@@ -2,7 +2,13 @@
   <div id="MScene">
     <div id="scene"></div>
     <div id="nav">
-      <div id="canvas" @click="OpenCanvas">open</div>
+      <div class="btn" @click="OpenCloud"><i class="iconfont icon-cloud"></i>{{$t('nav.cloud')}}</div>
+      <div class="btn" @click="ToBuy"><i class="iconfont icon-buy"></i>{{$t('nav.buy')}}</div>
+      <div class="canvas-switch" @click="OpenCanvas">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-doit"></use>
+        </svg>
+      </div>
     </div>
   </div>
 </template>
@@ -12,9 +18,20 @@
     data() {
       return {}
     },
+    mounted() {
+    },
+    computed: {},
     methods: {
       OpenCanvas() {
-        this.$emit('HandleCanvasOpen', true)
+        this.$store.state.isCanvasOpen = true;
+      },
+      OpenCloud() {
+        this.$router.push({name: 'Cloud'});
+        this.$store.state.isPanelOpen = true;
+      },
+      ToBuy() {
+        this.$router.push({name: 'Buy'});
+        this.$store.state.isPanelOpen = true;
       }
     }
   }
@@ -43,6 +60,47 @@
     color: #979797;
     transform-origin: 0 0;
     transform: scaleY(.5)
+  }
+
+  #nav .btn {
+    float: left;
+    width: 2rem;
+    height: 1rem;
+    line-height: 1rem;
+    color: #ffffff;
+    text-align: center;
+    font-size: 0.5rem;
+    border-right: 2px solid #ffffff;
+    cursor: pointer;
+    border-top-right-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+  }
+
+  #nav .btn i {
+    font-size: 0.5rem;
+    margin: 0 5px 0 0;
+  }
+
+  #nav .canvas-switch {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 1rem;
+    height: 1rem;
+    border: 3px solid #666666;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 0.9rem;
+    background-color: #ffffff;
+    cursor: pointer;
+  }
+
+  #nav .canvas-switch .icon {
+    width: 0.8rem;
+    height: 0.8rem;
+    vertical-align: -0.15rem;
+    fill: currentColor;
+    overflow: hidden;
   }
 </style>
 <style>

@@ -10,7 +10,7 @@
   let _this;
   //  import {ThreeUtils, empty} from '../utils/index'
 
-  const THREE = require('three');
+  const THREE = require('src/components/Three');
   THREE.OrbitControls = require('imports-loader?THREE=three!exports-loader?THREE.OrbitControls!../../node_modules/three/examples/js/controls/OrbitControls');
   THREE.OBJLoader = require('imports-loader?THREE=three!exports-loader?THREE.OBJLoader!../../node_modules/three/examples/js/loaders/OBJLoader');
 

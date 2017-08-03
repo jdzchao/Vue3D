@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <m-scene @HandleCanvasOpen="HandleCanvasOpen"></m-scene>
+    <m-scene></m-scene>
     <!--二维画布-->
     <transition name="canvas" enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
-      <m-canvas v-show="isCanvasOpen"></m-canvas>
+      <m-canvas v-show="this.$store.state.isCanvasOpen"></m-canvas>
     </transition>
     <transition name="panel" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
-      <router-view v-show="isPanelOpen"></router-view>
+      <m-panel v-show="this.$store.state.isPanelOpen"></m-panel>
     </transition>
   </div>
 </template>
@@ -14,27 +14,23 @@
 <script>
   import MScene from './components/MScene.vue'
   import MCanvas from './components/MCanvas.vue'
+  import MPanel from './components/MPanel.vue'
 
   export default {
     name: 'app',
-    components: {MScene, MCanvas},
+    components: {MScene, MCanvas, MPanel},
     data() {
-      return {
-        isPanelOpen: false,
-        isCanvasOpen: false
-      }
+      return {}
     },
-    computed: {
-      width: function () {
-        return document.body.clientWidth;
-      }
-    },
-    mounted() {
-      console.log(document.body.clientWidth);
+    created() {
+      this.WindowResize();
+      window.addEventListener("resize", this.WindowResize);
     },
     methods: {
-      HandleCanvasOpen(val) {
-        this.isCanvasOpen = val;
+      WindowResize() {
+        this.$store.state.width = document.body.clientWidth;
+        this.$store.state.height = document.body.clientHeight;
+        document.documentElement.style.fontSize = document.body.clientHeight * 0.06 + "px";
       }
     }
   }
@@ -53,5 +49,12 @@
     position: relative;
     width: 100%;
     height: 100%;
+  }
+
+  .animated {
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
   }
 </style>

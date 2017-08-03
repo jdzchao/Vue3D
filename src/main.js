@@ -13,6 +13,8 @@ i18n.SetLocale('zhcn');
 
 Vue.config.productionTip = false;
 
+Vue.prototype.$store = {};
+
 new Vue({
   router,
   store,
