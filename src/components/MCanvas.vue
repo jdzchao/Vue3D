@@ -116,12 +116,12 @@
 
   #nav .btn {
     float: left;
-    width: 2rem;
+    min-width: 1.5rem;
     height: 1rem;
     line-height: 1rem;
     color: #ffffff;
     text-align: center;
-    font-size: 0.5rem;
+    font-size: 0.4rem;
     border-right: 2px solid #ffffff;
     cursor: pointer;
     border-top-right-radius: .5rem;
@@ -145,7 +145,7 @@
   #nav .canvas-switch .icon {
     width: 0.8rem;
     height: 0.8rem;
-    vertical-align: -0.15rem;
+    vertical-align: -0.1rem;
     fill: #ffffff;
     overflow: hidden;
   }

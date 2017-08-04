@@ -2,7 +2,7 @@
   <div id="MScene">
     <div id="scene"></div>
     <div id="nav">
-      <div class="btn" @click="OpenCloud"><i class="iconfont icon-cloud"></i>{{$t('nav.cloud')}}</div>
+      <!--<div class="btn" @click="OpenCloud"><i class="iconfont icon-cloud"></i>{{$t('nav.cloud')}}</div>-->
       <div class="btn" @click="ToBuy"><i class="iconfont icon-buy"></i>{{$t('nav.buy')}}</div>
       <div class="canvas-switch" @click="OpenCanvas">
         <svg class="icon" aria-hidden="true">
@@ -64,12 +64,12 @@
 
   #nav .btn {
     float: left;
-    width: 2rem;
+    padding: 0 0.2rem;
     height: 1rem;
     line-height: 1rem;
     color: #ffffff;
     text-align: center;
-    font-size: 0.5rem;
+    font-size: 0.4rem;
     border-right: 2px solid #ffffff;
     cursor: pointer;
     border-top-right-radius: .5rem;
@@ -98,7 +98,7 @@
   #nav .canvas-switch .icon {
     width: 0.8rem;
     height: 0.8rem;
-    vertical-align: -0.15rem;
+    vertical-align: -0.1rem;
     fill: currentColor;
     overflow: hidden;
   }
