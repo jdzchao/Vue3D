@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import Axios from 'axios'
-
+import './utils'
 // load config
-import './config'
 import router from './config/router'
 import store from './config/store'
 // load css
