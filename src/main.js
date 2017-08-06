@@ -4,7 +4,7 @@ import Axios from 'axios'
 import './utils'
 // load config
 import router from './config/router'
-import store from './config/store'
+import store from './store/index'
 // load css
 import 'animate.css'
 // load i18n

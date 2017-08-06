@@ -1,6 +1,6 @@
 <template>
   <div id="MScene">
-    <div id="scene"></div>
+    <x-scene ref="scene"></x-scene>
     <div id="nav">
       <!--<div class="btn" @click="OpenCloud"><i class="iconfont icon-cloud"></i>{{$t('nav.cloud')}}</div>-->
       <div class="btn" @click="ToBuy"><i class="iconfont icon-buy"></i>{{$t('nav.buy')}}</div>
@@ -13,12 +13,16 @@
   </div>
 </template>
 <script>
+  import XScene from "./XScene.vue"
+
   export default {
+    components: {XScene},
     name: 'MScene',
     data() {
       return {}
     },
     mounted() {
+      console.log(this.$refs.scene.scene);
     },
     computed: {},
     methods: {
@@ -37,16 +41,12 @@
   }
 </script>
 <style scoped>
-  #scene {
-    width: 100%;
-    height: 94%;
-  }
-
   #nav {
     width: 100%;
     height: 6%;
     background-color: #666666;
-    position: relative;
+    position: absolute;
+    bottom: 0;
   }
 
   #nav:before {
@@ -70,10 +70,7 @@
     color: #ffffff;
     text-align: center;
     font-size: 0.4rem;
-    border-right: 2px solid #ffffff;
     cursor: pointer;
-    border-top-right-radius: .5rem;
-    border-bottom-right-radius: .5rem;
   }
 
   #nav .btn i {
