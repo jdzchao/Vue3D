@@ -30,7 +30,7 @@
     }
   }
 </script>
-<style>
+<style scoped>
   #XNav {
     width: 100%;
     height: 6%;

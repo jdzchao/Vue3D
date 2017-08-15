@@ -1,17 +1,18 @@
 <template>
-  <canvas id="canvas" class="canvas" ref="canvas"></canvas>
+  <canvas id="canvas" class="canvas" :state="state"></canvas>
 </template>
 <script>
   const THREE = require('three');
   THREE.OrbitControls = require('imports-loader?THREE=three!exports-loader?THREE.OrbitControls!../../../node_modules/three/examples/js/controls/OrbitControls');
-  import {mapState} from 'vuex'
 
   export default {
     name: 'XScene',
+    props: {
+      height: Number,
+      width: Number,
+    },
     data() {
       return {
-        width: this.$store.state.width,
-        height: this.$store.state.contentHeight,
         // 场景
         scene: new THREE.Scene(),
         // 相机
@@ -25,7 +26,9 @@
         //鼠标点
         mouse: new THREE.Vector2(),
         //控制器
-        controls: null,
+        controls: this.resize,
+        backgroundColor: "#ff0000",
+        backgroundAlpha: 1,
       }
     },
     mounted() {
@@ -34,10 +37,19 @@
         alpha: true,
         canvas: this.$el
       });
-      this.update();
+      this.updateRenderer();
     },
     computed: {
-      ...mapState(['contentHeight'])
+      state() {
+        if (this.$store.state.process === 'render') {
+          this.$store.state.scene = this.scene;
+          this.$store.commit('UpdateSceneDelegation', this.updateRenderer);
+          this.$store.commit('LoadingNext');
+          this.$store.commit('UpdateScene');
+          return true;
+        }
+        return false;
+      }
     },
     watch: {
       height: function () {
@@ -47,14 +59,6 @@
       }
     },
     methods: {
-      update() {
-        this.updateRenderer();
-//        this.updateModel();
-//        this.updateCamera();
-//        this.updateLights();
-//        this.updateControls();
-
-      },
       updateRenderer() {
         let renderer = this.renderer;
         renderer.setSize(this.width, this.height);

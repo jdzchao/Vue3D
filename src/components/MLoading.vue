@@ -28,13 +28,14 @@
   export default {
     name: 'MLoading',
     data() {
-      return {
-        notice: "loading..."
-      }
+      return {}
     },
     computed: {
       loading() {
-        return this.$store.getters.LoadingProcess;
+        return this.$store.getters.OnLoading;
+      },
+      notice() {
+        return "loading..." + this.$store.state.process + '...';
       }
     }
   }

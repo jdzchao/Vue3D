@@ -31,11 +31,10 @@
     methods: {
       WindowResize() {
         this.rem = document.body.clientHeight * 0.06;
+        document.documentElement.style.fontSize = this.rem + "px";
         this.$store.state.width = document.body.clientWidth;
         this.$store.state.height = document.body.clientHeight;
-        this.$store.state.contentHeight = document.body.clientHeight - this.rem;
-        this.$store.state.navHeight = this.rem;
-        document.documentElement.style.fontSize = this.rem + "px";
+        this.$store.state.rem = this.rem;
       }
     }
   }

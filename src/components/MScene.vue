@@ -1,29 +1,33 @@
 <template>
   <div id="MScene">
-    <x-scene ref="scene"></x-scene>
+    <x-scene :width="width" :height="height" ref="scene"></x-scene>
     <x-nav></x-nav>
+    <x-light></x-light>
+    <x-loader></x-loader>
   </div>
 </template>
 <script>
   import XScene from "./scene/XScene.vue"
   import XNav from "./scene/XNav.vue"
+  import XLight from "./scene/XLight.vue"
+  import XLoader from "./scene/XLoader.vue";
 
   export default {
-    components: {XScene, XNav},
+    components: {
+      XLoader, XLight, XScene, XNav
+    },
     name: 'MScene',
     data() {
-      return {}
+      return {
+        height: this.$store.state.height - this.$store.state.rem,
+        width: this.$store.state.width
+      }
     },
     mounted() {
-      console.log(this.$refs.scene.scene);
+
     },
-    computed: {},
-    methods: {}
   }
 </script>
-<style scoped>
-
-</style>
 <style>
   #MScene {
     width: 100%;

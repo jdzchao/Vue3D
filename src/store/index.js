@@ -8,15 +8,18 @@ import actions from './actions'
 import getters from './getters'
 
 const state = {
-  lifecycle: ['awake', 'scene', 'group', 'canvas', 'mounted', 'update', 'destroy'],// 生命周期
-  process: 'mounted',
-  isCanvasOpen: false,
-  isPanelOpen: false,
+  // UI相关
+  rem: 0,
   width: 0,
   height: 0,
-  contentHeight: 0,
-  navHeight: 0,
-  scene: {}
+  isCanvasOpen: false,
+  isPanelOpen: false,
+  // 生命周期及加载控制
+  lifecycle: ['awake', 'render', 'scene', 'canvas', 'mounted', 'update', 'destroy'],// 生命周期
+  process: 'mounted',
+  // 三维场景相关
+  scene: {},
+  updateSceneDelegation: []
 };
 
 export default new Vuex.Store({
