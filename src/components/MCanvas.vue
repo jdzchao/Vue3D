@@ -1,25 +1,27 @@
 <template>
-  <div id="MCanvas">
-    <div id="tools">
-      <div id="decal" class="tab" @click="OpenDecal">
-        <i class="iconfont icon-decal"></i>
+  <transition name="canvas" enterActiveClass="animated slideInUp" leaveActiveClass="animated slideOutDown">
+    <div id="MCanvas" v-show="this.$store.state.isCanvasOpen">
+      <div id="tools">
+        <div id="decal" class="tab" @click="OpenDecal">
+          <i class="iconfont icon-decal"></i>
+        </div>
+        <div id="text" class="tab" @click="OpenText">
+          <i class="iconfont icon-text"></i>
+        </div>
       </div>
-      <div id="text" class="tab" @click="OpenText">
-        <i class="iconfont icon-text"></i>
+      <div id="canvas"></div>
+      <div id="nav">
+        <template v-for="item in 4">
+          <div class="btn" @click="Target(item)">区域{{item}}</div>
+        </template>
+        <div class="canvas-switch" @click="CloseCanvas">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-done"></use>
+          </svg>
+        </div>
       </div>
     </div>
-    <div id="canvas"></div>
-    <div id="nav">
-      <template v-for="item in 4">
-        <div class="btn" @click="Target(item)">区域{{item}}</div>
-      </template>
-      <div class="canvas-switch" @click="CloseCanvas">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-done"></use>
-        </svg>
-      </div>
-    </div>
-  </div>
+  </transition>
 </template>
 <script>
   export default {

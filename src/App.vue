@@ -1,13 +1,9 @@
 <template>
   <div id="app">
     <m-scene></m-scene>
-    <!--二维画布-->
-    <transition name="canvas" enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
-      <m-canvas v-show="this.$store.state.isCanvasOpen"></m-canvas>
-    </transition>
-    <transition name="panel" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
-      <m-panel v-show="this.$store.state.isPanelOpen"></m-panel>
-    </transition>
+    <m-canvas></m-canvas>
+    <m-panel></m-panel>
+    <m-loading></m-loading>
   </div>
 </template>
 
@@ -15,10 +11,11 @@
   import MScene from './components/MScene.vue'
   import MCanvas from './components/MCanvas.vue'
   import MPanel from './components/MPanel.vue'
+  import MLoading from './components/MLoading.vue'
 
   export default {
     name: 'app',
-    components: {MScene, MCanvas, MPanel},
+    components: {MScene, MCanvas, MPanel, MLoading},
     data() {
       return {
         rem: document.body.clientHeight * 0.06
@@ -29,6 +26,7 @@
       window.addEventListener("resize", this.WindowResize);
     },
     mounted() {
+      this.$store.commit('LoadingNext');
     },
     methods: {
       WindowResize() {

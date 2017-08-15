@@ -35,16 +35,13 @@
         canvas: this.$el
       });
       this.update();
-
     },
     computed: {
       ...mapState(['contentHeight'])
     },
     watch: {
       height: function () {
-        console.log(1);
         this.$nextTick(() => {
-
           this.renderer.setSize(this.width, this.height);
         })
       }

@@ -1,10 +1,12 @@
 <template>
-  <div id="MPanel">
-    <div id="panel">
-      <div id="close" @click="ClosePanel"><i>x</i></div>
-      <router-view></router-view>
+  <transition name="panel" enterActiveClass="animated zoomIn" leaveActiveClass="animated zoomOut">
+    <div id="MPanel" v-show="this.$store.state.isPanelOpen">
+      <div id="panel">
+        <div id="close" @click="ClosePanel"><i>x</i></div>
+        <router-view></router-view>
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 <script>
   export default {
