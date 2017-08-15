@@ -8,8 +8,8 @@ import actions from './actions'
 import getters from './getters'
 
 const state = {
-  lifecycle: ['start', 'scene', 'group', 'canvas', 'mounted', 'destroy'],// 生命周期
-  process: 'canvas',
+  lifecycle: ['awake', 'scene', 'group', 'canvas', 'mounted', 'update', 'destroy'],// 生命周期
+  process: 'mounted',
   isCanvasOpen: false,
   isPanelOpen: false,
   width: 0,
