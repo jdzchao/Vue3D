@@ -19,6 +19,7 @@ const state = {
   process: 'mounted',
   // 三维场景相关
   scene: {},
+  canvas: {},
   updateSceneDelegation: []
 };
 

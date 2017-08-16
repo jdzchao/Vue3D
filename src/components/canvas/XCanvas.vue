@@ -3,6 +3,8 @@
   </div>
 </template>
 <script>
+  import fabric from 'fabric'
+
   export default {
     name: 'XCanvas',
     data() {
