@@ -1,21 +1,15 @@
 <template>
   <div id="app">
     <m-scene></m-scene>
-    <m-canvas></m-canvas>
-    <m-panel></m-panel>
-    <m-loading></m-loading>
   </div>
 </template>
 
 <script>
   import MScene from './components/MScene.vue'
-  import MCanvas from './components/MCanvas.vue'
-  import MPanel from './components/MPanel.vue'
-  import MLoading from './components/MLoading.vue'
 
   export default {
     name: 'app',
-    components: {MScene, MCanvas, MPanel, MLoading},
+    components: {MScene},
     data() {
       return {
         rem: document.body.clientHeight * 0.06
