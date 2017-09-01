@@ -1,6 +1,6 @@
 <template>
   <div id="Index">
-    <x-scene ref="scene"></x-scene>
+    <x-scene ref="handle"></x-scene>
     <template id="components"></template>
   </div>
 </template>
@@ -20,7 +20,7 @@
 
     },
     mounted() {
-      console.log(this.$refs.scene);
+      this.$store.state.handle = this.$refs.handle;
     },
   }
 </script>

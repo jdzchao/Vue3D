@@ -11,9 +11,7 @@ import getters from './getters'
 import lifecycle from './lifecycle/index'
 
 export default new Vuex.Store({
-  state() {
-    return state;
-  },
+  state,
   mutations,
   actions,
   getters,

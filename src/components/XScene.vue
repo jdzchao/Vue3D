@@ -5,6 +5,7 @@
   const THREE = require('three');
   THREE.OrbitControls = require('imports-loader?THREE=three!exports-loader?THREE.OrbitControls!../../node_modules/three/examples/js/controls/OrbitControls');
 
+  import {mapState} from 'vuex';
   import ThreeUtils from '../utils/three'
   import scene from '../config/scene'
 
@@ -18,28 +19,24 @@
     data() {
       return {
         aspect: this.width / this.height,
-        handler: null,
-        renderer: null,
-        scene: new THREE.Scene(),
-        camera: null,
-        box: null,
-        ray: new THREE.Raycaster(),
-        mouse: new THREE.Vector2(),
-        controls: null,
+        tick: null,
         backgroundColor: scene.backgroundColor,
         backgroundAlpha: scene.backgroundAlpha,
       }
     },
     mounted() {
-      this.renderer = new THREE.WebGLRenderer({
+      this.$store.state.scene = new THREE.Scene();
+      this.$store.state.renderer = new THREE.WebGLRenderer({
         antialias: true,
         alpha: true,
         canvas: this.$el
       });
-      this.camera = new THREE.PerspectiveCamera(this.fov(), this.width / this.height, scene.near, scene.far);
+      this.$store.state.camera = new THREE.PerspectiveCamera(this.fov(), this.width / this.height, scene.near, scene.far);
       this.camera.position.z = scene.dis + scene.size * 2;
       this.camera.target = new THREE.Vector3();
 
+      this.$store.state.ray = new THREE.Raycaster();
+      this.$store.state.mouse = new THREE.Vector2();
 //      // 测试方块
 //      let geometry = new THREE.BoxGeometry(scene.size, scene.size, scene.size);
 //      let material = new THREE.MeshBasicMaterial({color: 0x00ff00});
@@ -55,14 +52,15 @@
       this.$el.addEventListener('click', this.onClick, false);
     },
     computed: {
+      ...mapState(['scene', 'camera', 'renderer', 'ray', 'mouse']),
       // 主进程装载
       process() {
         if (this.$store.state.lifecycle.step === 'update') {
           this.$store.state.scene = this.scene;
           this.$store.state.camera = this.camera;
-          this.$store.commit('UpdateSceneDelegation', this.updateRenderer);
-          this.$store.commit('UpdateSceneDelegation', this.updateControls);
-          this.$store.commit('LoadingNext');
+          this.$store.commit('RendererDelegation', this.updateRenderer);
+          this.$store.commit('RendererDelegation', this.updateControls);
+          this.$store.commit('lifecycle/NextStep');
           this.$emit('Rendered', true);
           return true;
         }
@@ -96,7 +94,7 @@
         camera.updateProjectionMatrix();
       },
       updateRenderer() {
-        let renderer = this.renderer;
+        let renderer = this.$store.state.renderer;
         renderer.setSize(this.width, this.height);
         renderer.setPixelRatio(window.devicePixelRatio || 1);
         renderer.setClearColor(new THREE.Color(this.backgroundColor).getHex());
@@ -120,15 +118,15 @@
       },
       // 渲染帧
       render() {
-        if (this.handler) return;
-        this.handler = requestAnimationFrame(() => {
-          this.handler = null;
-          this.$store.commit('UpdateScene');
+        if (this.tick) return;
+        this.tick = requestAnimationFrame(() => {
+          this.tick = null;
+          this.$store.commit('Render');
           this.renderer.render(this.scene, this.camera);
         })
       },
       Resize() {
-        this.$store.state.aspect = this.width / this.height;
+        this.aspect = this.width / this.height;
         this.render();
       },
       onMouseDown(event) {

@@ -5,6 +5,10 @@ export default {
   width: 0,
   height: 0,
   // Scene
+  handle: null,
   scene: null,
+  camera: null,
+  group: null,
+  ray: null,
   rendererDelegation: []
 }

@@ -12,7 +12,9 @@ export default {
       console.debug('Error Delegation Function');
     }
   },
-  Render: (state) => {
+  Render(state) {
+    console.log(state.rendererDelegation);
+    if (state.rendererDelegation.length < 1) return;
     state.rendererDelegation.forEach((func) => {
       func();
     });
