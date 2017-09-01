@@ -1,9 +1,9 @@
 <template></template>
 <script>
   const THREE = require('three');
-  THREE.ObjLoader = require('imports-loader?THREE=three!exports-loader?THREE.OrbitControls!../../../node_modules/three/examples/js/loaders/OBJLoader');
+  THREE.ObjLoader = require('imports-loader?THREE=three!exports-loader?THREE.OrbitControls!../../node_modules/three/examples/js/loaders/OBJLoader');
   import scene from '../../config/scene'
-  import ThreeUtils from '../../utils/three'
+  import ThreeUtils from '../utils/three'
 
   export default {
     name: 'XLoader',

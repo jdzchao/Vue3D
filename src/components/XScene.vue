@@ -3,9 +3,9 @@
 </template>
 <script>
   const THREE = require('three');
-  THREE.OrbitControls = require('imports-loader?THREE=three!exports-loader?THREE.OrbitControls!../../../node_modules/three/examples/js/controls/OrbitControls');
+  THREE.OrbitControls = require('imports-loader?THREE=three!exports-loader?THREE.OrbitControls!../../node_modules/three/examples/js/controls/OrbitControls');
 
-  import ThreeUtils from '../../utils/three'
+  import ThreeUtils from '../utils/three'
   import scene from '../../config/scene'
 
   export default {

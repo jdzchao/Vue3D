@@ -1,21 +1,9 @@
 <template>
   <div id="MScene">
-    <x-scene :width="width" :height="height" ref="scene"></x-scene>
-    <x-nav></x-nav>
-    <x-light></x-light>
-    <x-loader></x-loader>
   </div>
 </template>
 <script>
-  import XScene from "./scene/XScene.vue"
-  import XNav from "./scene/XNav.vue"
-  import XLight from "./scene/XLight.vue"
-  import XLoader from "./scene/XLoader.vue";
-
   export default {
-    components: {
-      XLoader, XLight, XScene, XNav
-    },
     name: 'MScene',
     data() {
       return {
@@ -24,7 +12,6 @@
       }
     },
     mounted() {
-
     },
   }
 </script>

@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <m-scene></m-scene>
+    <index></index>
   </div>
 </template>
 
 <script>
-  import MScene from './components/MScene.vue'
+  import Index from './modules/Index.vue'
 
   export default {
     name: 'app',
-    components: {MScene},
+    components: {Index},
     data() {
       return {
         rem: document.body.clientHeight * 0.06
@@ -18,9 +18,10 @@
     created() {
       this.WindowResize();
       window.addEventListener("resize", this.WindowResize);
+      console.log(this.$store.state.lifecycle.steps);
     },
     mounted() {
-      this.$store.commit('LoadingNext');
+      this.$store.commit('lifecycle/NextStep');
     },
     methods: {
       WindowResize() {
