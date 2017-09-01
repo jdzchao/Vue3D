@@ -1,21 +1,19 @@
 export default {
   MobileResize(state) {
-    state.rem = document.body.clientHeight * 0.06;
-    document.documentElement.style.fontSize = state.rem + "px";
     state.width = document.body.clientWidth;
     state.height = document.body.clientHeight;
+    state.rem = document.body.clientHeight * state.ratio;
+    document.documentElement.style.fontSize = state.rem + "px";
   },
-  // 更新三维场景时执行的方法委托
-  UpdateSceneDelegation(state, func) {
+  RendererDelegation(state, func) {
     if (typeof func === 'function') {
-      state.updateSceneDelegation.push(func);
+      state.rendererDelegation.push(func);
     } else {
       console.debug('Error Delegation Function');
     }
   },
-  // 更新三维场景
-  UpdateScene: (state) => {
-    state.updateSceneDelegation.forEach((func) => {
+  Render: (state) => {
+    state.rendererDelegation.forEach((func) => {
       func();
     });
   },

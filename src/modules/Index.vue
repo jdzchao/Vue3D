@@ -1,22 +1,31 @@
 <template>
-  <div id="MScene">
+  <div id="Index">
+    <x-scene ref="scene"></x-scene>
+    <template id="components"></template>
   </div>
 </template>
 <script>
+  import XScene from '../components/XScene.vue'
+
   export default {
-    name: 'MScene',
+    name: 'Index',
+    components: {
+      XScene
+    },
     data() {
-      return {
-        height: this.$store.state.height - this.$store.state.rem,
-        width: this.$store.state.width
-      }
+      return {}
+    },
+    computed: {},
+    created() {
+
     },
     mounted() {
+      console.log(this.$refs.scene);
     },
   }
 </script>
 <style>
-  #MScene {
+  #Index {
     width: 100%;
     height: 100%;
     position: absolute;

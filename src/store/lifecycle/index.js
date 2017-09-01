@@ -10,7 +10,9 @@ import getters from './getters'
 
 export default {
   namespaced: true,
-  state: state,
+  state() {
+    return state;
+  },
   getters: getters,
   mutations: mutations,
   actions: actions

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <index></index>
+    <index ref="scene"></index>
   </div>
 </template>
 
@@ -11,27 +11,17 @@
     name: 'app',
     components: {Index},
     data() {
-      return {
-        rem: document.body.clientHeight * 0.06
-      }
+      return {}
     },
     created() {
-      this.WindowResize();
-      window.addEventListener("resize", this.WindowResize);
-      console.log(this.$store.state.lifecycle.steps);
+      this.$store.commit('MobileResize');
+      window.addEventListener("resize", () => {
+        this.$store.commit('MobileResize')
+      });
     },
     mounted() {
       this.$store.commit('lifecycle/NextStep');
     },
-    methods: {
-      WindowResize() {
-        this.rem = document.body.clientHeight * 0.06;
-        document.documentElement.style.fontSize = this.rem + "px";
-        this.$store.state.width = document.body.clientWidth;
-        this.$store.state.height = document.body.clientHeight;
-        this.$store.state.rem = this.rem;
-      }
-    }
   }
 </script>
 

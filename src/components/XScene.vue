@@ -6,7 +6,7 @@
   THREE.OrbitControls = require('imports-loader?THREE=three!exports-loader?THREE.OrbitControls!../../node_modules/three/examples/js/controls/OrbitControls');
 
   import ThreeUtils from '../utils/three'
-  import scene from '../../config/scene'
+  import scene from '../config/scene'
 
   export default {
     name: 'XScene',
@@ -57,7 +57,7 @@
     computed: {
       // 主进程装载
       process() {
-        if (this.$store.state.process === 'scene') {
+        if (this.$store.state.lifecycle.step === 'update') {
           this.$store.state.scene = this.scene;
           this.$store.state.camera = this.camera;
           this.$store.commit('UpdateSceneDelegation', this.updateRenderer);
