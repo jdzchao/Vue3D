@@ -8,14 +8,9 @@ import mutations from './mutations'
 import actions from './actions'
 import getters from './getters'
 
-import lifecycle from './lifecycle/index'
-
 export default new Vuex.Store({
   state,
   mutations,
   actions,
-  getters,
-  modules: {
-    lifecycle: lifecycle
-  }
+  getters
 });

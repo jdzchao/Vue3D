@@ -18,10 +18,7 @@
       window.addEventListener("resize", () => {
         this.$store.commit('MobileResize')
       });
-    },
-    mounted() {
-      this.$store.commit('lifecycle/NextStep');
-    },
+    }
   }
 </script>
 

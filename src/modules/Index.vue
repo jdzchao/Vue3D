@@ -1,27 +1,43 @@
 <template>
   <div id="Index">
-    <x-scene ref="handle"></x-scene>
-    <template id="components"></template>
+    <m-scene :width="width" :height="height" ref="handle" @onReady="onReady"></m-scene>
+    <template id="components" v-if="ready">
+      <x-light :type="'Ambient'" :position="{x:0,y:0,z:0}"></x-light>
+      <x-light :type="'Directional'" :position="{x:0,y:0,z:0}"></x-light>
+      <x-box-geometry></x-box-geometry>
+    </template>
   </div>
 </template>
 <script>
-  import XScene from '../components/XScene.vue'
+  import MScene from '../components/MScene.vue'
+  import XLight from '../components/XLight.vue'
+  import XBoxGeometry from '../components/XBoxGeometry.vue'
 
   export default {
     name: 'Index',
     components: {
-      XScene
+      MScene,
+      XLight,
+      XBoxGeometry
     },
     data() {
-      return {}
+      return {
+        ready: false,
+        width: document.body.clientWidth,
+        height: document.body.clientHeight
+      }
     },
-    computed: {},
     created() {
 
     },
     mounted() {
       this.$store.state.handle = this.$refs.handle;
     },
+    methods: {
+      onReady(bool) {
+        this.ready = bool;
+      }
+    }
   }
 </script>
 <style>

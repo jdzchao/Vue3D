@@ -3,30 +3,33 @@
   </div>
 </template>
 <script>
+  // Ambient 环境光
+  // Directional 平行光
   const THREE = require('three');
+  import _VC from './_VComponent.vue'
+
   export default {
     name: 'XLight',
+    mixins: [_VC],
     props: {
-      type: String,
-      color: {
-        type: String,
-        default: 'rgb(255,255,255)'
-      },
-      intensity: {
-        type: Number,
-        default: 1.0
-      },
+      type: {type: String, default: 'Ambient'},
+      color: {type: String, default: 'rgb(255,255,255)'},
+      intensity: {type: Number, default: 1.0},
       position: {
         default: () => {
           return new THREE.Vector3();
         },
-      },
-      update: Boolean
+      }
     },
     data() {
       return {
         scene: this.$store.state.scene,
-        light: {}
+        light: {},
+      }
+    },
+    watch: {
+      position(val) {
+        this.setPosition();
       }
     },
     created() {
@@ -37,30 +40,19 @@
         case 'Directional':
           this.light = new THREE.DirectionalLight(this.color, this.intensity);
       }
-      this.scene.add(this.light);
-      this.SetPosition();
-      if (this.update) {
-        this.$store.commit('UpdateSceneDelegation', this.Update);
-      }
-    },
-    beforeDestroy() {
-      this.$store.commit('UpdateSceneDelegationRemove', this.Update);
     },
     methods: {
-      SetPosition() {
-        if (typeof this.position === 'string') {
-          if (this.position === 'camera') {
-            this.light.position.copy(this.$store.state.camera.position);
-          }
-        } else if (typeof this.position === 'object') {
+      setPosition() {
+        if (this.position.hasOwnProperty('x')) {
           this.light.position.x = this.position.x || 0;
+        }
+        if (this.position.hasOwnProperty('y')) {
           this.light.position.y = this.position.y || 0;
+        }
+        if (this.position.hasOwnProperty('z')) {
           this.light.position.z = this.position.z || 0;
         }
       },
-      Update() {
-        this.SetPosition();
-      }
     }
   }
 </script>
