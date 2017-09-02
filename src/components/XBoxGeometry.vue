@@ -18,7 +18,7 @@
     },
     created() {
       this.cube = new THREE.Mesh(this.geometry, this.material);
-      this.$store.state.scene.add(this.cube);
+      this.scene.add(this.cube);
     }
   }
 </script>

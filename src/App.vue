@@ -9,14 +9,16 @@
 
   export default {
     name: 'app',
-    components: {Index},
+    components: {
+      Index
+    },
     data() {
       return {}
     },
     created() {
-      this.$store.commit('MobileResize');
+      this.$store.commit('mobileResize');
       window.addEventListener("resize", () => {
-        this.$store.commit('MobileResize')
+        this.$store.commit('mobileResize')
       });
     }
   }
@@ -35,6 +37,7 @@
     position: relative;
     width: 100%;
     height: 100%;
+    overflow: hidden;
   }
 
   .animated {

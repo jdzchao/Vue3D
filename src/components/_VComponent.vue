@@ -1,6 +1,8 @@
 <template>
 </template>
 <script>
+  import {mapState} from 'vuex';
+
   export default {
     data() {
       return {
@@ -10,12 +12,19 @@
     created() {
       console.debug('VC:created')
     },
+    mounted() {
+    },
     updated() {
       console.debug('VC:update');
     },
+    computed: {
+      ...mapState({
+        scene: state => state.three.scene,
+      })
+    },
     methods: {
       render() {
-        console.debug('VC:render');
+        this.$store.commit('three/render');
       }
     }
   }

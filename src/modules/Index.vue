@@ -27,11 +27,8 @@
         height: document.body.clientHeight
       }
     },
-    created() {
-
-    },
     mounted() {
-      this.$store.state.handle = this.$refs.handle;
+      this.$store.state.three.handle = this.$refs.handle;
     },
     methods: {
       onReady(bool) {
@@ -45,7 +42,7 @@
     width: 100%;
     height: 100%;
     position: absolute;
-    z-index: 10;
+    z-index: 1;
     top: 0;
     right: 0;
     bottom: 0;

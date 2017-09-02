@@ -2,7 +2,7 @@
 <script>
   const THREE = require('three');
   THREE.ObjLoader = require('imports-loader?THREE=three!exports-loader?THREE.OrbitControls!../../node_modules/three/examples/js/loaders/OBJLoader');
-  import scene from '../../config/scene'
+  import scene from '../../config/sceneConf'
   import ThreeUtils from '../utils/three'
 
   export default {

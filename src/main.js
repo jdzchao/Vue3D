@@ -3,6 +3,7 @@ import App from './App.vue'
 import Axios from 'axios'
 import './utils'
 // load config
+import './config/'
 import router from './config/router'
 import store from './store/index'
 // load css
@@ -12,7 +13,7 @@ import i18n from './i18n'
 
 i18n.SetLocale('zhcn');
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = true;
 
 Vue.prototype.$store = {};
 Vue.prototype.$http = Axios;

@@ -1,13 +1,13 @@
 <template>
-  <canvas id="canvas" class="canvas"></canvas>
+  <canvas id="canvas" class="canvas" :aspect="aspect"></canvas>
 </template>
 <script>
   const THREE = require('three');
   THREE.OrbitControls = require('imports-loader?THREE=three!exports-loader?THREE.OrbitControls!../../node_modules/three/examples/js/controls/OrbitControls');
 
   import {mapState} from 'vuex';
-  import ThreeUtils from '../utils/three'
-  import scene from '../config/scene'
+  import threeUtils from '../utils/three'
+  import sceneConf from '../config/scene'
 
   export default {
     name: 'MScene',
@@ -18,56 +18,57 @@
     },
     data() {
       return {
-        aspect: this.width / this.height,
         tick: null,
-        backgroundColor: scene.backgroundColor,
-        backgroundAlpha: scene.backgroundAlpha,
+        controls: null,
+        backgroundColor: sceneConf.backgroundColor,
+        backgroundAlpha: sceneConf.backgroundAlpha,
       }
     },
     mounted() {
-      this.$store.state.scene = new THREE.Scene();
-      this.$store.state.renderer = new THREE.WebGLRenderer({
+      this.$store.state.three.scene = new THREE.Scene();
+      this.$store.state.three.renderer = new THREE.WebGLRenderer({
         antialias: true,
         alpha: true,
         canvas: this.$el
       });
-      this.$store.state.camera = new THREE.PerspectiveCamera(this.fov(), this.width / this.height, scene.near, scene.far);
-      this.camera.position.z = scene.dis + scene.size * 2;
+      this.$store.state.three.camera = new THREE.PerspectiveCamera(this.fov(), this.width / this.height, sceneConf.near, sceneConf.far);
+      this.camera.position.z = sceneConf.dis + sceneConf.size * 2;
       this.camera.target = new THREE.Vector3();
+      this.$store.commit('three/rendererDelegation', this.updateRenderer);
+      this.$store.commit('three/rendererDelegation', this.updateControls);
 
-      this.$store.commit('RendererDelegation', this.updateRenderer);
-      this.$store.commit('RendererDelegation', this.updateControls);
-
-      this.Resize();
+      this.resize();
       this.$emit('onReady', true);
     },
     computed: {
-      ...mapState(['scene', 'camera', 'renderer']),
-    },
-    watch: {
-      width() {
-        this.Resize();
-      },
-      height() {
-        this.Resize();
+      ...mapState({
+        handle: state => state.three.handle,
+        scene: state => state.three.scene,
+        camera: state => state.three.camera,
+        renderer: state => state.three.renderer,
+      }),
+      aspect() {
+        this.$nextTick(() => {
+          this.resize();
+        });
+        return this.width / this.height;
       }
+//      ...mapState(['sceneConf', 'camera', 'renderer']),
     },
     methods: {
       fov() {
-        return ThreeUtils.calcFov(scene.dis, scene.size, this.width / this.height);
+        return threeUtils.calcFov(sceneConf.dis, sceneConf.size, this.width / this.height);
       },
       updateCamera() {
-        let camera = this.camera;
-        camera.fov = this.fov();
-        camera.aspect = this.width / this.height;
-        camera.updateProjectionMatrix();
+        this.camera.fov = this.fov();
+        this.camera.aspect = this.width / this.height;
+        this.camera.updateProjectionMatrix();
       },
       updateRenderer() {
-        let renderer = this.$store.state.renderer;
-        renderer.setSize(this.width, this.height);
-        renderer.setPixelRatio(window.devicePixelRatio || 1);
-        renderer.setClearColor(new THREE.Color(this.backgroundColor).getHex());
-        renderer.setClearAlpha(this.backgroundAlpha);
+        this.renderer.setSize(this.width, this.height);
+        this.renderer.setPixelRatio(window.devicePixelRatio || 1);
+        this.renderer.setClearColor(new THREE.Color(this.backgroundColor).getHex());
+        this.renderer.setClearAlpha(this.backgroundAlpha);
       },
       updateControls() {
         if (this.controllable && this.controls) return;
@@ -76,8 +77,8 @@
           this.controls = new THREE.OrbitControls(this.camera, this.$el);
           this.controls.addEventListener('change', this.render, false);
           this.controls.type = 'orbit';
-          this.controls.minDistance = scene.near;
-          this.controls.maxDistance = scene.far - 100;
+          this.controls.minDistance = sceneConf.near;
+          this.controls.maxDistance = sceneConf.far - 100;
         } else {
           if (this.controls) {
             this.controls.dispose();
@@ -85,25 +86,13 @@
           }
         }
       },
-      // 渲染帧
+      resize() {
+        this.updateCamera();
+        this.$store.commit('three/render');
+      },
       render() {
-        if (this.tick) return;
-        this.tick = requestAnimationFrame(() => {
-          this.tick = null;
-          this.$store.commit('Render');
-          this.renderer.render(this.scene, this.camera);
-        })
-      },
-      Resize() {
-        this.aspect = this.width / this.height;
-        this.render();
-      },
-    },
-    beforeDestroy() {
-      this.$el.removeEventListener('mousedown', this.onMouseDown, false);
-      this.$el.removeEventListener('mousemove', this.onMouseMove, false);
-      this.$el.removeEventListener('mouseup', this.onMouseUp, false);
-      this.$el.removeEventListener('click', this.onClick, false);
-    },
+        this.$store.commit('three/render');
+      }
+    }
   }
 </script>

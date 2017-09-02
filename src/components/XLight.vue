@@ -23,7 +23,6 @@
     },
     data() {
       return {
-        scene: this.$store.state.scene,
         light: {},
       }
     },
@@ -40,6 +39,7 @@
         case 'Directional':
           this.light = new THREE.DirectionalLight(this.color, this.intensity);
       }
+      this.scene.add(this.light);
     },
     methods: {
       setPosition() {

@@ -1,16 +1,23 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+// self
+import state from './state.js'
+import mutations from './mutations.js'
+import actions from './actions.js'
+import getters from './getters.js'
+// modules
+import three from './three/'
 
 Vue.use(Vuex);
 
-import state from './state'
-import mutations from './mutations'
-import actions from './actions'
-import getters from './getters'
-
-export default new Vuex.Store({
+let store = new Vuex.Store({
   state,
   mutations,
   actions,
-  getters
+  getters,
+  modules: {
+    three
+  }
 });
+
+export default store;
