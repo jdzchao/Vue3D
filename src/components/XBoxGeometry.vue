@@ -4,11 +4,11 @@
 </template>
 <script>
   const THREE = require('three');
-  import _VC from './_VComponent.vue'
+  import _XCom from './_XCom.vue'
 
   export default {
     name: 'XBoxGeometry',
-    mixins: [_VC],
+    mixins: [_XCom],
     data() {
       return {
         geometry: new THREE.BoxGeometry(100, 100, 100),
@@ -19,6 +19,7 @@
     created() {
       this.cube = new THREE.Mesh(this.geometry, this.material);
       this.scene.add(this.cube);
+      this.render();
     }
   }
 </script>

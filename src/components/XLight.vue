@@ -6,11 +6,11 @@
   // Ambient 环境光
   // Directional 平行光
   const THREE = require('three');
-  import _VC from './_VComponent.vue'
+  import _XCom from './_XCom.vue'
 
   export default {
     name: 'XLight',
-    mixins: [_VC],
+    mixins: [_XCom],
     props: {
       type: {type: String, default: 'Ambient'},
       color: {type: String, default: 'rgb(255,255,255)'},
@@ -40,6 +40,7 @@
           this.light = new THREE.DirectionalLight(this.color, this.intensity);
       }
       this.scene.add(this.light);
+      this.render();
     },
     methods: {
       setPosition() {

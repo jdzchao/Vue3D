@@ -38,6 +38,7 @@
       this.$store.commit('three/rendererDelegation', this.updateControls);
 
       this.resize();
+      this.render();
       this.$emit('onReady', true);
     },
     computed: {
@@ -57,11 +58,11 @@
     },
     methods: {
       fov() {
-        return threeUtils.calcFov(sceneConf.dis, sceneConf.size, this.width / this.height);
+        return threeUtils.calcFov(sceneConf.dis, sceneConf.size, this.aspect);
       },
       updateCamera() {
         this.camera.fov = this.fov();
-        this.camera.aspect = this.width / this.height;
+        this.camera.aspect = this.aspect;
         this.camera.updateProjectionMatrix();
       },
       updateRenderer() {
@@ -88,7 +89,7 @@
       },
       resize() {
         this.updateCamera();
-        this.$store.commit('three/render');
+        this.render();
       },
       render() {
         this.$store.commit('three/render');

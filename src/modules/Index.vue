@@ -9,6 +9,7 @@
   </div>
 </template>
 <script>
+  import {mapState} from 'vuex'
   import MScene from '../components/MScene.vue'
   import XLight from '../components/XLight.vue'
   import XBoxGeometry from '../components/XBoxGeometry.vue'
@@ -22,13 +23,14 @@
     },
     data() {
       return {
-        ready: false,
-        width: document.body.clientWidth,
-        height: document.body.clientHeight
+        ready: false
       }
     },
     mounted() {
       this.$store.state.three.handle = this.$refs.handle;
+    },
+    computed: {
+      ...mapState(['width', 'height'])
     },
     methods: {
       onReady(bool) {
