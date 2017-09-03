@@ -27,8 +27,11 @@
       }
     },
     watch: {
-      position(val) {
-        this.setPosition();
+      position: {
+        deep: true,
+        handler(val) {
+          this.setPosition();
+        }
       }
     },
     created() {

@@ -11,8 +11,8 @@
 <script>
   import {mapState} from 'vuex'
   import MScene from '../components/MScene.vue'
-  import XLight from '../components/XLight.vue'
-  import XBoxGeometry from '../components/XBoxGeometry.vue'
+  import XLight from '../components/XCom/XLight.vue'
+  import XBoxGeometry from '../components/XCom/XBoxGeometry.vue'
 
   export default {
     name: 'Index',
