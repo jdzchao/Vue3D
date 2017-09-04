@@ -19,5 +19,5 @@ let store = new Vuex.Store({
     three
   }
 });
-
+console.log(store);
 export default store;
