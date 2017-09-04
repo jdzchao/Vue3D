@@ -9,10 +9,16 @@
   export default {
     name: 'XBoxGeometry',
     mixins: [_XCom],
+    props: {
+      x: {type: Number, default: 100},
+      y: {type: Number, default: 100},
+      z: {type: Number, default: 100},
+      color: {type: String, default: 'rgb(255,255,255)'}
+    },
     data() {
       return {
-        geometry: new THREE.BoxGeometry(100, 100, 100),
-        material: new THREE.MeshBasicMaterial({color: 0x00ff00}),
+        geometry: new THREE.BoxGeometry(this.x, this.y, this.z),
+        material: new THREE.MeshBasicMaterial({color: this.color}),
         cube: null
       }
     },
