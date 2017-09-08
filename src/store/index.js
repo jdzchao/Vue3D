@@ -6,7 +6,7 @@ import mutations from './mutations.js'
 import actions from './actions.js'
 import getters from './getters.js'
 // modules
-import three from './three/'
+import vue3d from './Vue3D/'
 
 Vue.use(Vuex);
 
@@ -16,7 +16,7 @@ let store = new Vuex.Store({
   actions,
   getters,
   modules: {
-    three
+    vue3d
   }
 });
 

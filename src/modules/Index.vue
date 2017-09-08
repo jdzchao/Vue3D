@@ -26,9 +26,6 @@
         ready: false
       }
     },
-    mounted() {
-      this.$store.state.three.handle = this.$refs.handle;
-    },
     computed: {
       ...mapState(['width', 'height'])
     },

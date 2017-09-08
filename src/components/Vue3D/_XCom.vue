@@ -19,12 +19,12 @@
     },
     computed: {
       ...mapState({
-        scene: state => state.three.scene,
+        scene: state => state.vue3d.scene,
       })
     },
     methods: {
       render() {
-        this.$store.commit('three/render');
+        this.$store.commit('vue3d/render');
       }
     }
   }

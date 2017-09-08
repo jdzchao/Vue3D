@@ -25,17 +25,17 @@
       }
     },
     mounted() {
-      this.$store.state.three.scene = new THREE.Scene();
-      this.$store.state.three.renderer = new THREE.WebGLRenderer({
+      this.$store.state.vue3d.scene = new THREE.Scene();
+      this.$store.state.vue3d.renderer = new THREE.WebGLRenderer({
         antialias: true,
         alpha: true,
         canvas: this.$el
       });
-      this.$store.state.three.camera = new THREE.PerspectiveCamera(this.fov(), this.width / this.height, sceneConf.near, sceneConf.far);
+      this.$store.state.vue3d.camera = new THREE.PerspectiveCamera(this.fov(), this.width / this.height, sceneConf.near, sceneConf.far);
       this.camera.position.z = sceneConf.dis + sceneConf.size * 2;
       this.camera.target = new THREE.Vector3();
-      this.$store.commit('three/rendererDelegation', this.updateRenderer);
-      this.$store.commit('three/rendererDelegation', this.updateControls);
+      this.$store.commit('vue3d/rendererDelegation', this.updateRenderer);
+      this.$store.commit('vue3d/rendererDelegation', this.updateControls);
 
       this.resize();
       this.render();
@@ -43,10 +43,9 @@
     },
     computed: {
       ...mapState({
-        handle: state => state.three.handle,
-        scene: state => state.three.scene,
-        camera: state => state.three.camera,
-        renderer: state => state.three.renderer,
+        scene: state => state.vue3d.scene,
+        camera: state => state.vue3d.camera,
+        renderer: state => state.vue3d.renderer,
       }),
       aspect() {
         this.$nextTick(() => {
@@ -92,7 +91,7 @@
         this.render();
       },
       render() {
-        this.$store.commit('three/render');
+        this.$store.commit('vue3d/render');
       }
     }
   }
