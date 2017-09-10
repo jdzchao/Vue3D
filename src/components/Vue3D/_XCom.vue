@@ -10,12 +10,10 @@
       }
     },
     created() {
-      console.debug('VC:created')
     },
     mounted() {
     },
     updated() {
-      console.debug('VC:update');
     },
     computed: {
       ...mapState({
