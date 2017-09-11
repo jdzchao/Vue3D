@@ -16,9 +16,9 @@
       return {}
     },
     created() {
-      this.$store.commit('mobileResize');
+      this.$store.commit('windowResize');
       window.addEventListener("resize", () => {
-        this.$store.commit('mobileResize')
+        this.$store.commit('windowResize')
       });
     }
   }
