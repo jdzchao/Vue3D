@@ -1,6 +1,10 @@
 <template>
   <div id="Index">
-    <m-scene :width="width" :height="height" ref="handle" @onReady="onReady"></m-scene>
+    <template id="scene">
+      <m-renderer :width="width" :height="height" @onReady="onReady"></m-renderer>
+      <m-camera :width="width" :height="height"></m-camera>
+      <m-controls></m-controls>
+    </template>
     <template id="components" v-if="ready">
       <x-light :type="'Ambient'" :position="{x:0,y:0,z:0}"></x-light>
       <x-light :type="'Directional'" :position="{x:0,y:0,z:0}"></x-light>
@@ -10,14 +14,18 @@
 </template>
 <script>
   import {mapState} from 'vuex'
-  import MScene from '../components/MScene.vue'
+  import MRenderer from '../components/Vue3D/MRenderer.vue'
+  import MCamera from '../components/Vue3D/MCamera.vue'
+  import MControls from '../components/Vue3D/MControls.vue'
   import XLight from '../components/Vue3D/XLight.vue'
   import XBoxGeometry from '../components/Vue3D/XBoxGeometry.vue'
 
   export default {
     name: 'Index',
     components: {
-      MScene,
+      MRenderer,
+      MCamera,
+      MControls,
       XLight,
       XBoxGeometry
     },

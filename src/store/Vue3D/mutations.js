@@ -6,8 +6,7 @@ export default {
       console.debug('Error Delegation Function');
     }
   },
-  // 渲染一帧
-  render(state) {
+  render(state) { // 渲染一帧
     if (state.rendererDelegation.length < 1) return;
     if (state.tick) return;
     state.tick = requestAnimationFrame(() => {
@@ -18,4 +17,9 @@ export default {
       state.renderer.render(state.scene, state.camera);
     })
   },
+  resetCamera(state) {
+    if (typeof state.resetCamera === 'function') {
+      state.resetCamera();
+    }
+  }
 }
