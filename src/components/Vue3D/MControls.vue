@@ -15,7 +15,7 @@
         max: 500,
       }
     },
-    mounted() {
+    created() {
       this.$store.commit('vue3d/rendererDelegation', this.updateControls);
     },
     methods: {
