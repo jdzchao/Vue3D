@@ -23,7 +23,9 @@
       }
     },
     created() {
-      this.$store.state.vue3d.camera = new THREE.PerspectiveCamera(this.fov(), this.width / this.height, this.near, this.far);
+      if (this.type === 'Perspective') {
+        this.$store.state.vue3d.camera = new THREE.PerspectiveCamera(this.fov(), this.width / this.height, this.near, this.far);
+      }
       this.camera.position.z = this.dis + this.size * 2;
       this.camera.target = new THREE.Vector3();
     },
