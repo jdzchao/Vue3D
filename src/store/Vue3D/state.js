@@ -7,9 +7,5 @@ export default {
   target: null, // 当前选中的三维对象
   ray: null, // 射线
   tick: null, // 渲染辅助标记
-  /**
-   * 动态方法委托
-   */
-  resetCamera: null,
   rendererDelegation: [], // 渲染过程委托
 }
