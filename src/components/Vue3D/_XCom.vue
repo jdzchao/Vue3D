@@ -10,21 +10,20 @@
       }
     },
     created() {
-      console.debug('VC:created')
     },
     mounted() {
     },
     updated() {
-      console.debug('VC:update');
     },
     computed: {
       ...mapState({
-        scene: state => state.three.scene,
+        scene: state => state.vue3d.scene,
+        camera: state => state.vue3d.camera
       })
     },
     methods: {
       render() {
-        this.$store.commit('three/render');
+        this.$store.commit('vue3d/render');
       }
     }
   }
