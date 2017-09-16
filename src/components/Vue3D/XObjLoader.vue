@@ -12,18 +12,46 @@
     props: {
       path: {type: String},
       name: {type: String, default: 'main'},
-      material: {}
+      material: {type: String, default: 'MeshPhong'},
+      map: String,
     },
     data() {
       return {
         loader: new THREE.OBJLoader(),
+        object: null,
+        xMaterial: null,
+        texture: null,
       }
     },
     created(){
       this.LoaderModel();
+      this.LoadMaterial();
+      this.LoadMap();
     },
     mounted(){
 
+    },
+    updated(){
+      console.log("update")
+    },
+    watch:{
+      object(val, oldVal){
+        if(oldVal !== null)
+            this.scene.remove(oldVal);
+
+        this.scene.add(val);
+        this.SetMaterial();
+        this.Adjust(val);
+      },
+      xMaterial(val){
+          this.SetMaterial();
+      },
+      material(){
+          this.LoadMaterial();
+      },
+      map(){
+          this.LoadMap();
+      }
     },
     methods:{
       LoaderModel(){
@@ -31,18 +59,9 @@
         let that = this;
         this.loader.load( this.path , object => {
 
-          object.traverse(function (child) {
-            child.material = new THREE.MeshPhongMaterial({
-              color: 0xffffff,
-            });
-          });
-
+          this.object = object;
           console.log(object);
 
-          this.scene.add(object);
-          this.Adjust(object);
-
-          this.render();
           this.$emit( 'on-load' );
 
         }, err => {
@@ -50,6 +69,39 @@
           this.$emit( 'on-error', err );
 
         });
+      },
+      LoadMaterial(){
+        let materialStr = this.material.toLowerCase();
+        switch (materialStr) {
+          case 'meshphong':
+            this.xMaterial = new THREE.MeshPhongMaterial();
+            break;
+          case 'meshbasic':
+            this.xMaterial = new THREE.MeshBasicMaterial();
+            break;
+          case  'meshlambert':
+            this.xMaterial = new THREE.MeshLambertMaterial();
+            break;
+        }
+        if(this.texture)
+            this.xMaterial.map = this.texture;
+      },
+      LoadMap(){
+        if(this.map && this.xMaterial){
+          let texture = new THREE.TextureLoader().load(this.map , function ( texture ) {
+            this.xMaterial.map = texture;
+            this.texture = texture;
+            this.render();                  //render
+          }.bind(this));
+        }
+      },
+      SetMaterial(){
+        if(this.object && this.xMaterial){
+          this.object.traverse(function (child) {
+            child.material = this.xMaterial;
+          }.bind(this));
+          this.render();                //render
+        }
       },
       Adjust(object){
           this.SetScale(object);

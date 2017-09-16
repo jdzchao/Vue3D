@@ -9,8 +9,9 @@
       <x-light :type="'Ambient'" :position="{x:0,y:0,z:0}" :intensity="0.6"></x-light>
       <x-light :type="'Directional'" :position="{x:20,y:15,z:50}" :intensity="0.4" follow></x-light>
       <!--<x-box-geometry></x-box-geometry>-->
-      <x-obj-loader path="http://39.108.53.123/obj/beizi1.obj" material="MeshPhong"></x-obj-loader>
+      <x-obj-loader path="http://39.108.53.123/obj/cup1/body.obj" :material="testMaterial" :map="testMap"></x-obj-loader>
     </template>
+    <button style="position: fixed;top: 0" @click="luckyTest">test</button>
   </div>
 </template>
 <script>
@@ -34,8 +35,13 @@
     },
     data() {
       return {
-        ready: false
+        ready: false,
+        testMap: 'http://39.108.53.123/obj/cup1/bodytexture.jpg',
+        testMaterial: 'MeshPhong'
       }
+    },
+    created(){
+
     },
     computed: {
       ...mapState(['width', 'height'])
@@ -43,6 +49,10 @@
     methods: {
       onReady(bool) {
         this.ready = bool;
+      },
+      luckyTest(){
+        this.testMaterial = 'meshbasic';
+        //this.testMap = 'http://39.108.53.123/obj/cup1/bodyzhankai.jpg';
       }
     }
   }
