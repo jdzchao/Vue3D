@@ -23,13 +23,18 @@
         texture: null,
       }
     },
+    computed:{
+        _parent(){
+          return this.$parent.tGroup ? this.$parent.tGroup : this.scene;
+        }
+    },
     created(){
       this.LoaderModel();
       this.LoadMaterial();
       this.LoadMap();
     },
     mounted(){
-
+      console.log(this.$parent);
     },
     updated(){
       console.log("update")
@@ -37,9 +42,9 @@
     watch:{
       object(val, oldVal){
         if(oldVal !== null)
-            this.scene.remove(oldVal);
+            this._parent.remove(oldVal);
 
-        this.scene.add(val);
+        this._parent.add(val);
         this.SetMaterial();
         this.Adjust(val);
       },
@@ -107,12 +112,12 @@
           this.SetScale(object);
           this.SetCenter(object);
       },
-      GetSize: function (object) {
+      GetSize(object) {
         let box = new THREE.Box3();
         box.setFromObject(object);
         return box.getSize();
       },
-      SetCenter: function (object) {
+      SetCenter(object) {
         let box = new THREE.Box3();
         box.setFromObject(object);
         let center = box.getCenter();

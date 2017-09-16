@@ -9,7 +9,9 @@
       <x-light :type="'Ambient'" :position="{x:0,y:0,z:0}" :intensity="0.6"></x-light>
       <x-light :type="'Directional'" :position="{x:20,y:15,z:50}" :intensity="0.4" follow></x-light>
       <!--<x-box-geometry></x-box-geometry>-->
-      <x-obj-loader path="http://39.108.53.123/obj/cup1/body.obj" :material="testMaterial" :map="testMap"></x-obj-loader>
+      <x-group v-model="myGroup">
+        <x-obj-loader path="http://39.108.53.123/obj/cup1/body.obj" :material="testMaterial" :map="testMap"></x-obj-loader>
+      </x-group>
     </template>
     <button style="position: fixed;top: 0" @click="luckyTest">test</button>
   </div>
@@ -22,6 +24,7 @@
   import XLight from '../components/Vue3D/XLight.vue'
   import XBoxGeometry from '../components/Vue3D/XBoxGeometry.vue'
   import XObjLoader from '../components/Vue3D/XObjLoader.vue'
+  import XGroup from '../components/Vue3D/XGroup.vue'
 
   export default {
     name: 'Index',
@@ -31,13 +34,15 @@
       MControls,
       XLight,
       XBoxGeometry,
-      XObjLoader
+      XObjLoader,
+      XGroup
     },
     data() {
       return {
         ready: false,
         testMap: 'http://39.108.53.123/obj/cup1/bodytexture.jpg',
-        testMaterial: 'MeshPhong'
+        testMaterial: 'MeshPhong',
+        myGroup: null,
       }
     },
     created(){
@@ -45,6 +50,8 @@
     },
     computed: {
       ...mapState(['width', 'height'])
+    },
+    watch:{
     },
     methods: {
       onReady(bool) {
