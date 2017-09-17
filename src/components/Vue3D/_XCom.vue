@@ -18,7 +18,6 @@
     computed: {
       ...mapState({
         scene: state => state.vue3d.scene,
-        camera: state => state.vue3d.camera
       })
     },
     methods: {

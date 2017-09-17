@@ -19,8 +19,7 @@
         default: () => {
           return new THREE.Vector3();
         },
-      },
-      follow: Boolean,
+      }
     },
     data() {
       return {
@@ -33,9 +32,6 @@
         handler(val) {
           this.setPosition();
         }
-      },
-      follow(val){
-
       }
     },
     created() {
@@ -47,7 +43,6 @@
           this.light = new THREE.DirectionalLight(this.color, this.intensity);
       }
       this.scene.add(this.light);
-      this.cameraFollow();
       this.render();
     },
     methods: {
@@ -62,13 +57,6 @@
           this.light.position.z = this.position.z || 0;
         }
       },
-      cameraFollow(){
-          if(this.follow){
-              this.$store.state.vue3d.rendererDelegation.push(
-                () => {this.light.position.copy(this.camera.position)}
-              )
-          }
-      }
     }
   }
 </script>
