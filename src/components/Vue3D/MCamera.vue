@@ -4,6 +4,7 @@
 <script>
   const THREE = require('three');
   import _MCom from './_MCom.vue'
+  import _Config from '../../config/vue3d'
 
   export default {
     name: 'MCamera',
@@ -15,18 +16,14 @@
     },
     data() {
       return {
-        near: 1,
-        far: 1000,
-        dis: 100,
-        size: 100,
 //        aspect: this.width / this.height
       }
     },
     created() {
       if (this.type === 'Perspective') {
-        this.$store.state.vue3d.camera = new THREE.PerspectiveCamera(this.fov(), this.width / this.height, this.near, this.far);
+        this.$store.state.vue3d.camera = new THREE.PerspectiveCamera(this.fov(), this.width / this.height, _Config.camera.near, _Config.camera.far);
       }
-      this.camera.position.z = this.dis + this.size * 2;
+      this.camera.position.z = _Config.camera.dis + _Config.camera.size * 2;
       this.camera.target = new THREE.Vector3();
     },
     computed: {
@@ -40,11 +37,11 @@
     },
     methods: {
       fov() {
-        let vertical = this.size;
+        let vertical = _Config.camera.size;
         if (this.aspect < 1) {
           vertical = vertical / this.aspect;
         }
-        return Math.atan(vertical / this.dis / 2) * (180 / Math.PI);
+        return Math.atan(vertical / _Config.camera.dis / 2) * (180 / Math.PI);
       },
       updateCamera() {
         this.camera.fov = this.fov();
