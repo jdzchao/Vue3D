@@ -127,7 +127,7 @@
       },
       SetScale(object) {
         let scale = 1;
-        let scene_size = _Config.camera.size;
+        let scene_size = _Config.size;
         let size = this.GetSize(object);
         let aspect = this.$store.state.width / this.$store.state.height;
 

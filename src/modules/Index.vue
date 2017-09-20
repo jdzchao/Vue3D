@@ -8,7 +8,8 @@
     <template id="components" v-if="ready">
       <x-light :type="'Ambient'" :position="{x:0,y:0,z:0}"></x-light>
       <x-light :type="'Directional'" :position="{x:0,y:0,z:0}"></x-light>
-      <x-box-geometry></x-box-geometry>
+      <!--<x-box-geometry></x-box-geometry>-->
+      <x-obj-loader path="http://39.108.53.123/obj/cup1/body.obj" map="http://39.108.53.123/obj/cup1/bodytexture.jpg"></x-obj-loader>
     </template>
   </div>
 </template>
@@ -19,6 +20,7 @@
   import MControls from '../components/Vue3D/MControls.vue'
   import XLight from '../components/Vue3D/XLight.vue'
   import XBoxGeometry from '../components/Vue3D/XBoxGeometry.vue'
+  import XObjLoader from '../components/Vue3D/XObjLoader.vue'
 
   export default {
     name: 'Index',
@@ -27,7 +29,8 @@
       MCamera,
       MControls,
       XLight,
-      XBoxGeometry
+      XBoxGeometry,
+      XObjLoader
     },
     data() {
       return {
