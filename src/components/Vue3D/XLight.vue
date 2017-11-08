@@ -1,6 +1,5 @@
 <template>
-  <div id="XLight">
-  </div>
+  <div id="XLight"></div>
 </template>
 <script>
   // Ambient 环境光
@@ -21,7 +20,7 @@
         },
       }
     },
-    data() {
+    data () {
       return {
         light: {},
       }
@@ -29,12 +28,13 @@
     watch: {
       position: {
         deep: true,
-        handler(val) {
+        handler (val) {
+          console.log(val);
           this.setPosition();
         }
       }
     },
-    created() {
+    created () {
       switch (this.type) {
         case 'Ambient':
           this.light = new THREE.AmbientLight(this.color, this.intensity);
@@ -46,7 +46,7 @@
       this.render();
     },
     methods: {
-      setPosition() {
+      setPosition () {
         if (this.position.hasOwnProperty('x')) {
           this.light.position.x = this.position.x || 0;
         }

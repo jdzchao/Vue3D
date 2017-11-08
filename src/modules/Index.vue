@@ -6,10 +6,10 @@
       <m-controls></m-controls>
     </template>
     <template id="components" v-if="ready">
-      <x-light :type="'Ambient'" :position="{x:0,y:0,z:0}"></x-light>
-      <x-light :type="'Directional'" :position="{x:0,y:0,z:0}"></x-light>
+      <x-light :type="'Ambient'" :intensity="1" :color="'rgb(200,200,200)'"></x-light>
+      <x-light :type="'Directional'" :intensity="1" :color="'rgb(200,200,200)'" :position="camera.position"></x-light>
       <!--<x-box-geometry></x-box-geometry>-->
-      <x-obj-loader path="http://39.108.53.123/obj/cup1/body.obj" map="http://39.108.53.123/obj/cup1/bodytexture.jpg"></x-obj-loader>
+      <x-obj-loader path="./static/demo/cup.obj" map="./static/demo/map.jpg"></x-obj-loader>
     </template>
   </div>
 </template>
@@ -32,16 +32,22 @@
       XBoxGeometry,
       XObjLoader
     },
-    data() {
+    data () {
       return {
         ready: false
       }
     },
     computed: {
-      ...mapState(['width', 'height'])
+      ...mapState(['width', 'height']),
+      ...mapState({
+        scene: state => state.vue3d.scene,
+        camera: state => state.vue3d.camera,
+        renderer: state => state.vue3d.renderer,
+      })
     },
     methods: {
-      onReady(bool) {
+      onReady (bool) {
+        console.log(this.camera.position);
         this.ready = bool;
       }
     }
