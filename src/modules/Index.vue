@@ -6,10 +6,11 @@
       <m-controls></m-controls>
     </template>
     <template id="components" v-if="ready">
-      <x-light :type="'Ambient'" :intensity="1" :color="'rgb(200,200,200)'"></x-light>
-      <x-light :type="'Directional'" :intensity="1" :color="'rgb(200,200,200)'" :position="camera.position"></x-light>
+      <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(200,200,200)'"></x-light>
+      <x-light :type="'Directional'" :intensity="0.8" :color="'rgb(200,200,200)'" :position="lPos"></x-light>
       <!--<x-box-geometry></x-box-geometry>-->
-      <x-obj-loader path="./static/demo/cup.obj" map="./static/demo/map.jpg"></x-obj-loader>
+      <x-obj-loader :path="'./static/demo/cup.obj'"></x-obj-loader>
+      <x-material map="./static/demo/map.jpg"></x-material>
     </template>
   </div>
 </template>
@@ -21,6 +22,7 @@
   import XLight from '../components/Vue3D/XLight.vue'
   import XBoxGeometry from '../components/Vue3D/XBoxGeometry.vue'
   import XObjLoader from '../components/Vue3D/XObjLoader.vue'
+  import XMaterial from "../components/Vue3D/XMaterial.vue";
 
   export default {
     name: 'Index',
@@ -30,11 +32,13 @@
       MControls,
       XLight,
       XBoxGeometry,
-      XObjLoader
+      XObjLoader,
+      XMaterial,
     },
     data () {
       return {
-        ready: false
+        ready: false,
+        lPos: null,
       }
     },
     computed: {
@@ -45,9 +49,16 @@
         renderer: state => state.vue3d.renderer,
       })
     },
+    watch: {
+      camera: {
+        deep: true,
+        handler (val) {
+          this.lPos = val.position
+        }
+      }
+    },
     methods: {
       onReady (bool) {
-        console.log(this.camera.position);
         this.ready = bool;
       }
     }

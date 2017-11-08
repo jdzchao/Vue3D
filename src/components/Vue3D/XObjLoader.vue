@@ -11,71 +11,49 @@
     mixins: [_XCom],
     props: {
       path: {type: String},
-      name: {type: String, default: 'main'},
-      material: {type: String, default: 'MeshPhong'},
+      name: {type: String, default: 'obj'},
+      material: {type: Object},
       map: String,
     },
-    data() {
+    data () {
       return {
         loader: new THREE.OBJLoader(),
         object: null,
-        xMaterial: null,
-        texture: null,
       }
     },
-    computed:{
-        _parent(){
-          return this.$parent.tGroup ? this.$parent.tGroup : this.scene;
-        }
-    },
-    created(){
+    created () {
       this.LoaderModel();
-      this.LoadMaterial();
       this.LoadMap();
     },
-    mounted(){
+    mounted () {
       console.log(this.$parent);
     },
-    updated(){
+    updated () {
       console.log("update")
     },
-    watch:{
-      object(val, oldVal){
-        if(oldVal !== null)
-            this._parent.remove(oldVal);
-
-        this._parent.add(val);
-        this.SetMaterial();
+    watch: {
+      object (val, oldVal) {
+        if (oldVal !== null)
+          this.scene.remove(oldVal);
+        this.scene.add(val);
         this.Adjust(val);
-      },
-      xMaterial(val){
-          this.SetMaterial();
-      },
-      material(){
-          this.LoadMaterial();
-      },
-      map(){
-          this.LoadMap();
       }
     },
-    methods:{
-      LoaderModel(){
-        if(!this.path) return;
+    methods: {
+      LoaderModel () {
+        if (!this.path) return;
         let that = this;
-        this.loader.load( this.path , object => {
-
+        this.loader.load(this.path, object => {
           this.object = object;
           console.log(object);
-
-          this.$emit( 'on-load' );
-
+          this.$emit('on-load');
         }, err => {
 
-          this.$emit( 'on-error', err );
+          this.$emit('on-error', err);
 
         });
       },
-      LoadMaterial(){
+      LoadMaterial () {
         let materialStr = this.material.toLowerCase();
         switch (materialStr) {
           case 'meshphong':
@@ -88,36 +66,36 @@
             this.xMaterial = new THREE.MeshLambertMaterial();
             break;
         }
-        if(this.texture)
-            this.xMaterial.map = this.texture;
+        if (this.texture)
+          this.xMaterial.map = this.texture;
       },
-      LoadMap(){
-        if(this.map && this.xMaterial){
-          let texture = new THREE.TextureLoader().load(this.map , function ( texture ) {
+      LoadMap () {
+        if (this.map && this.xMaterial) {
+          let texture = new THREE.TextureLoader().load(this.map, function (texture) {
             this.xMaterial.map = texture;
             this.texture = texture;
             this.render();                  //render
           }.bind(this));
         }
       },
-      SetMaterial(){
-        if(this.object && this.xMaterial){
+      SetMaterial () {
+        if (this.object && this.xMaterial) {
           this.object.traverse(function (child) {
             child.material = this.xMaterial;
           }.bind(this));
           this.render();                //render
         }
       },
-      Adjust(object){
-          this.SetScale(object);
-          this.SetCenter(object);
+      Adjust (object) {
+        this.SetScale(object);
+        this.SetCenter(object);
       },
-      GetSize(object) {
+      GetSize (object) {
         let box = new THREE.Box3();
         box.setFromObject(object);
         return box.getSize();
       },
-      SetCenter(object) {
+      SetCenter (object) {
         let box = new THREE.Box3();
         box.setFromObject(object);
         let center = box.getCenter();
@@ -125,7 +103,7 @@
         object.position.y -= center.y;
         object.position.z -= center.z;
       },
-      SetScale(object) {
+      SetScale (object) {
         let scale = 1;
         let scene_size = _Config.size;
         let size = this.GetSize(object);

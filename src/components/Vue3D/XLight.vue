@@ -29,8 +29,7 @@
       position: {
         deep: true,
         handler (val) {
-          console.log(val);
-          this.setPosition();
+          this.setPosition(val);
         }
       }
     },
