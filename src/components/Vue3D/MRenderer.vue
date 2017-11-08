@@ -27,7 +27,7 @@
       this.$store.commit('vue3d/rendererDelegation', this.updateRenderer);
       this.$store.state.vue3d.dom = this.$el;
       this.render();
-      this.$emit('onReady', true);
+      this.$emit('ready', true);
     },
     methods: {
       updateRenderer() {
