@@ -23,12 +23,8 @@
     mounted () {
       this.LoadObj();
     },
-    updated () {
-      console.log("update")
-    },
     watch: {
       path (val) {
-        console.log(val);
         this.LoadObj();
       },
       object (val, oldVal) {
@@ -45,6 +41,7 @@
         const objLoader = new THREE.OBJLoader(this.manager);
         objLoader.load(this.path, object => {
           this.object = object;
+          this.SetMaterial();
           this.$emit('loaded');
         }, xhr => {
           this.$emit('process', xhr);
@@ -57,7 +54,7 @@
           this.object.traverse(function (child) {
             child.material = this.material;
           }.bind(this));
-          this.render();                //render
+          this.render(); //render
         }
       },
       Adjust (object) {

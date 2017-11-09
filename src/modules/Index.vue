@@ -9,8 +9,8 @@
       <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(200,200,200)'"></x-light>
       <x-light :type="'Directional'" :intensity="0.8" :color="'rgb(200,200,200)'" :position="lPos"></x-light>
       <!--<x-box-geometry></x-box-geometry>-->
-      <x-obj-loader :path="'./static/demo/cup.obj'" @loaded="LoadSuccess" @process="LoadProcess" @error="LoadError"></x-obj-loader>
-      <x-material :map="'./static/demo/map.jpg'"></x-material>
+      <x-obj-loader :path="'./static/demo/cup.obj'" :material="material" @loaded="LoadSuccess" @process="LoadProcess" @error="LoadError"></x-obj-loader>
+      <x-material :cMap="'./static/demo/map.jpg'" @loaded="MtlSuccess"></x-material>
     </template>
   </div>
 </template>
@@ -39,6 +39,7 @@
       return {
         ready: false,
         lPos: null,
+        material: null
       }
     },
     computed: {
@@ -68,6 +69,10 @@
       },
       LoadProcess (xhr) {
         console.log(xhr);
+      },
+      MtlSuccess (mtl) {
+        console.log(mtl);
+        this.material = mtl;
       }
     }
   }
