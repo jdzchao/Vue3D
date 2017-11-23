@@ -20,6 +20,7 @@
     },
     mounted() {
       this.$store.state.vue3d.renderer = new THREE.WebGLRenderer({
+        preserveDrawingBuffer: true,
         antialias: true,
         alpha: true,
         canvas: this.$el
