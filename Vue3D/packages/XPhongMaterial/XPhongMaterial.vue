@@ -2,12 +2,12 @@
   <div id="XMaterial"></div>
 </template>
 <script>
-  const THREE = require('three');
-  import _XCom from './_XCom.vue'
+  import * as THREE from 'three'
+  import Vue3D from '../Vue3D.vue'
 
   export default {
     name: 'XPhoneMaterial',
-    mixins: [_XCom],
+    mixins: [Vue3D],
     props: {
       color: {type: String, default: 'rgb(255,255,255)'},
       cMap: {type: String}, // color map

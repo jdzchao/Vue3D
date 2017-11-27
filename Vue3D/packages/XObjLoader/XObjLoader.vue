@@ -1,14 +1,14 @@
 <template>
 </template>
 <script>
-  const THREE = require('three');
-  THREE.OBJLoader = require('imports-loader?THREE=three!exports-loader?THREE.OBJLoader!../../../node_modules/three/examples/js/loaders/OBJLoader');
-  import _XCom from './_XCom.vue'
-  import _Config from '../../config/vue3d'
+  import * as THREE from 'three'
+
+  THREE.OBJLoader = require('imports-loader?THREE=three!exports-loader?THREE.OBJLoader!./OBJLoader');
+  import Vue3D from '../Vue3D.vue'
 
   export default {
     name: 'XObjLoader',
-    mixins: [_XCom],
+    mixins: [Vue3D],
     props: {
       path: {type: String},
       name: {type: String, default: 'vue3d'},
@@ -29,8 +29,8 @@
       },
       object (val, oldVal) {
         if (oldVal !== null)
-          this.scene.remove(oldVal);
-        this.scene.add(val);
+          this.$vue3d.scene.remove(oldVal);
+        this.$vue3d.scene.add(val);
         this.Adjust(val);
         this.render();
       }
@@ -76,7 +76,7 @@
       },
       SetScale (object) {
         let scale = 1;
-        let scene_size = _Config.size;
+        let scene_size = this.$vue3d.size;
         let size = this.GetSize(object);
         let aspect = this.$store.state.width / this.$store.state.height;
 
