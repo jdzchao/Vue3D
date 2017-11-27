@@ -1,7 +1,7 @@
 const version = "1.0";
 
 class Vue3d {
-  constructor () {
+  constructor() {
     this.version = version;
     this.size = 100;
     this.dom = null; // webGL canvas dom
@@ -15,7 +15,7 @@ class Vue3d {
     this.rendererDelegation = []; // 渲染过程委托
   }
 
-  rendererDelegationReg (func) {
+  rendererDelegationReg(func) {
     if (typeof func === 'function') {
       this.rendererDelegation.push(func);
     } else {
@@ -23,7 +23,7 @@ class Vue3d {
     }
   };
 
-  render () {
+  render() {
     if (this.rendererDelegation.length < 1) return;
     if (this.tick) return;
     this.tick = requestAnimationFrame(() => {

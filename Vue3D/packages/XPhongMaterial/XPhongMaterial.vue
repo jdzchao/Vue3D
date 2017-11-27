@@ -1,12 +1,12 @@
 <template>
-  <div id="XMaterial"></div>
+  <div id="XPhongMaterial"></div>
 </template>
 <script>
   import * as THREE from 'three'
   import Vue3D from '../Vue3D.vue'
 
   export default {
-    name: 'XPhoneMaterial',
+    name: 'XPhongMaterial',
     mixins: [Vue3D],
     props: {
       color: {type: String, default: 'rgb(255,255,255)'},

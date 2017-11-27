@@ -14,13 +14,13 @@
       type: {type: String, default: 'Ambient'},
       color: {type: String, default: 'rgb(255,255,255)'},
       intensity: {type: Number, default: 1.0},
-      position: {
+      pos: {
         default: () => {
           return new THREE.Vector3();
         },
       }
     },
-    data () {
+    data() {
       return {
         light: {},
       }
@@ -28,12 +28,12 @@
     watch: {
       position: {
         deep: true,
-        handler (val) {
+        handler(val) {
           this.setPosition(val);
         }
       }
     },
-    created () {
+    created() {
       switch (this.type) {
         case 'Ambient':
           this.light = new THREE.AmbientLight(this.color, this.intensity);
@@ -45,7 +45,7 @@
       this.render();
     },
     methods: {
-      setPosition () {
+      setPosition() {
         if (this.position.hasOwnProperty('x')) {
           this.light.position.x = this.position.x || 0;
         }
