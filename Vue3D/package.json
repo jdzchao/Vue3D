@@ -1,0 +1,23 @@
+{
+  "name": "vue3d",
+  "version": "0.0.3",
+  "description": "Vue.js & Three.js components",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdzchao/Vue3D.git"
+  },
+  "keywords": [
+    "vue",
+    "three"
+  ],
+  "author": "JdzChao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jdzchao/Vue3D/issues"
+  },
+  "homepage": "https://github.com/jdzchao/Vue3D#readme"
+}
