@@ -24,7 +24,7 @@
     },
     created () {
       this.cube = new THREE.Mesh(this.geometry, this.material);
-      this.scene.add(this.cube);
+      this.$vue3d.scene.add(this.cube);
       this.render();
     }
   }
