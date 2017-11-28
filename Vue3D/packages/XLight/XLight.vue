@@ -20,20 +20,20 @@
         },
       }
     },
-    data() {
+    data () {
       return {
         light: {},
       }
     },
     watch: {
-      position: {
+      pos: {
         deep: true,
-        handler(val) {
+        handler (val) {
           this.setPosition(val);
         }
       }
     },
-    created() {
+    created () {
       switch (this.type) {
         case 'Ambient':
           this.light = new THREE.AmbientLight(this.color, this.intensity);
@@ -45,15 +45,15 @@
       this.render();
     },
     methods: {
-      setPosition() {
-        if (this.position.hasOwnProperty('x')) {
-          this.light.position.x = this.position.x || 0;
+      setPosition () {
+        if (this.pos.hasOwnProperty('x')) {
+          this.light.position.x = this.pos.x || 0;
         }
-        if (this.position.hasOwnProperty('y')) {
-          this.light.position.y = this.position.y || 0;
+        if (this.pos.hasOwnProperty('y')) {
+          this.light.position.y = this.pos.y || 0;
         }
-        if (this.position.hasOwnProperty('z')) {
-          this.light.position.z = this.position.z || 0;
+        if (this.pos.hasOwnProperty('z')) {
+          this.light.position.z = this.pos.z || 0;
         }
       },
     }

@@ -3,16 +3,19 @@
   import * as THREE from 'three'
 
   export default {
-    data() {
-      return {}
+    data () {
+      return {
+        scene: '',
+      }
     },
-    created() {
+    created () {
       if (!this.$vue3d.scene) {
         this.$vue3d.scene = new THREE.Scene();
       }
     },
     methods: {
-      render() {
+      render () {
+        this.scene = this.$vue3d.scene;
         this.$vue3d.render();
       }
     }

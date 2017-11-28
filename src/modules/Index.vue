@@ -2,29 +2,20 @@
   <div id="Index">
     <template id="scene">
       <m-renderer ref="renderer" :width="width" :height="height" @ready="Ready"></m-renderer>
-      <m-camera ref="camera" :width="width" :height="height"></m-camera>
+      <m-camera ref="camera" :width="width" :height="height" @update="updateCamera"></m-camera>
       <m-controls ref="controls"></m-controls>
     </template>
     <template id="components" v-if="ready">
       <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(200,200,200)'"></x-light>
-      <x-light :type="'Directional'" :intensity="0.8" :color="'rgb(200,200,200)'"
-               :pos="camPos"></x-light>
+      <x-light :type="'Directional'" :intensity="0.8" :color="'rgb(200,200,200)'" :pos="camPos"></x-light>
       <!--<x-box-geometry></x-box-geometry>-->
-      <x-obj-loader :path="'./static/demo/cup.obj'" :material="material" @loaded="LoadSuccess" @process="LoadProcess"
-                    @error="LoadError"></x-obj-loader>
+      <x-obj-loader :path="'./static/demo/cup.obj'" :material="material"></x-obj-loader>
       <x-phong-material :cMap="'./static/demo/map.jpg'" @loaded="MtlSuccess"></x-phong-material>
     </template>
   </div>
 </template>
 <script>
   import {mapState} from 'vuex'
-  //  import MRenderer from '../../Vue3D/packages/MRenderer'
-  //  import MCamera from '../../Vue3D/packages/MCamera'
-  //  import MControls from '../../Vue3D/packages/MControls'
-  //  import XLight from '../../Vue3D/packages/XLight'
-  //  import XBoxGeometry from '../../Vue3D/packages/XBoxGeometry'
-  //  import XObjLoader from '../../Vue3D/packages/XObjLoader'
-  //  import XMaterial from "../../Vue3D/packages/XPhongMaterial";
   import {
     MRenderer,
     MCamera,
@@ -46,30 +37,30 @@
       XObjLoader,
       XPhongMaterial,
     },
-    data() {
+    data () {
       return {
         ready: false,
         material: null,
+        camPos: null
       }
     },
     computed: {
       ...mapState(['width', 'height']),
-      camPos() {
-        console.log(this.$refs.camera.camera);
-        return this.$refs.camera.camera.position;
-      }
     },
     methods: {
-      Ready(bool) {
+      Ready (bool) {
         this.ready = bool;
       },
-      LoadError(err) {
+      updateCamera (camera) {
+        this.camPos = camera.position;
       },
-      LoadSuccess() {
+      LoadError (err) {
       },
-      LoadProcess(xhr) {
+      LoadSuccess () {
       },
-      MtlSuccess(mtl) {
+      LoadProcess (xhr) {
+      },
+      MtlSuccess (mtl) {
         this.material = mtl;
       }
     }
