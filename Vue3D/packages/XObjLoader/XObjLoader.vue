@@ -1,8 +1,7 @@
 <template>
 </template>
 <script>
-  import * as THREE from 'three'
-
+  const THREE = require('three');
   THREE.OBJLoader = require('imports-loader?THREE=three!exports-loader?THREE.OBJLoader!./OBJLoader');
   import Vue3D from '../Vue3D.vue'
 
@@ -14,20 +13,20 @@
       name: {type: String, default: 'vue3d'},
       material: {type: Object},
     },
-    data () {
+    data() {
       return {
         manager: new THREE.LoadingManager(),
         object: null,
       }
     },
-    mounted () {
+    mounted() {
       this.LoadObj();
     },
     watch: {
-      path (val) {
+      path(val) {
         this.LoadObj();
       },
-      object (val, oldVal) {
+      object(val, oldVal) {
         if (oldVal !== null)
           this.$vue3d.scene.remove(oldVal);
         this.$vue3d.scene.add(val);
@@ -36,7 +35,7 @@
       }
     },
     methods: {
-      LoadObj () {
+      LoadObj() {
         if (!this.path) return;
         const objLoader = new THREE.OBJLoader(this.manager);
         objLoader.load(this.path, object => {
@@ -49,7 +48,7 @@
           this.$emit('error', err);
         });
       },
-      SetMaterial () {
+      SetMaterial() {
         if (this.object && this.material) {
           this.object.traverse(function (child) {
             child.material = this.material;
@@ -57,16 +56,16 @@
           this.render(); //render
         }
       },
-      Adjust (object) {
+      Adjust(object) {
         this.SetScale(object);
         this.SetCenter(object);
       },
-      GetSize (object) {
+      GetSize(object) {
         let box = new THREE.Box3();
         box.setFromObject(object);
         return box.getSize();
       },
-      SetCenter (object) {
+      SetCenter(object) {
         let box = new THREE.Box3();
         box.setFromObject(object);
         let center = box.getCenter();
@@ -74,7 +73,7 @@
         object.position.y -= center.y;
         object.position.z -= center.z;
       },
-      SetScale (object) {
+      SetScale(object) {
         let scale = 1;
         let scene_size = this.$vue3d.size;
         let size = this.GetSize(object);

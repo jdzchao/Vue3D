@@ -4,7 +4,7 @@
 <script>
   // Ambient 环境光
   // Directional 平行光
-  import * as THREE from 'three'
+  const THREE = require('three');
   import Vue3D from '../Vue3D.vue'
 
   export default {
@@ -20,7 +20,7 @@
         },
       }
     },
-    data () {
+    data() {
       return {
         light: {},
       }
@@ -28,12 +28,12 @@
     watch: {
       pos: {
         deep: true,
-        handler (val) {
+        handler(val) {
           this.setPosition(val);
         }
       }
     },
-    created () {
+    created() {
       switch (this.type) {
         case 'Ambient':
           this.light = new THREE.AmbientLight(this.color, this.intensity);
@@ -45,7 +45,7 @@
       this.render();
     },
     methods: {
-      setPosition () {
+      setPosition() {
         if (this.pos.hasOwnProperty('x')) {
           this.light.position.x = this.pos.x || 0;
         }

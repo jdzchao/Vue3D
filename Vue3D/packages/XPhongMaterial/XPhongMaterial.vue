@@ -2,7 +2,7 @@
   <div id="XPhongMaterial"></div>
 </template>
 <script>
-  import * as THREE from 'three'
+  const THREE = require('three');
   import Vue3D from '../Vue3D.vue'
 
   export default {
@@ -16,22 +16,22 @@
       shininess: {type: Number, default: 30},
       flatShading: {type: Boolean, default: false}
     },
-    data () {
+    data() {
       return {
         material: null,
         loader: new THREE.TextureLoader(),
       }
     },
-    mounted () {
+    mounted() {
       this.Material();
     },
     watch: {
-      cMap (val) {
+      cMap(val) {
         this.LoadColorMap(val);
       }
     },
     methods: {
-      Material () {
+      Material() {
         this.material = new THREE.MeshPhongMaterial({
           flatShading: this.flatShading,
           shininess: this.shininess,
@@ -41,7 +41,7 @@
           this.LoadColorMap(this.cMap);
         }
       },
-      LoadColorMap (val) {
+      LoadColorMap(val) {
         this.loader.load(val, texture => {
             this.material.map = texture;
             this.material.map.needsUpdate = true;

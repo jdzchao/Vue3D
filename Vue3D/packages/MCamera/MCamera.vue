@@ -2,7 +2,7 @@
   <div id="MCamera" :aspect="aspect"></div>
 </template>
 <script>
-  import * as THREE from 'three'
+  const THREE = require('three');
   import Vue3D from '../Vue3D.vue'
 
   export default {
@@ -13,7 +13,7 @@
       width: Number,
       height: Number,
     },
-    data () {
+    data() {
       return {
         camera: '',
         near: 1,
@@ -22,7 +22,7 @@
         size: 100,
       }
     },
-    created () {
+    created() {
       if (this.type === 'Perspective') {
         this.$vue3d.camera = new THREE.PerspectiveCamera(this.fov(), this.width / this.height, this.near, this.far);
       }
@@ -31,7 +31,7 @@
       this.$vue3d.rendererDelegationReg(this.renderCamera);
     },
     computed: {
-      aspect () {
+      aspect() {
         this.$nextTick(() => {
           this.updateCamera(); // 重置相机相关配置
           this.render();
@@ -40,18 +40,18 @@
       }
     },
     methods: {
-      renderCamera () {
+      renderCamera() {
         this.camera = this.$vue3d.camera;
         this.$emit('update', this.camera);
       },
-      fov () {
+      fov() {
         let vertical = this.size;
         if (this.aspect < 1) {
           vertical = vertical / this.aspect;
         }
         return Math.atan(vertical / this.dis / 2) * (180 / Math.PI);
       },
-      updateCamera () {
+      updateCamera() {
         this.$vue3d.camera.fov = this.fov();
         this.$vue3d.camera.aspect = this.aspect;
         this.$vue3d.camera.updateProjectionMatrix();

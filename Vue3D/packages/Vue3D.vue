@@ -1,20 +1,20 @@
 <template></template>
 <script>
-  import * as THREE from 'three'
+  const THREE = require('three');
 
   export default {
-    data () {
+    data() {
       return {
         scene: '',
       }
     },
-    created () {
+    created() {
       if (!this.$vue3d.scene) {
         this.$vue3d.scene = new THREE.Scene();
       }
     },
     methods: {
-      render () {
+      render() {
         this.scene = this.$vue3d.scene;
         this.$vue3d.render();
       }

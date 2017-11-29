@@ -3,7 +3,7 @@
   </div>
 </template>
 <script>
-  import * as THREE from 'three'
+  const THREE = require('three');
   import Vue3D from '../Vue3D.vue'
 
   export default {
@@ -15,14 +15,14 @@
       z: {type: Number, default: 100},
       color: {type: String, default: 'rgb(255,255,255)'}
     },
-    data () {
+    data() {
       return {
         geometry: new THREE.BoxGeometry(this.x, this.y, this.z),
         material: new THREE.MeshBasicMaterial({color: this.color}),
         cube: null
       }
     },
-    created () {
+    created() {
       this.cube = new THREE.Mesh(this.geometry, this.material);
       this.$vue3d.scene.add(this.cube);
       this.render();
