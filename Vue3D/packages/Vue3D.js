@@ -6,7 +6,6 @@ class Vue3d {
   constructor() {
     this.version = version;
     this.size = 100;
-    this.aspect = 1;
     this.dom = null; // webGL canvas dom
     this.renderer = null; // 渲染器
     this.scene = null; // 当前场景
@@ -56,13 +55,14 @@ class Vue3d {
 
   adaptScale(object) {
     let scale = 1;
+    let aspect = this.dom.width / this.dom.height;
     let scene_size = this.size;
     let size = this.getObjectSize(object);
-    if (size.x / size.y > this.aspect) {
+    if (size.x / size.y > aspect) {
       scale *= scene_size / size.x;
       size.multiplyScalar(scale);
     } else {
-      scale *= this.aspect > 1 ? scene_size / size.y : scene_size / size.y / this.aspect;
+      scale *= aspect > 1 ? scene_size / size.y : scene_size / size.y / aspect;
       size.multiplyScalar(scale);
     }
     if (size.z > scene_size) {
