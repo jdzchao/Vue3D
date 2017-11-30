@@ -18,7 +18,8 @@
     created() {
       this.$store.commit('windowResize');
       window.addEventListener("resize", () => {
-        this.$store.commit('windowResize')
+        this.$store.commit('windowResize');
+        // this.$vue3d.aspect = this.$store.state.width / this.$store.state.height;
       });
     }
   }
