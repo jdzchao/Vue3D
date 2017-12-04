@@ -24,7 +24,8 @@ import MRenderer from './packages/MRenderer'
 import XBoxGeometry from './packages/XBoxGeometry'
 import XLight from './packages/XLight'
 import XObjLoader from './packages/XObjLoader'
-import XPhongMaterial from './packages/XPhongMaterial'
+
+import Materials from './packages/Materials'
 
 export {
   MCamera,
@@ -33,5 +34,5 @@ export {
   XBoxGeometry,
   XLight,
   XObjLoader,
-  XPhongMaterial
+  Materials
 };

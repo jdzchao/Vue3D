@@ -6,7 +6,7 @@
   import Vue3D from '../Vue3D.vue'
 
   export default {
-    name: 'MCamera',
+    name: 'm-camera',
     mixins: [Vue3D],
     props: {
       type: {type: String, default: 'Perspective'},

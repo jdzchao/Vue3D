@@ -7,7 +7,7 @@
   import Vue3D from '../Vue3D.vue'
 
   export default {
-    name: 'MControls',
+    name: 'm-controls',
     mixins: [Vue3D],
     data() {
       return {

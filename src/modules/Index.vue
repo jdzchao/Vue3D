@@ -8,9 +8,8 @@
     <template id="components" v-if="ready">
       <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(200,200,200)'"></x-light>
       <x-light :type="'Directional'" :intensity="0.8" :color="'rgb(200,200,200)'" :pos="camPos"></x-light>
-      <!--<x-box-geometry></x-box-geometry>-->
+      <x-box-geometry :material="material"></x-box-geometry>
       <x-obj-loader :path="'./static/demo/cup.obj'" :material="material"></x-obj-loader>
-      <x-phong-material :cMap="'./static/demo/map.jpg'" @loaded="MtlSuccess"></x-phong-material>
     </template>
   </div>
 </template>
@@ -23,7 +22,7 @@
     XBoxGeometry,
     XLight,
     XObjLoader,
-    XPhongMaterial
+    Materials
   } from '../../Vue3D'
 
   export default {
@@ -35,12 +34,11 @@
       XLight,
       XBoxGeometry,
       XObjLoader,
-      XPhongMaterial,
     },
-    data () {
+    data() {
       return {
         ready: false,
-        material: null,
+        material: Materials.sapphire(),
         camPos: null
       }
     },
@@ -48,21 +46,18 @@
       ...mapState(['width', 'height']),
     },
     methods: {
-      Ready (bool) {
+      Ready(bool) {
         this.ready = bool;
       },
-      updateCamera (camera) {
+      updateCamera(camera) {
         this.camPos = camera.position;
       },
-      LoadError (err) {
+      LoadError(err) {
       },
-      LoadSuccess () {
+      LoadSuccess() {
       },
-      LoadProcess (xhr) {
+      LoadProcess(xhr) {
       },
-      MtlSuccess (mtl) {
-        this.material = mtl;
-      }
     }
   }
 </script>

@@ -8,7 +8,7 @@
   import Vue3D from '../Vue3D.vue'
 
   export default {
-    name: 'XLight',
+    name: 'x-light',
     mixins: [Vue3D],
     props: {
       type: {type: String, default: 'Ambient'},
@@ -43,6 +43,9 @@
       }
       this.$vue3d.scene.add(this.light);
       this.render();
+    },
+    destroyed() {
+      this.$vue3d.scene.remove(this.light);
     },
     methods: {
       setPosition() {

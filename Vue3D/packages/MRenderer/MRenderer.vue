@@ -6,7 +6,7 @@
   import Vue3D from '../Vue3D.vue'
 
   export default {
-    name: 'MRenderer',
+    name: 'm-renderer',
     mixins: [Vue3D],
     props: {
       height: Number,

@@ -5,7 +5,7 @@
   import Vue3D from '../Vue3D.vue'
 
   export default {
-    name: 'XObjLoader',
+    name: 'x-obj-loader',
     mixins: [Vue3D],
     props: {
       path: {type: String},
@@ -22,11 +22,14 @@
       }
     },
     mounted() {
-      this.LoadObj(this.path);
+      this.loadObj(this.path);
+    },
+    destroyed() {
+      this.$vue3d.scene.remove(this.object);
     },
     watch: {
       path(val) {
-        this.LoadObj(val);
+        this.loadObj(val);
       },
       object(val, oldVal) {
         if (oldVal !== null)
@@ -35,29 +38,43 @@
         this.$vue3d.placeZeroPoint(val);
         this.$vue3d.adaptScale(val);
         this.render();
+      },
+      material(val, oldVal) {
+        if (oldVal !== val && oldVal !== null) {
+          this.setMaterial();
+        }
       }
     },
     methods: {
-      LoadObj(path) {
+      loadObj(path) {
         if (!path) return;
         const objLoader = new THREE.OBJLoader(this.manager);
         objLoader.load(path, object => {
           this.object = object;
-          this.SetMaterial();
-          this.$emit('loaded');
+          this.setMaterial();
+          this.loaded(object);
         }, xhr => {
-          this.$emit('process', xhr);
+          this.process(xhr);
         }, err => {
-          this.$emit('error', err);
+          this.error(err);
         });
       },
-      SetMaterial() {
+      setMaterial() {
         if (this.object && this.material) {
           this.object.traverse(function (child) {
             child.material = this.material;
           }.bind(this));
           this.render();
         }
+      },
+      loaded(object) {
+        this.$emit('loaded', object);
+      },
+      process(xhr) {
+        this.$emit('process', xhr);
+      },
+      error(err) {
+        this.$emit('error', err);
       }
     }
   }
