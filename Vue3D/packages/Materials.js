@@ -3,6 +3,14 @@ import * as THREE from 'three'
 const loader = new THREE.TextureLoader();
 
 let mtl = {
+  ceramic: function () {
+    return new THREE.MeshPhongMaterial({
+      flatShading: false,
+      shininess: 30,
+      specular: 0xffffff,
+      color: "rgb(255,255,255)",
+    });
+  },
   glass: function () {
     return new THREE.MeshPhongMaterial({
       flatShading: false,
