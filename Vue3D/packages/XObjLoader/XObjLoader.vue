@@ -10,33 +10,45 @@
     props: {
       path: {type: String},
       name: {type: String, default: 'vue3d'},
+      group: {type: Object},
       material: {type: Object},
       position: {type: Object},
       scale: {type: Object},
-      rotate: {type: Object}
+      rotate: {type: Object},
     },
     data() {
       return {
         manager: new THREE.LoadingManager(),
         object: null,
+        _group: {},
+      }
+    },
+    created() {
+      if (!this.group) {
+        this._group = this.$vue3d.scene;
       }
     },
     mounted() {
       this.loadObj(this.path);
     },
     destroyed() {
-      this.$vue3d.scene.remove(this.object);
+      this._group.remove(this.object);
     },
     watch: {
       path(val) {
         this.loadObj(val);
       },
+      group(val) {
+        if (!val) {
+          this._group = val;
+        }
+      },
       object(val, oldVal) {
         if (oldVal !== null)
-          this.$vue3d.scene.remove(oldVal);
-        this.$vue3d.scene.add(val);
-        this.$vue3d.placeZeroPoint(val);
-        this.$vue3d.adaptScale(val);
+          this._group.remove(oldVal);
+        this._group.add(val);
+        this.setMaterial();
+        this.adjust();
         this.render();
       },
       material(val, oldVal) {
@@ -50,14 +62,22 @@
         if (!path) return;
         const objLoader = new THREE.OBJLoader(this.manager);
         objLoader.load(path, object => {
+          object.name = this.name;
           this.object = object;
-          this.setMaterial();
           this.loaded(object);
         }, xhr => {
           this.process(xhr);
         }, err => {
           this.error(err);
         });
+      },
+      adjust() {
+        if (!this.position) {
+          this.$vue3d.placeZeroPoint(this.object);
+        }
+        if (!this.scale) {
+          this.$vue3d.adaptScale(this.object);
+        }
       },
       setMaterial() {
         if (this.object && this.material) {
