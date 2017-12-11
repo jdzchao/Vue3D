@@ -30,7 +30,6 @@
           this._group.remove(oldVal);
         this._group.add(val);
         this.setMaterial();
-        this.adjusted();
         this.render();
       },
       material(val, oldVal) {
@@ -46,6 +45,7 @@
         objLoader.load(path, object => {
           object.name = this.name;
           this.object = object;
+          this.adjusted(this.object);
           this.loaded(object);
         }, xhr => {
           this.process(xhr);
@@ -53,10 +53,10 @@
           this.error(err);
         });
       },
-      adjusted() {
+      adjusted(object) {
         if (this.adjust) {
-          this.$vue3d.placeZeroPoint(this.object);
-          this.$vue3d.adaptScale(this.object);
+          this.$vue3d.placeZeroPoint(object);
+          this.$vue3d.adaptScale(object);
         }
       },
       setMaterial() {
