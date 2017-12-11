@@ -11,6 +11,7 @@
     name: 'x-light',
     mixins: [Vue3D],
     props: {
+      group: {type: Object},
       type: {type: String, default: 'Ambient'},
       color: {type: String, default: 'rgb(255,255,255)'},
       intensity: {type: Number, default: 1.0},
@@ -22,8 +23,26 @@
     },
     data() {
       return {
+        _group: {},
         light: {},
       }
+    },
+    created() {
+      if (!this.group) {
+        this._group = this.$vue3d.scene;
+      }
+      switch (this.type) {
+        case 'Ambient':
+          this.light = new THREE.AmbientLight(this.color, this.intensity);
+          break;
+        case 'Directional':
+          this.light = new THREE.DirectionalLight(this.color, this.intensity);
+      }
+      this._group.add(this.light);
+      this.render();
+    },
+    destroyed() {
+      this._group.remove(this.light);
     },
     watch: {
       pos: {
@@ -32,20 +51,6 @@
           this.setPosition(val);
         }
       }
-    },
-    created() {
-      switch (this.type) {
-        case 'Ambient':
-          this.light = new THREE.AmbientLight(this.color, this.intensity);
-          break;
-        case 'Directional':
-          this.light = new THREE.DirectionalLight(this.color, this.intensity);
-      }
-      this.$vue3d.scene.add(this.light);
-      this.render();
-    },
-    destroyed() {
-      this.$vue3d.scene.remove(this.light);
     },
     methods: {
       setPosition() {
@@ -62,6 +67,3 @@
     }
   }
 </script>
-<style scoped>
-
-</style>

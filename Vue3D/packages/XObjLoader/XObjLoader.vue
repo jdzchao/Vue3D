@@ -8,9 +8,9 @@
     name: 'x-obj-loader',
     mixins: [Vue3D],
     props: {
+      group: {type: Object},
       path: {type: String},
       name: {type: String, default: 'vue3d'},
-      group: {type: Object},
       material: {type: Object},
       position: {type: Object},
       scale: {type: Object},
@@ -18,9 +18,9 @@
     },
     data() {
       return {
+        _group: {},
         manager: new THREE.LoadingManager(),
         object: null,
-        _group: {},
       }
     },
     created() {
