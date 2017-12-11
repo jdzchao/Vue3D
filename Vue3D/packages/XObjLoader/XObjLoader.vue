@@ -11,9 +11,7 @@
       path: {type: String},
       name: {type: String, default: 'vue3d'},
       material: {type: Object},
-      position: {type: Object},
-      scale: {type: Object},
-      rotate: {type: Object},
+      adjust: {type: Boolean, default: true}
     },
     data() {
       return {
@@ -32,7 +30,7 @@
           this._group.remove(oldVal);
         this._group.add(val);
         this.setMaterial();
-        this.adjust();
+        this.adjusted();
         this.render();
       },
       material(val, oldVal) {
@@ -55,11 +53,9 @@
           this.error(err);
         });
       },
-      adjust() {
-        if (!this.position) {
+      adjusted() {
+        if (this.adjust) {
           this.$vue3d.placeZeroPoint(this.object);
-        }
-        if (!this.scale) {
           this.$vue3d.adaptScale(this.object);
         }
       },
