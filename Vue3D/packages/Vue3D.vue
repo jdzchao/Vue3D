@@ -3,9 +3,12 @@
   const THREE = require('three');
 
   export default {
+    props: {
+      group: {type: Object}
+    },
     data() {
       return {
-        scene: '',
+        object: null,
       }
     },
     created() {
@@ -13,9 +16,23 @@
         this.$vue3d.scene = new THREE.Scene();
       }
     },
+    updated() {
+      this.render();
+    },
+    destroyed() {
+      this._group.remove(this.object);
+    },
+    computed: {
+      _group() {
+        if (!this.group) {
+          return this.$vue3d.scene;
+        } else {
+          return this.group;
+        }
+      }
+    },
     methods: {
       render() {
-        this.scene = this.$vue3d.scene;
         this.$vue3d.render();
       }
     }

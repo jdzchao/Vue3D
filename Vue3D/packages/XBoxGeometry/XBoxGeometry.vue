@@ -13,18 +13,11 @@
       y: {type: Number, default: 100},
       z: {type: Number, default: 100},
       material: {type: Object},
-      group: {type: Object}
     },
     data() {
       return {
-        _group: {},
         geometry: new THREE.BoxGeometry(this.x, this.y, this.z),
         cube: null,
-      }
-    },
-    created() {
-      if (!this.group) {
-        this._group = this.$vue3d.scene;
       }
     },
     mounted() {

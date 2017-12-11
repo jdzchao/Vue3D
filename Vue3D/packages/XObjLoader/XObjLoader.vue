@@ -8,7 +8,6 @@
     name: 'x-obj-loader',
     mixins: [Vue3D],
     props: {
-      group: {type: Object},
       path: {type: String},
       name: {type: String, default: 'vue3d'},
       material: {type: Object},
@@ -18,30 +17,15 @@
     },
     data() {
       return {
-        _group: {},
         manager: new THREE.LoadingManager(),
-        object: null,
-      }
-    },
-    created() {
-      if (!this.group) {
-        this._group = this.$vue3d.scene;
       }
     },
     mounted() {
       this.loadObj(this.path);
     },
-    destroyed() {
-      this._group.remove(this.object);
-    },
     watch: {
       path(val) {
         this.loadObj(val);
-      },
-      group(val) {
-        if (!val) {
-          this._group = val;
-        }
       },
       object(val, oldVal) {
         if (oldVal !== null)

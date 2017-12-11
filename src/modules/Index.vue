@@ -8,8 +8,8 @@
     <template id="components" v-if="ready">
       <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(200,200,200)'"></x-light>
       <x-light :type="'Directional'" :intensity="0.8" :color="'rgb(200,200,200)'" :pos="camPos"></x-light>
-      <x-box-geometry :material="material"></x-box-geometry>
       <x-obj-loader :path="obj" :material="material" @loaded="LoadSuccess"></x-obj-loader>
+      <x-obj-loader :path="obj" :material="material" :group="object" v-if="object"></x-obj-loader>
     </template>
   </div>
 </template>
@@ -40,7 +40,8 @@
         ready: false,
         material: Materials.sapphire(),
         camPos: null,
-        obj: './static/demo/cup.obj'
+        obj: './static/demo/cup.obj',
+        object: null
       }
     },
     mounted() {
@@ -63,7 +64,7 @@
       LoadError(err) {
       },
       LoadSuccess(object) {
-
+        this.object = object;
       },
       LoadProcess(xhr) {
       },
