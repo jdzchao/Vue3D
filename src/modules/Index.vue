@@ -9,7 +9,7 @@
       <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(200,200,200)'"></x-light>
       <x-light :type="'Directional'" :intensity="0.8" :color="'rgb(200,200,200)'" :pos="camPos"></x-light>
       <!--<x-obj-loader :path="obj" :material="material" @loaded="LoadSuccess"></x-obj-loader>-->
-      <x-box-geometry></x-box-geometry>
+      <x-box-geometry :material="material"></x-box-geometry>
     </template>
   </div>
 </template>
@@ -53,7 +53,7 @@
     },
     methods: {
       changeM() {
-        this.material = Materials.ceramic();
+        this.material = Materials.canvas();
       },
       Ready(bool) {
         this.ready = bool;
