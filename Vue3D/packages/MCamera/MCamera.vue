@@ -1,5 +1,5 @@
 <template>
-  <div id="MCamera" :aspect="aspect"></div>
+  <div id="MCamera" :aspect="aspect" style="display:none;"></div>
 </template>
 <script>
   const THREE = require('three');
@@ -12,15 +12,10 @@
       type: {type: String, default: 'Perspective'},
       width: Number,
       height: Number,
-    },
-    data() {
-      return {
-        camera: '',
-        near: 1,
-        far: 1000,
-        dis: 100,
-        size: 100,
-      }
+      near: {type: Number, default: 1},
+      far: {type: Number, default: 1000},
+      dis: {type: Number, default: 100},
+      size: {type: Number, default: 100},
     },
     created() {
       if (this.type === 'Perspective') {
@@ -41,15 +36,16 @@
     },
     methods: {
       renderCamera() {
-        this.camera = this.$vue3d.camera;
-        this.$emit('update', this.camera);
+        this.$emit('update', this.$vue3d.camera);
       },
       fov() {
-        let vertical = this.size;
+        let size = this.size;
         if (this.aspect < 1) {
-          vertical = vertical / this.aspect;
+          size = size / this.aspect;
+        } else {
+          size = size * this.aspect;
         }
-        return Math.atan(vertical / this.dis / 2) * (180 / Math.PI);
+        return Math.atan(size / this.dis / 2) * (180 / Math.PI);
       },
       updateCamera() {
         this.$vue3d.camera.fov = this.fov();

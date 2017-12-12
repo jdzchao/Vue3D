@@ -11,7 +11,6 @@
       path: {type: String},
       name: {type: String, default: 'vue3d'},
       material: {type: Object},
-      adjust: {type: Boolean, default: true}
     },
     data() {
       return {
@@ -45,19 +44,12 @@
         objLoader.load(path, object => {
           object.name = this.name;
           this.object = object;
-          this.adjusted(this.object);
           this.loaded(object);
         }, xhr => {
           this.process(xhr);
         }, err => {
           this.error(err);
         });
-      },
-      adjusted(object) {
-        if (this.adjust) {
-          this.$vue3d.placeZeroPoint(object);
-          this.$vue3d.adaptScale(object);
-        }
       },
       setMaterial() {
         if (this.object && this.material) {

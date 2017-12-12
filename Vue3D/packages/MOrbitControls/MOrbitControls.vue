@@ -1,5 +1,5 @@
 <template>
-  <div id="MControls"></div>
+  <div id="MOrbitControls" style="display:none;"></div>
 </template>
 <script>
   const THREE = require('three');
@@ -7,7 +7,7 @@
   import Vue3D from '../Vue3D.vue'
 
   export default {
-    name: 'm-controls',
+    name: 'm-orbit-controls',
     mixins: [Vue3D],
     props: {
       min: {type: Number, default: 10},

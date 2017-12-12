@@ -2,14 +2,13 @@
   <div id="Index">
     <template id="scene">
       <m-renderer ref="renderer" :width="width" :height="height" @ready="Ready"></m-renderer>
-      <m-camera ref="camera" :width="width" :height="height" @update="updateCamera"></m-camera>
-      <m-controls ref="controls"></m-controls>
+      <m-camera ref="camera" :width="width" :height="height" :far="2000" @update="updateCamera"></m-camera>
+      <m-controls ref="controls" :min="10" :max="999"></m-controls>
     </template>
     <template id="components" v-if="ready">
       <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(200,200,200)'"></x-light>
       <x-light :type="'Directional'" :intensity="0.8" :color="'rgb(200,200,200)'" :pos="camPos"></x-light>
       <x-obj-loader :path="obj" :material="material" @loaded="LoadSuccess"></x-obj-loader>
-      <x-obj-loader :path="obj" :material="material" :group="object" v-if="object"></x-obj-loader>
     </template>
   </div>
 </template>
@@ -64,6 +63,8 @@
       LoadError(err) {
       },
       LoadSuccess(object) {
+        this.$vue3d.placeZeroPoint(object);
+        this.$vue3d.adaptScale(object);
         this.object = object;
       },
       LoadProcess(xhr) {

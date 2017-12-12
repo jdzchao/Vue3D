@@ -19,7 +19,7 @@ export default {
   }
 };
 import MCamera from './packages/MCamera'
-import MControls from './packages/MControls'
+import MControls from './packages/MOrbitControls'
 import MRenderer from './packages/MRenderer'
 import XBoxGeometry from './packages/XBoxGeometry'
 import XLight from './packages/XLight'

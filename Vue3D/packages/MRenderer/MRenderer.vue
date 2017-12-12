@@ -11,12 +11,8 @@
     props: {
       height: Number,
       width: Number,
-    },
-    data() {
-      return {
-        backgroundColor: 0x000000,
-        backgroundAlpha: 1,
-      }
+      backgroundColor: {type: String, default: 'rgb(0,0,0)'},
+      backgroundAlpha: {type: Number, default: 1},
     },
     mounted() {
       this.$vue3d.renderer = new THREE.WebGLRenderer({
