@@ -53,7 +53,7 @@
     },
     methods: {
       changeM() {
-        this.material = Materials.canvas();
+        this.material = Materials.ceramic();
       },
       Ready(bool) {
         this.ready = bool;
