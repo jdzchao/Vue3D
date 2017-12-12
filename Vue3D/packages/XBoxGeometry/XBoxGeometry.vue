@@ -21,9 +21,7 @@
       }
     },
     mounted() {
-      if (!this.material) {
-        this.material = new THREE.MeshBasicMaterial();
-      }
+      this.setCube();
     },
     watch: {
       cube(val, oldVal) {
@@ -34,22 +32,16 @@
       },
       material(val, oldVal) {
         if (oldVal !== val && oldVal !== null) {
-          this.setMaterial();
+          this.setCube();
         }
       }
     },
     methods: {
       setCube() {
-        this.cube = new THREE.Mesh(this.geometry, this.material);
-      },
-      setMaterial() {
-        if (this.cube && this.material) {
+        if (this.geometry) {
           this.cube = new THREE.Mesh(this.geometry, this.material);
         }
       }
     }
   }
 </script>
-<style scoped>
-
-</style>
