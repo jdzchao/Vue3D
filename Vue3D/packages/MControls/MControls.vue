@@ -9,11 +9,13 @@
   export default {
     name: 'm-controls',
     mixins: [Vue3D],
+    props: {
+      min: {type: Number, default: 10},
+      max: {type: Number, default: 500},
+    },
     data() {
       return {
-        controls: null,
-        min: 10,
-        max: 500,
+        controls: null
       }
     },
     created() {
