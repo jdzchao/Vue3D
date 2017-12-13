@@ -6,7 +6,7 @@ import mutations from './mutations.js'
 import actions from './actions.js'
 import getters from './getters.js'
 // modules
-import vue3d from './Vue3D/'
+// import vue3d from './Vue3D/'
 
 Vue.use(Vuex);
 
@@ -15,9 +15,9 @@ let store = new Vuex.Store({
   mutations,
   actions,
   getters,
-  modules: {
-    vue3d
-  }
+  // modules: {
+  //   vue3d
+  // }
 });
 
 export default store;
