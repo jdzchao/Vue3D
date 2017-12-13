@@ -1,46 +1,86 @@
 <template>
   <div id="Index">
     <template id="scene">
-      <m-renderer :width="width" :height="height" @onReady="onReady"></m-renderer>
-      <m-camera :width="width" :height="height"></m-camera>
-      <m-controls></m-controls>
+      <m-renderer ref="renderer" :width="width" :height="height" @ready="Ready"></m-renderer>
+      <m-camera ref="camera" :width="width" :height="height" :far="2000" @update="updateCamera"></m-camera>
+      <m-orbit-controls :min="10" :max="999"></m-orbit-controls>
     </template>
     <template id="components" v-if="ready">
-      <x-light :type="'Ambient'" :position="{x:0,y:0,z:0}"></x-light>
-      <x-light :type="'Directional'" :position="{x:0,y:0,z:0}"></x-light>
-      <x-box-geometry></x-box-geometry>
+      <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(200,200,200)'"></x-light>
+      <x-light :type="'Directional'" :intensity="0.8" :color="'rgb(200,200,200)'" :pos="camPos"></x-light>
+      <x-obj-loader :path="obj" :material="material" @loaded="LoadSuccess"></x-obj-loader>
+      <x-obj-loader :path="sobj" :material="mtl" v-if="Object" :group="object" @loaded="loads"></x-obj-loader>
+      <x-obj-loader :path="obj" :material="mtls" v-if="objs" :group="objs"></x-obj-loader>
+      <x-box-geometry :material="mtl" :group="object"></x-box-geometry>
     </template>
   </div>
 </template>
 <script>
   import {mapState} from 'vuex'
-  import MRenderer from '../components/Vue3D/MRenderer.vue'
-  import MCamera from '../components/Vue3D/MCamera.vue'
-  import MControls from '../components/Vue3D/MControls.vue'
-  import XLight from '../components/Vue3D/XLight.vue'
-  import XBoxGeometry from '../components/Vue3D/XBoxGeometry.vue'
+  import {
+    MRenderer,
+    MCamera,
+    MOrbitControls,
+    XBoxGeometry,
+    XLight,
+    XObjLoader,
+    Materials
+  } from '../../Vue3D'
 
   export default {
     name: 'Index',
     components: {
       MRenderer,
       MCamera,
-      MControls,
+      MOrbitControls,
       XLight,
-      XBoxGeometry
+      XBoxGeometry,
+      XObjLoader,
     },
     data() {
       return {
-        ready: false
+        ready: false,
+        material: Materials.sapphire(),
+        mtl: Materials.glass(),
+        mtls: Materials.metal(),
+        camPos: null,
+        obj: './static/demo/female02.obj',
+        sobj: './static/demo/cup.obj',
+        object: null,
+        objs: null
       }
+    },
+    mounted() {
+      let vm = this;
+      setTimeout(this.changeM, 2000)
     },
     computed: {
-      ...mapState(['width', 'height'])
+      ...mapState(['width', 'height']),
     },
     methods: {
-      onReady(bool) {
+      changeM() {
+        this.mtls = Materials.ceramic();
+      },
+      Ready(bool) {
         this.ready = bool;
-      }
+      },
+      updateCamera(camera) {
+        this.camPos = camera.position;
+      },
+      LoadError(err) {
+      },
+      LoadSuccess(object) {
+        console.log(object);
+        this.$vue3d.placeZeroPoint(object);
+        this.$vue3d.adaptScale(object);
+        this.object = object;
+      },
+      loads(object) {
+        this.objs = object;
+        this.objs.position.x -= 50;
+      },
+      LoadProcess(xhr) {
+      },
     }
   }
 </script>

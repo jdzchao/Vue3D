@@ -10,6 +10,9 @@ import store from './store/index'
 import 'animate.css'
 // load i18n
 import i18n from './i18n'
+import vue3d from '../Vue3D'
+
+Vue.use(vue3d);
 
 i18n.SetLocale('zhcn');
 

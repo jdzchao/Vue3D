@@ -1,21 +1,20 @@
 <template>
-  <div id="XLight">
-  </div>
+  <div id="XLight"></div>
 </template>
 <script>
   // Ambient 环境光
   // Directional 平行光
   const THREE = require('three');
-  import _XCom from './_XCom.vue'
+  import Vue3D from '../Vue3D.vue'
 
   export default {
-    name: 'XLight',
-    mixins: [_XCom],
+    name: 'x-light',
+    mixins: [Vue3D],
     props: {
       type: {type: String, default: 'Ambient'},
       color: {type: String, default: 'rgb(255,255,255)'},
       intensity: {type: Number, default: 1.0},
-      position: {
+      pos: {
         default: () => {
           return new THREE.Vector3();
         },
@@ -26,14 +25,6 @@
         light: {},
       }
     },
-    watch: {
-      position: {
-        deep: true,
-        handler(val) {
-          this.setPosition();
-        }
-      }
-    },
     created() {
       switch (this.type) {
         case 'Ambient':
@@ -42,24 +33,29 @@
         case 'Directional':
           this.light = new THREE.DirectionalLight(this.color, this.intensity);
       }
-      this.scene.add(this.light);
+      this._group.add(this.light);
       this.render();
+    },
+    watch: {
+      pos: {
+        deep: true,
+        handler(val) {
+          this.setPosition(val);
+        }
+      }
     },
     methods: {
       setPosition() {
-        if (this.position.hasOwnProperty('x')) {
-          this.light.position.x = this.position.x || 0;
+        if (this.pos.hasOwnProperty('x')) {
+          this.light.position.x = this.pos.x || 0;
         }
-        if (this.position.hasOwnProperty('y')) {
-          this.light.position.y = this.position.y || 0;
+        if (this.pos.hasOwnProperty('y')) {
+          this.light.position.y = this.pos.y || 0;
         }
-        if (this.position.hasOwnProperty('z')) {
-          this.light.position.z = this.position.z || 0;
+        if (this.pos.hasOwnProperty('z')) {
+          this.light.position.z = this.pos.z || 0;
         }
       },
     }
   }
 </script>
-<style scoped>
-
-</style>
