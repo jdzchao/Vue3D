@@ -54,7 +54,9 @@
       setMaterial() {
         if (this.object && this.material) {
           this.object.traverse(function (child) {
-            child.material = this.material;
+            if (child.type === 'Mesh' && (child.parent === this._group || child.parent === this.object)) {
+              child.material = this.material;
+            }
           }.bind(this));
           this.render();
         }

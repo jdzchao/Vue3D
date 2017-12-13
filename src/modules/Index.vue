@@ -8,8 +8,10 @@
     <template id="components" v-if="ready">
       <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(200,200,200)'"></x-light>
       <x-light :type="'Directional'" :intensity="0.8" :color="'rgb(200,200,200)'" :pos="camPos"></x-light>
-      <!--<x-obj-loader :path="obj" :material="material" @loaded="LoadSuccess"></x-obj-loader>-->
-      <x-box-geometry :material="material"></x-box-geometry>
+      <x-obj-loader :path="obj" :material="material" @loaded="LoadSuccess"></x-obj-loader>
+      <x-obj-loader :path="sobj" :material="mtl" v-if="Object" :group="object" @loaded="loads"></x-obj-loader>
+      <x-obj-loader :path="obj" :material="mtls" v-if="objs" :group="objs"></x-obj-loader>
+      <x-box-geometry :material="mtl" :group="object"></x-box-geometry>
     </template>
   </div>
 </template>
@@ -39,9 +41,13 @@
       return {
         ready: false,
         material: Materials.sapphire(),
+        mtl: Materials.glass(),
+        mtls: Materials.metal(),
         camPos: null,
-        obj: './static/demo/cup.obj',
-        object: null
+        obj: './static/demo/female02.obj',
+        sobj: './static/demo/cup.obj',
+        object: null,
+        objs: null
       }
     },
     mounted() {
@@ -53,7 +59,7 @@
     },
     methods: {
       changeM() {
-        this.material = Materials.ceramic();
+        this.mtls = Materials.ceramic();
       },
       Ready(bool) {
         this.ready = bool;
@@ -64,9 +70,14 @@
       LoadError(err) {
       },
       LoadSuccess(object) {
+        console.log(object);
         this.$vue3d.placeZeroPoint(object);
         this.$vue3d.adaptScale(object);
         this.object = object;
+      },
+      loads(object) {
+        this.objs = object;
+        this.objs.position.x -= 50;
       },
       LoadProcess(xhr) {
       },

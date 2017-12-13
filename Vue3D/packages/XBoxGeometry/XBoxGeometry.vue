@@ -25,6 +25,7 @@
     },
     watch: {
       cube(val, oldVal) {
+        console.log(this.$vue3d.scene);
         if (oldVal !== null)
           this._group.remove(oldVal);
         this._group.add(val);
