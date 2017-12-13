@@ -24,6 +24,7 @@ import MRenderer from './packages/MRenderer'
 import XBoxGeometry from './packages/XBoxGeometry'
 import XLight from './packages/XLight'
 import XObjLoader from './packages/XObjLoader'
+import MScene from './packages/MScene'
 
 import Materials from './packages/Materials'
 
@@ -34,5 +35,6 @@ export {
   XBoxGeometry,
   XLight,
   XObjLoader,
-  Materials
+  Materials,
+  MScene
 };

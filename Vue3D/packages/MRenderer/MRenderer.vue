@@ -15,6 +15,7 @@
       backgroundAlpha: {type: Number, default: 1},
     },
     mounted() {
+      console.log(this.$parent);
       this.$vue3d.renderer = new THREE.WebGLRenderer({
         preserveDrawingBuffer: true,
         antialias: true,
