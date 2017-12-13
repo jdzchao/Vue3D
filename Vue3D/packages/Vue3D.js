@@ -74,4 +74,4 @@ class Vue3d {
   }
 }
 
-export default new Vue3d;
+export default Vue3d;

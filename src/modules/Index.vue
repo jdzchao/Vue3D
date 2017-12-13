@@ -1,14 +1,14 @@
 <template>
   <div id="Index">
-    <m-scene v-model="scene">
+    <m-scene v-for="item in scenes" v-model="item.scene" :key="1">
 
-      <template id="scene">
-        <m-renderer ref="renderer" :width="width" :height="height" @ready="Ready"></m-renderer>
+      <template>
+        <m-renderer ref="renderer" :width="width" :height="height / 2" @ready="Ready"></m-renderer>
         <m-camera ref="camera" :width="width" :height="height" :far="2000" @update="updateCamera"></m-camera>
         <m-orbit-controls :min="10" :max="999"></m-orbit-controls>
       </template>
 
-      <template id="components" v-if="ready">
+      <template v-if="ready">
         <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(200,200,200)'"></x-light>
         <x-light :type="'Directional'" :intensity="0.8" :color="'rgb(200,200,200)'" :pos="camPos"></x-light>
         <!--<x-obj-loader :path="obj" :material="material" @loaded="LoadSuccess"></x-obj-loader>-->
@@ -49,7 +49,7 @@
         camPos: null,
         obj: './static/demo/cup.obj',
         object: null,
-        scene: null
+        scenes: [{scene: null}, {scene: null}],
       }
     },
     mounted() {

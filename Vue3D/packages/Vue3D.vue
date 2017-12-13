@@ -1,7 +1,6 @@
 <template></template>
 <script>
   const THREE = require('three');
-
   export default {
     props: {
       group: {type: Object}
@@ -29,6 +28,9 @@
         } else {
           return this.group;
         }
+      },
+      $vue3d() {
+            return this.$parent.value;
       }
     },
     methods: {

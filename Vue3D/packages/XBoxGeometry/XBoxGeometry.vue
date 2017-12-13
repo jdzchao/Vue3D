@@ -28,6 +28,7 @@
         if (oldVal !== null)
           this._group.remove(oldVal);
         this._group.add(val);
+        console.log(this.$vue3d.scene)
         this.render();
       },
       material(val, oldVal) {

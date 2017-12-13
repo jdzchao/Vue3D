@@ -12,7 +12,7 @@ import 'animate.css'
 import i18n from './i18n'
 import vue3d from '../Vue3D'
 
-Vue.use(vue3d);
+// Vue.use(vue3d);
 
 i18n.SetLocale('zhcn');
 
