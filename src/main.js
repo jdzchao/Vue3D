@@ -12,11 +12,9 @@ import 'animate.css'
 import i18n from './i18n'
 import vue3d from '../Vue3D'
 
-Vue.use(vue3d);
-
 i18n.SetLocale('zhcn');
 
-Vue.config.productionTip = true;
+Vue.config.productionTip = false;
 
 Vue.prototype.$store = {};
 Vue.prototype.$http = Axios;
