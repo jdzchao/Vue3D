@@ -3,11 +3,9 @@
 </template>
 <script>
   const THREE = require('three');
-  import Vue3D from '../Vue3D.vue'
 
   export default {
     name: 'm-camera',
-    mixins: [Vue3D],
     props: {
       type: {type: String, default: 'Perspective'},
       width: Number,
@@ -17,19 +15,28 @@
       dis: {type: Number, default: 100},
       size: {type: Number, default: 100},
     },
+    data() {
+      return {
+        $vue3d: null
+      }
+    },
     created() {
+      if (!this.$vue3d) {
+        this.$vue3d = this.$parent;
+      }
+      console.log(this.$vue3d);
       if (this.type === 'Perspective') {
         this.$vue3d.camera = new THREE.PerspectiveCamera(this.fov(), this.width / this.height, this.near, this.far);
       }
       this.$vue3d.camera.position.z = this.dis + this.size * 2;
       this.$vue3d.camera.target = new THREE.Vector3();
-      this.$vue3d.rendererDelegationReg(this.renderCamera);
+      this.$vue3d.rendererDelegationAdd(this.renderCamera);
     },
     computed: {
       aspect() {
         this.$nextTick(() => {
           this.updateCamera(); // 重置相机相关配置
-          this.render();
+          this.$vue3d.render();
         });
         return this.width / this.height;
       }

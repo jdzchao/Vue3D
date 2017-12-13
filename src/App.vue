@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-    <index ref="scene"></index>
+    <multi-scene></multi-scene>
   </div>
 </template>
 
 <script>
-  import Index from './modules/Index.vue'
+  import MultiScene from "./modules/MultiScene";
+
 
   export default {
     name: 'app',
     components: {
-      Index
+      MultiScene,
     },
     data() {
       return {}
