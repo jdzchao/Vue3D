@@ -1,5 +1,5 @@
 <template>
-  <div id="XBoxGeometry"></div>
+  <div id="XBoxGeometry" style="display:none;"></div>
 </template>
 <script>
   const THREE = require('three');
@@ -25,7 +25,6 @@
     },
     watch: {
       cube(val, oldVal) {
-        console.log(this.$vue3d.scene);
         if (oldVal !== null)
           this._group.remove(oldVal);
         this._group.add(val);

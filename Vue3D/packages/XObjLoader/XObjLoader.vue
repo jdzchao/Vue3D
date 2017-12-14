@@ -58,7 +58,7 @@
               child.material = this.material;
             }
           }.bind(this));
-          this.render();
+          this.$vue3d.render();
         }
       },
       loaded(object) {
