@@ -10,13 +10,11 @@ import store from './store/index'
 import 'animate.css'
 // load i18n
 import i18n from './i18n'
-import vue3d from '../Vue3D'
 
 i18n.SetLocale('zhcn');
 
 Vue.config.productionTip = false;
 
-Vue.prototype.$store = {};
 Vue.prototype.$http = Axios;
 
 new Vue({
