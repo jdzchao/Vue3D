@@ -1,5 +1,5 @@
 <template>
-  <canvas id="renderer" :width="width" :height="height">
+  <canvas>
     <slot v-if="ready"></slot>
   </canvas>
 </template>
@@ -19,10 +19,10 @@
         dom: null,
         scene: null,
         scene_size: 100,
-        camera: null,
         renderer: null,
         rendererDelegation: [],
         rendererTick: null,
+        camera: null,
         ready: false,
       }
     },

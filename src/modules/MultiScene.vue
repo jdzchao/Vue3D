@@ -40,7 +40,7 @@
     data() {
       return {
         ready: false,
-        material: Materials.ceramic(),
+        material: Materials.metal(),
         mtl: Materials.glass(),
         mtls: Materials.metal(),
         camPos: null,
