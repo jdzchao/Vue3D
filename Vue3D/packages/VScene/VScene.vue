@@ -18,7 +18,6 @@
       return {
         dom: null,
         scene: null,
-        scene_size: 100,
         renderer: null,
         rendererDelegation: [],
         rendererTick: null,
@@ -71,38 +70,6 @@
         } else {
           console.warn('Function is not found in delegation');
         }
-      },
-      getObjectSize(object) {
-        let box = new THREE.Box3();
-        box.setFromObject(object);
-        return box.getSize();
-      },
-      placeZeroPoint(object) {
-        let box = new THREE.Box3();
-        box.setFromObject(object);
-        let center = box.getCenter();
-        object.position.x -= center.x;
-        object.position.y -= center.y;
-        object.position.z -= center.z;
-        return center;
-      },
-      adaptScale(object) {
-        let scale = 1;
-        let aspect = this.width / this.height;
-        let size = this.getObjectSize(object);
-        if (size.x / size.y > aspect) {
-          scale *= this.scene_size / size.x;
-          size.multiplyScalar(scale);
-        } else {
-          scale *= aspect > 1 ? this.scene_size / size.y : this.scene_size / size.y / aspect;
-          size.multiplyScalar(scale);
-        }
-        if (size.z > this.scene_size) {
-          scale *= this.scene_size / size.z;
-          size.multiplyScalar(scale);
-        }
-        object.scale.set(scale, scale, scale);
-        return scale;
       }
     }
   }
