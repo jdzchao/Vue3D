@@ -1,7 +1,5 @@
 <template></template>
 <script>
-  const THREE = require('three');
-
   export default {
     props: {
       group: {type: Object}
@@ -14,9 +12,8 @@
     },
     created() {
       if (!this.$vue3d) {
-        this.$vue3d = this.$parent;
+        this.$vue3d = this.getNode(this.$parent)
       }
-      console.log(this.$vue3d);
     },
     updated() {
       this.render();
@@ -25,15 +22,22 @@
       this._group.remove(this.object);
     },
     computed: {
-      // _group() {
-      //   if (!this.group) {
-      //     return this.$vue3d.scene;
-      //   } else {
-      //     return this.group;
-      //   }
-      // }
+      _group() {
+        if (!this.group) {
+          return this.$vue3d.scene;
+        } else {
+          return this.group;
+        }
+      }
     },
     methods: {
+      getNode(obj) {
+        if (obj.$options.name === "v-scene" && obj.hasOwnProperty('scene')) {
+          return obj;
+        } else {
+          return this.getNode(obj.$parent);
+        }
+      },
       render() {
         this.$vue3d.render();
       }

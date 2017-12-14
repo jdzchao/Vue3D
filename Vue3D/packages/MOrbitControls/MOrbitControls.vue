@@ -19,7 +19,7 @@
       }
     },
     created() {
-      this.$vue3d.rendererDelegationReg(this.updateControls);
+      this.$vue3d.rendererDelegationAdd(this.updateControls);
     },
     methods: {
       updateControls() {

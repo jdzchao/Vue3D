@@ -1,8 +1,7 @@
 <template>
-  <div id="VScene">
-    <canvas :width="width" :height="height"></canvas>
-    <slot></slot>
-  </div>
+  <canvas>
+    <slot v-if="ready"></slot>
+  </canvas>
 </template>
 
 <script>
@@ -17,34 +16,34 @@
     },
     data() {
       return {
+        dom: null,
         scene: null,
-        camera: null,
         renderer: null,
         rendererDelegation: [],
-        tick: null,
-        ready: false
+        rendererTick: null,
+        camera: null,
+        ready: false,
       }
     },
-    created() {
+    mounted() {
+      this.dom = this.$el;
       this.scene = new THREE.Scene();
       this.renderer = new THREE.WebGLRenderer({
         preserveDrawingBuffer: true,
         antialias: true, // 抗锯齿
         alpha: true,
-        canvas: this.$el
+        canvas: this.dom
       });
       this.rendererDelegationAdd(this.updateRenderer);
       this.ready = true;
       this.render();
     },
-    mounted() {
-    },
     methods: {
       render() {
         if (this.rendererDelegation.length < 1) return;
-        if (this.tick) return;
-        this.tick = requestAnimationFrame(() => {
-          this.tick = null;
+        if (this.rendererTick) return;
+        this.rendererTick = requestAnimationFrame(() => {
+          this.rendererTick = null;
           this.rendererDelegation.forEach((func) => {
             func();
           });
@@ -52,7 +51,6 @@
         })
       },
       updateRenderer() {
-        console.log("render");
         this.renderer.setSize(this.width, this.height);
         this.renderer.setPixelRatio(window.devicePixelRatio || 1);
         this.renderer.setClearColor(new THREE.Color(this.backgroundColor).getHex());
@@ -62,7 +60,7 @@
         if (typeof func === 'function') {
           this.rendererDelegation.push(func);
         } else {
-          console.debug('Error Delegation Function');
+          console.error('Error Delegation Function');
         }
       },
       rendererDelegationRemove(func) {
@@ -70,7 +68,7 @@
         if (index >= 0) {
           this.rendererDelegation.slice(index, 1);
         } else {
-          console.debug('Error Delegation Function');
+          console.warn('Function is not found in delegation');
         }
       }
     }

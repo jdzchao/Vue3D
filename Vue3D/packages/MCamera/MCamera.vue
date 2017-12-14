@@ -24,7 +24,6 @@
       if (!this.$vue3d) {
         this.$vue3d = this.$parent;
       }
-      console.log(this.$vue3d);
       if (this.type === 'Perspective') {
         this.$vue3d.camera = new THREE.PerspectiveCamera(this.fov(), this.width / this.height, this.near, this.far);
       }
