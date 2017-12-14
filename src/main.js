@@ -16,7 +16,6 @@ i18n.SetLocale('zhcn');
 
 Vue.config.productionTip = false;
 
-Vue.prototype.$store = {};
 Vue.prototype.$http = Axios;
 
 new Vue({
