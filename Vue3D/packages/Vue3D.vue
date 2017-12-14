@@ -11,8 +11,8 @@
       }
     },
     created() {
-      if (!this.$vue3d && this.$parent.hasOwnProperty('scene')) {
-        this.$vue3d = this.$parent;
+      if (!this.$vue3d) {
+        this.$vue3d = this.getNode(this.$parent)
       }
     },
     updated() {
@@ -31,6 +31,13 @@
       }
     },
     methods: {
+      getNode(obj) {
+        if (obj.$options.name === "v-scene" && obj.hasOwnProperty('scene')) {
+          return obj;
+        } else {
+          return this.getNode(obj.$parent);
+        }
+      },
       render() {
         this.$vue3d.render();
       }

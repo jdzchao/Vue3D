@@ -1,13 +1,10 @@
 <template>
   <div>
-    <v-scene ref="s1" :width="width" :height="height">
+    <v-scene :width="width" :height="height">
       <m-camera :width="width" :height="height" :far="2000"></m-camera>
       <m-controls></m-controls>
-      <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(200,200,200)'"></x-light>
-      <x-light :type="'Directional'" :intensity="0.8" :color="'rgb(200,200,200)'" :pos="camPos"></x-light>
-      <x-obj-loader :path="obj" :material="material" @loaded="LoadSuccess"></x-obj-loader>
-      <!--<x-obj-loader :path="sobj" :material="mtl" v-if="Object" :group="object" @loaded="loads"></x-obj-loader>-->
-      <!--<x-obj-loader :path="obj" :material="mtls" v-if="objs" :group="objs"></x-obj-loader>-->
+      <multi-show></multi-show>
+      <x-box-geometry :material="mtl"></x-box-geometry>
     </v-scene>
   </div>
 </template>
@@ -22,10 +19,12 @@
   import XObjLoader from '../../Vue3D/packages/XObjLoader'
   import Materials from '../../Vue3D/packages/Materials'
   import XLight from '../../Vue3D/packages/XLight'
+  import MultiShow from './MultiShow'
 
   export default {
     name: "multi-scene",
     components: {
+      MultiShow,
       MControls,
       XBoxGeometry,
       MCamera,
