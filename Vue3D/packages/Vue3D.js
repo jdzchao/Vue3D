@@ -18,7 +18,6 @@ let Vue3D = {
   adaptScale(object, aspect, vize) {
     let scale = 1;
     vize = vize ? vize : 100;
-    console.log(vize);
     let box = new THREE.Box3();
     box.setFromObject(object);
     let size = box.getSize();

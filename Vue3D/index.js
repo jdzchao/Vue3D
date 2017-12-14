@@ -7,8 +7,10 @@ import XLight from './packages/XLight'
 import XObjLoader from './packages/XObjLoader'
 
 import Materials from './packages/Materials'
+import Vue3D from './packages/Vue3D'
 
 export {
+  Vue3D,
   VScene,
   MCamera,
   MOrbitControls,
