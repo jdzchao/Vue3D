@@ -1,6 +1,6 @@
 const THREE = require('three');
 
-let Vue3D = {
+let Utils = {
   getObjectSize(object) {
     let box = new THREE.Box3();
     box.setFromObject(object);
@@ -36,4 +36,4 @@ let Vue3D = {
     return scale;
   }
 };
-export default Vue3D;
+export default Utils;

@@ -36,6 +36,8 @@
       });
       this.rendererDelegationAdd(this.updateRenderer);
       this.ready = true;
+    },
+    update() {
       this.render();
     },
     methods: {

@@ -1,26 +1,22 @@
 <template>
-  <div id="Index">
-    <template id="scene">
-      <m-renderer ref="renderer" :width="width" :height="height" @ready="Ready"></m-renderer>
-      <m-camera ref="camera" :width="width" :height="height" :far="2000" @update="updateCamera"></m-camera>
-      <m-orbit-controls :min="10" :max="999"></m-orbit-controls>
-    </template>
-    <template id="components" v-if="ready">
-      <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(200,200,200)'"></x-light>
-      <x-light :type="'Directional'" :intensity="0.8" :color="'rgb(200,200,200)'" :pos="camPos"></x-light>
-      <x-obj-loader :path="obj" :material="material" @loaded="LoadSuccess"></x-obj-loader>
-      <x-obj-loader :path="sobj" :material="mtl" v-if="Object" :group="object" @loaded="loads"></x-obj-loader>
-      <x-obj-loader :path="obj" :material="mtls" v-if="objs" :group="objs"></x-obj-loader>
-      <x-box-geometry :material="mtl" :group="object"></x-box-geometry>
-    </template>
+  <div id="Home">
+    <v-scene :width="width" :height="height">
+      <m-camera :width="width" :height="height" :far="2000">
+        <x-light :type="'Directional'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
+      </m-camera>
+      <w-orbit-controls></w-orbit-controls>
+      <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
+      <x-box-geometry></x-box-geometry>
+      <x-obj-loader :path="obj" :material="material"></x-obj-loader>
+    </v-scene>
   </div>
 </template>
 <script>
   import {mapState} from 'vuex'
   import {
-    MRenderer,
+    VScene,
     MCamera,
-    MOrbitControls,
+    WOrbitControls,
     XBoxGeometry,
     XLight,
     XObjLoader,
@@ -28,11 +24,11 @@
   } from '../../Vue3D'
 
   export default {
-    name: 'Index',
+    name: 'home',
     components: {
-      MRenderer,
+      VScene,
       MCamera,
-      MOrbitControls,
+      WOrbitControls,
       XLight,
       XBoxGeometry,
       XObjLoader,
@@ -40,14 +36,8 @@
     data() {
       return {
         ready: false,
-        material: Materials.sapphire(),
-        mtl: Materials.glass(),
-        mtls: Materials.metal(),
-        camPos: null,
+        material: Materials.ceramic(),
         obj: './static/demo/female02.obj',
-        sobj: './static/demo/cup.obj',
-        object: null,
-        objs: null
       }
     },
     mounted() {

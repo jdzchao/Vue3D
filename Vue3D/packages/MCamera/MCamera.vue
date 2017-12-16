@@ -1,5 +1,7 @@
 <template>
-  <div id="MCamera" :aspect="aspect" style="display:none;"></div>
+  <div id="MCamera" :aspect="aspect" style="display:none;">
+    <slot></slot>
+  </div>
 </template>
 <script>
   const THREE = require('three');

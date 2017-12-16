@@ -6,8 +6,9 @@
     },
     data() {
       return {
+        isSlot: false,
         $vue3d: null,
-        object: null,
+        object3d: null,
       }
     },
     created() {
@@ -19,7 +20,7 @@
       this.render();
     },
     destroyed() {
-      this._group.remove(this.object);
+      this._group.remove(this.object3d);
     },
     computed: {
       _group() {
