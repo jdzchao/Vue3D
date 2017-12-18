@@ -1,48 +1,33 @@
 <template>
   <div id="Home">
     <v-scene :width="width" :height="height">
-      <m-camera :width="width" :height="height" :far="2000">
-        <x-light :type="'Directional'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
-      </m-camera>
       <w-orbit-controls></w-orbit-controls>
       <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
-      <x-box-geometry></x-box-geometry>
+      <x-camera :width="width" :height="height" :far="2000">
+        <x-light :type="'Directional'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
+      </x-camera>
+      <!--<x-box-geometry :material="material">-->
+      <!--<x-obj-loader :path="obj" :material="material"></x-obj-loader>-->
+      <!--</x-box-geometry>-->
       <x-obj-loader :path="obj" :material="material"></x-obj-loader>
     </v-scene>
   </div>
 </template>
 <script>
   import {mapState} from 'vuex'
-  import {
-    VScene,
-    MCamera,
-    WOrbitControls,
-    XBoxGeometry,
-    XLight,
-    XObjLoader,
-    Materials
-  } from '../../Vue3D'
+
 
   export default {
     name: 'home',
-    components: {
-      VScene,
-      MCamera,
-      WOrbitControls,
-      XLight,
-      XBoxGeometry,
-      XObjLoader,
-    },
+
     data() {
       return {
         ready: false,
-        material: Materials.ceramic(),
+        material: this.$vue3d.Materials.ceramic(),
         obj: './static/demo/female02.obj',
       }
     },
     mounted() {
-      let vm = this;
-      setTimeout(this.changeM, 2000)
     },
     computed: {
       ...mapState(['width', 'height']),
