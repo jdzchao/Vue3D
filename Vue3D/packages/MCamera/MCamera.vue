@@ -1,15 +1,13 @@
 <template>
-  <div id="XCamera" :aspect="aspect" style="display:none;">
-    <slot v-if="slot"></slot>
+  <div id="MCamera" :aspect="aspect" style="display:none;">
+    <slot></slot>
   </div>
 </template>
 <script>
   const THREE = require('three');
-  import XMixin from '../_mixins/XMixin'
 
   export default {
-    name: 'x-camera',
-    mixins: [XMixin],
+    name: 'm-camera',
     props: {
       type: {type: String, default: 'Perspective'},
       width: Number,
@@ -20,31 +18,33 @@
       size: {type: Number, default: 100},
     },
     data() {
-      return {}
+      return {
+        $vue3d: null
+      }
     },
     created() {
-      if (this.type === 'Perspective') {
-        this.object3d = new THREE.PerspectiveCamera(this.fov(), this.width / this.height, this.near, this.far);
+      if (!this.$vue3d) {
+        this.$vue3d = this.$parent;
       }
-      this.object3d.position.z = this.dis + this.size * 2;
-      this.object3d.target = new THREE.Vector3();
-      this.root.rendererDelegationAdd(this.renderCamera);
-      this.root.camera = this.object3d;
-      this.add3d(this.object3d);
-      this.slotIn();
+      if (this.type === 'Perspective') {
+        this.$vue3d.camera = new THREE.PerspectiveCamera(this.fov(), this.width / this.height, this.near, this.far);
+      }
+      this.$vue3d.camera.position.z = this.dis + this.size * 2;
+      this.$vue3d.camera.target = new THREE.Vector3();
+      this.$vue3d.rendererDelegationAdd(this.renderCamera);
     },
     computed: {
       aspect() {
         this.$nextTick(() => {
           this.updateCamera(); // 重置相机相关配置
-          this.render();
+          this.$vue3d.render();
         });
         return this.width / this.height;
       }
     },
     methods: {
       renderCamera() {
-        this.$emit('update', this.object3d);
+        this.$emit('update', this.$vue3d.camera);
       },
       fov() {
         let size = this.size;
@@ -56,9 +56,9 @@
         return Math.atan(size / this.dis / 2) * (180 / Math.PI);
       },
       updateCamera() {
-        this.object3d.fov = this.fov();
-        this.object3d.aspect = this.aspect;
-        this.object3d.updateProjectionMatrix();
+        this.$vue3d.camera.fov = this.fov();
+        this.$vue3d.camera.aspect = this.aspect;
+        this.$vue3d.camera.updateProjectionMatrix();
       }
     }
   }

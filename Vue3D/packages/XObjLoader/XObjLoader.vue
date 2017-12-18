@@ -1,16 +1,12 @@
-<template>
-  <div id="XObjLoader" style="display:none">
-    <slot v-if="slot"></slot>
-  </div>
-</template>
+<template></template>
 <script>
   const THREE = require('three');
   THREE.OBJLoader = require('imports-loader?THREE=three!exports-loader?THREE.OBJLoader!./OBJLoader');
-  import XMixin from '../_mixins/XMixin'
+  import Vue3D from '../Vue3D.vue'
 
   export default {
     name: 'x-obj-loader',
-    mixins: [XMixin],
+    mixins: [Vue3D],
     props: {
       path: {type: String},
       name: {type: String, default: 'vue3d'},
@@ -23,16 +19,15 @@
     },
     mounted() {
       this.loadObj(this.path);
-      this.slotIn();
     },
     watch: {
       path(val) {
         this.loadObj(val);
       },
-      object3d(val, oldVal) {
+      object(val, oldVal) {
         if (oldVal !== null)
-          this.remove3d(oldVal);
-        this.add3d(val);
+          this._group.remove(oldVal);
+        this._group.add(val);
         this.setMaterial();
         this.render();
       },
@@ -48,7 +43,7 @@
         const objLoader = new THREE.OBJLoader(this.manager);
         objLoader.load(path, object => {
           object.name = this.name;
-          this.object3d = object;
+          this.object = object;
           this.loaded(object);
         }, xhr => {
           this.process(xhr);
@@ -57,13 +52,13 @@
         });
       },
       setMaterial() {
-        if (this.object3d && this.material) {
-          this.object3d.traverse(function (child) {
-            if (child.type === 'Mesh' && (child.parent === this.node || child.parent === this.object3d)) {
+        if (this.object && this.material) {
+          this.object.traverse(function (child) {
+            if (child.type === 'Mesh' && (child.parent === this._group || child.parent === this.object)) {
               child.material = this.material;
             }
           }.bind(this));
-          this.root.render();
+          this.$vue3d.render();
         }
       },
       loaded(object) {

@@ -4,11 +4,11 @@
 <script>
   const THREE = require('three');
   THREE.OrbitControls = require('imports-loader?THREE=three!exports-loader?THREE.OrbitControls!./OrbitControls');
-  import WMixin from '../_mixins/WMixin'
+  import Vue3D from '../Vue3D.vue'
 
   export default {
     name: 'w-orbit-controls',
-    mixins: [WMixin],
+    mixins: [Vue3D],
     props: {
       min: {type: Number, default: 10},
       max: {type: Number, default: 500},
@@ -19,12 +19,12 @@
       }
     },
     created() {
-      this.root.rendererDelegationAdd(this.updateControls);
+      this.$vue3d.rendererDelegationAdd(this.updateControls);
     },
     methods: {
       updateControls() {
         if (this.controls) return;
-        this.controls = new THREE.OrbitControls(this.root.camera, this.root.dom);
+        this.controls = new THREE.OrbitControls(this.$vue3d.camera, this.$vue3d.dom);
         this.controls.addEventListener('change', this.render, false);
         this.controls.type = 'orbit';
         this.controls.minDistance = this.min;
