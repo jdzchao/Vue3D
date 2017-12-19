@@ -13,11 +13,7 @@
   import XLight from '../../Vue3D/packages/XLight'
   import XObjLoader from '../../Vue3D/packages/XObjLoader'
   import Materials from '../../Vue3D/packages/Materials'
-<<<<<<< HEAD
   import Vue3d from '../../Vue3D/packages/Utils'
-=======
-  import Vue3d from '../../Vue3D/packages/Vue3D'
->>>>>>> dev
 
   export default {
     name: "multi-show",
