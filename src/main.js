@@ -1,25 +1,38 @@
 import Vue from 'vue'
 import App from './App.vue'
-import Axios from 'axios'
+import router from './router'
+import store from './store'
+import http from './http'
+import i18n from './i18n' // load i18n
 import './utils'
-// load config
-import './config/'
-import router from './config/router'
-import store from './store/index'
 // load css
 import 'animate.css'
+<<<<<<< HEAD
+=======
 // load i18n
 import i18n from './i18n'
+import vue3d from '../Vue3D'
+>>>>>>> dev
 
 i18n.SetLocale('zhcn');
 
 Vue.config.productionTip = false;
 
-Vue.prototype.$http = Axios;
+<<<<<<< HEAD
+Vue.prototype.$http = http;
+import Vue3D from '../Vue3D'
 
-new Vue({
+Vue.use(Vue3D);
+=======
+Vue.prototype.$http = Axios;
+>>>>>>> dev
+
+const vue = new Vue({
   router,
   store,
   template: '<App/>',
   components: {App}
-}).$mount("#app");
+});
+http.complete(() => {
+  vue.$mount("#app");
+});

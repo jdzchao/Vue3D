@@ -1,25 +1,17 @@
 <template>
   <div id="app">
-    <multi-scene></multi-scene>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-  import MultiScene from "./modules/MultiScene";
-
 
   export default {
     name: 'app',
-    components: {
-      MultiScene,
-    },
-    data() {
-      return {}
-    },
     created() {
-      this.$store.commit('windowResize');
+      this.$store.dispatch('windowResize');
       window.addEventListener("resize", () => {
-        this.$store.commit('windowResize');
+        this.$store.dispatch('windowResize');
       });
     }
   }

@@ -18,7 +18,6 @@
       return {
         dom: null,
         scene: null,
-        scene_size: 100,
         renderer: null,
         rendererDelegation: [],
         rendererTick: null,
@@ -37,8 +36,13 @@
       });
       this.rendererDelegationAdd(this.updateRenderer);
       this.ready = true;
+    },
+<<<<<<< HEAD
+    update() {
       this.render();
     },
+=======
+>>>>>>> dev
     methods: {
       render() {
         if (this.rendererDelegation.length < 1) return;
@@ -61,7 +65,11 @@
         if (typeof func === 'function') {
           this.rendererDelegation.push(func);
         } else {
+<<<<<<< HEAD
+          console.error('error type function');
+=======
           console.error('Error Delegation Function');
+>>>>>>> dev
         }
       },
       rendererDelegationRemove(func) {
@@ -69,40 +77,12 @@
         if (index >= 0) {
           this.rendererDelegation.slice(index, 1);
         } else {
+<<<<<<< HEAD
+          console.warn('function is not found in the delegation');
+=======
           console.warn('Function is not found in delegation');
+>>>>>>> dev
         }
-      },
-      getObjectSize(object) {
-        let box = new THREE.Box3();
-        box.setFromObject(object);
-        return box.getSize();
-      },
-      placeZeroPoint(object) {
-        let box = new THREE.Box3();
-        box.setFromObject(object);
-        let center = box.getCenter();
-        object.position.x -= center.x;
-        object.position.y -= center.y;
-        object.position.z -= center.z;
-        return center;
-      },
-      adaptScale(object) {
-        let scale = 1;
-        let aspect = this.width / this.height;
-        let size = this.getObjectSize(object);
-        if (size.x / size.y > aspect) {
-          scale *= this.scene_size / size.x;
-          size.multiplyScalar(scale);
-        } else {
-          scale *= aspect > 1 ? this.scene_size / size.y : this.scene_size / size.y / aspect;
-          size.multiplyScalar(scale);
-        }
-        if (size.z > this.scene_size) {
-          scale *= this.scene_size / size.z;
-          size.multiplyScalar(scale);
-        }
-        object.scale.set(scale, scale, scale);
-        return scale;
       }
     }
   }
