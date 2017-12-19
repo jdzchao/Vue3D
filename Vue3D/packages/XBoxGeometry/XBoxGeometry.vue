@@ -19,20 +19,12 @@
     data() {
       return {
         geometry: new THREE.BoxGeometry(this.x, this.y, this.z),
-        object3d: null,
       }
     },
     mounted() {
       this.setCube();
-      this.slotIn();
     },
     watch: {
-      object3d(val, oldVal) {
-        if (oldVal !== null)
-          this.remove3d(oldVal);
-        this.add3d(val);
-        this.render();
-      },
       material(val, oldVal) {
         if (oldVal !== val && oldVal !== null) {
           this.setCube();

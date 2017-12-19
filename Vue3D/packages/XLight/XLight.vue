@@ -28,8 +28,6 @@
         case 'Directional':
           this.object3d = new THREE.DirectionalLight(this.color, this.intensity);
       }
-      this.add3d(this.object3d);
-      this.slotIn();
       this.render();
     }
   }

@@ -19,9 +19,6 @@
       dis: {type: Number, default: 100},
       size: {type: Number, default: 100},
     },
-    data() {
-      return {}
-    },
     created() {
       if (this.type === 'Perspective') {
         this.object3d = new THREE.PerspectiveCamera(this.fov(), this.width / this.height, this.near, this.far);
@@ -30,8 +27,6 @@
       this.object3d.target = new THREE.Vector3();
       this.root.rendererDelegationAdd(this.renderCamera);
       this.root.camera = this.object3d;
-      this.add3d(this.object3d);
-      this.slotIn();
     },
     computed: {
       aspect() {
