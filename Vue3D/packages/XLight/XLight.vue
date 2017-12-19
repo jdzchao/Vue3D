@@ -1,5 +1,5 @@
 <template>
-  <div id="XLight" style="display:none;">
+  <div title="XLight" style="display:none;">
     <slot v-if="slot"></slot>
   </div>
 </template>

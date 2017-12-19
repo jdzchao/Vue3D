@@ -1,5 +1,5 @@
 <template>
-  <div id="XCamera" :aspect="aspect" style="display:none;">
+  <div title="XCamera" :aspect="aspect" style="display:none;">
     <slot v-if="slot"></slot>
   </div>
 </template>
