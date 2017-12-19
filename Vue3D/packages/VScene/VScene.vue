@@ -37,9 +37,12 @@
       this.rendererDelegationAdd(this.updateRenderer);
       this.ready = true;
     },
+<<<<<<< HEAD
     update() {
       this.render();
     },
+=======
+>>>>>>> dev
     methods: {
       render() {
         if (this.rendererDelegation.length < 1) return;
@@ -62,7 +65,11 @@
         if (typeof func === 'function') {
           this.rendererDelegation.push(func);
         } else {
+<<<<<<< HEAD
           console.error('error type function');
+=======
+          console.error('Error Delegation Function');
+>>>>>>> dev
         }
       },
       rendererDelegationRemove(func) {
@@ -70,7 +77,11 @@
         if (index >= 0) {
           this.rendererDelegation.slice(index, 1);
         } else {
+<<<<<<< HEAD
           console.warn('function is not found in the delegation');
+=======
+          console.warn('Function is not found in delegation');
+>>>>>>> dev
         }
       }
     }

@@ -19,7 +19,11 @@
       }
     },
     created() {
+<<<<<<< HEAD:Vue3D/packages/WOrbitControls/WOrbitControls.vue
       this.root.rendererDelegationAdd(this.updateControls);
+=======
+      this.$vue3d.rendererDelegationAdd(this.updateControls);
+>>>>>>> dev:Vue3D/packages/MOrbitControls/MOrbitControls.vue
     },
     methods: {
       updateControls() {

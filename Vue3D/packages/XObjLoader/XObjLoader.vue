@@ -52,6 +52,7 @@
         });
       },
       setMaterial() {
+<<<<<<< HEAD
         if (this.object3d && this.material) {
           this.object3d.traverse(function (child) {
             if (child.type === 'Mesh' && (child.parent === this.node || child.parent === this.object3d)) {
@@ -59,6 +60,15 @@
             }
           }.bind(this));
           this.root.render();
+=======
+        if (this.object && this.material) {
+          this.object.traverse(function (child) {
+            if (child.type === 'Mesh' && (child.parent === this._group || child.parent === this.object)) {
+              child.material = this.material;
+            }
+          }.bind(this));
+          this.$vue3d.render();
+>>>>>>> dev
         }
       },
       loaded(object) {
