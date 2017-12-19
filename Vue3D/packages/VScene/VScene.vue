@@ -23,6 +23,7 @@
         rendererTick: null,
         camera: null,
         ready: false,
+        panoramaMesh:  null,
       }
     },
     mounted() {
@@ -34,6 +35,7 @@
         alpha: true,
         canvas: this.dom
       });
+      this.loadPanorama();
       this.rendererDelegationAdd(this.updateRenderer);
       this.ready = true;
     },
@@ -72,6 +74,18 @@
         } else {
           console.warn('function is not found in the delegation');
         }
+      },
+      loadPanorama() {
+        let geometry = new THREE.SphereBufferGeometry( 500, 60, 40 );
+        let material = new THREE.MeshBasicMaterial();
+        geometry.scale( - 1, 1, 1 );
+        new THREE.TextureLoader().load( 'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/2294472375_24a3b8ef46_o.jpg', function (texture ) {
+          material.map = texture
+          material.map.needsUpdate = true;
+        } );
+        this.panoramaMesh = new THREE.Mesh( geometry, material );
+        this.scene.add(this.panoramaMesh);
+        console.log(this.scene)
       }
     }
   }
