@@ -1,11 +1,7 @@
 <template>
-<<<<<<< HEAD
   <div id="XBoxGeometry" style="display:none;">
     <slot v-if="slot"></slot>
   </div>
-=======
-  <div id="XBoxGeometry" style="display:none;"></div>
->>>>>>> dev
 </template>
 <script>
   const THREE = require('three');
@@ -29,15 +25,6 @@
       this.setCube();
     },
     watch: {
-<<<<<<< HEAD
-=======
-      cube(val, oldVal) {
-        if (oldVal !== null)
-          this._group.remove(oldVal);
-        this._group.add(val);
-        this.render();
-      },
->>>>>>> dev
       material(val, oldVal) {
         if (oldVal !== val && oldVal !== null) {
           this.setCube();

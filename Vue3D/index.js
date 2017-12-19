@@ -1,33 +1,16 @@
 import VScene from './packages/VScene'
-<<<<<<< HEAD
 import WOrbitControls from './packages/WOrbitControls'
-=======
-import MCamera from './packages/MCamera'
-import MOrbitControls from './packages/MOrbitControls'
-import MRenderer from './packages/MRenderer'
->>>>>>> dev
 import XBoxGeometry from './packages/XBoxGeometry'
 import XCamera from './packages/XCamera'
 import XLight from './packages/XLight'
 import XObjLoader from './packages/XObjLoader'
 
 import Materials from './packages/Materials'
-<<<<<<< HEAD
 import Utils from './packages/Utils'
 
 export {
   VScene,
   WOrbitControls,
-=======
-import Vue3D from './packages/Vue3D'
-
-export {
-  Vue3D,
-  VScene,
-  MCamera,
-  MOrbitControls,
-  MRenderer,
->>>>>>> dev
   XBoxGeometry,
   XCamera,
   XLight,
