@@ -15,11 +15,6 @@
       color: {type: String, default: 'rgb(255,255,255)'},
       intensity: {type: Number, default: 1.0},
     },
-    data() {
-      return {
-        light: {},
-      }
-    },
     created() {
       switch (this.type) {
         case 'Ambient':
@@ -28,7 +23,6 @@
         case 'Directional':
           this.object3d = new THREE.DirectionalLight(this.color, this.intensity);
       }
-      this.render();
     }
   }
 </script>
