@@ -23,18 +23,13 @@
     },
     mounted() {
       this.loadObj(this.path);
-      this.slotIn();
     },
     watch: {
       path(val) {
         this.loadObj(val);
       },
       object3d(val, oldVal) {
-        if (oldVal !== null)
-          this.remove3d(oldVal);
-        this.add3d(val);
         this.setMaterial();
-        this.render();
       },
       material(val, oldVal) {
         if (oldVal !== val && oldVal !== null) {

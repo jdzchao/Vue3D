@@ -62,7 +62,7 @@
         if (typeof func === 'function') {
           this.rendererDelegation.push(func);
         } else {
-          console.error('Error Delegation Function');
+          console.error('error type function');
         }
       },
       rendererDelegationRemove(func) {
@@ -70,7 +70,7 @@
         if (index >= 0) {
           this.rendererDelegation.slice(index, 1);
         } else {
-          console.warn('Function is not found in delegation');
+          console.warn('function is not found in the delegation');
         }
       }
     }

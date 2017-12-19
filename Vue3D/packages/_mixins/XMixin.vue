@@ -22,6 +22,17 @@
     destroyed() {
       this.remove3d(this.object3d);
     },
+    watch: {
+      object3d(val, oldVal) {
+        if (oldVal !== null) {
+          this.remove3d(oldVal);
+          this.slotOut();
+        }
+        this.add3d(val);
+        this.slotIn();
+        this.render();
+      },
+    },
     methods: {
       mnt(obj) {
         if (obj.$options.name === "v-scene" && obj.hasOwnProperty('scene')) {
@@ -36,6 +47,9 @@
       },
       slotIn() {
         this.slot = true;
+      },
+      slotOut() {
+        this.slot = false;
       },
       add3d(object3d) {
         if (this.node.hasOwnProperty('object3d')) {

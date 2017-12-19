@@ -6,10 +6,10 @@
       <x-camera :width="width" :height="height" :far="2000">
         <x-light :type="'Directional'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
       </x-camera>
-      <!--<x-box-geometry :material="material">-->
+      <x-box-geometry :material="material">
+        <x-obj-loader :path="obj" :material="material"></x-obj-loader>
+      </x-box-geometry>
       <!--<x-obj-loader :path="obj" :material="material"></x-obj-loader>-->
-      <!--</x-box-geometry>-->
-      <x-obj-loader :path="obj" :material="material"></x-obj-loader>
     </v-scene>
   </div>
 </template>
@@ -60,7 +60,7 @@
   }
 </script>
 <style>
-  #Index {
+  #Home {
     width: 100%;
     height: 100%;
     position: absolute;
