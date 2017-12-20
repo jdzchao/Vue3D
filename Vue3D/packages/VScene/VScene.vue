@@ -18,12 +18,12 @@
       return {
         dom: null,
         scene: null,
-        scene_size: 100,
         renderer: null,
         rendererDelegation: [],
         rendererTick: null,
         camera: null,
         ready: false,
+        panoramaMesh:  null,
       }
     },
     mounted() {
@@ -35,8 +35,11 @@
         alpha: true,
         canvas: this.dom
       });
+      this.loadPanorama();
       this.rendererDelegationAdd(this.updateRenderer);
       this.ready = true;
+    },
+    update() {
       this.render();
     },
     methods: {
@@ -61,7 +64,7 @@
         if (typeof func === 'function') {
           this.rendererDelegation.push(func);
         } else {
-          console.error('Error Delegation Function');
+          console.error('error type function');
         }
       },
       rendererDelegationRemove(func) {
@@ -69,40 +72,20 @@
         if (index >= 0) {
           this.rendererDelegation.slice(index, 1);
         } else {
-          console.warn('Function is not found in delegation');
+          console.warn('function is not found in the delegation');
         }
       },
-      getObjectSize(object) {
-        let box = new THREE.Box3();
-        box.setFromObject(object);
-        return box.getSize();
-      },
-      placeZeroPoint(object) {
-        let box = new THREE.Box3();
-        box.setFromObject(object);
-        let center = box.getCenter();
-        object.position.x -= center.x;
-        object.position.y -= center.y;
-        object.position.z -= center.z;
-        return center;
-      },
-      adaptScale(object) {
-        let scale = 1;
-        let aspect = this.width / this.height;
-        let size = this.getObjectSize(object);
-        if (size.x / size.y > aspect) {
-          scale *= this.scene_size / size.x;
-          size.multiplyScalar(scale);
-        } else {
-          scale *= aspect > 1 ? this.scene_size / size.y : this.scene_size / size.y / aspect;
-          size.multiplyScalar(scale);
-        }
-        if (size.z > this.scene_size) {
-          scale *= this.scene_size / size.z;
-          size.multiplyScalar(scale);
-        }
-        object.scale.set(scale, scale, scale);
-        return scale;
+      loadPanorama() {
+        let geometry = new THREE.SphereBufferGeometry( 500, 60, 40 );
+        let material = new THREE.MeshBasicMaterial();
+        geometry.scale( - 1, 1, 1 );
+        new THREE.TextureLoader().load( 'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/2294472375_24a3b8ef46_o.jpg', function (texture ) {
+          material.map = texture
+          material.map.needsUpdate = true;
+        } );
+        this.panoramaMesh = new THREE.Mesh( geometry, material );
+        this.scene.add(this.panoramaMesh);
+        console.log(this.scene)
       }
     }
   }
