@@ -23,6 +23,7 @@
         rendererTick: null,
         camera: null,
         ready: false,
+        panoramaMesh:  null,
       }
     },
     mounted() {
@@ -77,22 +78,14 @@
       loadPanorama() {
         let geometry = new THREE.SphereBufferGeometry( 500, 60, 40 );
         let material = new THREE.MeshBasicMaterial();
-        geometry.scale( -1, 1, 1 );
-
-        let loader = new THREE.CubeTextureLoader();
-        loader.setPath( '../../../static/images/' );
-
-        loader.load( [
-          'px.jpg', 'nx.jpg',
-          'py.jpg', 'ny.jpg',
-          'pz.jpg', 'nz.jpg',
-        ], function (textureCube) {
-          this.scene.background = textureCube;
-          this.render();
-          console.log(this.scene)
-        }.bind(this) );
-
-
+        geometry.scale( - 1, 1, 1 );
+        new THREE.TextureLoader().load( 'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/2294472375_24a3b8ef46_o.jpg', function (texture ) {
+          material.map = texture
+          material.map.needsUpdate = true;
+        } );
+        this.panoramaMesh = new THREE.Mesh( geometry, material );
+        this.scene.add(this.panoramaMesh);
+        console.log(this.scene)
       }
     }
   }
