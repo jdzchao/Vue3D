@@ -1,5 +1,5 @@
 <template>
-  <div id="XBoxGeometry" style="display:none;">
+  <div title="XBoxGeometry" style="display:none;">
     <slot v-if="slot"></slot>
   </div>
 </template>

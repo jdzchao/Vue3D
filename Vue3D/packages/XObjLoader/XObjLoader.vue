@@ -1,5 +1,5 @@
 <template>
-  <div id="XObjLoader" style="display:none">
+  <div title="XObjLoader" style="display:none">
     <slot v-if="slot"></slot>
   </div>
 </template>

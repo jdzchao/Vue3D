@@ -1,5 +1,5 @@
 <template>
-  <div id="WOrbitControls" style="display:none;"></div>
+  <div title="WOrbitControls" style="display:none;"></div>
 </template>
 <script>
   const THREE = require('three');
