@@ -1,5 +1,5 @@
 <template>
-  <canvas>
+  <canvas title="VScene">
     <slot v-if="ready"></slot>
   </canvas>
 </template>
