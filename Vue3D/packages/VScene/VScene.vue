@@ -34,6 +34,7 @@
         alpha: true,
         canvas: this.dom
       });
+      this.loadPanorama();
       this.rendererDelegationAdd(this.updateRenderer);
       this.ready = true;
     },
@@ -72,6 +73,24 @@
         } else {
           console.warn('function is not found in the delegation');
         }
+      },
+      loadPanorama() {
+        let geometry = new THREE.SphereBufferGeometry( 500, 60, 40 );
+        let material = new THREE.MeshBasicMaterial();
+        geometry.scale( -1, 1, 1 );
+
+        let loader = new THREE.CubeTextureLoader();
+        loader.setPath( '../../../static/images/' );
+
+        loader.load( [
+          'px.jpg', 'nx.jpg',
+          'py.jpg', 'ny.jpg',
+          'pz.jpg', 'nz.jpg',
+        ], function (textureCube) {
+          this.scene.background = textureCube;
+          this.render();
+          console.log(this.scene)
+        }.bind(this) );
       }
     }
   }
