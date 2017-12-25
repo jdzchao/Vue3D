@@ -23,6 +23,7 @@
         rendererTick: null,
         camera: null,
         ready: false,
+
       }
     },
     mounted() {
