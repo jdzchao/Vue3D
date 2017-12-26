@@ -30,7 +30,7 @@
       this.dom = this.$el;
       this.scene = new THREE.Scene();
       this.renderer = new THREE.WebGLRenderer({
-        preserveDrawingBuffer: true,
+        //preserveDrawingBuffer: true,
         antialias: true, // 抗锯齿
         alpha: true,
         canvas: this.dom
