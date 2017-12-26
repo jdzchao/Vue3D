@@ -14,12 +14,12 @@
         raycaster: new THREE.Raycaster(),
         mouse: new THREE.Vector2(),
         target: [],
-        isClick: false,
+        charged: false,
       }
     },
     created() {
-      this.root.dom.addEventListener('mousedown', this.mouseLock, false);
-      this.root.dom.addEventListener('mousemove', this.dragLock, false);
+      this.root.dom.addEventListener('mousedown', this.charge, false);
+      this.root.dom.addEventListener('mousemove', this.leakage, false);
       this.root.dom.addEventListener('mouseup', this.caster, false);
     },
     methods: {
@@ -32,11 +32,11 @@
         this.$emit('cast', this.target);
         this.isClick = true;
       },
-      mouseLock() {
-        this.isClick = true;
+      charge() {
+        this.charged = true;
       },
-      dragLock() {
-        this.isClick = false;
+      leakage() {
+        this.charged = false;
       }
     }
   }
