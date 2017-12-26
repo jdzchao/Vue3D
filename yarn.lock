@@ -2966,6 +2966,10 @@ js-base64@^2.1.9:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.3.2.tgz#a79a923666372b580f8e27f51845c6f7e8fbfbaf"
 
+js-base64@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.0.tgz#9e566fee624751a1d720c966cd6226d29d4025aa"
+
 js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
@@ -5308,14 +5312,6 @@ vue-template-compiler@^2.5.9:
 vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
-
-vue3d@^0.0.18:
-  version "0.0.18"
-  resolved "https://registry.yarnpkg.com/vue3d/-/vue3d-0.0.18.tgz#d63e5716f254e57b0ba83a1e3d785e0cdf1d714b"
-  dependencies:
-    exports-loader "^0.6.4"
-    imports-loader "^0.7.1"
-    three "^0.88.0"
 
 vue@^2.5.9:
   version "2.5.9"
