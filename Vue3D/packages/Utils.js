@@ -34,6 +34,22 @@ let Utils = {
     }
     object.scale.set(scale, scale, scale);
     return scale;
+  },
+  findComponentByFirst(obj) {
+    if(!obj)
+      return obj;
+    if (obj.type === "Group")
+      return obj;
+    else
+      return Utils.findComponentByFirst(obj.parent);
+  },
+  findComponentByScene(obj) {
+    if(!obj)
+      return obj;
+    if (obj.type === "Group" && obj.parent.type === "Scene")
+      return obj;
+    else
+      return Utils.findComponentByScene(obj.parent);
   }
 };
 export default Utils;
