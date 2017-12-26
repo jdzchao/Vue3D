@@ -1,7 +1,7 @@
 <template>
   <div id="Home">
     <v-scene :width="width" :height="height">
-      <w-raycast></w-raycast>
+      <w-raycast @cast="raycast"></w-raycast>
       <w-orbit-controls></w-orbit-controls>
       <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
       <x-camera :width="width" :height="height" :far="2000">
@@ -36,6 +36,9 @@
       ...mapState(['width', 'height']),
     },
     methods: {
+      raycast(objs) {
+        console.log(objs);
+      },
       changeM() {
         this.mtls = Materials.ceramic();
       },

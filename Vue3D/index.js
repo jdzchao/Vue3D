@@ -1,5 +1,7 @@
 import VScene from './packages/VScene'
 import WOrbitControls from './packages/WOrbitControls'
+import WRayCast from './packages/WRaycast'
+import WSkyBox from './packages/WSkyBox'
 import XBoxGeometry from './packages/XBoxGeometry'
 import XCamera from './packages/XCamera'
 import XLight from './packages/XLight'
@@ -12,6 +14,8 @@ import Utils from './packages/Utils'
 export {
   VScene,
   WOrbitControls,
+  WRayCast,
+  WSkyBox,
   XBoxGeometry,
   XCamera,
   XLight,
@@ -31,6 +35,8 @@ const Vue3D = {
     Vue.component('v-scene', VScene);
     Vue.component('v-panorama-scene', VPanoramaScene);
     Vue.component('w-orbit-controls', WOrbitControls);
+    Vue.component('w-ray-case', WRayCast);
+    Vue.component('w-sky-box', WSkyBox);
     Vue.component('x-box-geometry', XBoxGeometry);
     Vue.component('x-camera', XCamera);
     Vue.component('x-light', XLight);
