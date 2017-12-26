@@ -24,13 +24,13 @@
     },
     methods: {
       caster(event) {
-        if (!this.isClick) return;
+        if (!this.charged) return;
         this.mouse.x = (event.clientX / this.root.dom.clientWidth) * 2 - 1;
         this.mouse.y = -(event.clientY / this.root.dom.clientHeight) * 2 + 1;
         this.raycaster.setFromCamera(this.mouse, this.root.camera);
         this.target = this.raycaster.intersectObjects(this.root.scene.children, true);
         this.$emit('cast', this.target);
-        this.isClick = true;
+        this.charged = true;
       },
       charge() {
         this.charged = true;
