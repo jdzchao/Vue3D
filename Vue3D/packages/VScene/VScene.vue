@@ -16,6 +16,7 @@
       buffer: {type: Boolean, default: true},
       antialias: {type: Boolean, default: true},
       alpha: {type: Boolean, default: true},
+      auto: {type: Boolean, default: false},
     },
     data() {
       return {
@@ -53,6 +54,9 @@
             func();
           });
           this.renderer.render(this.scene, this.camera);
+          if (this.auto) {
+            this.render();
+          }
         })
       },
       updateRenderer() {
