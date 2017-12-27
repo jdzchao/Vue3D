@@ -18,7 +18,7 @@
         if (obj.$options.name === "v-scene" && obj.hasOwnProperty('scene')) {
           this.root = obj;
         } else {
-          console.warn(this.$options.name + " should mounted on root node");
+          console.warn(this.$options.name + " should mounted on v-scene node");
           this.mnt(obj.$parent);
         }
       },

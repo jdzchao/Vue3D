@@ -3,6 +3,6 @@ import Router from 'vue-router'
 
 Vue.use(Router);
 
-import router from './router'
+import example from './example'
 
-export default new Router(router);
+export default new Router(example);

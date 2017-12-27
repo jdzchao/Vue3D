@@ -3,12 +3,12 @@
     <v-scene :width="width" :height="height">
       <w-raycast @cast="raycast"></w-raycast>
       <w-orbit-controls></w-orbit-controls>
+      <w-sky-box path="../../../static/images/"></w-sky-box>
       <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
       <x-camera :width="width" :height="height" :far="2000">
         <x-light :type="'Directional'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
       </x-camera>
-      <x-box-geometry :material="material">
-      </x-box-geometry>
+      <x-box-geometry :material="material"></x-box-geometry>
       <x-obj-loader :path="obj" :material="material"></x-obj-loader>
       <!--<x-obj-loader :path="obj" :material="material"></x-obj-loader>-->
     </v-scene>
@@ -17,10 +17,14 @@
 <script>
   import {mapState} from 'vuex'
   import WRaycast from "../../Vue3D/packages/WRaycast/WRaycast";
+  import WSkyBox from "../../Vue3D/packages/WSkyBox/WSkyBox";
 
 
   export default {
-    components: {WRaycast},
+    components: {
+      WSkyBox,
+      WRaycast
+    },
     name: 'home',
 
     data() {
