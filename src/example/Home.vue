@@ -3,6 +3,7 @@
     <v-scene :width="width" :height="height">
       <w-raycast @cast="raycast"></w-raycast>
       <w-orbit-controls></w-orbit-controls>
+      <w-animation position="[]"></w-animation>
       <w-sky-box path="../../../static/images/"></w-sky-box>
       <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
       <x-camera :width="width" :height="height" :far="2000">
