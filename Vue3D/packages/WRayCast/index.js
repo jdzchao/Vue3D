@@ -1,3 +1,3 @@
-import WRaycast from './WRayCast'
+import WRayCast from './WRayCast'
 
-export default WRaycast;
+export default WRayCast;
