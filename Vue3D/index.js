@@ -1,6 +1,6 @@
 import VScene from './packages/VScene'
 import WOrbitControls from './packages/WOrbitControls'
-import WRayCast from './packages/WRaycast'
+import WRayCast from './packages/WRayCast'
 import WSkyBox from './packages/WSkyBox'
 import XBoxGeometry from './packages/XBoxGeometry'
 import XCamera from './packages/XCamera'

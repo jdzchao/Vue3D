@@ -16,7 +16,7 @@
 </template>
 <script>
   import {mapState} from 'vuex'
-  import WRaycast from "../../Vue3D/packages/WRaycast/WRaycast";
+  import WRaycast from "../../Vue3D/packages/WRayCast/WRaycast";
   import WSkyBox from "../../Vue3D/packages/WSkyBox/WSkyBox";
 
 
