@@ -1,7 +1,7 @@
 <template>
   <div id="Home">
     <v-scene :width="width" :height="height">
-      <w-raycast @cast="raycast"></w-raycast>
+      <w-ray-cast @cast="raycast"></w-ray-cast>
       <w-orbit-controls></w-orbit-controls>
       <w-sky-box path="../../../static/images/"></w-sky-box>
       <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
@@ -16,14 +16,14 @@
 </template>
 <script>
   import {mapState} from 'vuex'
-  import WRaycast from "../../Vue3D/packages/WRayCast/WRaycast";
+  import WRayCast from "../../Vue3D/packages/WRayCast/WRayCast";
   import WSkyBox from "../../Vue3D/packages/WSkyBox/WSkyBox";
 
 
   export default {
     components: {
       WSkyBox,
-      WRaycast
+      WRayCast
     },
     name: 'home',
 
