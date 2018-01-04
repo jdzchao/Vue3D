@@ -32,7 +32,7 @@ const Vue3D = {
     Vue.prototype.$vue3d = $vue3d;
     Vue.component('v-scene', VScene);
     Vue.component('w-orbit-controls', WOrbitControls);
-    Vue.component('w-ray-case', WRayCast);
+    Vue.component('w-ray-cast', WRayCast);
     Vue.component('w-sky-box', WSkyBox);
     Vue.component('x-box-geometry', XBoxGeometry);
     Vue.component('x-camera', XCamera);
