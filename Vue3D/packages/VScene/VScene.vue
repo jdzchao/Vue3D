@@ -13,6 +13,10 @@
       height: {type: Number, default: 50},
       backgroundColor: {type: String, default: 'rgb(0,0,0)'},
       backgroundAlpha: {type: Number, default: 1},
+      buffer: {type: Boolean, default: true},
+      antialias: {type: Boolean, default: true},
+      alpha: {type: Boolean, default: true},
+      auto: {type: Boolean, default: false},
     },
     data() {
       return {
@@ -23,16 +27,15 @@
         rendererTick: null,
         camera: null,
         ready: false,
-
       }
     },
     mounted() {
       this.dom = this.$el;
       this.scene = new THREE.Scene();
       this.renderer = new THREE.WebGLRenderer({
-        //preserveDrawingBuffer: true,
-        antialias: true, // 抗锯齿
-        alpha: true,
+        preserveDrawingBuffer: this.buffer, //绘图缓冲
+        antialias: this.antialias, // 抗锯齿
+        alpha: this.alpha,
         canvas: this.dom
       });
       this.rendererDelegationAdd(this.updateRenderer);
@@ -51,6 +54,9 @@
             func();
           });
           this.renderer.render(this.scene, this.camera);
+          if (this.auto) {
+            this.render();
+          }
         })
       },
       updateRenderer() {

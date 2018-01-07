@@ -1,5 +1,5 @@
 <template>
-  <div title="WRaycast" style="display:none;"></div>
+  <div title="WRayCast" style="display:none;"></div>
 </template>
 
 <script>
@@ -7,8 +7,12 @@
   import WMixin from '../_mixins/WMixin'
 
   export default {
-    name: "w-raycast",
+    name: "w-ray-cast",
     mixins: [WMixin],
+    props: {
+      near: {type: Number, default: 0},
+      far: {type: Number, default: 0},
+    },
     data() {
       return {
         raycaster: new THREE.Raycaster(),
@@ -21,6 +25,22 @@
       this.root.dom.addEventListener('mousedown', this.charge, false);
       this.root.dom.addEventListener('mousemove', this.leakage, false);
       this.root.dom.addEventListener('mouseup', this.caster, false);
+      if (this.near) {
+        this.raycaster.near = this.near;
+      }
+      if (this.far && this.far > this.near) {
+        this.raycaster.far = this.far;
+      }
+    },
+    watch: {
+      near(val) {
+        this.raycaster.near = val;
+      },
+      far(val) {
+        if (val > this.near) {
+          this.raycaster.far = val;
+        }
+      }
     },
     methods: {
       caster(event) {
