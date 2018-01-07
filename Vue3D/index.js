@@ -1,6 +1,6 @@
 import VScene from './packages/VScene'
 import WOrbitControls from './packages/WOrbitControls'
-import WRayCast from './packages/WRaycast'
+import WRayCast from './packages/WRayCast'
 import WSkyBox from './packages/WSkyBox'
 import WAnimation from './packages/WAnimation'
 import XBoxGeometry from './packages/XBoxGeometry'
@@ -34,7 +34,7 @@ const Vue3D = {
     Vue.prototype.$vue3d = $vue3d;
     Vue.component('v-scene', VScene);
     Vue.component('w-orbit-controls', WOrbitControls);
-    Vue.component('w-ray-case', WRayCast);
+    Vue.component('w-ray-cast', WRayCast);
     Vue.component('w-sky-box', WSkyBox);
     Vue.component('w-animation', WAnimation);
     Vue.component('x-box-geometry', XBoxGeometry);

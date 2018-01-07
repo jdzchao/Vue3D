@@ -1,5 +1,5 @@
 <template>
-  <div title="WRaycast" style="display:none;"></div>
+  <div title="WRayCast" style="display:none;"></div>
 </template>
 
 <script>
@@ -7,7 +7,7 @@
   import WMixin from '../_mixins/WMixin'
 
   export default {
-    name: "w-raycast",
+    name: "w-ray-cast",
     mixins: [WMixin],
     props: {
       near: {type: Number, default: 0},
