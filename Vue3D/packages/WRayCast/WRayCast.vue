@@ -11,12 +11,12 @@
     mixins: [WMixin],
     props: {
       near: {type: Number, default: 0},
-      far: {type: Number, default: 0},
+      far: {type: Number, default: 1000},
     },
     data() {
       return {
         raycaster: new THREE.Raycaster(),
-        mouse: new THREE.Vector2(),
+        point: new THREE.Vector2(),
         target: [],
         charged: false,
       }
@@ -24,7 +24,10 @@
     created() {
       this.root.dom.addEventListener('mousedown', this.charge, false);
       this.root.dom.addEventListener('mousemove', this.leakage, false);
-      this.root.dom.addEventListener('mouseup', this.caster, false);
+      this.root.dom.addEventListener('mouseup', this.mouseCaster, false);
+      this.root.dom.addEventListener('touchstart', this.charge, false);
+      this.root.dom.addEventListener('touchmove', this.leakage, false);
+      this.root.dom.addEventListener('touchend', this.touchCaster, false);
       if (this.near) {
         this.raycaster.near = this.near;
       }
@@ -43,11 +46,20 @@
       }
     },
     methods: {
-      caster(event) {
+      mouseCaster(event) {
         if (!this.charged) return;
-        this.mouse.x = (event.clientX / this.root.dom.clientWidth) * 2 - 1;
-        this.mouse.y = -(event.clientY / this.root.dom.clientHeight) * 2 + 1;
-        this.raycaster.setFromCamera(this.mouse, this.root.camera);
+        this.point.x = (event.clientX / this.root.dom.clientWidth) * 2 - 1;
+        this.point.y = -(event.clientY / this.root.dom.clientHeight) * 2 + 1;
+        this.raycaster.setFromCamera(this.point, this.root.camera);
+        this.target = this.raycaster.intersectObjects(this.root.scene.children, true);
+        this.$emit('cast', this.target);
+        this.charged = true;
+      },
+      touchCaster(event) {
+        if (!this.charged) return;
+        this.point.x = (event.changedTouches[0].clientX / this.root.dom.clientWidth) * 2 - 1;
+        this.point.y = -(event.changedTouches[0].clientY / this.root.dom.clientHeight) * 2 + 1;
+        this.raycaster.setFromCamera(this.point, this.root.camera);
         this.target = this.raycaster.intersectObjects(this.root.scene.children, true);
         this.$emit('cast', this.target);
         this.charged = true;
@@ -61,7 +73,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-</style>

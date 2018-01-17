@@ -1,7 +1,9 @@
 import VScene from './packages/VScene'
+import WGridHelper from './packages/WGridHelper'
 import WOrbitControls from './packages/WOrbitControls'
 import WRayCast from './packages/WRayCast'
 import WSkyBox from './packages/WSkyBox'
+import WTransformControls from './packages/WTransformControls'
 import XBoxGeometry from './packages/XBoxGeometry'
 import XCamera from './packages/XCamera'
 import XLight from './packages/XLight'
@@ -12,9 +14,11 @@ import Utils from './packages/Utils'
 
 export {
   VScene,
+  WGridHelper,
   WOrbitControls,
   WRayCast,
   WSkyBox,
+  WTransformControls,
   XBoxGeometry,
   XCamera,
   XLight,
