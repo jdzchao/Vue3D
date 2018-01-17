@@ -7,9 +7,10 @@
       <x-camera :width="width" :height="height" :far="2000">
         <x-light :type="'Directional'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
       </x-camera>
-      <x-box-geometry :material="material"></x-box-geometry>
-      <x-obj-loader :path="obj" :material="material"></x-obj-loader>
-      <!--<w-grid-helper></w-grid-helper>-->
+      <x-box-geometry :material="material">
+        <x-obj-loader :path="obj" :material="material"></x-obj-loader>
+      </x-box-geometry>
+      <w-grid-helper></w-grid-helper>
       <!--<x-obj-loader :path="obj" :material="material"></x-obj-loader>-->
       <w-transform-controls :mesh="target"></w-transform-controls>
     </v-scene>
@@ -48,8 +49,9 @@
       raycast(objs) {
         if (objs.length > 0) {
           this.target = objs[0].object;
+        } else {
+          this.target = null;
         }
-        console.log(this.target);
       },
       updateCamera(camera) {
         this.camPos = camera.position;

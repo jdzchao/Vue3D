@@ -23,10 +23,10 @@
     },
     created() {
       this.root.dom.addEventListener('mousedown', this.charge, false);
-      this.root.dom.addEventListener('mousemove', this.leakage, false);
+      // this.root.dom.addEventListener('mousemove', this.leakage, false);
       this.root.dom.addEventListener('mouseup', this.mouseCaster, false);
       this.root.dom.addEventListener('touchstart', this.charge, false);
-      this.root.dom.addEventListener('touchmove', this.leakage, false);
+      // this.root.dom.addEventListener('touchmove', this.leakage, false);
       this.root.dom.addEventListener('touchend', this.touchCaster, false);
       if (this.near) {
         this.raycaster.near = this.near;
@@ -47,6 +47,7 @@
     },
     methods: {
       mouseCaster(event) {
+        this.root.dom.removeEventListener('mousemove', this.leakage, false);
         if (!this.charged) return;
         this.point.x = (event.clientX / this.root.dom.clientWidth) * 2 - 1;
         this.point.y = -(event.clientY / this.root.dom.clientHeight) * 2 + 1;
@@ -56,6 +57,7 @@
         this.charged = true;
       },
       touchCaster(event) {
+        this.root.dom.removeEventListener('touchmove', this.leakage, false);
         if (!this.charged) return;
         this.point.x = (event.changedTouches[0].clientX / this.root.dom.clientWidth) * 2 - 1;
         this.point.y = -(event.changedTouches[0].clientY / this.root.dom.clientHeight) * 2 + 1;
@@ -66,9 +68,13 @@
       },
       charge() {
         this.charged = true;
+        this.root.dom.addEventListener('mousemove', this.leakage, false);
+        this.root.dom.addEventListener('touchmove', this.leakage, false);
       },
-      leakage() {
-        this.charged = false;
+      leakage(event) {
+        if (Math.abs(event.movementX) > 3 || Math.abs(event.movementY) > 3) {
+          this.charged = false;
+        }
       }
     }
   }

@@ -12,23 +12,30 @@
     props: {
       min: {type: Number, default: 10},
       max: {type: Number, default: 500},
+      enable: {type: Boolean, default: false},
     },
     data() {
       return {
         control: null
       }
     },
-    created() {
+    mounted() {
+      this.control = new THREE.OrbitControls(this.root.camera, this.root.dom);
+      this.control.addEventListener('change', this.root.render, false);
+      this.control.type = 'orbit';
+      this.control.minDistance = this.min;
+      this.control.maxDistance = this.max;
+      this.control.enable = this.enable;
       this.root.rendererDelegationAdd(this.updateControls);
+    },
+    watch: {
+      enable(val) {
+        this.control.enable = this.enable;
+      }
     },
     methods: {
       updateControls() {
-        if (this.control) return;
-        this.control = new THREE.OrbitControls(this.root.camera, this.root.dom);
-        this.control.addEventListener('change', this.render, false);
-        this.control.type = 'orbit';
-        this.control.minDistance = this.min;
-        this.control.maxDistance = this.max;
+        this.control.update();
       },
     }
   }

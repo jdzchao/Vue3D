@@ -15,16 +15,26 @@
     },
     data() {
       return {
-        control: null
+        blacklist: ['XY', 'XZ', 'YZ', 'XYZE'],
+        control: null,
       }
     },
     mounted() {
       this.control = new THREE.TransformControls(this.root.camera, this.root.dom);
       this.control.addEventListener('change', this.renderControl);
+      this.root.scene.add(this.control);
+    },
+    watch: {
+      mesh(val) {
+        if (val && val.type === 'Mesh' && this.blacklist.indexOf(val.name) < 0) {
+          this.setAttach();
+        } else {
+          this.control.detach();
+        }
+      }
     },
     methods: {
       setAttach() {
-        console.log(this.mesh);
         this.control.attach(this.mesh);
       },
       renderControl() {
