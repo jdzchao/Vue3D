@@ -15,7 +15,7 @@
     },
     data() {
       return {
-        controls: null
+        control: null
       }
     },
     created() {
@@ -23,12 +23,12 @@
     },
     methods: {
       updateControls() {
-        if (this.controls) return;
-        this.controls = new THREE.OrbitControls(this.root.camera, this.root.dom);
-        this.controls.addEventListener('change', this.render, false);
-        this.controls.type = 'orbit';
-        this.controls.minDistance = this.min;
-        this.controls.maxDistance = this.max;
+        if (this.control) return;
+        this.control = new THREE.OrbitControls(this.root.camera, this.root.dom);
+        this.control.addEventListener('change', this.render, false);
+        this.control.type = 'orbit';
+        this.control.minDistance = this.min;
+        this.control.maxDistance = this.max;
       },
     }
   }
