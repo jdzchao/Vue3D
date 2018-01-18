@@ -12,7 +12,7 @@
     props: {
       min: {type: Number, default: 10},
       max: {type: Number, default: 500},
-      enable: {type: Boolean, default: false},
+      enable: {type: Boolean, default: true},
     },
     data() {
       return {
