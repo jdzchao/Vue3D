@@ -1,5 +1,5 @@
 <template>
-  <div title="WGridHelper" style="display:none;"></div>
+  <object name="WGridHelper" style="display:none;"></object>
 </template>
 
 <script>

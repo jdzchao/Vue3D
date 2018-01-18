@@ -1,5 +1,5 @@
 <template>
-  <div title="WTransformControls" style="display:none;"></div>
+  <object name="WTransformControls" style="display:none;"></object>
 </template>
 
 <script>

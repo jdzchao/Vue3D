@@ -1,5 +1,5 @@
 <template>
-  <div title="WRayCast" style="display:none;"></div>
+  <object name="WRayCast" style="display:none;"></object>
 </template>
 
 <script>

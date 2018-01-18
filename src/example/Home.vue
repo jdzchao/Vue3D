@@ -7,12 +7,12 @@
       <x-camera :width="width" :height="height" :far="2000">
         <x-light :type="'Directional'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
       </x-camera>
-      <x-box-geometry :material="material">
-        <x-obj-loader :path="obj" :material="material"></x-obj-loader>
-      </x-box-geometry>
+      <!--<x-box-geometry :material="material">-->
+        <!--<x-obj-loader :path="obj" :material="material"></x-obj-loader>-->
+      <!--</x-box-geometry>-->
       <w-grid-helper></w-grid-helper>
       <!--<x-obj-loader :path="obj" :material="material"></x-obj-loader>-->
-      <w-transform-controls :mesh="target"></w-transform-controls>
+      <!--<w-transform-controls :mesh="target"></w-transform-controls>-->
     </v-scene>
   </div>
 </template>
