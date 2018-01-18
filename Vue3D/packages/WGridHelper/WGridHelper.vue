@@ -12,8 +12,8 @@
     props: {
       size: {type: Number, default: 1000},
       divisions: {type: Number, default: 10},
-      colorCenterLine: {type: String, default: 'rgb(68,68,68)'},
-      colorGrid: {type: String, default: 'rgb(136,136,136)'},
+      colorCenterLine: {type: String, default: 'rgb(136,136,136)'},
+      colorGrid: {type: String, default: 'rgb(68,68,68)'},
     },
     data() {
       return {
