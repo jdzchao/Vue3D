@@ -1,3 +1,3 @@
-import WGridHelper from '../WGridHelper'
+import WGridHelper from './WGridHelper.vue'
 
 export default WGridHelper
