@@ -7,10 +7,10 @@
       <x-camera :width="width" :height="height" :far="2000">
         <x-light :type="'Directional'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
       </x-camera>
-      <!--<x-box-geometry :material="material">-->
-        <!--<x-obj-loader :path="obj" :material="material"></x-obj-loader>-->
-      <!--</x-box-geometry>-->
       <w-grid-helper></w-grid-helper>
+      <!--<x-box-geometry :material="material">-->
+      <!--<x-obj-loader :path="obj" :material="material"></x-obj-loader>-->
+      <!--</x-box-geometry>-->
       <!--<x-obj-loader :path="obj" :material="material"></x-obj-loader>-->
       <!--<w-transform-controls :mesh="target"></w-transform-controls>-->
     </v-scene>
@@ -18,24 +18,32 @@
 </template>
 <script>
   import {mapState} from 'vuex'
+  import VScene from "../../Vue3D/packages/VScene/VScene"
+  import WOrbitControls from '../../Vue3D/packages/WOrbitControls/WOrbitControls'
   import WRayCast from "../../Vue3D/packages/WRayCast/WRayCast";
   import WSkyBox from "../../Vue3D/packages/WSkyBox/WSkyBox";
   import WGridHelper from "../../Vue3D/packages/WGridHelper/WGridHelper";
   import WTransformControls from "../../Vue3D/packages/WTransformControls/WTransformControls";
+  import XLight from "../../Vue3D/packages/XLight/XLight"
+  import XCamera from "../../Vue3D/packages/XCamera/XCamera"
+  import Materials from "../../Vue3D/packages/Materials"
 
   export default {
     components: {
+      VScene,
+      WOrbitControls,
       WTransformControls,
       WGridHelper,
       WSkyBox,
-      WRayCast
+      WRayCast,
+      XCamera,
+      XLight
     },
     name: 'home',
-
     data() {
       return {
         ready: false,
-        material: this.$vue3d.Materials.ceramic(),
+        material: Materials.ceramic(),
         obj: './static/demo/female02.obj',
         target: null
       }

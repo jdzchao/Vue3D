@@ -4,7 +4,7 @@
 
 <script>
   const THREE = require('three');
-  THREE.OrbitControls = require('imports-loader?THREE=three!exports-loader?THREE.TransformControls!./TransformControls');
+  THREE.TransformControls = require('imports-loader?THREE=three!exports-loader?THREE.TransformControls!./TransformControls');
   import WMixin from '../_mixins/WMixin'
 
   export default {
