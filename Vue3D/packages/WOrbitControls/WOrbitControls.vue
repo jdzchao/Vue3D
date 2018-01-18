@@ -25,12 +25,12 @@
       this.control.type = 'orbit';
       this.control.minDistance = this.min;
       this.control.maxDistance = this.max;
-      this.control.enable = this.enable;
+      this.control.enabled = this.enable;
       this.root.rendererDelegationAdd(this.updateControls);
     },
     watch: {
       enable(val) {
-        this.control.enable = this.enable;
+        this.control.enabled = this.enable;
       }
     },
     methods: {
