@@ -23,11 +23,7 @@
     },
     created() {
       this.root.dom.addEventListener('mousedown', this.charge, false);
-      // this.root.dom.addEventListener('mousemove', this.leakage, false);
-      this.root.dom.addEventListener('mouseup', this.mouseCaster, false);
       this.root.dom.addEventListener('touchstart', this.charge, false);
-      // this.root.dom.addEventListener('touchmove', this.leakage, false);
-      this.root.dom.addEventListener('touchend', this.touchCaster, false);
       if (this.near) {
         this.raycaster.near = this.near;
       }
@@ -48,28 +44,32 @@
     methods: {
       mouseCaster(event) {
         this.root.dom.removeEventListener('mousemove', this.leakage, false);
+        this.root.dom.removeEventListener('mouseup', this.mouseCaster, false);
         if (!this.charged) return;
         this.point.x = (event.clientX / this.root.dom.clientWidth) * 2 - 1;
         this.point.y = -(event.clientY / this.root.dom.clientHeight) * 2 + 1;
         this.raycaster.setFromCamera(this.point, this.root.camera);
         this.target = this.raycaster.intersectObjects(this.root.scene.children, true);
         this.$emit('cast', this.target);
-        this.charged = true;
+        this.charged = false;
       },
       touchCaster(event) {
         this.root.dom.removeEventListener('touchmove', this.leakage, false);
+        this.root.dom.removeEventListener('touchend', this.touchCaster, false);
         if (!this.charged) return;
         this.point.x = (event.changedTouches[0].clientX / this.root.dom.clientWidth) * 2 - 1;
         this.point.y = -(event.changedTouches[0].clientY / this.root.dom.clientHeight) * 2 + 1;
         this.raycaster.setFromCamera(this.point, this.root.camera);
         this.target = this.raycaster.intersectObjects(this.root.scene.children, true);
         this.$emit('cast', this.target);
-        this.charged = true;
+        this.charged = false;
       },
       charge() {
         this.charged = true;
         this.root.dom.addEventListener('mousemove', this.leakage, false);
+        this.root.dom.addEventListener('mouseup', this.mouseCaster, false);
         this.root.dom.addEventListener('touchmove', this.leakage, false);
+        this.root.dom.addEventListener('touchend', this.touchCaster, false);
       },
       leakage(event) {
         if (Math.abs(event.movementX) > 3 || Math.abs(event.movementY) > 3) {

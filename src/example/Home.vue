@@ -8,11 +8,10 @@
         <x-light :type="'Directional'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
       </x-camera>
       <w-grid-helper></w-grid-helper>
-      <!--<x-box-geometry :material="material">-->
+      <x-box-geometry :material="material">
+      </x-box-geometry>
       <!--<x-obj-loader :path="obj" :material="material"></x-obj-loader>-->
-      <!--</x-box-geometry>-->
-      <!--<x-obj-loader :path="obj" :material="material"></x-obj-loader>-->
-      <!--<w-transform-controls :mesh="target"></w-transform-controls>-->
+      <w-transform-controls :mesh="target"></w-transform-controls>
     </v-scene>
   </div>
 </template>
@@ -25,6 +24,7 @@
   import WGridHelper from "../../Vue3D/packages/WGridHelper/WGridHelper";
   import WTransformControls from "../../Vue3D/packages/WTransformControls/WTransformControls";
   import XLight from "../../Vue3D/packages/XLight/XLight"
+  import XBoxGeometry from "../../Vue3D/packages/XBoxGeometry/index"
   import XCamera from "../../Vue3D/packages/XCamera/XCamera"
   import Materials from "../../Vue3D/packages/Materials"
 
@@ -37,7 +37,8 @@
       WSkyBox,
       WRayCast,
       XCamera,
-      XLight
+      XLight,
+      XBoxGeometry
     },
     name: 'home',
     data() {
