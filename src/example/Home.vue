@@ -3,22 +3,14 @@
     <v-scene :width="width" :height="height">
       <w-ray-cast @cast="raycast"></w-ray-cast>
       <w-orbit-controls></w-orbit-controls>
-<<<<<<< HEAD
-=======
+      <w-animation :object="object" :to-position="toPosition" :to-scale="toScale" :repeat="-1"></w-animation>
       <w-sky-box path="../../../static/images/"></w-sky-box>
->>>>>>> pr/21
       <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
       <x-camera :width="width" :height="height" :far="2000">
         <x-light :type="'Directional'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
       </x-camera>
-<<<<<<< HEAD
       <w-grid-helper></w-grid-helper>
-      <x-box-geometry :material="material">
-      </x-box-geometry>
-=======
-      <x-box-geometry :material="material" ref="box"></x-box-geometry>
-      <x-obj-loader :path="obj" :material="material" @loaded="LoadSuccess"></x-obj-loader>
->>>>>>> pr/21
+      <x-box-geometry :material="material"></x-box-geometry>
       <!--<x-obj-loader :path="obj" :material="material"></x-obj-loader>-->
       <w-transform-controls :mesh="target"></w-transform-controls>
     </v-scene>
@@ -35,11 +27,13 @@
   import XLight from "../../Vue3D/packages/XLight/XLight"
   import XBoxGeometry from "../../Vue3D/packages/XBoxGeometry/index"
   import XCamera from "../../Vue3D/packages/XCamera/XCamera"
+  import WAnimation from "../../Vue3D/packages/WAnimation"
   import Materials from "../../Vue3D/packages/Materials"
 
   export default {
     components: {
       VScene,
+      WAnimation,
       WOrbitControls,
       WTransformControls,
       WGridHelper,
@@ -55,16 +49,18 @@
         ready: false,
         material: Materials.ceramic(),
         obj: './static/demo/female02.obj',
-<<<<<<< HEAD
-        target: null
-=======
+        target: null,
         object: null,
         toPosition: [0, -80, 0],
         toScale: [1.5, 1.5, 1.5]
->>>>>>> pr/21
       }
     },
     mounted() {
+      setTimeout(() => {
+        this.toPosition = [0, 50, 0];           //参数调整必须在对象update之前
+        this.toScale = null;
+        this.object = this.$refs.box.object3d;
+      }, 3000)
     },
     computed: {
       ...mapState(['width', 'height']),
