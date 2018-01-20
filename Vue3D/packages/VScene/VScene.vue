@@ -1,5 +1,5 @@
 <template>
-  <canvas :id="id">
+  <canvas title="VScene">
     <slot v-if="ready"></slot>
   </canvas>
 </template>
@@ -9,7 +9,6 @@
   export default {
     name: "v-scene",
     props: {
-      id: {type: String, default: 'VScene'},
       width: {type: Number, default: 50},
       height: {type: Number, default: 50},
       backgroundColor: {type: String, default: 'rgb(0,0,0)'},
