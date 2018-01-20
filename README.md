@@ -45,7 +45,7 @@ export default {
 // this.$vue3d.Materials; // 注册的全局材质
 // this.$vue3d.Utils; // 注册的全局工具
 ```
-### 按需引用
+### javascript
 ``` bash
 import {VScene, XCamera, XLight, ...} from 'vue3d'
 import {Materials,Utils} from 'vue3d' // 也可以按需引用模型材质和辅助工具
