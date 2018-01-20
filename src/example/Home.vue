@@ -3,13 +3,22 @@
     <v-scene :width="width" :height="height">
       <w-ray-cast @cast="raycast"></w-ray-cast>
       <w-orbit-controls></w-orbit-controls>
+<<<<<<< HEAD
+=======
+      <w-sky-box path="../../../static/images/"></w-sky-box>
+>>>>>>> pr/21
       <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
       <x-camera :width="width" :height="height" :far="2000">
         <x-light :type="'Directional'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
       </x-camera>
+<<<<<<< HEAD
       <w-grid-helper></w-grid-helper>
       <x-box-geometry :material="material">
       </x-box-geometry>
+=======
+      <x-box-geometry :material="material" ref="box"></x-box-geometry>
+      <x-obj-loader :path="obj" :material="material" @loaded="LoadSuccess"></x-obj-loader>
+>>>>>>> pr/21
       <!--<x-obj-loader :path="obj" :material="material"></x-obj-loader>-->
       <w-transform-controls :mesh="target"></w-transform-controls>
     </v-scene>
@@ -46,7 +55,13 @@
         ready: false,
         material: Materials.ceramic(),
         obj: './static/demo/female02.obj',
+<<<<<<< HEAD
         target: null
+=======
+        object: null,
+        toPosition: [0, -80, 0],
+        toScale: [1.5, 1.5, 1.5]
+>>>>>>> pr/21
       }
     },
     mounted() {
@@ -68,10 +83,11 @@
       LoadError(err) {
       },
       LoadSuccess(object) {
-        console.log(object);
-        this.$vue3d.placeZeroPoint(object);
-        this.$vue3d.adaptScale(object);
+        // console.log(object);
+        // this.$vue3d.placeZeroPoint(object);
+        // this.$vue3d.adaptScale(object);
         this.object = object;
+        this.object.position.y -= 150;
       },
       loads(object) {
         this.objs = object;
