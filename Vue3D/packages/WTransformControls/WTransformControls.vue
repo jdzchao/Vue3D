@@ -29,7 +29,7 @@
     },
     watch: {
       mesh(val) {
-        if (val && val.type === 'Mesh' && this.blacklist.indexOf(val.name) < 0) {
+        if (val && val.name && this.blacklist.indexOf(val.name) < 0) {
           this.setAttach();
         } else {
           this.control.detach();
