@@ -19,6 +19,7 @@
     data() {
       return {
         blacklist: ['XY', 'XZ', 'YZ', 'XYZE'],
+        whitelist: ['Mesh', 'Group'],
         control: null,
       }
     },
@@ -29,7 +30,7 @@
     },
     watch: {
       mesh(val) {
-        if (val && val.name && this.blacklist.indexOf(val.name) < 0) {
+        if (val && this.blacklist.indexOf(val.name) < 0 && this.whitelist.indexOf(val.type) >= 0) {
           this.setAttach();
         } else {
           this.control.detach();
