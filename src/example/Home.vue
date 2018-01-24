@@ -1,6 +1,6 @@
 <template>
   <div id="Home">
-    <v-scene :width="width" :height="height">
+    <v-scene :width="width" :height="height" :auto="true">
       <w-ray-cast @cast="raycast"></w-ray-cast>
       <w-orbit-controls></w-orbit-controls>
       <w-animation :object="object" :to-position="toPosition" :to-scale="toScale" :repeat="-1"></w-animation>
