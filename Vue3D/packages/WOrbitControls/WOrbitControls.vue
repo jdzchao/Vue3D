@@ -1,5 +1,5 @@
 <template>
-  <div title="WOrbitControls" style="display:none;"></div>
+  <object name="WOrbitControls" style="display:none;"></object>
 </template>
 <script>
   const THREE = require('three');
@@ -12,23 +12,30 @@
     props: {
       min: {type: Number, default: 10},
       max: {type: Number, default: 500},
+      enable: {type: Boolean, default: true},
     },
     data() {
       return {
-        controls: null
+        control: null
       }
     },
-    created() {
+    mounted() {
+      this.control = new THREE.OrbitControls(this.root.camera, this.root.dom);
+      this.control.addEventListener('change', this.root.render, false);
+      this.control.type = 'orbit';
+      this.control.minDistance = this.min;
+      this.control.maxDistance = this.max;
+      this.control.enabled = this.enable;
       this.root.rendererDelegationAdd(this.updateControls);
+    },
+    watch: {
+      enable(val) {
+        this.control.enabled = this.enable;
+      }
     },
     methods: {
       updateControls() {
-        if (this.controls) return;
-        this.controls = new THREE.OrbitControls(this.root.camera, this.root.dom);
-        this.controls.addEventListener('change', this.render, false);
-        this.controls.type = 'orbit';
-        this.controls.minDistance = this.min;
-        this.controls.maxDistance = this.max;
+        this.control.update();
       },
     }
   }
