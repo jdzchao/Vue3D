@@ -1,5 +1,5 @@
 <template>
-  <div title="XGround" style="display: none"></div>
+  <object name="XGround" style="display: none"></object>
 </template>
 
 <script>
