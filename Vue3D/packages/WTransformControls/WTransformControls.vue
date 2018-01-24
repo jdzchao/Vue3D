@@ -11,7 +11,7 @@
     name: "w-transform-controls",
     mixins: [WMixin],
     props: {
-      mesh: {type: Object},
+      target: {type: Object},
       mode: {type: String, default: 'position'},
       space: {type: String, default: 'world'},
       size: {type: Number, default: 1},
@@ -29,7 +29,7 @@
       this.root.scene.add(this.control);
     },
     watch: {
-      mesh(val) {
+      target(val) {
         if (val && this.blacklist.indexOf(val.name) < 0 && this.whitelist.indexOf(val.type) >= 0) {
           this.setAttach();
         } else {
@@ -59,7 +59,7 @@
     },
     methods: {
       setAttach() {
-        this.control.attach(this.mesh);
+        this.control.attach(this.target);
       },
       renderControl() {
         this.control.update();

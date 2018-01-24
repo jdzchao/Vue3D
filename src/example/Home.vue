@@ -12,7 +12,8 @@
       <w-grid-helper></w-grid-helper>
       <x-box-geometry :material="material"></x-box-geometry>
       <!--<x-obj-loader :path="obj" :material="material"></x-obj-loader>-->
-      <w-transform-controls :mesh="target"></w-transform-controls>
+      <w-transform-controls :target="target"></w-transform-controls>
+      <w-box-helper :target="target"></w-box-helper>
     </v-scene>
   </div>
 </template>
@@ -29,9 +30,11 @@
   import XCamera from "../../Vue3D/packages/XCamera/XCamera"
   import WAnimation from "../../Vue3D/packages/WAnimation"
   import Materials from "../../Vue3D/packages/Materials"
+  import WBoxHelper from "../../Vue3D/packages/WBoxHelper/WBoxHelper";
 
   export default {
     components: {
+      WBoxHelper,
       VScene,
       WAnimation,
       WOrbitControls,
