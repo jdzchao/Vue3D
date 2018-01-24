@@ -1,5 +1,5 @@
 <template>
-  <object name="WSkyBox" style="display: none"></object>
+  <div title="WSkyBox" style="display: none"></div>
 </template>
 
 <script>

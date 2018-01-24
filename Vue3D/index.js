@@ -1,9 +1,8 @@
 import VScene from './packages/VScene'
-import WGridHelper from './packages/WGridHelper'
 import WOrbitControls from './packages/WOrbitControls'
 import WRayCast from './packages/WRayCast'
 import WSkyBox from './packages/WSkyBox'
-import WTransformControls from './packages/WTransformControls'
+import WAnimation from './packages/WAnimation'
 import XBoxGeometry from './packages/XBoxGeometry'
 import XCamera from './packages/XCamera'
 import XLight from './packages/XLight'
@@ -14,11 +13,10 @@ import Utils from './packages/Utils'
 
 export {
   VScene,
-  WGridHelper,
   WOrbitControls,
   WRayCast,
   WSkyBox,
-  WTransformControls,
+  WAnimation,
   XBoxGeometry,
   XCamera,
   XLight,
@@ -35,11 +33,10 @@ const Vue3D = {
   install: function (Vue, options) {
     Vue.prototype.$vue3d = $vue3d;
     Vue.component('v-scene', VScene);
-    Vue.component('w-grid-helper', WGridHelper);
     Vue.component('w-orbit-controls', WOrbitControls);
     Vue.component('w-ray-cast', WRayCast);
     Vue.component('w-sky-box', WSkyBox);
-    Vue.component('w-transform-controls', WTransformControls);
+    Vue.component('w-animation', WAnimation);
     Vue.component('x-box-geometry', XBoxGeometry);
     Vue.component('x-camera', XCamera);
     Vue.component('x-light', XLight);

@@ -1,7 +1,7 @@
 <template>
-  <object name="XObjLoader" style="display:none">
+  <div title="XObjLoader" style="display:none">
     <slot v-if="slot"></slot>
-  </object>
+  </div>
 </template>
 <script>
   const THREE = require('three');

@@ -1,7 +1,7 @@
 <template>
-  <object name="XCamera" :aspect="aspect" style="display:none;">
+  <div title="XCamera" :aspect="aspect" style="display:none;">
     <slot v-if="slot"></slot>
-  </object>
+  </div>
 </template>
 <script>
   const THREE = require('three');

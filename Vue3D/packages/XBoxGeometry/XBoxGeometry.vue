@@ -1,7 +1,7 @@
 <template>
-  <object name="XBoxGeometry" style="display:none;">
+  <div title="XBoxGeometry" style="display:none;">
     <slot v-if="slot"></slot>
-  </object>
+  </div>
 </template>
 <script>
   const THREE = require('three');

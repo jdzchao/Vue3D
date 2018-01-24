@@ -13,9 +13,9 @@ i18n.SetLocale('zhcn');
 Vue.config.productionTip = false;
 
 Vue.prototype.$http = http;
-// import Vue3D from '../Vue3D'
-//
-// Vue.use(Vue3D);
+import Vue3D from '../Vue3D'
+
+Vue.use(Vue3D);
 
 const vue = new Vue({
   router,

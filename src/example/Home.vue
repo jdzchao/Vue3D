@@ -1,66 +1,62 @@
 <template>
   <div id="Home">
-    <v-scene :width="width" :height="height">
+    <v-scene :width="width" :height="height" :auto="true">
       <w-ray-cast @cast="raycast"></w-ray-cast>
       <w-orbit-controls></w-orbit-controls>
+      <w-animation :object="object" :to-position="toPosition" :to-scale="toScale" :repeat="-1"></w-animation>
+      <w-sky-box path="../../../static/images/"></w-sky-box>
       <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
       <x-camera :width="width" :height="height" :far="2000">
         <x-light :type="'Directional'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
       </x-camera>
-      <w-grid-helper></w-grid-helper>
-      <x-box-geometry :material="material">
-      </x-box-geometry>
+      <x-box-geometry :material="material" ref="box"></x-box-geometry>
+      <x-obj-loader :path="obj" :material="material" @loaded="LoadSuccess"></x-obj-loader>
       <!--<x-obj-loader :path="obj" :material="material"></x-obj-loader>-->
-      <w-transform-controls :mesh="target"></w-transform-controls>
     </v-scene>
   </div>
 </template>
 <script>
   import {mapState} from 'vuex'
-  import VScene from "../../Vue3D/packages/VScene/VScene"
-  import WOrbitControls from '../../Vue3D/packages/WOrbitControls/WOrbitControls'
   import WRayCast from "../../Vue3D/packages/WRayCast/WRayCast";
   import WSkyBox from "../../Vue3D/packages/WSkyBox/WSkyBox";
-  import WGridHelper from "../../Vue3D/packages/WGridHelper/WGridHelper";
-  import WTransformControls from "../../Vue3D/packages/WTransformControls/WTransformControls";
-  import XLight from "../../Vue3D/packages/XLight/XLight"
-  import XBoxGeometry from "../../Vue3D/packages/XBoxGeometry/index"
-  import XCamera from "../../Vue3D/packages/XCamera/XCamera"
-  import Materials from "../../Vue3D/packages/Materials"
+
 
   export default {
     components: {
-      VScene,
-      WOrbitControls,
-      WTransformControls,
-      WGridHelper,
       WSkyBox,
-      WRayCast,
-      XCamera,
-      XLight,
-      XBoxGeometry
+      WRayCast
     },
     name: 'home',
+
     data() {
       return {
         ready: false,
-        material: Materials.ceramic(),
+        material: this.$vue3d.Materials.ceramic(),
         obj: './static/demo/female02.obj',
-        target: null
+        object: null,
+        toPosition: [0, -80, 0],
+        toScale: [1.5, 1.5, 1.5]
       }
     },
     mounted() {
+      setTimeout(() => {
+        this.toPosition = [0, 50, 0];           //参数调整必须在对象update之前
+        this.toScale = null;
+        this.object = this.$refs.box.object3d;
+      }, 3000)
     },
     computed: {
       ...mapState(['width', 'height']),
     },
     methods: {
       raycast(objs) {
-        if (objs.length > 0) {
-          this.target = objs[0].object;
-        } else {
-          this.target = null;
-        }
+        console.log(objs);
+      },
+      changeM() {
+        this.mtls = Materials.ceramic();
+      },
+      Ready(bool) {
+        this.ready = bool;
       },
       updateCamera(camera) {
         this.camPos = camera.position;
@@ -68,10 +64,11 @@
       LoadError(err) {
       },
       LoadSuccess(object) {
-        console.log(object);
-        this.$vue3d.placeZeroPoint(object);
-        this.$vue3d.adaptScale(object);
+        // console.log(object);
+        // this.$vue3d.placeZeroPoint(object);
+        // this.$vue3d.adaptScale(object);
         this.object = object;
+        this.object.position.y -= 150;
       },
       loads(object) {
         this.objs = object;

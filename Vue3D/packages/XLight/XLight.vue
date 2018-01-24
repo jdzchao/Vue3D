@@ -1,7 +1,7 @@
 <template>
-  <object name="XLight" style="display:none;">
+  <div title="XLight" style="display:none;">
     <slot v-if="slot"></slot>
-  </object>
+  </div>
 </template>
 <script>
   const THREE = require('three');
