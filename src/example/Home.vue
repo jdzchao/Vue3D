@@ -3,6 +3,8 @@
     <v-scene :width="width" :height="height">
       <w-ray-cast @cast="raycast"></w-ray-cast>
       <w-orbit-controls></w-orbit-controls>
+      <w-animation :object="object" :to-position="toPosition" :to-scale="toScale" :repeat="-1"></w-animation>
+      <w-sky-box path="../../../static/images/"></w-sky-box>
       <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
       <x-camera :width="width" :height="height" :far="2000">
         <x-light :type="'Directional'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
@@ -47,9 +49,17 @@
         material: Materials.ceramic(),
         obj: './static/demo/female02.obj',
         target: null
+        object: null,
+        toPosition: [0, -80, 0],
+        toScale: [1.5, 1.5, 1.5]
       }
     },
     mounted() {
+      setTimeout(() => {
+        this.toPosition = [0, 50, 0];           //参数调整必须在对象update之前
+        this.toScale = null;
+        this.object = this.$refs.box.object3d;
+      }, 3000)
     },
     computed: {
       ...mapState(['width', 'height']),
@@ -68,10 +78,11 @@
       LoadError(err) {
       },
       LoadSuccess(object) {
-        console.log(object);
-        this.$vue3d.placeZeroPoint(object);
-        this.$vue3d.adaptScale(object);
+        // console.log(object);
+        // this.$vue3d.placeZeroPoint(object);
+        // this.$vue3d.adaptScale(object);
         this.object = object;
+        this.object.position.y -= 150;
       },
       loads(object) {
         this.objs = object;

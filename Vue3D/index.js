@@ -4,6 +4,7 @@ import WOrbitControls from './packages/WOrbitControls'
 import WRayCast from './packages/WRayCast'
 import WSkyBox from './packages/WSkyBox'
 import WTransformControls from './packages/WTransformControls'
+import WAnimation from './packages/WAnimation'
 import XBoxGeometry from './packages/XBoxGeometry'
 import XCamera from './packages/XCamera'
 import XLight from './packages/XLight'
@@ -19,6 +20,7 @@ export {
   WRayCast,
   WSkyBox,
   WTransformControls,
+  WAnimation,
   XBoxGeometry,
   XCamera,
   XLight,
@@ -40,6 +42,7 @@ const Vue3D = {
     Vue.component('w-ray-cast', WRayCast);
     Vue.component('w-sky-box', WSkyBox);
     Vue.component('w-transform-controls', WTransformControls);
+    Vue.component('w-animation', WAnimation);
     Vue.component('x-box-geometry', XBoxGeometry);
     Vue.component('x-camera', XCamera);
     Vue.component('x-light', XLight);
