@@ -13,7 +13,7 @@
       <x-box-geometry :material="material"></x-box-geometry>
       <!--<x-obj-loader :path="obj" :material="material"></x-obj-loader>-->
       <w-transform-controls :target="target"></w-transform-controls>
-      <w-box-helper :target="target"></w-box-helper>
+      <w-box-helper color="rgb(255,0,0)" :target="target"></w-box-helper>
     </v-scene>
   </div>
 </template>
@@ -59,18 +59,14 @@
       }
     },
     mounted() {
-      setTimeout(() => {
-        this.toPosition = [0, 50, 0];           //参数调整必须在对象update之前
-        this.toScale = null;
-        this.object = this.$refs.box.object3d;
-      }, 3000)
+
     },
     computed: {
       ...mapState(['width', 'height']),
     },
     methods: {
       raycast(objs) {
-        if (objs.length > 0) {
+        if (objs && objs.length > 0) {
           this.target = objs[0].object;
         } else {
           this.target = null;

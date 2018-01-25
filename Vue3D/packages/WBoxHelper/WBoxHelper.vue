@@ -27,37 +27,43 @@
           this.position = val.position;
           this.rotation = val.rotation;
           this.scale = val.scale;
+          this.box.setFromObject(this.target);
           this.root.scene.add(this.box);
-          this.setBox();
+          this.update();
         } else {
           this.root.scene.remove(this.box);
+        }
+      },
+      color(val) {
+        if (val) {
+          this.box.color = val;
         }
       },
       position: {
         deep: true,
         handler(val, oldVal) {
           if (!this.target) return;
-          this.setBox();
+          this.update();
         }
       },
       rotation: {
         deep: true,
         handler(val, oldVal) {
           if (!this.target) return;
-          this.setBox();
+          this.update();
         }
       },
       scale: {
         deep: true,
         handler(val, oldVal) {
           if (!this.target) return;
-          this.setBox();
+          this.update();
         }
       },
     },
     methods: {
-      setBox() {
-        this.box.setFromObject(this.target);
+      update() {
+        this.box.update();
       }
     }
   }

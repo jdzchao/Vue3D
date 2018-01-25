@@ -18,8 +18,6 @@
     },
     data() {
       return {
-        blacklist: ['XY', 'XZ', 'YZ', 'XYZE'],
-        whitelist: ['Mesh', 'Group'],
         control: null,
       }
     },
@@ -30,7 +28,7 @@
     },
     watch: {
       target(val) {
-        if (val && this.blacklist.indexOf(val.name) < 0 && this.whitelist.indexOf(val.type) >= 0) {
+        if (val) {
           this.setAttach();
         } else {
           this.control.detach();
@@ -59,7 +57,11 @@
     },
     methods: {
       setAttach() {
-        this.control.attach(this.target);
+        try {
+          this.control.attach(this.target);
+        } catch (err) {
+          console.error(err);
+        }
       },
       renderControl() {
         this.control.update();
