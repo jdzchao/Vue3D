@@ -14,7 +14,7 @@
     data() {
       return {
         geometry: new THREE.BoxGeometry(this.x, this.y, this.z),
-        mtl: {}
+        material_: {}
       }
     },
     mounted() {
@@ -26,15 +26,15 @@
           this.setCube(val);
         }
       },
-      mtl(val, oldVal) {
+      material_(val, oldVal) {
         if (oldVal !== val && oldVal !== null) {
+          console.log(1);
           this.setCube(val);
         }
       },
     },
     methods: {
       setCube(mtl) {
-        console.log(1);
         if (this.geometry) {
           this.object3d = new THREE.Mesh(this.geometry, mtl);
         }

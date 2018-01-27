@@ -40,7 +40,6 @@ const Vue3D = {
     Vue.component('w-ray-cast', WRayCast);
     Vue.component('w-sky-box', WSkyBox);
     Vue.component('w-transform-controls', WTransformControls);
-    Vue.component('w-animation', WAnimation);
     Vue.component('x-box-geometry', XBoxGeometry);
     Vue.component('x-camera', XCamera);
     Vue.component('x-light', XLight);

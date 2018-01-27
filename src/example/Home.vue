@@ -10,7 +10,8 @@
       </x-camera>
       <w-grid-helper></w-grid-helper>
       <x-box-geometry :material="material">
-        <y-phong-material></y-phong-material>
+        <y-material-phong></y-material-phong>
+        <y-material-basic></y-material-basic>
       </x-box-geometry>
       <!--<x-obj-loader :path="obj" :material="material"></x-obj-loader>-->
       <w-transform-controls :target="target"></w-transform-controls>
@@ -31,11 +32,9 @@
   import XCamera from "../../Vue3D/packages/XCamera/XCamera"
   import Materials from "../../Vue3D/packages/Materials"
   import WBoxHelper from "../../Vue3D/packages/WBoxHelper/WBoxHelper";
-  import YPhongMaterial from "../../Vue3D/packages/YPhongMaterial/YPhongMaterial";
 
   export default {
     components: {
-      YPhongMaterial,
       WBoxHelper,
       VScene,
       WOrbitControls,

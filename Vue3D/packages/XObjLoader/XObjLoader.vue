@@ -14,7 +14,7 @@
     data() {
       return {
         manager: new THREE.LoadingManager(),
-        mtl: {}
+        _material: {}
       }
     },
     mounted() {
@@ -32,7 +32,7 @@
           this.setMaterial(val);
         }
       },
-      mtl(val, oldVal) {
+      _material(val, oldVal) {
         if (oldVal !== val && oldVal !== null) {
           this.setMaterial(val);
         }
