@@ -1,11 +1,11 @@
-import Home from '../example/Home'
-
-export default {
-  routes: [
-    {
-      path: '/',
-      name: 'Home',
-      component: Home
-    },
-  ]
-}
+export default [
+  {
+    path: '/example',
+    redirect: '/example/dev'
+  },
+  {
+    path: '/example/dev',
+    name: 'example/dev',
+    component: () => import(/* webpackChunkName: "example" */'../pages/example/Dev.vue'),
+  }
+]

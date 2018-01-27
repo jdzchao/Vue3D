@@ -20,18 +20,18 @@
 </template>
 <script>
   import {mapState} from 'vuex'
-  import VScene from "../../Vue3D/packages/VScene/VScene"
-  import WOrbitControls from '../../Vue3D/packages/WOrbitControls/WOrbitControls'
-  import WRayCast from "../../Vue3D/packages/WRayCast/WRayCast";
-  import WSkyBox from "../../Vue3D/packages/WSkyBox/WSkyBox";
-  import WGridHelper from "../../Vue3D/packages/WGridHelper/WGridHelper";
-  import WTransformControls from "../../Vue3D/packages/WTransformControls/WTransformControls";
-  import XLight from "../../Vue3D/packages/XLight/XLight"
-  import XBoxGeometry from "../../Vue3D/packages/XBoxGeometry/index"
-  import XCamera from "../../Vue3D/packages/XCamera/XCamera"
-  import Materials from "../../Vue3D/packages/Materials"
-  import WBoxHelper from "../../Vue3D/packages/WBoxHelper/WBoxHelper";
-  import YMaterialPhong from "../../Vue3D/packages/YMaterialPhong/YMaterialPhong";
+  import VScene from "../../../Vue3D/packages/VScene/VScene"
+  import WOrbitControls from '../../../Vue3D/packages/WOrbitControls/WOrbitControls'
+  import WRayCast from "../../../Vue3D/packages/WRayCast/WRayCast";
+  import WSkyBox from "../../../Vue3D/packages/WSkyBox/WSkyBox";
+  import WGridHelper from "../../../Vue3D/packages/WGridHelper/WGridHelper";
+  import WTransformControls from "../../../Vue3D/packages/WTransformControls/WTransformControls";
+  import XLight from "../../../Vue3D/packages/XLight/XLight"
+  import XBoxGeometry from "../../../Vue3D/packages/XBoxGeometry/index"
+  import XCamera from "../../../Vue3D/packages/XCamera/XCamera"
+  import Materials from "../../../Vue3D/packages/Materials"
+  import WBoxHelper from "../../../Vue3D/packages/WBoxHelper/WBoxHelper";
+  import YMaterialPhong from "../../../Vue3D/packages/YMaterialPhong/YMaterialPhong";
 
   export default {
     components: {
