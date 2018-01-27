@@ -1,8 +1,3 @@
-<template>
-  <object name="XLight" style="display:none;">
-    <slot v-if="slot"></slot>
-  </object>
-</template>
 <script>
   const THREE = require('three');
   import XMixin from '../_mixins/XMixin'

@@ -1,7 +1,3 @@
-<template>
-  <object name="WTransformControls" style="display:none;"></object>
-</template>
-
 <script>
   const THREE = require('three');
   THREE.TransformControls = require('imports-loader?THREE=three!exports-loader?THREE.TransformControls!./TransformControls');

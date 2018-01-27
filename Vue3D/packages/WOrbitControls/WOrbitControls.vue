@@ -1,6 +1,3 @@
-<template>
-  <object name="WOrbitControls" style="display:none;"></object>
-</template>
 <script>
   const THREE = require('three');
   THREE.OrbitControls = require('imports-loader?THREE=three!exports-loader?THREE.OrbitControls!./OrbitControls');

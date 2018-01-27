@@ -4,7 +4,6 @@ import WOrbitControls from './packages/WOrbitControls'
 import WRayCast from './packages/WRayCast'
 import WSkyBox from './packages/WSkyBox'
 import WTransformControls from './packages/WTransformControls'
-import WAnimation from './packages/WAnimation'
 import XBoxGeometry from './packages/XBoxGeometry'
 import XCamera from './packages/XCamera'
 import XLight from './packages/XLight'
@@ -20,7 +19,6 @@ export {
   WRayCast,
   WSkyBox,
   WTransformControls,
-  WAnimation,
   XBoxGeometry,
   XCamera,
   XLight,

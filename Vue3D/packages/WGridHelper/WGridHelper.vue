@@ -1,7 +1,3 @@
-<template>
-  <object name="WGridHelper" style="display:none;"></object>
-</template>
-
 <script>
   const THREE = require('three');
   import WMixin from '../_mixins/WMixin'

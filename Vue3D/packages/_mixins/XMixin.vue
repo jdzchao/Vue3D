@@ -1,4 +1,8 @@
-<template></template>
+<template>
+  <object :name="$options.name" style="display:none;">
+    <slot v-if="slot"></slot>
+  </object>
+</template>
 <script>
   export default {
     name: "x-mixin",
@@ -28,7 +32,7 @@
           this.remove3d(oldVal);
           this.slotOut();
         }
-        this.add3d(val);
+        this.addObject3d(val);
         this.slotIn();
         this.render();
       },
@@ -51,7 +55,7 @@
       slotOut() {
         this.slot = false;
       },
-      add3d(object3d) {
+      addObject3d(object3d) {
         if (this.node.hasOwnProperty('object3d')) {
           this.node.object3d.add(object3d);
         } else {
