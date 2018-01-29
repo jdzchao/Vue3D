@@ -28,12 +28,12 @@
         this.setMaterial();
       },
       material(val, oldVal) {
-        if (oldVal !== val && oldVal !== null) {
+        if (val && oldVal !== val) {
           this.setMaterial(val);
         }
       },
       _material(val, oldVal) {
-        if (oldVal !== val && oldVal !== null) {
+        if (val && oldVal !== val) {
           this.setMaterial(val);
         }
       },
