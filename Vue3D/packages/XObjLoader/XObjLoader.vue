@@ -25,7 +25,7 @@
         this.loadObj(val);
       },
       object3d(val, oldVal) {
-        this.setMaterial();
+        this.setMaterial(this.material);
       },
       material(val, oldVal) {
         if (val && oldVal !== val) {
