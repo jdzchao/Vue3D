@@ -10,6 +10,8 @@
       min: {type: Number, default: 10},
       max: {type: Number, default: 500},
       enable: {type: Boolean, default: true},
+      enableKeys: {type: Boolean, default: false},
+      autoRotate: {type: Boolean, default: false},
     },
     data() {
       return {
@@ -23,11 +25,19 @@
       this.control.minDistance = this.min;
       this.control.maxDistance = this.max;
       this.control.enabled = this.enable;
+      this.control.enableKeys = this.enableKeys;
+      this.control.autoRotate = this.autoRotate;
       this.root.rendererDelegationAdd(this.updateControls);
     },
     watch: {
       enable(val) {
         this.control.enabled = this.enable;
+      },
+      enableKeys(val) {
+        this.control.enableKeys = this.enableKeys;
+      },
+      autoRotate(val) {
+        this.control.autoRotate = this.autoRotate;
       }
     },
     methods: {
