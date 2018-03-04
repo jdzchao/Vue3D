@@ -1,4 +1,5 @@
 import VScene from './packages/VScene'
+import WBoxHelper from './packages/WBoxHelper'
 import WGridHelper from './packages/WGridHelper'
 import WOrbitControls from './packages/WOrbitControls'
 import WRayCast from './packages/WRayCast'
@@ -14,6 +15,7 @@ import Utils from './packages/Utils'
 
 export {
   VScene,
+  WBoxHelper,
   WGridHelper,
   WOrbitControls,
   WRayCast,
@@ -35,6 +37,7 @@ const Vue3D = {
   install: function (Vue, options) {
     Vue.prototype.$vue3d = $vue3d;
     Vue.component('v-scene', VScene);
+    Vue.component('v-box-helper', WBoxHelper);
     Vue.component('w-grid-helper', WGridHelper);
     Vue.component('w-orbit-controls', WOrbitControls);
     Vue.component('w-ray-cast', WRayCast);
