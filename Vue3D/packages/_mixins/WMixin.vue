@@ -1,4 +1,6 @@
-<template></template>
+<template>
+  <object :name="$options.name" style="display:none;"></object>
+</template>
 
 <script>
   export default {

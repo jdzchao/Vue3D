@@ -1,8 +1,3 @@
-<template>
-  <object name="XBoxGeometry" style="display:none;">
-    <slot v-if="slot"></slot>
-  </object>
-</template>
 <script>
   const THREE = require('three');
   import XMixin from '../_mixins/XMixin'
@@ -19,6 +14,7 @@
     data() {
       return {
         geometry: new THREE.BoxGeometry(this.x, this.y, this.z),
+        material_: {}
       }
     },
     mounted() {
@@ -27,14 +23,20 @@
     watch: {
       material(val, oldVal) {
         if (oldVal !== val && oldVal !== null) {
-          this.setCube();
+          this.setCube(val);
         }
-      }
+      },
+      material_(val, oldVal) {
+        if (oldVal !== val && oldVal !== null) {
+          console.log(1);
+          this.setCube(val);
+        }
+      },
     },
     methods: {
-      setCube() {
+      setCube(mtl) {
         if (this.geometry) {
-          this.object3d = new THREE.Mesh(this.geometry, this.material);
+          this.object3d = new THREE.Mesh(this.geometry, mtl);
         }
       }
     }

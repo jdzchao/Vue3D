@@ -1,7 +1,3 @@
-<template>
-  <object name="WTransformControls" style="display:none;"></object>
-</template>
-
 <script>
   const THREE = require('three');
   THREE.TransformControls = require('imports-loader?THREE=three!exports-loader?THREE.TransformControls!./TransformControls');
@@ -11,14 +7,13 @@
     name: "w-transform-controls",
     mixins: [WMixin],
     props: {
-      mesh: {type: Object},
+      target: {type: Object},
       mode: {type: String, default: 'position'},
       space: {type: String, default: 'world'},
       size: {type: Number, default: 1},
     },
     data() {
       return {
-        blacklist: ['XY', 'XZ', 'YZ', 'XYZE'],
         control: null,
       }
     },
@@ -28,8 +23,8 @@
       this.root.scene.add(this.control);
     },
     watch: {
-      mesh(val) {
-        if (val && val.type === 'Mesh' && this.blacklist.indexOf(val.name) < 0) {
+      target(val) {
+        if (val) {
           this.setAttach();
         } else {
           this.control.detach();
@@ -58,7 +53,11 @@
     },
     methods: {
       setAttach() {
-        this.control.attach(this.mesh);
+        try {
+          this.control.attach(this.target);
+        } catch (err) {
+          console.error(err);
+        }
       },
       renderControl() {
         this.control.update();

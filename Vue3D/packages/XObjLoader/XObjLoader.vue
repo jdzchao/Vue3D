@@ -1,8 +1,3 @@
-<template>
-  <object name="XObjLoader" style="display:none">
-    <slot v-if="slot"></slot>
-  </object>
-</template>
 <script>
   const THREE = require('three');
   THREE.OBJLoader = require('imports-loader?THREE=three!exports-loader?THREE.OBJLoader!./OBJLoader');
@@ -19,6 +14,7 @@
     data() {
       return {
         manager: new THREE.LoadingManager(),
+        material__: {}
       }
     },
     mounted() {
@@ -29,13 +25,18 @@
         this.loadObj(val);
       },
       object3d(val, oldVal) {
-        this.setMaterial();
+        this.setMaterial(this.material);
       },
       material(val, oldVal) {
-        if (oldVal !== val && oldVal !== null) {
-          this.setMaterial();
+        if (val && oldVal !== val) {
+          this.setMaterial(val);
         }
-      }
+      },
+      material__(val, oldVal) {
+        if (val && oldVal !== val) {
+          this.setMaterial(val);
+        }
+      },
     },
     methods: {
       loadObj(path) {
@@ -51,11 +52,11 @@
           this.error(err);
         });
       },
-      setMaterial() {
-        if (this.object3d && this.material) {
+      setMaterial(mtl) {
+        if (this.object3d && mtl) {
           this.object3d.traverse(function (child) {
             if (child.type === 'Mesh' && (child.parent === this.node || child.parent === this.object3d)) {
-              child.material = this.material;
+              child.material = mtl;
             }
           }.bind(this));
           this.root.render();
