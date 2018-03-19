@@ -17,7 +17,7 @@
     "exports-loader": "^0.6.4",
     "imports-loader": "^0.7.1",
     "js-base64": "^2.4.0",
-    "three": "^0.89.0",
+    "three": "^0.91.0",
     "vconsole": "^3.1.0",
     "vue": "^2.5.13",
     "vue-i18n": "5.0.3",

@@ -18,7 +18,7 @@
       }
     },
     mounted() {
-      this.setCube();
+      this.setCube(this.material);
     },
     watch: {
       material(val, oldVal) {
