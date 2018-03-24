@@ -22,6 +22,10 @@
           break;
         case 'RectArea':
           this.object3d = new THREE.RectAreaLight(this.color, this.intensity, this.width, this.height);
+          let rectLightHelper = new THREE.RectAreaLightHelper(this.object3d);
+          this.object3d.position.set(0, 0, 100);
+          this.object3d.lookAt(0, 0, 0);
+          this.root.scene.add(rectLightHelper);
           break;
       }
     }

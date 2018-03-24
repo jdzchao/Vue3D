@@ -6,7 +6,8 @@
       <!--<w-sky-box path="../../../static/images/"></w-sky-box>-->
       <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
       <x-camera :width="width" :height="height" :far="2000" @update="updateCamera">
-        <x-light ref="light" :type="'RectArea'" :intensity="1" :color="'rgb(255,255,255)'"></x-light>
+        <x-light ref="light" :type="'Directional'" :intensity="1" :color="'rgb(255,0,255)'"></x-light>
+        <!--<x-light ref="light" :type="'RectArea'" :intensity="1" :color="'rgb(255,255,255)'"></x-light>-->
       </x-camera>
       <w-grid-helper></w-grid-helper>
       <x-box-geometry :material="material"></x-box-geometry>
