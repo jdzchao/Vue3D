@@ -18,8 +18,12 @@
       }
     },
     created() {
-      this.root.dom.addEventListener('mousedown', this.charge, false);
-      this.root.dom.addEventListener('touchstart', this.charge, false);
+      let supportTouch = "ontouchend" in document;
+      if (supportTouch) {
+        this.root.dom.addEventListener('touchstart', this.charge, false);
+      } else {
+        this.root.dom.addEventListener('mousedown', this.charge, false);
+      }
       if (this.near) {
         this.raycaster.near = this.near;
       }
@@ -61,6 +65,7 @@
         this.charged = false;
       },
       charge() {
+        if (this.charged) return;
         this.charged = true;
         this.root.dom.addEventListener('mousemove', this.leakage, false);
         this.root.dom.addEventListener('mouseup', this.mouseCaster, false);
