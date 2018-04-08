@@ -1,3 +1,8 @@
+<template>
+  <object :name="$options.name" style="display:none;" :aspect="aspect">
+    <slot v-if="slot"></slot>
+  </object>
+</template>
 <script>
   const THREE = require('three');
   import XMixin from '../_mixins/XMixin'
@@ -7,8 +12,8 @@
     mixins: [XMixin],
     props: {
       type: {type: String, default: 'Perspective'},
-      width: Number,
-      height: Number,
+      width: {type: Number, default: 100},
+      height: {type: Number, default: 100},
       near: {type: Number, default: 1},
       far: {type: Number, default: 1000},
       dis: {type: Number, default: 100},
