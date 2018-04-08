@@ -15,11 +15,11 @@
         point: new THREE.Vector2(),
         target: [],
         charged: false,
+        supportTouch: "ontouchend" in document
       }
     },
     created() {
-      let supportTouch = "ontouchend" in document;
-      if (supportTouch) {
+      if (this.supportTouch) {
         this.root.dom.addEventListener('touchstart', this.charge, false);
       } else {
         this.root.dom.addEventListener('mousedown', this.charge, false);
@@ -67,12 +67,19 @@
       charge() {
         if (this.charged) return;
         this.charged = true;
-        this.root.dom.addEventListener('mousemove', this.leakage, false);
-        this.root.dom.addEventListener('mouseup', this.mouseCaster, false);
-        this.root.dom.addEventListener('touchmove', this.leakage, false);
-        this.root.dom.addEventListener('touchend', this.touchCaster, false);
+        if (this.supportTouch) {
+          this.root.dom.addEventListener('touchmove', this.leakage, false);
+          this.root.dom.addEventListener('touchend', this.touchCaster, false);
+        } else {
+          this.root.dom.addEventListener('mousemove', this.leakage, false);
+          this.root.dom.addEventListener('mouseup', this.mouseCaster, false);
+        }
       },
       leakage(event) {
+        if (event.type === "touchmove") {
+          this.charged = false;
+          return;
+        }
         if (Math.abs(event.movementX) > 3 || Math.abs(event.movementY) > 3) {
           this.charged = false;
         }
