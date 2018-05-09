@@ -3,4 +3,6 @@ export default {
   rem: 0, // 1rem的像素值
   width: 0, // 宽度
   height: 0, // 高度
+
+  isCollapse: false
 }

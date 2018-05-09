@@ -13,6 +13,7 @@ let routes = [
     alias: '/index',
     name: 'index',
     component: () => import(/* webpackChunkName: "home" */'../pages/Index.vue'),
+    meta: {activeTab: 'index'}
   },
   {
     path: '*',

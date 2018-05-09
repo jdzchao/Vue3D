@@ -23,7 +23,15 @@
     data() {
       return {
         isCollapse: false,
-        activeTab: "index"
+        activeTab: ''
+      }
+    },
+    watch: {
+      $route(val) {
+        this.activeTab = this.$route.meta.activeTab;
+      },
+      isCollapse(val) {
+        this.$store.state.isCollapse = val;
       }
     },
     methods: {

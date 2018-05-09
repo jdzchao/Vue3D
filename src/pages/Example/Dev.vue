@@ -1,5 +1,5 @@
 <template>
-  <div id="Home">
+  <div id="Dev">
     <v-scene :width="width" :height="height">
       <w-orbit-controls></w-orbit-controls>
       <!--<w-sky-box path="../../../static/images/"></w-sky-box>-->
