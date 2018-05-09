@@ -2,27 +2,26 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import http from './http'
 import i18n from './i18n' // load i18n
 import './utils'
+
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
 // load css
 import 'animate.css'
 
 i18n.SetLocale('zhcn');
 
+Vue.use(ElementUI);
+
+/* Config */
 Vue.config.productionTip = false;
 
-Vue.prototype.$http = http;
-// import Vue3D from '../Vue3D'
-//
-// Vue.use(Vue3D);
-
-const vue = new Vue({
+window.vue = new Vue({
   router,
   store,
   template: '<App/>',
   components: {App}
 });
-http.complete(() => {
-  vue.$mount("#app");
-});
+vue.$mount("#app");

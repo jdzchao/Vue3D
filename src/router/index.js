@@ -10,12 +10,9 @@ Vue.use(Router);
 let routes = [
   {
     path: '/',
-    redirect: '/home'
-  },
-  {
-    path: '/home',
-    name: 'home',
-    component: () => import(/* webpackChunkName: "home" */'../pages/Home.vue'),
+    alias: '/index',
+    name: 'index',
+    component: () => import(/* webpackChunkName: "home" */'../pages/Index.vue'),
   },
   {
     path: '*',

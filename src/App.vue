@@ -1,13 +1,16 @@
 <template>
   <div id="app">
+    <p-header></p-header>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+  import PHeader from "./components/page/PHeader";
 
   export default {
     name: 'app',
+    components: {PHeader},
     created() {
       this.$store.dispatch('windowResize');
       window.addEventListener("resize", () => {
@@ -31,12 +34,5 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
-  }
-
-  .animated {
-    -webkit-animation-duration: 0.5s;
-    animation-duration: 0.5s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
   }
 </style>
