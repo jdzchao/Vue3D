@@ -1,7 +1,6 @@
 <template>
   <div id="Home">
     <v-scene :width="width" :height="height">
-      <w-ray-cast @cast="raycast"></w-ray-cast>
       <w-orbit-controls></w-orbit-controls>
       <!--<w-sky-box path="../../../static/images/"></w-sky-box>-->
       <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
@@ -9,10 +8,8 @@
         <x-light ref="light" :type="'Directional'" :intensity="1" :color="'rgb(255,0,255)'"></x-light>
         <!--<x-light ref="light" :type="'RectArea'" :intensity="1" :color="'rgb(255,255,255)'"></x-light>-->
       </x-camera>
-      <w-grid-helper></w-grid-helper>
       <x-box-geometry :material="material"></x-box-geometry>
       <!--<x-obj-loader :path="obj" :material="material"></x-obj-loader>-->
-      <w-transform-controls :target="target"></w-transform-controls>
       <w-box-helper color="rgb(255,0,0)" :target="target"></w-box-helper>
     </v-scene>
   </div>
