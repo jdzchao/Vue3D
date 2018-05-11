@@ -1,16 +1,11 @@
 <template>
   <div id="header">
     <div class="logo">Vue3D</div>
-    <div class="collapse">
-      <el-radio-group v-model="isCollapse" size="mini">
-        <el-radio-button :label="false"><i class="el-icon-menu"></i></el-radio-button>
-        <el-radio-button :label="true"><i class="el-icon-more"></i></el-radio-button>
-      </el-radio-group>
-    </div>
     <div class="link">
       <el-tabs v-model="activeTab" @tab-click="changeTab">
         <el-tab-pane label="首页" name="index"></el-tab-pane>
         <el-tab-pane label="示例" name="example"></el-tab-pane>
+        <el-tab-pane label="文档" name="doc"></el-tab-pane>
         <el-tab-pane label="编辑器" name="editor"></el-tab-pane>
       </el-tabs>
     </div>
@@ -22,17 +17,14 @@
     name: "PHeader",
     data() {
       return {
-        isCollapse: false,
         activeTab: ''
       }
     },
     watch: {
       $route(val) {
         this.activeTab = this.$route.meta.activeTab;
+        this.$store.state.activeTab = this.activeTab;
       },
-      isCollapse(val) {
-        this.$store.state.isCollapse = val;
-      }
     },
     methods: {
       changeTab() {
@@ -50,6 +42,7 @@
     color: #ffffff;
     line-height: 60px;
     padding: 0 20px;
+    overflow: hidden;
   }
 
   .logo {

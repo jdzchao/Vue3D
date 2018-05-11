@@ -1,16 +1,17 @@
 <template>
   <div id="app">
     <p-header></p-header>
-    <router-view></router-view>
+    <p-content></p-content>
   </div>
 </template>
 
 <script>
   import PHeader from "./components/page/PHeader";
+  import PContent from "./components/page/PContent";
 
   export default {
     name: 'app',
-    components: {PHeader},
+    components: {PContent, PHeader},
     created() {
       this.$store.dispatch('windowResize');
       window.addEventListener("resize", () => {

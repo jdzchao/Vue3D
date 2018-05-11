@@ -1,19 +1,19 @@
 <template>
-  <div class="light">
-    light
+  <div id="content">
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
   export default {
-    name: "Light"
+    name: "PContent"
   }
 </script>
 
 <style scoped>
-  .light {
+  #content {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 60px);
   }
 </style>

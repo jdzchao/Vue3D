@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import PageNotFound from '../pages/PageNotFound'
-import editor from './editor'
+
 import example from './example'
+import doc from './doc'
+import editor from './editor'
 
 Vue.use(Router);
 
-// import admin from './admin'
 let routes = [
   {
     path: '/',
@@ -22,7 +23,8 @@ let routes = [
   }
 ];
 
-routes.push(...editor);
 routes.push(...example);
+routes.push(...editor);
+routes.push(...doc);
 
 export default new Router({routes});

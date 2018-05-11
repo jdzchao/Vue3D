@@ -4,5 +4,7 @@ export default {
   width: 0, // 宽度
   height: 0, // 高度
 
-  isCollapse: false
+  isCollapse: false, // 是否折叠
+  activeTab: 'index', // 当前访问的标签导航
+  activeMenu: '', // 当前访问的菜单
 }
