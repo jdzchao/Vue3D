@@ -1,6 +1,6 @@
 <template>
   <div id="Example">
-    <p-menu></p-menu>
+    <p-menu :obj="menu" :default="active"></p-menu>
     <p-view></p-view>
   </div>
 </template>
@@ -9,10 +9,17 @@
   import {mapState} from 'vuex'
   import PMenu from "../components/page/PMenu";
   import PView from "../components/page/PView";
+  import MenuData from "./Example/menu"
 
   export default {
     name: "Example",
     components: {PView, PMenu},
+    data() {
+      return {
+        menu: MenuData,
+        active: 'z1'
+      }
+    },
     computed: {
       ...mapState(['isCollapse'])
     }

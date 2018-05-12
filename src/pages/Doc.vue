@@ -1,14 +1,24 @@
 <template>
   <div id="doc">
-    <div class="left">asd</div>
-    <div class="right">ddd</div>
-    <div class="hack">ddd</div>
+    <p-menu :obj="menu" :default="active"></p-menu>
+    <p-view></p-view>
   </div>
 </template>
 
 <script>
+  import PView from "../components/page/PView";
+  import PMenu from "../components/page/PMenu";
+  import MenuData from './Doc/menu'
+
   export default {
-    name: "Doc"
+    name: "Doc",
+    data() {
+      return {
+        menu: MenuData,
+        active: '1'
+      }
+    },
+    components: {PMenu, PView}
   }
 </script>
 

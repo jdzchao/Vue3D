@@ -1,6 +1,6 @@
 <template>
   <div id="header">
-    <div class="logo">Vue3D</div>
+    <div class="logo"><span style="color:#41B883;">Vue</span>3D<span style="color:#41B883;"></span></div>
     <div class="link">
       <el-tabs v-model="activeTab" @tab-click="changeTab">
         <el-tab-pane label="首页" name="index"></el-tab-pane>

@@ -1,20 +1,28 @@
 <template>
   <div id="menu">
     <el-menu :default-active="activeMenu" class="el-menu-vertical">
-      <el-menu-item index="2" to="/example/dev">
-        <i class="el-icon-menu"></i>
-        <span slot="title">导航二</span>
-      </el-menu-item>
-
-      <el-menu-item index="3">
-        <i class="el-icon-document"></i>
-        <span slot="title">导航三</span>
-      </el-menu-item>
-
-      <el-menu-item index="4">
-        <i class="el-icon-setting"></i>
-        <span slot="title">导航四</span>
-      </el-menu-item>
+      <template v-for="item in obj">
+        <template v-if="item.sub">
+          <el-submenu :index="item.id">
+            <template slot="title">
+              <i :class="item.icon"></i>
+              <span slot="title">{{item.name}}</span>
+            </template>
+            <template v-for="i in item.sub">
+              <el-menu-item :index="i.id">
+                <i :class="i.icon"></i>
+                <span slot="title">{{i.name}}</span>
+              </el-menu-item>
+            </template>
+          </el-submenu>
+        </template>
+        <template v-else>
+          <el-menu-item :index="item.id">
+            <i :class="item.icon"></i>
+            <span slot="title">{{item.name}}</span>
+          </el-menu-item>
+        </template>
+      </template>
     </el-menu>
   </div>
 </template>
@@ -22,9 +30,13 @@
 <script>
   export default {
     name: "PMenu",
+    props: {
+      obj: {type: Array},
+      default: {type: String}
+    },
     data() {
       return {
-        activeMenu: '4'
+        activeMenu: this.default,
       }
     },
     watch: {
