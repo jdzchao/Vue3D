@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import PageNotFound from '../pages/PageNotFound'
 
 import example from './example'
 import doc from './doc'
@@ -19,7 +18,7 @@ let routes = [
   {
     path: '*',
     name: '404',
-    component: PageNotFound
+    component: () => import('../pages/PageNotFound.vue'),
   }
 ];
 

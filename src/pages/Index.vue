@@ -9,7 +9,7 @@
     name: "index",
     data() {
       return {
-        isCollapse: true
+        
       };
     },
   }
@@ -21,6 +21,4 @@
     height: 100%;
   }
 
-  .el-nav {
-  }
 </style>

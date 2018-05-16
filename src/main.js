@@ -18,10 +18,12 @@ Vue.use(ElementUI);
 /* Config */
 Vue.config.productionTip = false;
 
-window.vue = new Vue({
+window.vm = new Vue({
   router,
   store,
   template: '<App/>',
   components: {App}
 });
-vue.$mount("#app");
+http.complete(() => {
+  vm.$mount("#app");
+});
