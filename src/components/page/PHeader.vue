@@ -2,7 +2,7 @@
   <div id="header">
     <div class="logo"><span style="color:#41B883;">Vue</span>3D<span style="color:#41B883;"></span></div>
     <div class="link">
-      <el-tabs v-model="activeTab" @tab-click="changeTab">
+      <el-tabs v-model="activeNav" @tab-click="changeTab">
         <el-tab-pane label="首页" name="index"></el-tab-pane>
         <el-tab-pane label="示例" name="example"></el-tab-pane>
         <el-tab-pane label="文档" name="doc"></el-tab-pane>
@@ -17,18 +17,18 @@
     name: "PHeader",
     data() {
       return {
-        activeTab: ''
+        activeNav: ''
       }
     },
     watch: {
       $route(val) {
-        this.activeTab = this.$route.meta.activeTab;
-        this.$store.state.activeTab = this.activeTab;
+        this.activeNav = this.$route.meta.activeNav;
+        this.$store.state.activeNav = this.activeNav;
       },
     },
     methods: {
       changeTab() {
-        this.$router.push('/' + this.activeTab);
+        this.$router.push('/' + this.activeNav);
       }
     }
   }

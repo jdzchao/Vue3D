@@ -24,6 +24,4 @@ window.vm = new Vue({
   template: '<App/>',
   components: {App}
 });
-http.complete(() => {
-  vm.$mount("#app");
-});
+vm.$mount("#app");

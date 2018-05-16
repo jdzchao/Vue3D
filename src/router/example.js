@@ -7,13 +7,13 @@ export default [
         path: '/',
         name: 'example',
         component: () => import(/* webpackChunkName: "example" */'../pages/example/Light.vue'),
-        meta: {activeTab: 'example'}
+        meta: {activeNav: 'example'}
       },
       {
         path: '/light',
         name: 'light',
         component: () => import(/* webpackChunkName: "example" */'../pages/example/Light.vue'),
-        meta: {activeTab: 'example'}
+        meta: {activeNav: 'example'}
       },
     ]
   },
