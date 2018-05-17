@@ -1,25 +1,25 @@
 <template>
   <div id="menu">
-    <el-menu :default-active="activeMenu" class="el-menu-vertical">
-      <template v-for="item in obj">
+    <el-menu :default-active="activeMenu" class="el-menu-vertical" router>
+      <template v-for="item in menus">
         <template v-if="item.sub">
           <el-submenu :index="item.id">
             <template slot="title">
-              <i :class="item.icon"></i>
-              <span slot="title">{{item.name}}</span>
+              <i class="iconfont" :class="item.icon"></i>
+              <span slot="title">{{item.title}}</span>
             </template>
             <template v-for="i in item.sub">
-              <el-menu-item :index="i.id">
-                <i :class="i.icon"></i>
-                <span slot="title">{{i.name}}</span>
+              <el-menu-item :index="i.id" :route="i.route">
+                <i class="iconfont" :class="i.icon"></i>
+                <span slot="title">{{i.title}}</span>
               </el-menu-item>
             </template>
           </el-submenu>
         </template>
         <template v-else>
-          <el-menu-item :index="item.id">
-            <i :class="item.icon"></i>
-            <span slot="title">{{item.name}}</span>
+          <el-menu-item :index="item.id" :route="item.route">
+            <i class="iconfont" :class="item.icon"></i>
+            <span slot="title">{{item.title}}</span>
           </el-menu-item>
         </template>
       </template>
@@ -28,21 +28,15 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex'
+
   export default {
     name: "PMenu",
     props: {
-      obj: {type: Array},
-      default: {type: String}
+      menus: {type: Array},
     },
-    data() {
-      return {
-        activeMenu: this.default,
-      }
-    },
-    watch: {
-      activeMenu(val) {
-        this.$store.state.activeMenu = val;
-      }
+    computed: {
+      ...mapState(['activeMenu'])
     }
   }
 </script>

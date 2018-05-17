@@ -1,6 +1,6 @@
 <template>
   <div id="Example">
-    <p-menu :obj="menu" :default="active"></p-menu>
+    <p-menu :menus="menus"></p-menu>
     <p-view></p-view>
   </div>
 </template>
@@ -9,15 +9,14 @@
   import {mapState} from 'vuex'
   import PMenu from "../components/page/PMenu";
   import PView from "../components/page/PView";
-  import MenuData from "./Example/menu"
+  import MenuData from "./Example/config"
 
   export default {
     name: "Example",
     components: {PView, PMenu},
     data() {
       return {
-        menu: MenuData,
-        active: 'z1'
+        menus: MenuData,
       }
     },
     computed: {

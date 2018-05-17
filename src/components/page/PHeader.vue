@@ -2,33 +2,27 @@
   <div id="header">
     <div class="logo"><span style="color:#41B883;">Vue</span>3D<span style="color:#41B883;"></span></div>
     <div class="link">
-      <el-tabs v-model="activeNav" @tab-click="changeTab">
-        <el-tab-pane label="首页" name="index"></el-tab-pane>
-        <el-tab-pane label="示例" name="example"></el-tab-pane>
-        <el-tab-pane label="文档" name="doc"></el-tab-pane>
-        <el-tab-pane label="编辑器" name="editor"></el-tab-pane>
-      </el-tabs>
+      <template v-for="item in items">
+        <div class="nav" @click="changeTab(item.route)" :class="{active:activeNav===item.id}">{{item.title}}</div>
+      </template>
     </div>
   </div>
 </template>
 
 <script>
+  import {mapState} from 'vuex'
+
   export default {
     name: "PHeader",
-    data() {
-      return {
-        activeNav: ''
-      }
+    props: {
+      items: {type: Array}
     },
-    watch: {
-      $route(val) {
-        this.activeNav = this.$route.meta.activeNav;
-        this.$store.state.activeNav = this.activeNav;
-      },
+    computed: {
+      ...mapState(['activeNav'])
     },
     methods: {
-      changeTab() {
-        this.$router.push('/' + this.activeNav);
+      changeTab(obj) {
+        this.$router.push(obj);
       }
     }
   }
@@ -50,6 +44,7 @@
     float: left;
     font-size: 30px;
     text-align: center;
+    cursor: pointer;
   }
 
   .collapse {
@@ -61,31 +56,30 @@
     color: #ffffff;
   }
 
-</style>
-<style>
-  .el-tabs__nav-wrap::after {
-    background-color: #545c64;
+  .nav {
+    position: relative;
+    float: left;
+    padding: 0 20px;
+    cursor: pointer;
   }
 
-  .el-tabs__item {
-    color: #ffffff;
+  .nav.active {
+    color: #ffd04b
   }
 
-  .el-tabs__item.is-active {
+  .nav.active:after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-bottom: 3px solid #ffd04b;
     color: #ffd04b;
-  }
-
-  .el-tabs__item:hover {
-    color: #ffd04b;
-  }
-
-  .el-tabs__active-bar {
-    background-color: #ffd04b;
-  }
-
-  .el-radio-button__orig-radio:checked + .el-radio-button__inner {
-    background-color: #ffd04b;
-    border-color: #ffd04b;
-    box-shadow: -1px 0 0 0 #ffd04b;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    z-index: 5;
   }
 </style>
+

@@ -1,6 +1,6 @@
 <template>
   <div id="index">
-    首页
+
   </div>
 </template>
 
@@ -8,15 +8,15 @@
   export default {
     name: "index",
     data() {
-      return {
+      return {};
         
-      };
     },
   }
 </script>
 
 <style scoped>
   #index {
+    position: relative;
     width: 100%;
     height: 100%;
   }

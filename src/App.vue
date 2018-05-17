@@ -1,22 +1,34 @@
 <template>
   <div id="app">
-    <p-header></p-header>
+    <p-header :items="navData"></p-header>
     <p-content></p-content>
   </div>
 </template>
 
 <script>
+  import {nav} from './config'
   import PHeader from "./components/page/PHeader";
   import PContent from "./components/page/PContent";
 
   export default {
     name: 'app',
     components: {PContent, PHeader},
+    data() {
+      return {
+        navData: nav,
+      }
+    },
     created() {
       this.$store.dispatch('windowResize');
       window.addEventListener("resize", () => {
         this.$store.dispatch('windowResize');
       });
+    },
+    watch: {
+      $route(val) {
+        this.$store.state.activeNav = this.$route.meta.activeNav;
+        this.$store.state.activeMenu = this.$route.meta.activeMenu;
+      },
     }
   }
 </script>

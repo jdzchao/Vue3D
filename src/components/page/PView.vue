@@ -13,11 +13,12 @@
 <style scoped>
   #view {
     float: left;
-    width: calc(100% - 200px);
-    height: 100%;
+    width: calc(100% - 220px);
+    height: calc(100% - 20px);
     overflow-y: scroll;
     overflow-x: hidden;
     background-color: #f5f5f5;
+    padding: 10px;
   }
 
   #view::-webkit-scrollbar-track {

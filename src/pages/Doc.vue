@@ -1,6 +1,6 @@
 <template>
   <div id="doc">
-    <p-menu :obj="menu" :default="active"></p-menu>
+    <p-menu :menus="menus"></p-menu>
     <p-view></p-view>
   </div>
 </template>
@@ -8,14 +8,13 @@
 <script>
   import PView from "../components/page/PView";
   import PMenu from "../components/page/PMenu";
-  import MenuData from './Doc/menu'
+  import MenuData from './Doc/config'
 
   export default {
     name: "Doc",
     data() {
       return {
-        menu: MenuData,
-        active: '1'
+        menus: MenuData,
       }
     },
     components: {PMenu, PView}
