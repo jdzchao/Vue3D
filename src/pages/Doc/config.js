@@ -1,8 +1,8 @@
 export default [
   {
-    id: 'install',
+    id: 'start',
     title: '安装与上手',
-    icon: 'el-icon-menu',
-    path: ''
+    icon: 'vue3d-start',
+    route: '/doc/start'
   },
 ]

@@ -1,8 +1,15 @@
 export default [
   {
     path: '/doc',
-    name: 'doc',
     component: () => import(/* webpackChunkName: "doc" */'../pages/Doc.vue'),
-    meta: {activeNav: 'doc'}
+    children: [
+      {
+        path: '/',
+        alias: 'start',
+        name: 'start',
+        component: () => import(/* webpackChunkName: "example" */'../pages/doc/Start.vue'),
+        meta: {activeNav: 'doc', activeMenu: 'start'}
+      }
+    ]
   },
 ]
