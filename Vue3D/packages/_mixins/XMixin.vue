@@ -1,6 +1,8 @@
 <template>
   <object :name="$options.name" style="display:none;">
-    <slot v-if="slot"></slot>
+    <template v-if="slot">
+      <slot></slot>
+    </template>
   </object>
 </template>
 <script>

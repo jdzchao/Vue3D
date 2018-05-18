@@ -1,6 +1,6 @@
 export default {
-  width: 0, // 宽度
-  height: 0, // 高度
+  vWidth: 0, // viewport width
+  vHeight: 0, // viewport height
 
   activeNav: 'index', // 当前访问的标签导航
   activeMenu: '', // 当前访问的菜单

@@ -2,54 +2,18 @@ export default [
   {
     id: 'scene',
     title: '场景',
-    icon: 'el-icon-menu',
-    path: ''
+    icon: 'vue3d-scene',
+    route: '/example/scene'
   },
   {
-    id: 'w',
-    title: '功能组件',
-    icon: 'el-icon-menu',
-    sub: [
-      {
-        id: '菜单1',
-        title: 'Vue3D',
-        path: ''
-      }
-    ]
-  },
-  {
-    id: 'x',
+    id: 'geometry',
     title: '三维对象',
-    icon: 'el-icon-menu',
+    icon: 'vue3d-geometry',
     sub: [
       {
-        id: 'x1',
-        title: 'x1',
-        path: ''
-      }
-    ]
-  },
-  {
-    id: 'y',
-    title: '显示组件',
-    icon: 'el-icon-menu',
-    sub: [
-      {
-        id: 'y1',
-        title: 'y1',
-        path: ''
-      }
-    ]
-  },
-  {
-    id: 'z',
-    title: '其他组件',
-    icon: 'el-icon-menu',
-    sub: [
-      {
-        id: 'z1',
-        title: 'z1',
-        path: ''
+        id: 'cube',
+        title: 'Cube',
+        route: '/example/cube'
       }
     ]
   },

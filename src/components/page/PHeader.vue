@@ -1,6 +1,6 @@
 <template>
   <div id="header">
-    <div class="logo"><span style="color:#41B883;">Vue</span>3D<span style="color:#41B883;"></span></div>
+    <v-logo class="logo"></v-logo>
     <div class="link">
       <template v-for="item in items">
         <div class="nav" @click="changeTab(item.route)" :class="{active:activeNav===item.id}">{{item.title}}</div>
@@ -11,9 +11,11 @@
 
 <script>
   import {mapState} from 'vuex'
+  import VLogo from "../VLogo";
 
   export default {
     name: "PHeader",
+    components: {VLogo},
     props: {
       items: {type: Array}
     },
@@ -40,15 +42,8 @@
   }
 
   .logo {
-    width: 150px;
     float: left;
-    font-size: 30px;
-    text-align: center;
     cursor: pointer;
-  }
-
-  .collapse {
-    float: left;
   }
 
   .link {

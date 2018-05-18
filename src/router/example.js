@@ -5,12 +5,13 @@ export default [
     children: [
       {
         path: '/',
-        name: 'example',
-        component: () => import(/* webpackChunkName: "example" */'../pages/example/Light.vue'),
-        meta: {activeNav: 'example'}
+        alias: 'scene',
+        name: 'scene',
+        component: () => import(/* webpackChunkName: "example" */'../pages/example/Scene.vue'),
+        meta: {activeNav: 'example', activeMenu: 'scene'}
       },
       {
-        path: '/light',
+        path: 'light',
         name: 'light',
         component: () => import(/* webpackChunkName: "example" */'../pages/example/Light.vue'),
         meta: {activeNav: 'example'}
