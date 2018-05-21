@@ -1,23 +1,20 @@
 <template>
   <div id="editor">
-    <editor-header></editor-header>
-    <editor-viewport :width="width" :height="height"></editor-viewport>
+    <editor-menu></editor-menu>
+    <editor-viewport></editor-viewport>
     <editor-tools></editor-tools>
-    <editor-footer></editor-footer>
   </div>
 </template>
 
 <script>
-  import EditorHeader from "../editor/layout/EditorHeader";
+  import EditorMenu from "../editor/layout/EditorMenu";
   import EditorViewport from "../editor/layout/EditorViewport";
   import EditorTools from "../editor/layout/EditorTools";
-  import EditorFooter from "../editor/layout/EditorFooter";
 
   export default {
     components: {
-      EditorFooter,
       EditorTools,
-      EditorHeader,
+      EditorMenu,
       EditorViewport,
     },
     name: "editor",
@@ -29,9 +26,8 @@
     },
     mounted() {
       this.editorResize();
-      window.addEventListener("resize", () => {
-        this.editorResize();
-      });
+      window.addEventListener("resize", this.editorResize);
+      // 禁用右键菜单
       this.$el.oncontextmenu = function (e) {
         return false;
       }
@@ -43,15 +39,14 @@
     },
     methods: {
       editorResize() {
-        this.width = this.$el.clientWidth - 350;
-        this.height = this.$el.clientHeight - 120;
-        console.log(this.width, this.$el.clientHeight);
+        this.$store.state.editor.vWidth = this.$el.clientWidth - 350;
+        this.$store.state.editor.vHeight = this.$el.clientHeight - 61;
       },
       init() {
         if (this.$route && this.$route.params.id) {
           this.loaded = true;
           this.id = this.$route.params.id;
-          this.$store.dispatch('tddz/load', {id: this.id});
+          this.$store.dispatch('editor/load', {id: this.id});
         }
       }
     }

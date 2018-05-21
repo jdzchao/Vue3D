@@ -1,6 +1,9 @@
 export default {
+  /* 基础数据 */
+  vWidth: 0, // viewport width
+  vHeight: 0, // viewport height
 
-  /* 接口数据是否加载完成 */
+  /* 场景数据是否加载完成 */
   loaded: false,
 
   /* 编辑器scene组件dom对象 */

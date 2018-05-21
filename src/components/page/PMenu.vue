@@ -5,12 +5,12 @@
         <template v-if="item.sub">
           <el-submenu :index="item.id">
             <template slot="title">
-              <i class="iconfont" :class="item.icon"></i>
+              <i class="vue3d-icon" :class="item.icon"></i>
               <span slot="title">{{item.title}}</span>
             </template>
             <template v-for="i in item.sub">
               <el-menu-item :index="i.id" :route="i.route">
-                <i class="iconfont" :class="i.icon"></i>
+                <i class="vue3d-icon" :class="i.icon"></i>
                 <span slot="title">{{i.title}}</span>
               </el-menu-item>
             </template>
@@ -18,7 +18,7 @@
         </template>
         <template v-else>
           <el-menu-item :index="item.id" :route="item.route">
-            <i class="iconfont" :class="item.icon"></i>
+            <i class="vue3d-icon" :class="item.icon"></i>
             <span slot="title">{{item.title}}</span>
           </el-menu-item>
         </template>

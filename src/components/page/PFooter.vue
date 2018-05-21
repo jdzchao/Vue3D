@@ -1,27 +1,26 @@
 <template>
-  <div id="editor-footer">
-    <p class="copyright">Copyright &copy; 2018 All Rights Reserved Powered by 陶大联创</p>
+  <div id="footer">
+    <p class="copyright">Copyright &copy; 2017-2018 All Rights Reserved Powered by JDZChao</p>
   </div>
 </template>
 
 <script>
   export default {
-    name: "EditorFooter"
+    name: "PFooter"
   }
 </script>
 
 <style scoped>
-  #editor-footer {
-    clear: both;
+  #footer {
     position: relative;
     width: 100%;
-    height: 39px;
+    height: 30px;
     background-color: #545c64;
   }
 
   .copyright {
     text-align: center;
-    line-height: 39px;
+    line-height: 30px;
     color: #d6d6d6;
   }
 </style>

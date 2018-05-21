@@ -1,5 +1,5 @@
 <template>
-  <div id="editor-scene" v-loading="loading">
+  <div id="main-scene" v-loading="loading">
     <v-scene ref="preview" :width="width" :height="height">
       <w-ray-cast @cast="raycast" :far="2500"></w-ray-cast>
       <w-orbit-controls :enable="orbit" :max="2000"></w-orbit-controls>
@@ -26,7 +26,7 @@
   import CLoader from '../module/CLoader'
 
   export default {
-    name: "editor-scene",
+    name: "main-scene",
     components: {
       WBoxHelper,
       VScene,

@@ -1,6 +1,6 @@
 <template>
   <div id="editor-menu">
-    <el-menu mode="horizontal" menu-trigger="click" @select="menuSelect" unique-opened >
+    <el-menu mode="horizontal" @select="menuSelect" unique-opened>
       <el-submenu index="file">
         <template slot="title">File</template>
         <!--<el-menu-item index="new">新建</el-menu-item>-->
@@ -17,7 +17,7 @@
       <!--<el-menu-item index="3"><i class="icon iconfont cifuwu-translate"></i></el-menu-item>-->
       <el-button-group class="btn">
         <el-button type="primary" @click="preview">预览</el-button>
-        <el-button type="primary" @click="save" :disabled="save_keep">{{save_text}}</el-button>
+        <el-button type="primary" @click="save" :disabled="save_keep">保存</el-button>
       </el-button-group>
     </el-menu>
   </div>
@@ -25,7 +25,8 @@
 
 <script>
   export default {
-    name: "editor-menu",
+    name: "EditorMenu",
+    components: {},
     data() {
       return {
         activeIndex: '1',
@@ -69,6 +70,13 @@
 </script>
 
 <style scoped>
+  #editor-menu {
+    position: relative;
+    width: 100%;
+    height: 61px;
+    overflow: hidden;
+  }
+
   .btn {
     float: right;
     margin: 10px;

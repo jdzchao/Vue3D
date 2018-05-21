@@ -2,17 +2,19 @@
   <div id="app">
     <p-header :items="navData"></p-header>
     <p-content></p-content>
+    <p-footer></p-footer>
   </div>
 </template>
 
 <script>
-  import {nav} from './config'
+  import {nav} from './components/page/config'
   import PHeader from "./components/page/PHeader";
   import PContent from "./components/page/PContent";
+  import PFooter from "./components/page/PFooter";
 
   export default {
     name: 'app',
-    components: {PContent, PHeader},
+    components: {PFooter, PContent, PHeader},
     data() {
       return {
         navData: nav,
@@ -34,7 +36,7 @@
 </script>
 
 <style>
-  html, body {
+  html, body, p {
     width: 100%;
     height: 100%;
     margin: 0;
@@ -46,6 +48,8 @@
     position: relative;
     width: 100%;
     height: 100%;
+    min-width: 1200px;
     overflow: hidden;
   }
+
 </style>
