@@ -1,26 +1,28 @@
+import {loadScene} from '../config/API'
+
 export default {
   // 从接口读取场景数据
   load(ctx, params) {
-    API.load(params.id, params.slot, params.serialize, params.design).then((res) => {
-      ctx.state.data.scene = res.scene.data;
-      ctx.state.data.design = res.design.data;
-      ctx.state.progress.goal = res.scene.data.count; // 加载obj个数
+    loadScene().then((res) => {
+      console.log(res);
+      ctx.state.data.scene = res;
+      // ctx.state.progress.goal = res.data.count; // 加载obj个数
       ctx.commit('initMaterials');
       ctx.commit('initDesign');
       ctx.state.loaded = true;
     });
   },
 
-  // 将场景数据保存到服务器
-  save(ctx, callback) {
-    API.saveScene(JSON.stringify(ctx.state.data.scene)).then((res) => {
-      if (typeof callback === 'function') {
-        callback(res);
-      }
-    }).catch((err) => {
-      callback && callback(err);
-    });
-  },
+  // // 将场景数据保存到服务器
+  // save(ctx, callback) {
+  //   saveScene(JSON.stringify(ctx.state.data.scene)).then((res) => {
+  //     if (typeof callback === 'function') {
+  //       callback(res);
+  //     }
+  //   }).catch((err) => {
+  //     callback && callback(err);
+  //   });
+  // },
 
   // 向场景中添加三维对象
   addObject(ctx, obj) {

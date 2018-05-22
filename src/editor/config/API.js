@@ -1,9 +1,15 @@
 import request from '../../http/request'
 import qs from 'querystring'
 
+import Mock from 'mockjs'
+import {data} from '../../../static/demo/json/cup'
+
 let S3URL = 'https://s3.cifuwu.com';
+let DATA_URL = 'https://xapi.cifuwu.com';
+
 if (process.env.NODE_ENV === 'development') {
-  S3URL = 'https://s3.cifuwu.com';
+  // S3URL = 'https://s3.cifuwu.com';
+  // DATA_URL = 'https://xapi.cifuwu.com';
 }
 
 // 模型加载路径
@@ -49,4 +55,14 @@ export function imageUploadWithFile(file, onProgress) {
 // uv加载路径
 export function uvPath(name) {
   return S3URL + '/storage/uvw/' + name;
+}
+
+/**
+ * 加载场景数据
+ * @returns {*}
+ */
+export function loadScene() {
+  return new Promise(function (resolve, reject) {
+    resolve(data);
+  });
 }

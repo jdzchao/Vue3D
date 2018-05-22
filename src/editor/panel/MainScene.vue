@@ -64,7 +64,7 @@
         selectedObj: state => state.tddz.selected.obj,
       }),
       ...mapGetters({
-        loading: 'tddz/loading'
+        loading: 'editor/loading'
       })
     },
     watch: {
@@ -99,10 +99,10 @@
     },
     methods: {
       raycast(targets) {
-        this.$store.commit('tddz/raycast', targets);
+        this.$store.commit('editor/raycast', targets);
       },
       render() {
-        this.$store.commit('tddz/render');
+        this.$store.commit('editor/render');
       }
     }
   }

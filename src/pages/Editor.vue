@@ -30,12 +30,8 @@
       // 禁用右键菜单
       this.$el.oncontextmenu = function (e) {
         return false;
-      }
-    },
-    watch: {
-      $route(val) {
-        this.init();
-      }
+      };
+      this.init();
     },
     methods: {
       editorResize() {
