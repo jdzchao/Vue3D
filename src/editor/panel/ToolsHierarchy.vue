@@ -3,13 +3,13 @@
     <div class="tools">
       <el-button-group class="btns">
         <el-tooltip class="item" effect="dark" content="在选中节点上添加对象" placement="top">
-          <el-button @click="appendSelected"><i class="icon iconfont cifuwu-add"></i></el-button>
+          <el-button @click="appendSelected"><i class="vue3d-icon vue3d-add"></i></el-button>
         </el-tooltip>
         <el-tooltip class="item" effect="dark" content="删除选中节点内的对象" placement="top">
-          <el-button @click="removeSelected"><i class="icon iconfont cifuwu-subtract"></i></el-button>
+          <el-button @click="removeSelected"><i class="vue3d-icon vue3d-subtract"></i></el-button>
         </el-tooltip>
         <el-tooltip class="item" effect="dark" content="取消选中状态" placement="top">
-          <el-button @click="freeSelected"><i class="icon iconfont cifuwu-free"></i></el-button>
+          <el-button @click="freeSelected"><i class="vue3d-icon vue3d-free"></i></el-button>
         </el-tooltip>
       </el-button-group>
     </div>

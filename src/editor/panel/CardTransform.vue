@@ -1,7 +1,21 @@
 <template>
-  <el-collapse-item id="card-transform" title="TRANSFORM" name="transform">
+  <el-collapse-item id="card-transform" name="transform">
+    <template slot="title">
+      <i class="vue3d-icon vue3d-panel"></i><span style="margin: 0 0 0 5px">TRANSFORM</span>
+    </template>
+    <el-form label-width="80px" label-position="left">
+      <el-form-item label="Visible">
+        <el-switch value="visible" active-color="#13ce66" inactive-color="#ff4949" :disabled="disabled">
+        </el-switch>
+      </el-form-item>
+    </el-form>
     <div class="buttons">
-      <el-radio-group v-model="transform" @change="changeMode">
+      <el-button-group>
+        <el-tooltip class="item" effect="light" content="Reset" placement="top">
+          <el-button :disabled="disabled"><i class="vue3d-icon vue3d-reset"></i></el-button>
+        </el-tooltip>
+      </el-button-group>
+      <el-radio-group v-model="transform" @change="changeMode" style="float:right">
         <el-radio-button label="translate" :disabled="disabled"><i class="vue3d-icon vue3d-translate"></i></el-radio-button>
         <el-radio-button label="rotate" :disabled="disabled"><i class="vue3d-icon vue3d-rotation"></i></el-radio-button>
         <el-radio-button label="scale" :disabled="disabled"><i class="vue3d-icon vue3d-scale"></i></el-radio-button>
@@ -59,13 +73,13 @@
     name: "CardTransform",
     data() {
       return {
+        disabled: true,
         handler: '',
         position: {x: 0, y: 0, z: 0},
         rotation: {x: 0, y: 0, z: 0},
         scale: {x: 1, y: 1, z: 1},
         axis: {x: 0, y: 0, z: 0},
         transform: this.$store.state.editor.setting.transform,
-        disabled: true,
       }
     },
     computed: {
@@ -161,9 +175,10 @@
 
   .tf-group label {
     display: block;
-    height: 10px;
+    height: 15px;
     width: 100%;
-    font-size: 10px;
+    font-size: 12px;
+    line-height: 15px;
     color: #999999;
   }
 

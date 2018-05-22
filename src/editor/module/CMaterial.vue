@@ -5,7 +5,7 @@
 <script>
   import {mapState} from 'vuex'
   import * as THREE from 'three'
-  import S3 from "../config/api"
+  import {imagePath} from "../config/api"
   import {fabric} from 'fabric'
 
   export default {
@@ -36,7 +36,7 @@
     },
     computed: {
       ...mapState({
-        materials: state => state.tddz.materials,
+        materials: state => state.editor.materials,
       }),
       completed() {
         if (this.loaded && this.status === 0) {
@@ -51,7 +51,7 @@
       map_color(val) {
         this.status++;
         if (this.canvas_color && this.customizable > 0) {
-          this.loadImage(S3.imagePath(val), (res) => {
+          this.loadImage(imagePath(val), (res) => {
             let cvs = new canvas(this.bgColor, res);
             this.canvas_color_data = cvs;
             this.material.map = new THREE.Texture(cvs.dom);
@@ -60,7 +60,7 @@
             this.status--;
           })
         } else {
-          new THREE.TextureLoader().load(S3.imagePath(val), (res) => {
+          new THREE.TextureLoader().load(imagePath(val), (res) => {
             this.material.map = res;
             this.material.map.name = val;
             this.material.map.needsUpdate = true;
@@ -75,7 +75,7 @@
         if (this.canvas_normal && this.customizable) {
           // TODO: 编辑法线图，实现可雕刻定制
         } else {
-          new THREE.TextureLoader().load(S3.imagePath(val), (res) => {
+          new THREE.TextureLoader().load(imagePath(val), (res) => {
             res.name = val;
             this.material.normalMap = res;
             this.material.normalMap.needsUpdate = true;
@@ -89,7 +89,7 @@
         this.status++;
         if (this.canvas_specular && this.customizable) {
         } else {
-          new THREE.TextureLoader().load(S3.imagePath(val), (res) => {
+          new THREE.TextureLoader().load(imagePath(val), (res) => {
             res.name = val;
             this.material.specularMap = res;
             this.material.specularMap.needsUpdate = true;
@@ -148,10 +148,10 @@
       },
       done() {
         this.loaded = false;
-        this.$store.state.tddz.materials[this.name].mtl = this.material;
-        this.$store.state.tddz.materials[this.name].customizable = this.customizable;
+        this.$store.state.editor.materials[this.name].mtl = this.material;
+        this.$store.state.editor.materials[this.name].customizable = this.customizable;
         if (this.canvas_color_data.hasOwnProperty('canvas')) {
-          this.$store.state.tddz.materials[this.name].canvas_color = this.canvas_color_data;
+          this.$store.state.editor.materials[this.name].canvas_color = this.canvas_color_data;
         }
         this.$emit("loaded", this.material);
       },
