@@ -1,7 +1,6 @@
 import request from '../../http/request'
 import qs from 'querystring'
 
-import Mock from 'mockjs'
 import {data} from '../../../static/demo/json/cup'
 
 let S3URL = 'https://s3.cifuwu.com';

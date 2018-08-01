@@ -1,4 +1,4 @@
-import {loadScene} from '../config/API'
+import {loadScene} from '../config/api'
 
 export default {
   // 从接口读取场景数据
