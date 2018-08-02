@@ -1,6 +1,6 @@
 <template>
   <div id="scene" class="viewport">
-    <v-scene :width="vWidth" :height="vHeight">
+    <v-scene :width="vWidth" :height="vHeight" @ready="getReady">
       <w-orbit-controls></w-orbit-controls>
       <w-sky-box path="../../../static/images/"></w-sky-box>
       <x-light :type="'Ambient'" :intensity="0.5" :color="'rgb(255,255,255)'"></x-light>
@@ -34,7 +34,11 @@
     data() {
       return {}
     },
-    methods: {},
+    methods: {
+      getReady(scene) {
+        console.log(scene);
+      }
+    },
     computed: {
       ...mapState(['vWidth', 'vHeight'])
     }
