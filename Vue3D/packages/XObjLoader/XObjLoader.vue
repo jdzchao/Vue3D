@@ -14,7 +14,6 @@
     data() {
       return {
         manager: new THREE.LoadingManager(),
-        material__: {}
       }
     },
     mounted() {
@@ -31,12 +30,7 @@
         if (val && oldVal !== val) {
           this.setMaterial(val);
         }
-      },
-      material__(val, oldVal) {
-        if (val && oldVal !== val) {
-          this.setMaterial(val);
-        }
-      },
+      }
     },
     methods: {
       loadObj(path) {

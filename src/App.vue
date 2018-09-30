@@ -1,24 +1,42 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <p-header :items="navData"></p-header>
+    <p-content></p-content>
+    <p-footer></p-footer>
   </div>
 </template>
 
 <script>
+  import {nav} from './components/page/config'
+  import PHeader from "./components/page/PHeader";
+  import PContent from "./components/page/PContent";
+  import PFooter from "./components/page/PFooter";
 
   export default {
     name: 'app',
+    components: {PFooter, PContent, PHeader},
+    data() {
+      return {
+        navData: nav,
+      }
+    },
     created() {
       this.$store.dispatch('windowResize');
       window.addEventListener("resize", () => {
         this.$store.dispatch('windowResize');
       });
+    },
+    watch: {
+      $route(val) {
+        this.$store.state.activeNav = this.$route.meta.activeNav;
+        this.$store.state.activeMenu = this.$route.meta.activeMenu;
+      },
     }
   }
 </script>
 
 <style>
-  html, body {
+  html, body, p {
     width: 100%;
     height: 100%;
     margin: 0;
@@ -30,13 +48,8 @@
     position: relative;
     width: 100%;
     height: 100%;
+    min-width: 1200px;
     overflow: hidden;
   }
 
-  .animated {
-    -webkit-animation-duration: 0.5s;
-    animation-duration: 0.5s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-  }
 </style>

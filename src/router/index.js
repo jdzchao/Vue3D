@@ -1,30 +1,29 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import PageNotFound from '../pages/PageNotFound'
-import editor from './editor'
+
 import example from './example'
+import doc from './doc'
+import editor from './editor'
 
 Vue.use(Router);
 
-// import admin from './admin'
 let routes = [
   {
     path: '/',
-    redirect: '/home'
-  },
-  {
-    path: '/home',
-    name: 'home',
-    component: () => import(/* webpackChunkName: "home" */'../pages/Home.vue'),
+    alias: '/index',
+    name: 'index',
+    component: () => import(/* webpackChunkName: "home" */'../pages/Index.vue'),
+    meta: {activeNav: 'index'}
   },
   {
     path: '*',
     name: '404',
-    component: PageNotFound
+    component: () => import('../pages/PageNotFound.vue'),
   }
 ];
 
-routes.push(...editor);
 routes.push(...example);
+routes.push(...editor);
+routes.push(...doc);
 
 export default new Router({routes});

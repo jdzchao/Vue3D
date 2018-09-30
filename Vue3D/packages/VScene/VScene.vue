@@ -41,6 +41,7 @@
       });
       this.rendererDelegationAdd(this.updateRenderer);
       this.ready = true;
+      this.$emit('ready', this.scene);
     },
     update() {
       this.render();

@@ -4,7 +4,7 @@
 
 <script>
   export default {
-    name: "y-material-phong"
+    name: "ToolsUV"
   }
 </script>
 
