@@ -9,7 +9,7 @@
   import {mapState} from 'vuex'
   import PMenu from "../components/page/PMenu";
   import PView from "../components/page/PView";
-  import MenuData from "./Example/config"
+  import MenuData from "./example/config"
 
   export default {
     name: "Example",

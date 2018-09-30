@@ -1,7 +1,7 @@
 import request from '../../http/request'
 import qs from 'querystring'
 
-import {data} from '../../../static/demo/json/cup'
+import {data} from '../../../public/demo/json/cup'
 
 let S3URL = 'https://s3.cifuwu.com';
 let DATA_URL = 'https://xapi.cifuwu.com';

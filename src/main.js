@@ -19,9 +19,8 @@ Vue.use(ElementUI);
 Vue.config.productionTip = false;
 
 window.vm = new Vue({
-  router,
-  store,
-  template: '<App/>',
-  components: {App}
+    router,
+    store,
+    render: h => h(App)
 });
 vm.$mount("#app");

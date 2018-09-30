@@ -8,18 +8,18 @@ import editor from './editor'
 Vue.use(Router);
 
 let routes = [
-  {
-    path: '/',
-    alias: '/index',
-    name: 'index',
-    component: () => import(/* webpackChunkName: "home" */'../pages/Index.vue'),
-    meta: {activeNav: 'index'}
-  },
-  {
-    path: '*',
-    name: '404',
-    component: () => import('../pages/PageNotFound.vue'),
-  }
+    {
+        path: '/',
+        alias: '/index',
+        name: 'index',
+        component: () => import(/* webpackChunkName: "home" */'../pages/Index.vue'),
+        meta: {activeNav: 'index'}
+    },
+    {
+        path: '*',
+        name: '404',
+        component: () => import('../pages/PageNotFound.vue'),
+    }
 ];
 
 routes.push(...example);
