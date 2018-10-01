@@ -1,5 +1,6 @@
 module.exports = {
     baseUrl: './',
+
     configureWebpack: {
         module: {
             rules: [
@@ -10,4 +11,11 @@ module.exports = {
             ]
         }
     },
+
+    outputDir: undefined,
+    assetsDir: undefined,
+    runtimeCompiler: true,
+    productionSourceMap: undefined,
+    parallel: undefined,
+    css: undefined
 }
