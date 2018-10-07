@@ -7,13 +7,13 @@ export default [
         path: '/',
         alias: 'scene',
         name: 'scene',
-        component: () => import(/* webpackChunkName: "example" */'../pages/example/Scene.vue'),
+        component: () => import(/* webpackChunkName: "example" */'../pages/Example/Scene.vue'),
         meta: {activeNav: 'example', activeMenu: 'scene'}
       },
       {
         path: 'light',
         name: 'light',
-        component: () => import(/* webpackChunkName: "example" */'../pages/example/Light.vue'),
+        component: () => import(/* webpackChunkName: "example" */'../pages/Example/Light.vue'),
         meta: {activeNav: 'example'}
       },
     ]

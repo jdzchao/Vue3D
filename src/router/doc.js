@@ -7,7 +7,7 @@ export default [
         path: '/',
         alias: 'start',
         name: 'start',
-        component: () => import(/* webpackChunkName: "example" */'../pages/doc/Start.vue'),
+        component: () => import(/* webpackChunkName: "example" */'../pages/Doc/Start.vue'),
         meta: {activeNav: 'doc', activeMenu: 'start'}
       }
     ]

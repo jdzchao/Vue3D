@@ -8,7 +8,7 @@
 <script>
   import PView from "../components/page/PView";
   import PMenu from "../components/page/PMenu";
-  import MenuData from './doc/config'
+  import MenuData from './Doc/config'
 
   export default {
     name: "Doc",
