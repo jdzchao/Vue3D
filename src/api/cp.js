@@ -15,11 +15,14 @@ export function login(account, password, header) {
 }
 
 export function getInfo(token) {
-    return request({
-        url: '/api/cp/info',
-        method: 'post',
-        data: qs.stringify({token})
+    return new Promise((resolve, reject) => {
+        resolve({data: {roles: ['site']}})
     })
+    // return request({
+    //     url: '/api/cp/info',
+    //     method: 'post',
+    //     data: qs.stringify({token})
+    // })
 }
 
 export function logout() {

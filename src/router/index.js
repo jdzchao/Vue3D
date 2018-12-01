@@ -9,8 +9,8 @@ Vue.use(Router);
 
 // 自定义路由
 export const asyncRouterMap = [
-    // member,
-    // setting,
+    member,
+    setting,
     error,
     {path: '*', redirect: '/error', hidden: true},
 ]
