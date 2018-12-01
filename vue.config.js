@@ -1,4 +1,3 @@
-// 为了编辑器代码提示，将webpack的部分配置单独来写。
 const webpack = require('./webpack.config.js')
 module.exports = {
     baseUrl: '/',
@@ -9,7 +8,7 @@ module.exports = {
         port: 8000,
         https: false,
         hotOnly: false,
-        proxy: null, // 设置代理
+        proxy: null,
         before: app => {
         }
     },
