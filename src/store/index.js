@@ -1,23 +1,25 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from 'vue'
+import Vuex from 'vuex'
+import getters from './getters'
+// store modules
+import app from './modules/app'
+import errorLog from './modules/errorLog'
+import member from './modules/member'
+import permission from './modules/permission'
+import tagsView from './modules/tagsView'
 
-Vue.use(Vuex);
-// self
-import state from './state.js'
-import mutations from './mutations.js'
-import actions from './actions.js'
-import getters from './getters.js'
-// modules
-import editor from '../editor/store'
+Vue.use(Vuex)
 
 let store = new Vuex.Store({
-  state,
-  mutations,
-  actions,
-  getters,
-  modules: {
-    editor
-  }
-});
+    modules: {
+        app,
+        errorLog,
+        member,
+        permission,
+        tagsView,
 
-export default store;
+    },
+    getters
+})
+
+export default store

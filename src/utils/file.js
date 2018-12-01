@@ -23,8 +23,3 @@ let GetFileExtName = function (filepath) {
   }
 };
 
-export default {
-  GetFileName: GetFileName,
-  GetFileNameWithoutExt: GetFileNameWithoutExt,
-  GetFileExtName: GetFileExtName
-};

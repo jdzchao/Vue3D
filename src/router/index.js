@@ -1,29 +1,70 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
-import example from './example'
-import doc from './doc'
-import editor from './editor'
+import ControlPanel from '@/views/_layout/ControlPanel'
+import error from './routes/error'
+import member from './routes/member'
+import setting from './routes/setting'
 
 Vue.use(Router);
 
-let routes = [
+// 自定义路由
+export const asyncRouterMap = [
+    member,
+    setting,
+    error,
+    {path: '*', redirect: '/error', hidden: true},
+]
+
+// 核心路由，通常不做修改
+export const coreRouterMap = [
     {
         path: '/',
-        alias: '/index',
-        name: 'index',
-        component: () => import(/* webpackChunkName: "home" */'../pages/Index.vue'),
-        meta: {activeNav: 'index'}
+        component: ControlPanel,
+        redirect: '/home',
+        children: [
+            {
+                path: 'home',
+                name: 'home',
+                component: () => import(/* webpackChunkName: "core" */'@/views/home/index'),
+                meta: {
+                    title: 'home', icon: 'dashboard', noCache: true,
+                }
+            }
+        ]
     },
     {
-        path: '*',
-        name: '404',
-        component: () => import('../pages/PageNotFound.vue'),
-    }
+        path: '/mine',
+        component: ControlPanel,
+        redirect: '/mine/index',
+        hidden: true,
+        children: [
+            {
+                path: 'index',
+                name: 'mine',
+                component: () => import(/* webpackChunkName: "core" */'@/views/mine/index'),
+                meta: {
+                    title: 'mine', icon: '', noCache: true,
+                }
+            },
+        ]
+    },
+    {
+        path: '/redirect',
+        component: ControlPanel,
+        hidden: true,
+        children: [
+            {
+                path: '/redirect/:path*',
+                component: () => import(/* webpackChunkName: "core" */'@/views/redirect/index')
+            }
+        ]
+    },
+    {path: '/login', component: () => import(/* webpackChunkName: "core" */'@/views/login/index'), hidden: true},
 ];
 
-routes.push(...example);
-routes.push(...editor);
-routes.push(...doc);
+export default new Router({
+    // mode: 'history', //后端重写支持可开
+    // scrollBehavior: () => ({y: 0}),
+    routes: coreRouterMap
+})
 
-export default new Router({routes});
