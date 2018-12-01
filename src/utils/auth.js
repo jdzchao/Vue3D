@@ -12,6 +12,7 @@ export function getHeader() {
 }
 
 export function getToken() {
+    setToken('SitePage')
     return Cookies.get(TokenKey)
 }
 

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import ControlPanel from '@/views/_layout/ControlPanel'
+import PageSite from '@/views/_layout/PageSite'
 import error from './routes/error'
 import member from './routes/member'
 import setting from './routes/setting'
@@ -9,8 +9,8 @@ Vue.use(Router);
 
 // 自定义路由
 export const asyncRouterMap = [
-    member,
-    setting,
+    // member,
+    // setting,
     error,
     {path: '*', redirect: '/error', hidden: true},
 ]
@@ -19,7 +19,7 @@ export const asyncRouterMap = [
 export const coreRouterMap = [
     {
         path: '/',
-        component: ControlPanel,
+        component: PageSite,
         redirect: '/home',
         children: [
             {
@@ -34,7 +34,7 @@ export const coreRouterMap = [
     },
     {
         path: '/mine',
-        component: ControlPanel,
+        component: PageSite,
         redirect: '/mine/index',
         hidden: true,
         children: [
@@ -50,7 +50,7 @@ export const coreRouterMap = [
     },
     {
         path: '/redirect',
-        component: ControlPanel,
+        component: PageSite,
         hidden: true,
         children: [
             {
