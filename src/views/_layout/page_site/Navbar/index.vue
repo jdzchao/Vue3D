@@ -16,16 +16,13 @@
         components: {NavbarItem},
         data() {
             return {
-                active: '1',
+                active: this.$route.fullPath,
             };
         },
         computed: {
             ...mapGetters([
                 'permission_routers',
             ]),
-        },
-        mounted() {
-            console.log(this.permission_routers)
         }
     }
 </script>

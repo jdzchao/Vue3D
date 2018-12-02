@@ -3,8 +3,10 @@
             v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow"
             :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown':!isNest}"
             :route="resolvePath(item.path)">
-        <item v-if="onlyOneChild.meta" :icon="onlyOneChild.meta.icon||item.meta.icon"
-              :title="generateTitle(onlyOneChild.meta.title)"/>
+        <app-link :to="resolvePath(item.path)" :key="item.name" style="display: inline-block">
+            <item v-if="onlyOneChild.meta" :icon="onlyOneChild.meta.icon||item.meta.icon"/>
+            <span>{{generateTitle(onlyOneChild.meta.title)}}</span>
+        </app-link>
     </el-menu-item>
 
     <el-submenu v-else ref="submenu" :index="resolvePath(item.path)">
@@ -96,3 +98,8 @@
         }
     }
 </script>
+<style scoped>
+    span {
+        margin: 0  0 0 8px
+    }
+</style>

@@ -27,8 +27,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-    span {
-        margin: 0  0 0 8px
-    }
-</style>
