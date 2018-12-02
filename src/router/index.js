@@ -1,16 +1,18 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import PageSite from '@/views/_layout/PageSite'
+
 import error from './routes/error'
-import member from './routes/member'
-import setting from './routes/setting'
+
+// import member from './routes/member'
+// import setting from './routes/setting'
 
 Vue.use(Router);
 
 // 自定义路由
 export const asyncRouterMap = [
-    member,
-    setting,
+    // member,
+    // setting,
     error,
     {path: '*', redirect: '/error', hidden: true},
 ]

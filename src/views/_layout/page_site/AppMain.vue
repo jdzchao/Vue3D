@@ -25,11 +25,10 @@
 <style scoped>
     .app-main {
         /*84 = navbar + tags-view = 50 +34 */
-        min-height: calc(100vh - 61px);
+        min-height: calc(100vh - 90px);
         width: 100%;
         position: relative;
         overflow: hidden;
-        padding: 10px 20px;
     }
 </style>
 
