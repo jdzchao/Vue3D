@@ -6,6 +6,7 @@ import error from './routes/error'
 
 // import member from './routes/member'
 // import setting from './routes/setting'
+import vue3d from './routes/vue3d'
 
 Vue.use(Router);
 
@@ -13,6 +14,7 @@ Vue.use(Router);
 export const asyncRouterMap = [
     // member,
     // setting,
+    vue3d,
     error,
     {path: '*', redirect: '/error', hidden: true},
 ]
@@ -32,22 +34,6 @@ export const coreRouterMap = [
                     title: 'home', icon: 'dashboard', noCache: true,
                 }
             }
-        ]
-    },
-    {
-        path: '/mine',
-        component: PageSite,
-        redirect: '/mine/index',
-        hidden: true,
-        children: [
-            {
-                path: 'index',
-                name: 'mine',
-                component: () => import(/* webpackChunkName: "core" */'@/views/mine/index'),
-                meta: {
-                    title: 'mine', icon: '', noCache: true,
-                }
-            },
         ]
     },
     {

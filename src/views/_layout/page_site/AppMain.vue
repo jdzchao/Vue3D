@@ -25,7 +25,7 @@
 <style scoped>
     .app-main {
         /*90 = navBar + footBar = 61 + 29 */
-        min-height: calc(100vh - 90px);
+        height: calc(100vh - 90px);
         width: 100%;
         position: relative;
         overflow: hidden;

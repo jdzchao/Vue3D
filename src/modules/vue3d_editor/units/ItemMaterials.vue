@@ -80,15 +80,15 @@
 </template>
 
 <script>
-    import {imagePath} from "@/api/s3";
+    // import {imagePath} from "@/api/s3";
     import {mapState} from 'vuex'
     import {validateName} from "@/utils/validate"
     import * as THREE from 'three'
-    import ImageUploader from "../../ImageUploader";
+    // import ImageUploader from "../../ImageUploader";
     import {loadFabricImage} from "../extend/materials";
 
     export default {
-        components: {ImageUploader},
+        // components: {ImageUploader},
         name: "item-materials",
         data() {
             return {

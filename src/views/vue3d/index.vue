@@ -1,14 +1,14 @@
 <template>
-    <scene-editor></scene-editor>
+    <vue3d-editor/>
 </template>
 
 <script>
-    import SceneEditor from "@/modules/SceneEditor/index";
+    import Vue3dEditor from "@/modules/vue3d_editor/index";
 
     export default {
-        name: "scene_editor",
+        name: "vue3d",
         components: {
-            SceneEditor,
+            Vue3dEditor,
         },
         data() {
             return {
@@ -17,7 +17,7 @@
         },
         methods: {
             load() {
-                this.$store.dispatch('LoadSceneData', {id: this.id}).then()
+                // this.$store.dispatch('LoadSceneData', {id: this.id}).then()
             }
         },
         mounted() {

@@ -22,6 +22,7 @@
     "normalize.css": "^8.0.1",
     "nprogress": "0.2.0",
     "path-to-regexp": "^2.4.0",
+    "qiniu-js": "^2.5.3",
     "screenfull": "^3.3.3",
     "three": "^0.98.0",
     "vue": "^2.5.17",

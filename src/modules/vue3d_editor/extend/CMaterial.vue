@@ -5,7 +5,7 @@
 <script>
     import {mapState} from 'vuex'
     import * as THREE from 'three'
-    import {imagePath} from "@/api/s3"
+    // import {imagePath} from "@/api/s3"
     import {canvas, loadFabricImage, phong} from './materials'
 
     export default {

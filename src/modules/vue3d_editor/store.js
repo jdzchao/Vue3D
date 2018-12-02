@@ -1,7 +1,7 @@
-import {loadScene, saveScene} from "@/api/xapi";
+// import {loadScene, saveScene} from "@/api/xapi";
 import {empty, guid} from '@/utils'
 
-const sceneEditor = {
+const vue3d = {
     state: {
         dom: {}, // editor DOM
         sWidth: 200, // scene width
@@ -29,24 +29,6 @@ const sceneEditor = {
         setting: {
             orbit: true, // 摄像机随鼠标盘旋转动
             transform: 'translate',// transform模式: translate || rotation || scale
-            editableMaterialMap: true,
-            editableMaterialNormalMap: false,
-            editableMaterialSpecularMap: false,
-
-            uvPreviewRender: true,
-            uvGroupColors: ['#409EFF', '#FD4F96', '#F01B2D', '#FF9900', '#CCCC66', '#9FF048', '#5ED5D1', '#9966CC'],
-            uv: [
-                {name: '底款', width: 200, height: 200, shape: 'circle'},
-                {name: '', width: 0, height: 0, shape: 'rect'},
-                {name: '', width: 0, height: 0, shape: 'rect'},
-                {name: '', width: 0, height: 0, shape: 'rect'},
-                {name: '', width: 0, height: 0, shape: 'rect'},
-                {name: '', width: 0, height: 0, shape: 'rect'},
-                {name: '', width: 0, height: 0, shape: 'rect'},
-                {name: '', width: 0, height: 0, shape: 'rect'},
-            ],
-            uvSize: 1024,
-            uvRatio: null,
         },
         // 加载状态
         progress: {
@@ -58,7 +40,6 @@ const sceneEditor = {
 
         _objects: {},
         _materials: {},
-        _uvs: {},
 
         /* endregion */
     },
@@ -175,20 +156,20 @@ const sceneEditor = {
         // 读取场景数据
         LoadSceneData({commit, dispatch}, params) {
             if (!params.hasOwnProperty('id')) return;
-            return new Promise((resolve, reject) => {
-                loadScene(
-                    params.id,
-                    params.hasOwnProperty('slot') ? params.slot : null,
-                    params.hasOwnProperty('serialize') ? params.serialize : null
-                ).then(res => {
-                    commit('SET_SCENE_DATA', res.data)
-                    commit('CHANGE_SCENE_STATUS', 'loaded')
-                    dispatch('AddDefaultMaterial')
-                    resolve(res.data)
-                }).catch(err => {
-                    reject(err)
-                })
-            })
+            // return new Promise((resolve, reject) => {
+            //     loadScene(
+            //         params.id,
+            //         params.hasOwnProperty('slot') ? params.slot : null,
+            //         params.hasOwnProperty('serialize') ? params.serialize : null
+            //     ).then(res => {
+            //         commit('SET_SCENE_DATA', res.data)
+            //         commit('CHANGE_SCENE_STATUS', 'loaded')
+            //         dispatch('AddDefaultMaterial')
+            //         resolve(res.data)
+            //     }).catch(err => {
+            //         reject(err)
+            //     })
+            // })
         },
         // 保存场景数据
         SaveSceneData({state}) {
@@ -307,4 +288,4 @@ const sceneEditor = {
         }
     }
 }
-export default sceneEditor
+export default vue3d

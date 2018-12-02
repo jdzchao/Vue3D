@@ -9,7 +9,8 @@ module.exports = {
         extensions: ['.js', '.vue', '.json'],
         alias: {
             '@': path.resolve(__dirname, 'src'),
-            _c: path.resolve(__dirname, 'src/components')
+            _c: path.resolve(__dirname, 'src/components'),
+            _v3d: path.resolve(__dirname, 'Vue3D')
         }
     },
     module: {

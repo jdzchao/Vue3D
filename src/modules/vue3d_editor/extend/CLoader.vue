@@ -11,7 +11,7 @@
 <script>
     import {mapState} from 'vuex'
     import {XObjLoader} from 'vue3d'
-    import {meshPath} from "@/api/s3";
+    // import {meshPath} from "@/api/s3";
     import {empty, guid} from '@/utils/index'
     import CLoader from './CLoader'
 

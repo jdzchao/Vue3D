@@ -12,12 +12,12 @@
             <w-grid-helper></w-grid-helper>
             <w-box-helper :target="selectedObj"></w-box-helper>
 
-            <template v-if="loaded" v-for="item in objects">
-                <c-loader :obj="item"></c-loader>
-            </template>
-            <template v-if="loaded" v-for="item in materials">
-                <c-material :mtl="item"></c-material>
-            </template>
+            <!--<template v-if="loaded" v-for="item in objects">-->
+                <!--<c-loader :obj="item"></c-loader>-->
+            <!--</template>-->
+            <!--<template v-if="loaded" v-for="item in materials">-->
+                <!--<c-material :mtl="item"></c-material>-->
+            <!--</template>-->
         </v-scene>
     </div>
 </template>
@@ -34,9 +34,9 @@
         XBoxGeometry,
         XCamera,
         XLight
-    } from 'vue3d'
-    import CLoader from '../extend/CLoader'
-    import CMaterial from '../extend/CMaterial'
+    } from '_v3d'
+    // import CLoader from '../extend/CLoader'
+    // import CMaterial from '../extend/CMaterial'
 
     export default {
         name: "PanelScene",
@@ -50,8 +50,8 @@
             WGridHelper,
             WRayCast,
             XBoxGeometry,
-            CLoader,
-            CMaterial,
+            // CLoader,
+            // CMaterial,
         },
         data() {
             return {
@@ -64,8 +64,8 @@
         },
         methods: {
             sceneResize() {
-                this.width = this.$store.state.sceneEditor.sWidth = this.$el.clientWidth;
-                this.height = this.$store.state.sceneEditor.sHeight = this.$el.clientHeight;
+                this.width = this.$store.state.vue3d.sWidth = this.$el.clientWidth;
+                this.height = this.$store.state.vue3d.sHeight = this.$el.clientHeight;
             },
             ray(targets) {
                 this.$store.dispatch('GetSelectedByRay', targets).then(res => {
@@ -77,11 +77,11 @@
         },
         computed: {
             ...mapState({
-                orbit: state => state.sceneEditor.setting.orbit,
-                transform: state => state.sceneEditor.setting.transform,
-                objects: state => state.sceneEditor.data.objects,
-                materials: state => state.sceneEditor.data.materials,
-                selectedObj: state => state.sceneEditor.selected.obj,
+                orbit: state => state.vue3d.setting.orbit,
+                transform: state => state.vue3d.setting.transform,
+                objects: state => state.vue3d.data.objects,
+                materials: state => state.vue3d.data.materials,
+                selectedObj: state => state.vue3d.selected.obj,
             }),
             ...mapGetters({
                 loaded: 'sceneLoaded'
@@ -118,7 +118,7 @@
             },
         },
         mounted() {
-            this.$store.state.sceneEditor.dom = this.$refs.scene;
+            this.$store.state.vue3d.dom = this.$refs.scene;
             this.sceneResize();
             window.addEventListener("resize", this.sceneResize);
         },

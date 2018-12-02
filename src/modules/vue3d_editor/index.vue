@@ -11,9 +11,6 @@
                 <el-tab-pane label="Hierarchy">
                     <panel-hierarchy></panel-hierarchy>
                 </el-tab-pane>
-                <el-tab-pane label="Customized">
-                    <panel-customized></panel-customized>
-                </el-tab-pane>
             </el-tabs>
             <panel-menu></panel-menu>
         </div>
@@ -22,16 +19,18 @@
 </template>
 
 <script>
-    import PanelScene from "@/modules/SceneEditor/panel/Scene";
-    import PanelInspector from "@/modules/SceneEditor/panel/Inspector";
-    import PanelHierarchy from "@/modules/SceneEditor/panel/Hierarchy";
-    import PanelCustomized from "@/modules/SceneEditor/panel/Customized";
-    import PanelMenu from "@/modules/SceneEditor/panel/Menu";
-    import PanelDialog from "@/modules/SceneEditor/panel/Dialog";
+    import PanelScene from "./panel/Scene";
+    import PanelInspector from "./panel/Inspector";
+    import PanelHierarchy from "./panel/Hierarchy";
+    import PanelMenu from "./panel/Menu"
+    import PanelDialog from "./panel/Dialog";
 
     export default {
-        name: "SceneEditor",
-        components: {PanelDialog, PanelMenu, PanelCustomized, PanelHierarchy, PanelInspector, PanelScene},
+        name: "Vue3dEditor",
+        components: {
+            PanelScene,
+            PanelDialog, PanelMenu, PanelHierarchy, PanelInspector
+        },
         destroyed() {
             this.$store.dispatch("SceneClear").then()
         }
@@ -42,7 +41,7 @@
     #scene-editor {
         position: relative;
         width: 100%;
-        height: calc(100vh - 104px);
+        height: 100%;
         overflow: hidden;
     }
 
