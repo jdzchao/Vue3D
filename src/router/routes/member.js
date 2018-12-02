@@ -6,7 +6,7 @@ const member = {
     redirect: '/member/index',
     meta: {
         title: 'member', icon: 'user',
-        roles: ['admin']
+        roles: ['site']
     },
     children: [
         {
@@ -15,7 +15,7 @@ const member = {
             component: () => import(/* webpackChunkName: "member" */'@/views/member/index'),
             meta: {
                 title: 'member_list', icon: 'list', noCache: true,
-                roles: ['admin']
+                roles: ['site']
             }
         },
         {
@@ -24,7 +24,7 @@ const member = {
             component: () => import(/* webpackChunkName: "member" */'@/views/member/index'),
             meta: {
                 title: 'member_role', icon: 'password', noCache: true,
-                roles: ['admin']
+                roles: ['site']
             }
         },
     ]

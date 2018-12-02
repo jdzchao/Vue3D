@@ -12,7 +12,7 @@
 
 <script>
     import {Navbar, Sidebar, AppMain, TagsView} from './control_panel/index'
-    import ResizeMixin from './mixin/ResizeHandler'
+    import ResizeMixin from './_mixin/ResizeHandler'
 
     export default {
         name: 'ControlPanel',
