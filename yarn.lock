@@ -7455,6 +7455,11 @@ q@^1.1.2:
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
 
+qiniu-js@^2.5.3:
+  version "2.5.3"
+  resolved "https://registry.yarnpkg.com/qiniu-js/-/qiniu-js-2.5.3.tgz#986af7a92fcc7f04e80d5d992fd1f091699d0b1f"
+  integrity sha512-PHrackGSagr5oPu/PhkipOVWWeGXowcUhtvBwviKlTeK7lnsBGsK1PD78RDJo9t2woXpeTu9m0LOYmlOsI6O3A==
+
 qs@6.5.1:
   version "6.5.1"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.1.tgz#349cdf6eef89ec45c12d7d5eb3fc0c870343a6d8"

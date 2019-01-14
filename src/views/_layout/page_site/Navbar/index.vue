@@ -1,8 +1,9 @@
 <template>
     <el-menu :default-active="active" mode="horizontal"
              background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
-        <navbar-item v-for="route in permission_routers" :key="route.path" :item="route"
-                     :base-path="route.path"></navbar-item>
+        <template v-for="route in permission_routers" v-if="!route.hidden&&route.children">
+            <navbar-item :key="route.path" :item="route" :base-path="route.path"></navbar-item>
+        </template>
     </el-menu>
 </template>
 
@@ -15,16 +16,13 @@
         components: {NavbarItem},
         data() {
             return {
-                active: '1',
+                active: this.$route.fullPath,
             };
         },
         computed: {
             ...mapGetters([
                 'permission_routers',
             ]),
-        },
-        mounted() {
-            console.log(this.permission_routers)
         }
     }
 </script>

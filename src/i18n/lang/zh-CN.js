@@ -52,6 +52,7 @@ export default {
         member_role: "权限设置",
         mine: "个人设置",
         setting: "系统设置",
+        editor: "编辑器",
     },
     // 站点设置
     site: {

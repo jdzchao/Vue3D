@@ -4,16 +4,19 @@
         <div class="page-container">
             <app-main/>
         </div>
+        <foot-bar></foot-bar>
     </div>
 </template>
 
 <script>
-    import {AppMain, Navbar} from './page_site/index'
+    import {AppMain, Navbar, FootBar} from './page_site/index'
 
     export default {
         name: "PageSite",
         components: {
-            AppMain, Navbar
+            FootBar,
+            AppMain,
+            Navbar
         },
     }
 </script>
