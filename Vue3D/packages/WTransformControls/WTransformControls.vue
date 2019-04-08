@@ -2,7 +2,7 @@
     import THREE from './TransformControls'
     // const THREE = require('three');
     // THREE.TransformControls = require('imports-loader?THREE=three!exports-loader?THREE.TransformControls!./TransformControls');
-    import WMixin from '../_mixins/WMixin'
+    import WMixin from '../../mixins/WMixin'
 
     export default {
         name: "w-transform-controls",

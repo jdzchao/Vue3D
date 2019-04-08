@@ -2,7 +2,7 @@
     import THREE from './OrbitControls'
     // const THREE = require('three');
     // THREE.OrbitControls = require('imports-loader?THREE=three!exports-loader?THREE.OrbitControls!./OrbitControls');
-    import WMixin from '../_mixins/WMixin'
+    import WMixin from '../../mixins/WMixin'
 
     export default {
         name: 'w-orbit-controls',

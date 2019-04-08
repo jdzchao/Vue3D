@@ -1,6 +1,6 @@
 const webpack = require('./webpack.config.js')
 module.exports = {
-    baseUrl: '/',
+    publicPath: '/',
 
     devServer: {
         open: process.platform === 'darwin',

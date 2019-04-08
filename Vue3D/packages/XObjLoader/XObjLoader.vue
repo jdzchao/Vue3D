@@ -1,6 +1,6 @@
 <script>
     import THREE from './OBJLoader'
-    import XMixin from '../_mixins/XMixin'
+    import XMixin from '../../mixins/XMixin'
 
     export default {
         name: 'x-obj-loader',

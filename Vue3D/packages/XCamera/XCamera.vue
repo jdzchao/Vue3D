@@ -5,7 +5,7 @@
 </template>
 <script>
   const THREE = require('three');
-  import XMixin from '../_mixins/XMixin'
+  import XMixin from '../../mixins/XMixin'
 
   export default {
     name: 'x-camera',

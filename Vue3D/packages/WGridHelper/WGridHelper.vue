@@ -1,6 +1,6 @@
 <script>
   const THREE = require('three');
-  import WMixin from '../_mixins/WMixin'
+  import WMixin from '../../mixins/WMixin'
 
   export default {
     name: "w-grid-helper",
