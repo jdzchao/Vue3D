@@ -14,12 +14,12 @@
             id: {type: String, default: 'V3dScene'},
             width: {type: Number, default: 50},
             height: {type: Number, default: 50},
-            backgroundColor: {type: String, default: 'rgb(0,0,0)'},
-            backgroundAlpha: {type: Number, default: 1},
-            buffer: {type: Boolean, default: true},
-            antialias: {type: Boolean, default: true},
+            backgroundColor: {type: String, default: 'rgb(0,0,0)'}, // 背景色
+            backgroundAlpha: {type: Number, default: 1}, // 背景透明度
+            buffer: {type: Boolean, default: true}, //绘图缓冲
+            antialias: {type: Boolean, default: true}, // 抗锯齿
             alpha: {type: Boolean, default: true},
-            auto: {type: Boolean, default: false},
+            autoRender: {type: Boolean, default: false},
         },
         data() {
             return {
@@ -28,14 +28,15 @@
                 renderer: null,
                 rendererDelegation: [],
                 rendererTick: null,
+                cameras: [],
                 camera: null,
                 ready: false,
-
             }
         },
         mounted() {
             this.dom = this.$el;
             this.scene = new THREE.Scene();
+            this.camera = new THREE.ArrayCamera(this.cameras);
             this.renderer = new THREE.WebGLRenderer({
                 preserveDrawingBuffer: this.buffer, //绘图缓冲
                 antialias: this.antialias, // 抗锯齿
@@ -46,8 +47,12 @@
             this.ready = true;
             this.$emit('ready', this.scene);
         },
-        update() {
-            this.render();
+        updated() {
+            if (this.camera) {
+                this.render();
+            } else {
+                console.error("No cameras rendering")
+            }
         },
         methods: {
             render() {
@@ -59,7 +64,7 @@
                         func();
                     });
                     this.renderer.render(this.scene, this.camera);
-                    if (this.auto) {
+                    if (this.autoRender) {
                         this.render();
                     }
                 })

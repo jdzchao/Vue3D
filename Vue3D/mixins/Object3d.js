@@ -18,7 +18,6 @@ export default {
     },
     methods: {
         mount(obj) {
-            console.log(obj)
             if (obj.hasOwnProperty('scene') && obj.hasOwnProperty('camera')) {
                 this.root = obj;
                 this.parent = obj;
