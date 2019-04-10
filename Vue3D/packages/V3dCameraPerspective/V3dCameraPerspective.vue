@@ -5,25 +5,18 @@
 </template>
 
 <script>
+
     import * as THREE from "three"
     import Camera from "../../mixins/Camera";
 
     export default {
-        name: "V3dPerspectiveCamera",
+        name: "V3dCameraPerspective",
         mixins: [Camera],
         props: {
             near: {type: Number, default: 1},
             far: {type: Number, default: 1000},
             dis: {type: Number, default: 100},
             size: {type: Number, default: 100},
-        },
-        created() {
-            this.object3d = new THREE.PerspectiveCamera(this.fov(), this.width / this.height, this.near, this.far);
-            this.object3d.viewport = new THREE.Vector4(this.viewport.x, this.viewport.y, this.viewport.w, this.viewport.h);
-            this.object3d.position.z = this.dis + this.size * 2;
-            this.object3d.target = new THREE.Vector3();
-            this.root.rendererDelegationAdd(this.renderCamera);
-            this.root.cameras.push(this.object3d);
         },
         computed: {
             aspect() {
@@ -35,9 +28,6 @@
             }
         },
         methods: {
-            renderCamera() {
-                this.$emit('update', this.object3d);
-            },
             fov() {
                 let size = this.size;
                 if (this.aspect < 1) {
@@ -48,11 +38,16 @@
                 return Math.atan(size / this.dis / 2) * (180 / Math.PI);
             },
             updateCamera() {
-                this.object3d.fov = this.fov();
-                this.object3d.aspect = this.aspect;
-                this.object3d.updateProjectionMatrix();
+                this.camera.fov = this.fov();
+                this.camera.aspect = this.aspect;
+                this.camera.updateProjectionMatrix();
             }
-        }
+        },
+        created() {
+            this.camera = new THREE.PerspectiveCamera(this.fov(), this.width / this.height, this.near, this.far);
+            this.camera.position.z = this.dis + this.size * 2;
+            this.camera.target = new THREE.Vector3();
+        },
 
     }
 </script>
