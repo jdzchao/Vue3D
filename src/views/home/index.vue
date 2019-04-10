@@ -2,10 +2,10 @@
     <v3d-scene :width="width" :height="height" ref="scene">
         <v3d-camera-perspective :dis="2" :size="1" :width="500" :height="500">
             <v-orbit-controls :max="1000"></v-orbit-controls>
-            <v3d-light-directional :helper="true"></v3d-light-directional>
+<!--            <v3d-light-directional :helper="true"></v3d-light-directional>-->
         </v3d-camera-perspective>
         <v3d-geom-cylinder :material="Materials.ceramic()" :radialSegments="50"></v3d-geom-cylinder>
-        <v3d-light-rect-area :helper="true" color="rgb(255,0,0)"></v3d-light-rect-area>
+        <v3d-light-rect-area :helper="false" color="rgb(255,0,0)"></v3d-light-rect-area>
     </v3d-scene>
 </template>
 

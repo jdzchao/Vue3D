@@ -5,7 +5,8 @@
 </template>
 
 <script>
-    import THREE from "./RectAreaLightUniformsLib"
+    import * as THREE from "three"
+    import "./RectAreaLightUniformsLib"
     import Light from "../../mixins/Light"
 
     export default {
