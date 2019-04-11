@@ -45,8 +45,8 @@
         },
         created() {
             this.camera = new THREE.PerspectiveCamera(this.fov(), this.width / this.height, this.near, this.far);
-            this.camera.position.z = this.dis + this.size * 2;
-            this.camera.target = new THREE.Vector3();
+            this.camera.layer = this.layer;
+            // this.camera.position.z = this.dis + this.size * 2;
         },
 
     }

@@ -10,22 +10,24 @@ export default {
     },
     data() {
         return {
-            _keyPoint: 'light',
-            _helper: null,
+            V$keyPoint: 'light',
             light: null,
+            lightHelper: null,
         }
     },
     methods: {
         setHelper() {
-            this.object3d = this.light;
-            console.info("Undefined function 'setHelper' in Light Component")
+            // console.info("Undefined function 'setHelper' in Light Component")
+            this.addObject3d(this.lightHelper, true);
+            this.root.rendererDelegationAdd(() => {
+                this.lightHelper.update()
+            })
         }
     },
     beforeMount() {
+        this.object3d = this.light;
         if (this.helper) {
             this.setHelper();
-        } else {
-            this.object3d = this.light;
         }
     }
 }

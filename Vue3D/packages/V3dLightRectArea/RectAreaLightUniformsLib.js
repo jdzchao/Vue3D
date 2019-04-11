@@ -1,5 +1,3 @@
-const THREE = require('three');
-
 /**
  * Uniforms library for RectAreaLight shared webgl shaders
  * @author abelnation
@@ -19,7 +17,7 @@ const THREE = require('three');
 // by Eric Heitz, Jonathan Dupuy, Stephen Hill and David Neubelt
 // code: https://github.com/selfshadow/ltc_code/
 
-(function () {
+export default function (THREE) {
 
     // source: https://github.com/selfshadow/ltc_code/tree/master/fit/results/ltc.js
 
@@ -45,7 +43,4 @@ const THREE = require('three');
 
     Object.assign(THREE.ShaderLib.standard.uniforms, ltc);
     Object.assign(THREE.ShaderLib.physical.uniforms, ltc);
-
-})()
-
-export default THREE
+}

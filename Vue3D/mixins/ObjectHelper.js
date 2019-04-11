@@ -5,7 +5,7 @@ export default {
             active: false,
             parent: null, // 挂载的父节点
             root: null,
-            keyPoint: "object3d"
+            keyPoint: "object3d" // 设置挂载检测点
         }
     },
     created() {

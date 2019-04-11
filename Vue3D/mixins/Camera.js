@@ -9,18 +9,19 @@ export default {
         y: {type: Number, default: 0},
         width: {type: Number, default: 100},
         height: {type: Number, default: 100},
-        distance: {type: Number, default: 100}
+        distance: {type: Number, default: 100},
+        layer: {type: Number, default: 1},
     },
     data() {
         return {
-            _keyPoint: 'camera',
+            V$keyPoint: 'camera',
             camera: null,
-            layers: 1,
-            viewport: {x: this.x, y: this.y, w: this.width, h: this.height}
         }
     },
     beforeMount() {
+        this.camera.layer = this.layer;
         this.camera.viewport = new THREE.Vector4(this.x, this.y, this.width, this.height);
+        console.log(this.camera.viewport);
         this.object3d = this.camera;
         this.root.cameras.push(this.camera);
     }
