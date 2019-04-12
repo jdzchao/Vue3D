@@ -7,6 +7,7 @@
 
 <script>
     import * as THREE from 'three'
+    import {Bus} from "_v3d/index";
 
     export default {
         name: "V3dScene",
@@ -46,6 +47,7 @@
             this.rendererDelegationAdd(this.updateRenderer);
             this.ready = true;
             this.$emit('ready', this.scene);
+            Bus.$on("render", this.render);
         },
         updated() {
             if (this.camera) {
@@ -55,6 +57,9 @@
             }
         },
         methods: {
+            debug(obj) {
+                console.log(obj)
+            },
             render() {
                 if (this.rendererDelegation.length < 1) return;
                 if (this.rendererTick) return;

@@ -11,7 +11,6 @@ export default {
     },
     data() {
         return {
-            V$keyPoint: 'geometry',
             geometry: null
         }
     },

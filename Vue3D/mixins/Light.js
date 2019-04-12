@@ -10,7 +10,6 @@ export default {
     },
     data() {
         return {
-            V$keyPoint: 'light',
             light: null,
             lightHelper: null,
         }

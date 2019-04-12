@@ -1,5 +1,3 @@
-import {Vector3} from "three";
-
 export default {
     name: "Object3d",
     props: {
@@ -30,7 +28,6 @@ export default {
     },
     data() {
         return {
-            V$keyPoint: 'object3d', // 挂载检测点
             V$autoSlot: true, // 自动挂载到当前节点
             active: true, // 是否激活组件
             name: "", // 组件名称
@@ -41,40 +38,52 @@ export default {
         }
     },
     watch: {
-        "position.x"(val) {
+        "position.x"(val, oldVal) {
+            if (val === oldVal) return;
             this.V$setPosition();
         },
-        "position.y"(val) {
+        "position.y"(val, oldVal) {
+            if (val === oldVal) return;
             this.V$setPosition();
         },
-        "position.z"(val) {
+        "position.z"(val, oldVal) {
+            if (val === oldVal) return;
             this.V$setPosition();
         },
-        "rotation.x"(val) {
+        "rotation.x"(val, oldVal) {
+            if (val === oldVal) return;
             this.V$setRotation();
         },
-        "rotation.y"(val) {
+        "rotation.y"(val, oldVal) {
+            if (val === oldVal) return;
             this.V$setRotation();
         },
-        "rotation.z"(val) {
+        "rotation.z"(val, oldVal) {
+            if (val === oldVal) return;
             this.V$setRotation();
         },
-        "scale.x"(val) {
+        "scale.x"(val, oldVal) {
+            if (val === oldVal) return;
             this.V$setScale();
         },
-        "scale.y"(val) {
+        "scale.y"(val, oldVal) {
+            if (val === oldVal) return;
             this.V$setScale();
         },
-        "scale.z"(val) {
+        "scale.z"(val, oldVal) {
+            if (val === oldVal) return;
             this.V$setScale();
         },
-        "target.x"(val) {
+        "target.x"(val, oldVal) {
+            if (val === oldVal) return;
             this.V$setTarget();
         },
-        "target.y"(val) {
+        "target.y"(val, oldVal) {
+            if (val === oldVal) return;
             this.V$setTarget();
         },
-        "target.z"(val) {
+        "target.z"(val, oldVal) {
+            if (val === oldVal) return;
             this.V$setTarget();
         },
     },

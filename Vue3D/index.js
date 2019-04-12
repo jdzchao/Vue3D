@@ -11,12 +11,14 @@ import V3dLightDirectional from "./packages/V3dLightDirectional" // Directional 
 import V3dLightRectArea from "./packages/V3dLightRectArea" // RectArea Light
 import V3dLightSpot from "./packages/V3dLightSpot" // Spot Light
 // Helper
-import VOrbitControls from "./packages/VOrbitControls"
+import V4hOrbitControls from "./packages/V4hOrbitControls"
 // 工具
-import Materials from './packages/Materials'
-import Utils from './packages/Utils'
+import Bus from './utils/Bus' // 事件总线
+import Materials from './utils/Materials'
+import Utils from './utils/Utils'
 
 export {
+    Bus,
     V3dScene,
     V3dCameraPerspective,
     V3dGeomBox,
@@ -25,20 +27,16 @@ export {
     V3dLightDirectional,
     V3dLightRectArea,
     V3dLightSpot,
-    VOrbitControls,
+    V4hOrbitControls,
     Materials
 };
 
 /**
  * 全局加载
  */
-const $vue3d = {
-    Utils, Materials
-};
-
 const Vue3D = {
     install: function (Vue, options) {
-        Vue.prototype.$vue3d = $vue3d;
+        Vue.prototype.$bus = Bus;
         Vue.component("v3d-scene", V3dScene);
         Vue.component("v3d-camera-perspective", V3dCameraPerspective);
         Vue.component("v3d-geom-box", V3dGeomBox);
@@ -47,7 +45,7 @@ const Vue3D = {
         Vue.component("v3d-light-directional", V3dLightDirectional);
         Vue.component("v3d-light-rect-area", V3dLightRectArea);
         Vue.component("v3d-light-spot", V3dLightSpot);
-        Vue.component("v-orbit-controls", VOrbitControls);
+        Vue.component("v4h-orbit-controls", V4hOrbitControls);
     }
 };
 

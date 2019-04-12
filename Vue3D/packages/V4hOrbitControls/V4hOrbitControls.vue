@@ -1,10 +1,9 @@
-<template></template>
 <script>
     import THREE from "./OrbitControls"
     import ObjectHelper from "../../mixins/ObjectHelper"
 
     export default {
-        name: "VOrbitControls",
+        name: "V4hOrbitControls",
         mixins: [ObjectHelper],
         props: {
             min: {type: Number, default: 10},
@@ -12,16 +11,18 @@
             enable: {type: Boolean, default: true},
             enableKeys: {type: Boolean, default: false},
             autoRotate: {type: Boolean, default: false},
+            index: {type: Number, default: 0},
         },
         data() {
             return {
-                keyPoint: 'camera',
+                camera: [],
                 control: null
             }
         },
         mounted() {
             if (this.active) {
-                this.control = new THREE.OrbitControls(this.$parent.camera, this.root.dom);
+                this.camera = this.root.camera.cameras[this.index];
+                this.control = new THREE.OrbitControls(this.camera, this.root.dom);
                 this.control.addEventListener('change', this.root.render, false);
                 this.control.type = 'orbit';
                 this.control.minDistance = this.min;
@@ -33,15 +34,15 @@
             }
         },
         watch: {
-            enable(val) {
+            enable() {
                 if (!this.active) return;
                 this.control.enabled = this.enable;
             },
-            enableKeys(val) {
+            enableKeys() {
                 if (!this.active) return;
                 this.control.enableKeys = this.enableKeys;
             },
-            autoRotate(val) {
+            autoRotate() {
                 if (!this.active) return;
                 this.control.autoRotate = this.autoRotate;
             }
@@ -51,8 +52,8 @@
                 this.control.update();
             },
             render() {
-                if (this.parent) {
-                    this.parent.render()
+                if (this.root) {
+                    this.root.render()
                 }
             }
         }

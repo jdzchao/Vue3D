@@ -12,7 +12,7 @@ let mtl = {
         });
     },
     standard: function () {
-        return new THREE.MeshStandardMaterial({color: 0xA00000, roughness: 0, metalness: 0});
+        return new THREE.MeshStandardMaterial({color: "rgb(255,255,255)", roughness: 0, metalness: 0});
     },
     glass: function () {
         return new THREE.MeshPhongMaterial({
