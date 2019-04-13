@@ -11,17 +11,14 @@
             enable: {type: Boolean, default: true},
             enableKeys: {type: Boolean, default: false},
             autoRotate: {type: Boolean, default: false},
-            index: {type: Number, default: 0},
         },
         data() {
             return {
-                camera: [],
                 control: null
             }
         },
         mounted() {
             if (this.active) {
-                this.camera = this.root.camera.cameras[this.index];
                 this.control = new THREE.OrbitControls(this.camera, this.root.dom);
                 this.control.addEventListener('change', this.root.render, false);
                 this.control.type = 'orbit';

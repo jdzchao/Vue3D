@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-export default event = new Vue({
+const Bus = new Vue({
     data: {
         status: 0
     },
@@ -19,3 +19,4 @@ export default event = new Vue({
         }
     }
 });
+export default Bus

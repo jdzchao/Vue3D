@@ -28,15 +28,15 @@ Vue.use(Vue3D);
 任意组件中
 ``` vue
 <template>
-  <v-scene>
+  <v3d-scene>
     <vue3d-components></vue3d-components>
-  </v-scene>
+  </v3d-scene>
 </template>
 
 <script>
 export default {
    components: {
-      VScene,
+      V3dScene,
       ... // Vue3dComponents
    },
 }
@@ -47,7 +47,7 @@ export default {
 ```
 ### javascript
 ``` bash
-import {VScene, XCamera, XLight, ...} from 'vue3d'
+import {V3dScene, V3dCamera, V3dLight, ...} from 'vue3d'
 import {Materials,Utils} from 'vue3d' // 也可以按需引用模型材质和辅助工具
 ```
 

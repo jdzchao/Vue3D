@@ -36,7 +36,9 @@
         },
         mounted() {
             this.dom = this.$el;
-            this.scene = new THREE.Scene();
+            let scene = new THREE.Scene();
+            this.scene = new THREE.Scene()
+            scene.add(this.scene);
             this.camera = new THREE.ArrayCamera(this.cameras);
             this.renderer = new THREE.WebGLRenderer({
                 preserveDrawingBuffer: this.buffer, //绘图缓冲
@@ -46,7 +48,7 @@
             });
             this.rendererDelegationAdd(this.updateRenderer);
             this.ready = true;
-            this.$emit('ready', this.scene);
+            this.$emit('ready', scene);
             Bus.$on("render", this.render);
         },
         updated() {
@@ -57,9 +59,6 @@
             }
         },
         methods: {
-            debug(obj) {
-                console.log(obj)
-            },
             render() {
                 if (this.rendererDelegation.length < 1) return;
                 if (this.rendererTick) return;

@@ -11,7 +11,11 @@ import V3dLightDirectional from "./packages/V3dLightDirectional" // Directional 
 import V3dLightRectArea from "./packages/V3dLightRectArea" // RectArea Light
 import V3dLightSpot from "./packages/V3dLightSpot" // Spot Light
 // Helper
+import V4hBox from "./packages/V4hBox"
+import V4hGrid from "./packages/V4hGrid"
 import V4hOrbitControls from "./packages/V4hOrbitControls"
+import V4hRayCast from "./packages/V4hRayCast"
+import V4hSkyBox from "./packages/V4hSkyBox";
 // 工具
 import Bus from './utils/Bus' // 事件总线
 import Materials from './utils/Materials'
@@ -27,7 +31,11 @@ export {
     V3dLightDirectional,
     V3dLightRectArea,
     V3dLightSpot,
+    V4hBox,
+    V4hGrid,
     V4hOrbitControls,
+    V4hRayCast,
+    V4hSkyBox,
     Materials
 };
 
@@ -45,7 +53,11 @@ const Vue3D = {
         Vue.component("v3d-light-directional", V3dLightDirectional);
         Vue.component("v3d-light-rect-area", V3dLightRectArea);
         Vue.component("v3d-light-spot", V3dLightSpot);
+        Vue.component("v4h-box", V4hBox);
+        Vue.component("v4h-grid", V4hGrid);
         Vue.component("v4h-orbit-controls", V4hOrbitControls);
+        Vue.component("V4h-ray-cast", V4hRayCast);
+        Vue.component("V4h-sky-box", V4hSkyBox);
     }
 };
 
