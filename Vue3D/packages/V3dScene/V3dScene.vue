@@ -26,6 +26,7 @@
             return {
                 dom: null,
                 scene: null,
+                scene_static: null,
                 renderer: null,
                 rendererDelegation: [],
                 rendererTick: null,
@@ -36,9 +37,9 @@
         },
         mounted() {
             this.dom = this.$el;
-            let scene = new THREE.Scene();
+            this.scene_static = new THREE.Scene();
             this.scene = new THREE.Scene()
-            scene.add(this.scene);
+            this.scene.add(this.scene_static);
             this.camera = new THREE.ArrayCamera(this.cameras);
             this.renderer = new THREE.WebGLRenderer({
                 preserveDrawingBuffer: this.buffer, //绘图缓冲
@@ -48,7 +49,7 @@
             });
             this.rendererDelegationAdd(this.updateRenderer);
             this.ready = true;
-            this.$emit('ready', scene);
+            this.$emit('ready', this.scene_static);
             Bus.$on("render", this.render);
         },
         updated() {
@@ -67,7 +68,7 @@
                     this.rendererDelegation.forEach((func) => {
                         func();
                     });
-                    this.renderer.render(this.scene, this.camera);
+                    this.renderer.render(this.scene_static, this.camera);
                     if (this.autoRender) {
                         this.render();
                     }

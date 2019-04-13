@@ -66,7 +66,7 @@
             }
         },
         mounted() {
-            console.log(this.$refs.scene.scene);
+            console.log(this.$refs.scene.scene_static);
         }
     }
 </script>
