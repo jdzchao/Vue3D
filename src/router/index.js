@@ -14,7 +14,7 @@ Vue.use(Router);
 export const asyncRouterMap = [
     // member,
     // setting,
-    vue3d,
+    // vue3d,
     error,
     {path: '*', redirect: '/error', hidden: true},
 ]

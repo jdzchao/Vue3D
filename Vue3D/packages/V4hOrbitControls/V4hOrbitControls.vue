@@ -1,10 +1,11 @@
 <script>
     import THREE from "./OrbitControls"
-    import ObjectHelper from "../../mixins/ObjectHelper"
+    import Helper from "../../mixins/Helper"
+    import {Vue3d} from "../../index";
 
     export default {
         name: "V4hOrbitControls",
-        mixins: [ObjectHelper],
+        mixins: [Helper],
         props: {
             min: {type: Number, default: 10},
             max: {type: Number, default: 500},
@@ -19,15 +20,18 @@
         },
         mounted() {
             if (this.active) {
-                this.control = new THREE.OrbitControls(this.camera, this.root.dom);
+                console.log(this.camera, "debug");
+                this.control = new THREE.OrbitControls(this.camera, this.V$dom);
+
                 this.control.addEventListener('change', this.root.render, false);
+
                 this.control.type = 'orbit';
                 this.control.minDistance = this.min;
                 this.control.maxDistance = this.max;
                 this.control.enabled = this.enable;
                 this.control.enableKeys = this.enableKeys;
                 this.control.autoRotate = this.autoRotate;
-                this.root.rendererDelegationAdd(this.updateControls);
+                Vue3d.$on("render", this.updateControls);
             }
         },
         watch: {

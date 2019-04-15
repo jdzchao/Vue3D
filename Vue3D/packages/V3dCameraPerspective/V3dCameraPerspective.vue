@@ -8,7 +8,7 @@
 
     import * as THREE from "three"
     import Camera from "../../mixins/Camera";
-    import {Bus} from "../../index"
+    import {Vue3d} from "../../common"
 
     export default {
         name: "V3dCameraPerspective",
@@ -46,7 +46,6 @@
         },
         created() {
             this.camera = new THREE.PerspectiveCamera(this.fov(), this.width / this.height, this.near, this.far);
-            // this.camera.position.z = this.dis + this.size * 2;
         },
 
     }

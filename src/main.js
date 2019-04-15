@@ -6,6 +6,7 @@ import store from './store'
 import ElementUI from 'element-ui'
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 import 'element-ui/lib/theme-chalk/index.css'
+import Vue3D from '../Vue3D'
 
 import '@/assets/styles/index.scss' // global css
 import '@/assets/icon-font' //icon font
@@ -16,6 +17,7 @@ import '@/utils/global'
 
 import i18n from './i18n'
 
+Vue.use(Vue3D);
 Vue.use(ElementUI, {
     i18n: (key, value) => i18n.t(key, value)
 })

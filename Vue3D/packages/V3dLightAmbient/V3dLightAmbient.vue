@@ -1,5 +1,8 @@
-<template></template>
-
+<template>
+    <object :name="$options.name" style="display:none;">
+        <slot v-if="slot"></slot>
+    </object>
+</template>
 <script>
     import * as THREE from "three"
     import Light from "../../mixins/Light"

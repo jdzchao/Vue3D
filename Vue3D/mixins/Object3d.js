@@ -1,3 +1,6 @@
+import {Vue3d} from '../index'
+import {Object3D} from '../common'
+
 export default {
     name: "Object3d",
     props: {
@@ -28,12 +31,13 @@ export default {
     },
     data() {
         return {
+            V$proto: Object3D,
             V$autoSlot: true, // 自动挂载到当前节点
+            scene: null, // mounted scene
             active: true, // 是否激活组件
             name: "", // 组件名称
             object3d: null, // 当前三维对象
             parent: null, // 父级三维对象
-            root: null, // 根场景
             slot: false, // 是否挂载子节点
         }
     },
@@ -90,14 +94,18 @@ export default {
     methods: {
         // 根据vue组件递归查询scene节点
         V$recursion(obj) {
-            if (obj.hasOwnProperty('scene') && obj.hasOwnProperty('camera')) {
-                this.root = obj;
+            if (!obj.hasOwnProperty("$parent")) {
+                console.error("Vue3D component must slot in V3dScene component");
+                return;
+            }
+            if (obj.hasOwnProperty('V$scene')) {
+                this.scene = obj.V$scene
                 this.parent = obj;
-            } else if (obj.hasOwnProperty('root') && obj.hasOwnProperty('object3d')) {
-                this.root = obj.root;
+            } else if (obj.hasOwnProperty("scene") && obj.hasOwnProperty('object3d')) {
+                this.scene = obj.scene
                 this.parent = obj;
             } else {
-                this.recursion(obj.$parent);
+                this.V$recursion(obj.$parent);
             }
         },
         // 插槽中添加三维对象
@@ -129,9 +137,10 @@ export default {
             if (inNode && this.parent.hasOwnProperty('object3d')) {
                 this.parent.object3d.add(object3d);
             } else {
-                this.root.scene.add(object3d);
+                this.V$scene.add(object3d);
             }
-            this.root.rendererDelegationAdd(this.onRender);
+            Vue3d.$on("update", this.onRender);
+            // this.root.rendererDelegationAdd(this.onRender);
         },
         removeObject3d(object3d, inNode) {
             if (inNode && this.parent.hasOwnProperty('object3d')) {
@@ -139,7 +148,8 @@ export default {
             } else {
                 this.removeObject3d(object3d);
             }
-            this.root.rendererDelegationRemove(this.onRender);
+            Vue3d.$off("update", this.onRender);
+            // this.root.rendererDelegationRemove(this.onRender);
         },
         // 激活插槽
         slotIn() {
@@ -151,9 +161,7 @@ export default {
         },
         // 渲染
         render() {
-            if (this.root) {
-                this.root.render()
-            }
+            Vue3d.$emit('render');
         },
         onReady() {
             this.$emit('ready', this.object3d);
@@ -166,7 +174,7 @@ export default {
         }
     },
     created() {
-        if (!this.root || !this.parent) {
+        if (!this.parent) {
             this.V$recursion(this.$parent)
         }
     },
@@ -192,5 +200,8 @@ export default {
     destroyed() {
         this.slotOut();
         this.V$removeObject3d(this.object3d);
+    },
+    render() {
+        return null
     }
 }

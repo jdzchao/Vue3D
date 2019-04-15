@@ -1,27 +1,28 @@
 export default {
-    name: "ObjectHelper",
+    name: "Helper",
     props: {
         camera_index: {type: Number, default: 0}
     },
     data() {
         return {
             active: false,
-            root: null,
+            dom: null,
             scene: null,
             camera: null,
         }
     },
     created() {
-        if (!this.root) {
+        if (!this.scene) {
             this.setActive(this.$parent);
         }
     },
     methods: {
         setActive(vnode) {
-            if (vnode.hasOwnProperty('scene')) {
-                this.root = vnode;
-                this.scene = vnode.scene;
+            if (vnode.hasOwnProperty('V$scene')) {
+                this.dom = vnode.V$dom;
+                this.scene = vnode.V$scene;
                 this.camera = vnode.cameras[this.camera_index];
+                console.log(vnode.cameras, "debug");
                 this.active = true;
             } else {
                 console.error(this.$options.name + " should slot on scene node");

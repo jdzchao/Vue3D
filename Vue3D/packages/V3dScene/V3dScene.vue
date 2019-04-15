@@ -1,18 +1,22 @@
 <template>
-    <canvas :id="id">
-        <slot v-if="ready"></slot>
+    <canvas v-bind="$attrs">
         Sorry, your web browser does not support WebGL
+        <stand-scene>
+            <slot v-if="start" name="v3d"></slot>
+        </stand-scene>
+        <slot v-if="start" name="v4h"></slot>
     </canvas>
 </template>
 
 <script>
     import * as THREE from 'three'
-    import {Bus} from "_v3d/index";
+    import {Vue3d} from "../../common";
+    import StandScene from "./StandardScene";
 
     export default {
         name: "V3dScene",
+        components: {StandScene},
         props: {
-            id: {type: String, default: 'V3dScene'},
             width: {type: Number, default: 50},
             height: {type: Number, default: 50},
             backgroundColor: {type: String, default: 'rgb(0,0,0)'}, // 背景色
@@ -20,81 +24,59 @@
             buffer: {type: Boolean, default: true}, //绘图缓冲
             antialias: {type: Boolean, default: true}, // 抗锯齿
             alpha: {type: Boolean, default: true},
-            autoRender: {type: Boolean, default: false},
         },
         data() {
             return {
-                dom: null,
-                scene: null,
-                scene_static: null,
+                /* protected */
+                V$dom: null,
+                V$scene: null, // root scene
+                V$cameras: null, // Array Camera
+                /* public */
+                scene: null, // standard scene
+                cameras: [], // Camera Array
                 renderer: null,
-                rendererDelegation: [],
-                rendererTick: null,
-                cameras: [],
-                camera: null,
-                ready: false,
+                /* status */
+                start: false,
             }
         },
         mounted() {
-            this.dom = this.$el;
-            this.scene_static = new THREE.Scene();
-            this.scene = new THREE.Scene()
-            this.scene.add(this.scene_static);
-            this.camera = new THREE.ArrayCamera(this.cameras);
-            this.renderer = new THREE.WebGLRenderer({
-                preserveDrawingBuffer: this.buffer, //绘图缓冲
-                antialias: this.antialias, // 抗锯齿
-                alpha: this.alpha,
-                canvas: this.dom
-            });
-            this.rendererDelegationAdd(this.updateRenderer);
-            this.ready = true;
-            this.$emit('ready', this.scene_static);
-            Bus.$on("render", this.render);
+            this.init(); // 初始化
+            Vue3d.render(); // 渲染第一帧
+            Vue3d.$on("update", this.updateRenderer);
+            Vue3d.$on("render", Vue3d.render);
         },
         updated() {
-            if (this.camera) {
-                this.render();
+            if (this.cameras) {
+                Vue3d.render();
             } else {
                 console.error("No cameras rendering")
             }
         },
         methods: {
-            render() {
-                if (this.rendererDelegation.length < 1) return;
-                if (this.rendererTick) return;
-                this.rendererTick = requestAnimationFrame(() => {
-                    this.rendererTick = null;
-                    this.rendererDelegation.forEach((func) => {
-                        func();
-                    });
-                    this.renderer.render(this.scene_static, this.camera);
-                    if (this.autoRender) {
-                        this.render();
-                    }
-                })
+            init() {
+                this.V$dom = this.$el;
+                this.V$scene = new THREE.Scene();
+                this.V$cameras = new THREE.ArrayCamera(this.cameras);
+                console.log(this.cameras, "start");
+                this.scene = new THREE.Scene();
+                this.V$scene.add(this.scene);
+                // 加载渲染器
+                this.renderer = new THREE.WebGLRenderer({
+                    preserveDrawingBuffer: this.buffer, //绘图缓冲
+                    antialias: this.antialias, // 抗锯齿
+                    alpha: this.alpha,
+                    canvas: this.V$dom
+                });
+                this.start = true;
+                Vue3d.start();
             },
             updateRenderer() {
                 this.renderer.setSize(this.width, this.height);
                 this.renderer.setPixelRatio(window.devicePixelRatio || 1);
                 this.renderer.setClearColor(new THREE.Color(this.backgroundColor).getHex());
                 this.renderer.setClearAlpha(this.backgroundAlpha);
+                Vue3d.pure ? this.renderer.render(this.scene, this.V$cameras) : this.renderer.render(this.V$scene, this.V$cameras);
             },
-            rendererDelegationAdd(func) {
-                if (typeof func === 'function') {
-                    this.rendererDelegation.push(func);
-                } else {
-                    console.error('error type function');
-                }
-            },
-            rendererDelegationRemove(func) {
-                let index = this.rendererDelegation.indexOf(func);
-                if (index >= 0) {
-                    this.rendererDelegation.slice(index, 1);
-                } else {
-                    console.warn('function is not found in the delegation');
-                }
-            }
         }
     }
 </script>

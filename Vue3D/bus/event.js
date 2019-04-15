@@ -1,10 +1,9 @@
-import Vue from 'vue'
-
-const Bus = new Vue({
-    data: {
-        status: 0
-    },
+/**
+ * 总线事件委托
+ */
+export default {
     methods: {
+        /* 事件代理 */
         emit(event, ...args) {
             this.$emit(event, ...args)
         },
@@ -16,7 +15,6 @@ const Bus = new Vue({
         },
         once(event, callback) {
             this.$once(event, callback)
-        }
+        },
     }
-});
-export default Bus
+}
