@@ -4,14 +4,14 @@
             <v3d-light-ambient :intensity="0.2"></v3d-light-ambient>
             <v3d-camera-perspective ref="camera" :dis="10" :size="1" :x="0" :y="0" :width="500" :height="500"
                                     @ready="setCamera">
-                <v3d-light-rect-area :width="100" :height="100" :intensity="2"
-                                     :target="{x:5,y:0,z:0}" :position="{x:0,y:0,z:10}"></v3d-light-rect-area>
-            </v3d-camera-perspective>
 
+            </v3d-camera-perspective>
+            <v3d-light-rect-area :width="100" :height="100" :intensity="1"
+                                 :target="{x:5,y:0,z:0}" :position="{x:0,y:0,z:10}"></v3d-light-rect-area>
             <v3d-geom-cylinder :material="Materials.standard()" :radialSegments="50"></v3d-geom-cylinder>
         </template>
         <v4h-orbit-controls slot="v4h" :index="0" :max="1000"></v4h-orbit-controls>
-<!--        <v4h-ray-cast slot="v4h" @cast="cast"></v4h-ray-cast>-->
+        <!--        <v4h-ray-cast slot="v4h" @cast="cast"></v4h-ray-cast>-->
         <v4h-grid slot="v4h"></v4h-grid>
     </v3d-scene>
 </template>
