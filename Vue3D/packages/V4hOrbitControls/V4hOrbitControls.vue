@@ -20,10 +20,9 @@
         },
         mounted() {
             if (this.active) {
-                console.log(this.camera, "debug");
                 this.control = new THREE.OrbitControls(this.camera, this.V$dom);
 
-                this.control.addEventListener('change', this.root.render, false);
+                this.control.addEventListener('change', this.render, false);
 
                 this.control.type = 'orbit';
                 this.control.minDistance = this.min;
@@ -31,7 +30,7 @@
                 this.control.enabled = this.enable;
                 this.control.enableKeys = this.enableKeys;
                 this.control.autoRotate = this.autoRotate;
-                Vue3d.$on("render", this.updateControls);
+                Vue3d.$on("update", this.updateControls);
             }
         },
         watch: {
@@ -53,8 +52,8 @@
                 this.control.update();
             },
             render() {
-                if (this.root) {
-                    this.root.render()
+                if (this.scene) {
+                    Vue3d.$emit("render");
                 }
             }
         }

@@ -33,9 +33,9 @@ export default {
         return {
             V$proto: Object3D,
             V$autoSlot: true, // 自动挂载到当前节点
-            scene: null, // mounted scene
             active: true, // 是否激活组件
             name: "", // 组件名称
+            scene: null, // mounted scene
             object3d: null, // 当前三维对象
             parent: null, // 父级三维对象
             slot: false, // 是否挂载子节点
@@ -99,10 +99,10 @@ export default {
                 return;
             }
             if (obj.hasOwnProperty('V$scene')) {
-                this.scene = obj.V$scene
+                this.scene = obj.V$scene;
                 this.parent = obj;
             } else if (obj.hasOwnProperty("scene") && obj.hasOwnProperty('object3d')) {
-                this.scene = obj.scene
+                this.scene = obj.scene;
                 this.parent = obj;
             } else {
                 this.V$recursion(obj.$parent);
@@ -137,7 +137,7 @@ export default {
             if (inNode && this.parent.hasOwnProperty('object3d')) {
                 this.parent.object3d.add(object3d);
             } else {
-                this.V$scene.add(object3d);
+                this.scene.add(object3d);
             }
             Vue3d.$on("update", this.onRender);
             // this.root.rendererDelegationAdd(this.onRender);

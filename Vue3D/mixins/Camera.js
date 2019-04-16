@@ -1,4 +1,5 @@
 import * as THREE from "three"
+import {Vue3d} from "../common";
 import Object3d from "./Object3d"
 
 export default {
@@ -20,6 +21,7 @@ export default {
         // this.camera.layer = this.layer;
         this.camera.viewport = new THREE.Vector4(this.x, this.y, this.width, this.height);
         this.object3d = this.camera;
-        this.root.cameras.push(this.camera);
+        Vue3d.$emit("add-camera", this.camera);
+        // this.root.cameras.push(this.camera);
     }
 }

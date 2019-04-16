@@ -1,8 +1,8 @@
 <template>
     <canvas v-bind="$attrs">
         Sorry, your web browser does not support WebGL
-        <stand-scene>
-            <slot v-if="start" name="v3d"></slot>
+        <stand-scene v-if="start">
+            <slot name="hierarchy"></slot>
         </stand-scene>
         <slot v-if="start" name="v4h"></slot>
     </canvas>
@@ -44,6 +44,7 @@
             Vue3d.render(); // 渲染第一帧
             Vue3d.$on("update", this.updateRenderer);
             Vue3d.$on("render", Vue3d.render);
+            Vue3d.$on("add-camera", this.addCamera);
         },
         updated() {
             if (this.cameras) {
@@ -57,7 +58,6 @@
                 this.V$dom = this.$el;
                 this.V$scene = new THREE.Scene();
                 this.V$cameras = new THREE.ArrayCamera(this.cameras);
-                console.log(this.cameras, "start");
                 this.scene = new THREE.Scene();
                 this.V$scene.add(this.scene);
                 // 加载渲染器
@@ -77,6 +77,9 @@
                 this.renderer.setClearAlpha(this.backgroundAlpha);
                 Vue3d.pure ? this.renderer.render(this.scene, this.V$cameras) : this.renderer.render(this.V$scene, this.V$cameras);
             },
+            addCamera(camera) {
+                this.cameras.push(camera);
+            }
         }
     }
 </script>

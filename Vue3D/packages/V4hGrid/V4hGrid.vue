@@ -1,10 +1,10 @@
 <script>
     import *as THREE from "three"
-    import ObjectHelper from "../../mixins/Helper"
+    import Helper from "../../mixins/Helper"
 
     export default {
         name: "V4hGrid",
-        mixins: [ObjectHelper],
+        mixins: [Helper],
         props: {
             size: {type: Number, default: 1000},
             divisions: {type: Number, default: 10},
@@ -17,6 +17,7 @@
             }
         },
         mounted() {
+            console.log("grid");
             this.grid = new THREE.GridHelper(this.size, this.divisions, this.colorCenterLine, this.colorGrid);
             this.scene.add(this.grid);
         }

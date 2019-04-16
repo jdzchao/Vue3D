@@ -22,7 +22,6 @@ export default {
                 this.dom = vnode.V$dom;
                 this.scene = vnode.V$scene;
                 this.camera = vnode.cameras[this.camera_index];
-                console.log(vnode.cameras, "debug");
                 this.active = true;
             } else {
                 console.error(this.$options.name + " should slot on scene node");

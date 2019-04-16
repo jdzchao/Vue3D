@@ -1,5 +1,5 @@
 <template>
-    <object name="stand-scene">
+    <object name="scene">
         <slot></slot>
     </object>
 </template>
@@ -8,9 +8,8 @@
         name: "StandardScene",
         data() {
             return {
-                V$dom: this.$parent.dom,
+                V$dom: this.$parent.V$dom,
                 V$scene: this.$parent.scene,
-
             }
         }
     }
