@@ -1,7 +1,6 @@
 <script>
     import THREE from "./OrbitControls"
     import Helper from "../../mixins/Helper"
-    import {Vue3d} from "../../index";
 
     export default {
         name: "V4hOrbitControls",
@@ -20,8 +19,7 @@
         },
         mounted() {
             if (this.active) {
-                this.control = new THREE.OrbitControls(this.camera, this.V$dom);
-
+                this.control = new THREE.OrbitControls(this.camera, this.dom);
                 this.control.addEventListener('change', this.render, false);
 
                 this.control.type = 'orbit';
@@ -30,7 +28,7 @@
                 this.control.enabled = this.enable;
                 this.control.enableKeys = this.enableKeys;
                 this.control.autoRotate = this.autoRotate;
-                Vue3d.$on("update", this.updateControls);
+                this.renderer.$on("update", this.control.update);
             }
         },
         watch: {
@@ -47,15 +45,5 @@
                 this.control.autoRotate = this.autoRotate;
             }
         },
-        methods: {
-            updateControls() {
-                this.control.update();
-            },
-            render() {
-                if (this.scene) {
-                    Vue3d.$emit("render");
-                }
-            }
-        }
     }
 </script>

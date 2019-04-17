@@ -1,6 +1,3 @@
-import {Vue3d} from '../index'
-import {Object3D} from '../common'
-
 export default {
     name: "Object3d",
     props: {
@@ -31,7 +28,6 @@ export default {
     },
     data() {
         return {
-            V$proto: Object3D,
             V$autoSlot: true, // 自动挂载到当前节点
             active: true, // 是否激活组件
             name: "", // 组件名称
@@ -95,14 +91,16 @@ export default {
         // 根据vue组件递归查询scene节点
         V$recursion(obj) {
             if (!obj.hasOwnProperty("$parent")) {
-                console.error("Vue3D component must slot in V3dScene component");
+                console.error("V3d-components must slot in V3dScene component");
                 return;
             }
             if (obj.hasOwnProperty('V$scene')) {
                 this.scene = obj.V$scene;
+                this.renderer = obj.renderer;
                 this.parent = obj;
             } else if (obj.hasOwnProperty("scene") && obj.hasOwnProperty('object3d')) {
                 this.scene = obj.scene;
+                this.renderer = obj.renderer;
                 this.parent = obj;
             } else {
                 this.V$recursion(obj.$parent);
@@ -139,7 +137,7 @@ export default {
             } else {
                 this.scene.add(object3d);
             }
-            Vue3d.$on("update", this.onRender);
+            this.renderer.$on("update", this.onRender);
             // this.root.rendererDelegationAdd(this.onRender);
         },
         removeObject3d(object3d, inNode) {
@@ -148,7 +146,7 @@ export default {
             } else {
                 this.removeObject3d(object3d);
             }
-            Vue3d.$off("update", this.onRender);
+            this.renderer.$off("update", this.onRender);
             // this.root.rendererDelegationRemove(this.onRender);
         },
         // 激活插槽
@@ -161,7 +159,7 @@ export default {
         },
         // 渲染
         render() {
-            Vue3d.$emit('render');
+            this.renderer.render();
         },
         onReady() {
             this.$emit('ready', this.object3d);
@@ -202,6 +200,6 @@ export default {
         this.V$removeObject3d(this.object3d);
     },
     render() {
-        return null
+        this.renderer.render();
     }
 }

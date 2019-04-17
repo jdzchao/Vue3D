@@ -1,10 +1,10 @@
 <script>
     import *as THREE from "three"
-    import ObjectHelper from "../../mixins/Helper"
+    import Helper from "../../mixins/Helper"
 
     export default {
         name: "V4hRayCast",
-        mixins: [ObjectHelper],
+        mixins: [Helper],
         props: {
             near: {type: Number, default: 0},
             far: {type: Number, default: 1000},
@@ -16,7 +16,7 @@
         },
         data() {
             return {
-                raycaster: new THREE.Raycaster(),
+                caster: new THREE.Raycaster(),
                 point: new THREE.Vector2(),
                 target: [],
                 charged: false,
@@ -25,61 +25,66 @@
         },
         created() {
             if (this.supportTouch) {
-                this.root.dom.addEventListener('touchstart', this.charge, false);
+                this.dom.addEventListener('touchstart', this.charge, false);
             } else {
-                this.root.dom.addEventListener('mousedown', this.charge, false);
+                this.dom.addEventListener('mousedown', this.charge, false);
             }
             if (this.near) {
-                this.raycaster.near = this.near;
+                this.caster.near = this.near;
             }
             if (this.far && this.far > this.near) {
-                this.raycaster.far = this.far;
+                this.caster.far = this.far;
             }
         },
         watch: {
             near(val) {
-                this.raycaster.near = val;
+                this.caster.near = val;
             },
             far(val) {
                 if (val > this.near) {
-                    this.raycaster.far = val;
+                    this.caster.far = val;
                 }
             }
         },
         methods: {
+            // 鼠标点击射线
             mouseCaster(event) {
-                this.root.dom.removeEventListener('mousemove', this.leakage, false);
-                this.root.dom.removeEventListener('mouseup', this.mouseCaster, false);
+                this.dom.removeEventListener('mousemove', this.leakage, false);
+                this.dom.removeEventListener('mouseup', this.mouseCaster, false);
                 if (!this.charged) return;
-                this.point.x = (event.offsetX / this.root.dom.clientWidth) * 2 - 1;
-                this.point.y = -(event.offsetY / this.root.dom.clientHeight) * 2 + 1;
-                this.setCaster();
+                this.point.x = (event.offsetX / this.dom.clientWidth) * 2 - 1;
+                this.point.y = -(event.offsetY / this.dom.clientHeight) * 2 + 1;
+                this.rayCaster();
             },
+            // 触摸点击射线
             touchCaster(event) {
-                this.root.dom.removeEventListener('touchmove', this.leakage, false);
-                this.root.dom.removeEventListener('touchend', this.touchCaster, false);
+                this.dom.removeEventListener('touchmove', this.leakage, false);
+                this.dom.removeEventListener('touchend', this.touchCaster, false);
                 if (!this.charged) return;
-                this.point.x = (event.changedTouches[0].clientX / this.root.dom.clientWidth) * 2 - 1;
-                this.point.y = -(event.changedTouches[0].clientY / this.root.dom.clientHeight) * 2 + 1;
-                this.setCaster();
+                this.point.x = (event.changedTouches[0].clientX / this.dom.clientWidth) * 2 - 1;
+                this.point.y = -(event.changedTouches[0].clientY / this.dom.clientHeight) * 2 + 1;
+                this.rayCaster();
             },
-            setCaster() {
-                this.raycaster.setFromCamera(this.point, this.camera);
-                this.target = this.raycaster.intersectObjects(this.root.scene.children, true);
+            // 捕获射线
+            rayCaster() {
+                this.caster.setFromCamera(this.point, this.camera);
+                this.target = this.caster.intersectObjects(this.renderer.scene.children, true);
                 this.$emit('cast', this.target);
                 this.charged = false;
             },
+            // 射线充能 【兼容拖动事件】
             charge() {
                 if (this.charged) return;
                 this.charged = true;
                 if (this.supportTouch) {
-                    this.root.dom.addEventListener('touchmove', this.leakage, false);
-                    this.root.dom.addEventListener('touchend', this.touchCaster, false);
+                    this.dom.addEventListener('touchmove', this.leakage, false);
+                    this.dom.addEventListener('touchend', this.touchCaster, false);
                 } else {
-                    this.root.dom.addEventListener('mousemove', this.leakage, false);
-                    this.root.dom.addEventListener('mouseup', this.mouseCaster, false);
+                    this.dom.addEventListener('mousemove', this.leakage, false);
+                    this.dom.addEventListener('mouseup', this.mouseCaster, false);
                 }
             },
+            // 兼容拖动事件
             leakage(event) {
                 if (event.type === "touchmove") {
                     this.charged = false;

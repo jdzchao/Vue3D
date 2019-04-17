@@ -16,11 +16,8 @@ export default {
     },
     methods: {
         setHelper() {
-            // console.info("Undefined function 'setHelper' in Light Component")
             this.addObject3d(this.lightHelper, true);
-            this.root.rendererDelegationAdd(() => {
-                this.lightHelper.update()
-            })
+            this.renderer.$on("update", this.lightHelper.update);
         }
     },
     beforeMount() {

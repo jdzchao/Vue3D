@@ -8,7 +8,6 @@
 
     import * as THREE from "three"
     import Camera from "../../mixins/Camera";
-    import {Vue3d} from "../../common"
 
     export default {
         name: "V3dCameraPerspective",

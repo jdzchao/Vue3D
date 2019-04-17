@@ -1,3 +1,10 @@
+class Scene {
+    constructor() {
+        this.type = "scene"
+    }
+
+}
+
 class Object3D {
     constructor() {
         this.type = "object3d"
@@ -11,10 +18,9 @@ class Light extends Object3D {
     }
 }
 
-import Bus from './renderer'
 
 export {
-    Bus as Vue3d,
+    Scene,
     Object3D,
     Light
 }

@@ -10,6 +10,7 @@
             return {
                 V$dom: this.$parent.V$dom,
                 V$scene: this.$parent.scene,
+                renderer: this.$parent.renderer
             }
         }
     }
