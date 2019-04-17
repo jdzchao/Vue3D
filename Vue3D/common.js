@@ -11,7 +11,7 @@ class Light extends Object3D {
     }
 }
 
-import Bus from './bus'
+import Bus from './renderer'
 
 export {
     Bus as Vue3d,

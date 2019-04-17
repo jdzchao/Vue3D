@@ -4,30 +4,30 @@
 export default {
     data() {
         return {
-            delegation: [],
+            _$delegation: [],
         }
     },
     methods: {
         // 向委托中添加方法
         delegationAdd(func) {
             if (typeof func === 'function') {
-                this.delegation.push(func);
+                this.$data._$delegation.push(func);
             } else {
-                console.error('error type function');
+                this.error('Render delegation need a function');
             }
         },
         // 从委托中移除方法
         delegationRemove(func) {
-            let index = this.delegation.indexOf(func);
+            let index = this.$data._$delegation.indexOf(func);
             if (index >= 0) {
-                this.delegation.slice(index, 1);
+                this.$data._$delegation.slice(index, 1);
             } else {
-                console.warn('function is not found in the delegation');
+                this.warn('Function is not found in render delegation');
             }
         },
         // 执行委托
         delegationCall() {
-            this.delegation.forEach((func) => {
+            this.$data._$delegation.forEach((func) => {
                 func();
             });
         }

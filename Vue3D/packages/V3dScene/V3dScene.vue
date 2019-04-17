@@ -10,7 +10,7 @@
 
 <script>
     import * as THREE from 'three'
-    import {Vue3d} from "../../common";
+    import Renderer from "../../renderer";
     import StandScene from "./StandardScene";
 
     export default {
@@ -41,9 +41,8 @@
         },
         mounted() {
             this.init(); // 初始化
-            Vue3d.render(); // 渲染第一帧
+            Vue3d.render(); // 开始渲染
             Vue3d.$on("update", this.updateRenderer);
-            Vue3d.$on("render", Vue3d.render);
             Vue3d.$on("add-camera", this.addCamera);
         },
         updated() {
@@ -68,14 +67,13 @@
                     canvas: this.V$dom
                 });
                 this.start = true;
-                Vue3d.start();
             },
             updateRenderer() {
                 this.renderer.setSize(this.width, this.height);
                 this.renderer.setPixelRatio(window.devicePixelRatio || 1);
                 this.renderer.setClearColor(new THREE.Color(this.backgroundColor).getHex());
                 this.renderer.setClearAlpha(this.backgroundAlpha);
-                Vue3d.pure ? this.renderer.render(this.scene, this.V$cameras) : this.renderer.render(this.V$scene, this.V$cameras);
+                Vue3d.getPure() ? this.renderer.render(this.scene, this.V$cameras) : this.renderer.render(this.V$scene, this.V$cameras);
             },
             addCamera(camera) {
                 this.cameras.push(camera);

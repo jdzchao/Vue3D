@@ -17,7 +17,6 @@
             }
         },
         mounted() {
-            console.log("grid");
             this.grid = new THREE.GridHelper(this.size, this.divisions, this.colorCenterLine, this.colorGrid);
             this.scene.add(this.grid);
         }

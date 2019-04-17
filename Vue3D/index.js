@@ -17,12 +17,10 @@ import V4hOrbitControls from "./packages/V4hOrbitControls"
 import V4hRayCast from "./packages/V4hRayCast"
 import V4hSkyBox from "./packages/V4hSkyBox";
 // 工具
-import Bus from './bus' // 事件总线
 import Materials from './utils/Materials'
 import Utils from './utils/Utils'
 
 export {
-    Bus as Vue3d,
     V3dScene,
     V3dCameraPerspective,
     V3dGeomBox,
@@ -36,15 +34,16 @@ export {
     V4hOrbitControls,
     V4hRayCast,
     V4hSkyBox,
-    Materials
+    // utils
+    Materials,
 };
 
 /**
  * 全局加载
  */
-const Vue3D = {
+export default {
     install: function (Vue, options) {
-        Vue.prototype.$vue3d = Bus;
+        // Vue.prototype.$vue3d = Vue3d;
         Vue.component("v3d-scene", V3dScene);
         Vue.component("v3d-camera-perspective", V3dCameraPerspective);
         Vue.component("v3d-geom-box", V3dGeomBox);
@@ -60,5 +59,3 @@ const Vue3D = {
         Vue.component("V4h-sky-box", V4hSkyBox);
     }
 };
-
-export default Vue3D;
