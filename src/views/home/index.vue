@@ -1,6 +1,6 @@
 <template>
     <div>
-        <vue-3d id="VScene" ref="scene" :width="width" :height="height" :params="params">
+        <vue-3d id="VScene" ref="scene" :width="width" :height="height" :params="params" :helper="{grid:false}">
             <v3d-camera-perspective ref="camera" :dis="10" :size="1" :x="0" :y="0" :width="500" :height="500"
                                     @ready="setCamera">
 
@@ -9,8 +9,8 @@
                                  :target="{x:5,y:0,z:0}" :position="{x:0,y:0,z:10}"></v3d-light-rect-area>
             <v3d-geom-cylinder :material="Materials.standard()" :radialSegments="50"></v3d-geom-cylinder>
             <v4h-orbit-controls :index="0" :max="1000"></v4h-orbit-controls>
-<!--            <v4h-ray-cast @cast="cast"></v4h-ray-cast>-->
-<!--            <v4h-grid slot="v4h"></v4h-grid>-->
+            <!--            <v4h-ray-cast @cast="cast"></v4h-ray-cast>-->
+            <!--            <v4h-grid slot="v4h"></v4h-grid>-->
         </vue-3d>
 
     </div>
@@ -73,6 +73,7 @@
             }
         },
         mounted() {
+            console.log(this.$parent)
             console.log(this.$refs.scene.V$scene, this.$refs.scene.scene);
         }
     }

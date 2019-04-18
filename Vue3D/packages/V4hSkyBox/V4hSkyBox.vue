@@ -1,6 +1,6 @@
 <script>
     import * as THREE from 'three'
-    import ObjectHelper from "../../mixins/Helper"
+    import ObjectHelper from "../Vue3d/tools/Helper"
 
     /** Texture naming convention
      *       [3]py

@@ -1,6 +1,6 @@
 <script>
     import *as THREE from "three"
-    import Helper from "../../mixins/Helper"
+    import Helper from "./Helper"
 
     export default {
         name: "V4hGrid",

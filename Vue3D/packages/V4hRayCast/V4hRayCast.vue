@@ -1,6 +1,6 @@
 <script>
     import *as THREE from "three"
-    import Helper from "../../mixins/Helper"
+    import Helper from "../Vue3d/tools/Helper"
 
     export default {
         name: "V4hRayCast",

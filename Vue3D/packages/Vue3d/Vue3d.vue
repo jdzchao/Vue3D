@@ -2,14 +2,19 @@
     <canvas :id="id">
         Sorry, your web browser does not support WebGL
         <slot v-if="slot"></slot>
+        <v4h-grid v-if="slot && helper.grid"></v4h-grid>
     </canvas>
 </template>
 
 <script>
     import Renderer from "../../renderer";
+    import V4hGrid from "./tools/V4hGrid"
 
     export default {
         name: "vue-3d",
+        components: {
+            V4hGrid
+        },
         props: {
             id: {type: String, default: 'Vue3D'},
             width: {type: Number, default: 50},
@@ -25,6 +30,15 @@
                     return {}
                 }
             },
+
+            // helper components
+            helper: {
+                type: Object, default() {
+                    return {
+                        grid: false,
+                    }
+                }
+            }
         },
         data() {
             return {
@@ -32,8 +46,9 @@
                 V$dom: null,
                 V$scene: null, // root scene
                 V$cameras: null, // Array Camera
+                V$camera: null, // Active Camera
                 /* public */
-                scenes: null, // standard scene
+                scene: null, // standard scene
                 cameras: [], // Camera Array
                 renderer: null,
                 /* status */
