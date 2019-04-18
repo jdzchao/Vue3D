@@ -118,7 +118,7 @@
             },
         },
         mounted() {
-            this.$store.state.vue3d.dom = this.$refs.scene;
+            this.$store.state.vue3d.canvas = this.$refs.scene;
             this.sceneResize();
             window.addEventListener("resize", this.sceneResize);
         },

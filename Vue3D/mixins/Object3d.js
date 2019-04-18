@@ -91,7 +91,7 @@ export default {
         // 根据vue组件递归查询scene节点
         V$recursion(obj) {
             if (!obj.hasOwnProperty("$parent")) {
-                console.error("V3d-components must slot in V3dScene component");
+                console.error("V3d-components must slot in Vue3d component");
                 return;
             }
             if (obj.hasOwnProperty('V$scene')) {

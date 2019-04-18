@@ -25,9 +25,9 @@
         },
         created() {
             if (this.supportTouch) {
-                this.dom.addEventListener('touchstart', this.charge, false);
+                this.canvas.addEventListener('touchstart', this.charge, false);
             } else {
-                this.dom.addEventListener('mousedown', this.charge, false);
+                this.canvas.addEventListener('mousedown', this.charge, false);
             }
             if (this.near) {
                 this.caster.near = this.near;
@@ -49,20 +49,20 @@
         methods: {
             // 鼠标点击射线
             mouseCaster(event) {
-                this.dom.removeEventListener('mousemove', this.leakage, false);
-                this.dom.removeEventListener('mouseup', this.mouseCaster, false);
+                this.canvas.removeEventListener('mousemove', this.leakage, false);
+                this.canvas.removeEventListener('mouseup', this.mouseCaster, false);
                 if (!this.charged) return;
-                this.point.x = (event.offsetX / this.dom.clientWidth) * 2 - 1;
-                this.point.y = -(event.offsetY / this.dom.clientHeight) * 2 + 1;
+                this.point.x = (event.offsetX / this.canvas.clientWidth) * 2 - 1;
+                this.point.y = -(event.offsetY / this.canvas.clientHeight) * 2 + 1;
                 this.rayCaster();
             },
             // 触摸点击射线
             touchCaster(event) {
-                this.dom.removeEventListener('touchmove', this.leakage, false);
-                this.dom.removeEventListener('touchend', this.touchCaster, false);
+                this.canvas.removeEventListener('touchmove', this.leakage, false);
+                this.canvas.removeEventListener('touchend', this.touchCaster, false);
                 if (!this.charged) return;
-                this.point.x = (event.changedTouches[0].clientX / this.dom.clientWidth) * 2 - 1;
-                this.point.y = -(event.changedTouches[0].clientY / this.dom.clientHeight) * 2 + 1;
+                this.point.x = (event.changedTouches[0].clientX / this.canvas.clientWidth) * 2 - 1;
+                this.point.y = -(event.changedTouches[0].clientY / this.canvas.clientHeight) * 2 + 1;
                 this.rayCaster();
             },
             // 捕获射线
@@ -77,11 +77,11 @@
                 if (this.charged) return;
                 this.charged = true;
                 if (this.supportTouch) {
-                    this.dom.addEventListener('touchmove', this.leakage, false);
-                    this.dom.addEventListener('touchend', this.touchCaster, false);
+                    this.canvas.addEventListener('touchmove', this.leakage, false);
+                    this.canvas.addEventListener('touchend', this.touchCaster, false);
                 } else {
-                    this.dom.addEventListener('mousemove', this.leakage, false);
-                    this.dom.addEventListener('mouseup', this.mouseCaster, false);
+                    this.canvas.addEventListener('mousemove', this.leakage, false);
+                    this.canvas.addEventListener('mouseup', this.mouseCaster, false);
                 }
             },
             // 兼容拖动事件

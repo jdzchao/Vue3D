@@ -19,7 +19,7 @@
         },
         mounted() {
             if (this.active) {
-                this.control = new THREE.OrbitControls(this.camera, this.dom);
+                this.control = new THREE.OrbitControls(this.camera, this.canvas);
                 this.control.addEventListener('change', this.render, false);
 
                 this.control.type = 'orbit';

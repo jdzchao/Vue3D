@@ -25,33 +25,28 @@ export default class {
                 _$cameras: [], // Array Cameras
 
                 id: "", // Scene ID
-                dom: null, // The <canvas> dom
+                canvas: null, // The <canvas> dom
                 scene: null, // Standard scene
                 cameras: [], // Cameras Array
             },
             methods: {
-                init(opt, callback) {
+                init(params, callback) {
                     this.$data._$scene = new THREE.Scene();
                     this.$data._$cameras = new THREE.ArrayCamera(this.cameras);
                     this.scene = new THREE.Scene();
 
                     this.$data._$scene.add(this.scene);
-                    this.$data._$renderer = new THREE.WebGLRenderer({
-                        canvas: opt.dom,
-                        antialias: opt.antialias, // 抗锯齿
-                        alpha: opt.alpha, //
-                        preserveDrawingBuffer: opt.buffer, //绘图缓冲
-                    });
+                    this.$data._$renderer = new THREE.WebGLRenderer(params);
 
-                    this.id = opt.id || this.$data._$scene.uuid;
-                    this.dom = opt.dom;
+                    this.id = params.id || this.$data._$scene.uuid;
+                    this.canvas = params.canvas;
 
                     this.render();
                     callback && callback({
                         _$scene: this.$data._$scene,
                         scene: this.scene,
                         cameras: this.cameras,
-                        dom: this.dom,
+                        canvas: this.canvas,
                     });
                 },
                 // 渲染一帧
@@ -117,11 +112,8 @@ export default class {
                 setPixelRatio(ratio) {
                     this.$data._$renderer.setPixelRatio(ratio);
                 },
-                setClearColor(bgColor) {
-                    this.$data._$renderer.setClearColor(new THREE.Color(bgColor).getHex());
-                },
-                setClearAlpha(alpha) {
-                    this.$data._$renderer.setClearAlpha(alpha);
+                setClearColor(bgColor, alpha) {
+                    this.$data._$renderer.setClearColor(new THREE.Color(bgColor).getHex(), alpha);
                 },
                 addCamera(camera) {
                     this.$data.cameras.push(camera);

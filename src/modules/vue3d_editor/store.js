@@ -3,7 +3,7 @@ import {empty, guid} from '@/utils'
 
 const vue3d = {
     state: {
-        dom: {}, // editor DOM
+        canvas: {}, // editor DOM
         sWidth: 200, // scene width
         sHeight: 200, // scene height
         status: 'ready', // 数据加载状态 [ ready | loaded | rendered ]
@@ -86,7 +86,7 @@ const vue3d = {
         },
         // 渲染场景
         SCENE_RENDER(state) {
-            state.dom.render();
+            state.canvas.render();
         },
         // 设置场景数据
         SET_SCENE_DATA(state, data) {
@@ -220,7 +220,7 @@ const vue3d = {
         GetSelectedByName({state, commit}, name) {
             return new Promise(resolve => {
                 if (state.selected.name === name) return;
-                let target = state.dom.scene.getObjectByName(name);
+                let target = state.canvas.scene.getObjectByName(name);
                 if (target.handler && target.name) {
                     commit('SET_SELECTED', target);
                     resolve(target)
@@ -234,7 +234,7 @@ const vue3d = {
                 let name = obj.name;
                 let hash = obj.hash;
                 let material = "default";
-                let target = state.dom.scene.getObjectByName(name);
+                let target = state.canvas.scene.getObjectByName(name);
                 if (target && target.handler && target.name) {
                     name = name + "(" + new Date().getTime().toSystem62() + ")";
                 }
