@@ -36,9 +36,7 @@ export default class {
                 clearColor: "rgb(25,25,25)", // renderer clear color
                 clearAlpha: 1, // renderer clear alpha
             },
-            watch:{
-
-            },
+            watch: {},
             methods: {
                 init(params, callback) {
                     this.$data._$canvas = params.canvas;
@@ -98,11 +96,11 @@ export default class {
                     switch (status) {
                         case  1:
                             this.$data._$status = 1;
-                            this.info("ლ(´ڡ`ლ) Vue3D Status: Start");
+                            this.info("ლ(´ڡ`ლ) Vue3D Status => Start");
                             break;
                         case  2:
                             this.$data._$status = 2;
-                            this.info("ლ(´ڡ`ლ) Vue3D Status: Render");
+                            this.info("ლ(´ڡ`ლ) Vue3D Status => Render");
                             break;
                         default:
                             return;
@@ -110,11 +108,11 @@ export default class {
                 },
                 setAuto() {
                     this.$data._$auto = !this.$data._$auto;
-                    this.info("ლ(´ڡ`ლ) Vue3D Auto: " + this.$data._$auto);
+                    this.info("ლ(´ڡ`ლ) Vue3D Auto => " + this.$data._$auto);
                 },
                 setPause() {
                     this.$data._$pause = !this.$data._$pause;
-                    this.info("ლ(´ڡ`ლ) Vue3D Pause: " + this.$data._$pause);
+                    this.info("ლ(´ڡ`ლ) Vue3D Pause => " + this.$data._$pause);
                 },
                 getPure() {
                     return this.$data._$play;
