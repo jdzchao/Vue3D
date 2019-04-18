@@ -1,28 +1,27 @@
 <template>
     <canvas :id="id">
         Sorry, your web browser does not support WebGL
-        <slot v-if="slot"></slot>
-        <v4h-grid v-if="slot && helper.grid"></v4h-grid>
+        <template v-if="slot">
+            <grid-helper v-if="plugins.grid"></grid-helper>
+            <slot></slot>
+        </template>
     </canvas>
 </template>
 
 <script>
     import Renderer from "../../renderer";
-    import V4hGrid from "./tools/V4hGrid"
+    import GridHelper from "./Plugins/GridHelper"
 
     export default {
         name: "vue-3d",
         components: {
-            V4hGrid
+            GridHelper
         },
         props: {
             id: {type: String, default: 'Vue3D'},
-            width: {type: Number, default: 50},
-            height: {type: Number, default: 50},
-            ratio: {type: Number, default: 1},
-
-            clearColor: {type: String, default: 'rgb(25,25,25)'},
-            clearAlpha: {type: Number, default: 1},
+            width: {type: Number, default: 500},
+            height: {type: Number, default: 500},
+            ratio: {type: Number, default: 0},
 
             // renderer parameters
             params: {
@@ -32,7 +31,7 @@
             },
 
             // helper components
-            helper: {
+            plugins: {
                 type: Object, default() {
                     return {
                         grid: false,
@@ -65,16 +64,24 @@
                 this.scene = res.scene;
                 this.cameras = res.cameras;
                 this.slot = true; // 开始挂载子组件
-            }); // 初始化
-            this.renderer.$on("reset-renderer", this.resetRenderer);
+            });
+            // this.renderer.setSize(this.width, this.height);
+            // this.renderer.setPixelRatio(this.ratio);
+            // this.renderer.refresh();
         },
-        methods: {
-            resetRenderer() {
-                this.renderer.setSize(this.width, this.height);
-                this.renderer.setPixelRatio(window.devicePixelRatio || this.ratio);
-                this.renderer.setClearColor(this.clearColor, this.clearAlpha);
-                this.renderer.render();
+        watch: {
+            width(val, oldVal) {
+                if (val === oldVal) return;
+                this.renderer.setSize(this.width, this.height, true);
             },
+            height(val, oldVal) {
+                if (val === oldVal) return;
+                this.renderer.setSize(this.width, this.height, true);
+            },
+            ratio(val, oldVal) {
+                if (val === oldVal) return;
+                this.renderer.setPixelRatio(this.ratio, true);
+            }
         }
     }
 </script>

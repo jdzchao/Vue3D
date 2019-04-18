@@ -1,6 +1,6 @@
 <script>
     import THREE from "./OrbitControls"
-    import Helper from "../Vue3d/tools/Helper"
+    import Helper from "../../mixins/Helper"
 
     export default {
         name: "V4hOrbitControls",

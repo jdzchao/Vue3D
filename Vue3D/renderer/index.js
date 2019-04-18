@@ -10,36 +10,46 @@ import event from './event'
 export default class {
     constructor(opt) {
         return new Vue({
-            mixins: [event, delegation, debug],
+            mixins: [debug, delegation, event,],
             data: {
                 // option
                 _$auto: false, // 是否自动逐帧渲染
                 _$pause: false, // 是否暂停渲染
-                _$pure: false, // 是否仅渲染 hierarchy scene
+                _$play: false, // 是否开启运行模式
                 // renderer
                 _$renderer: null, // 渲染器
                 _$rendering: null, // 渲染器正在渲染当前帧
                 _$status: 0, // 渲染器状态 0:awake; 1:start; 2:render;
                 // scene
+                _$canvas: null, // The <canvas> dom
                 _$scene: null, // Base scene
                 _$cameras: [], // Array Cameras
+                _$camera: null, // God's Perspective Camera
 
-                id: "", // Scene ID
-                canvas: null, // The <canvas> dom
-                scene: null, // Standard scene
+                scene: null, // activated Scene
                 cameras: [], // Cameras Array
+                camIndex: 0, // activated Camera
+
+                width: 0, // renderer width
+                height: 0, // renderer height
+                ratio: 1, // renderer ratio
+                clearColor: "rgb(25,25,25)", // renderer clear color
+                clearAlpha: 1, // renderer clear alpha
+            },
+            watch:{
+
             },
             methods: {
                 init(params, callback) {
+                    this.$data._$canvas = params.canvas;
                     this.$data._$scene = new THREE.Scene();
                     this.$data._$cameras = new THREE.ArrayCamera(this.cameras);
-                    this.scene = new THREE.Scene();
-
-                    this.$data._$scene.add(this.scene);
                     this.$data._$renderer = new THREE.WebGLRenderer(params);
+                    this.$data._$camera = new THREE.PerspectiveCamera(50, this.width / this.height);
 
-                    this.id = params.id || this.$data._$scene.uuid;
-                    this.canvas = params.canvas;
+                    this.scene = new THREE.Scene();
+                    this.$data._$scene.add(this.scene);
+                    this.$data._$scene.add(this.$data._$camera);
 
                     this.render();
                     callback && callback({
@@ -60,9 +70,9 @@ export default class {
                         this.setStatus('render'); // 切换渲染器状态
                         this.delegationCall(); // 调用委托中的方法
                         // 当 pure 为真时，则仅渲染 standard scene
-                        this.$data._$pure ?
+                        this.$data._$play ?
                             this.$data._$renderer.render(this.scene, this.$data._$cameras) :
-                            this.$data._$renderer.render(this.$data._$scene, this.$data._$cameras);
+                            this.$data._$renderer.render(this.$data._$scene, this.$data._$camera);
                         this.$emit("update"); // 正常来讲只有这里能触发update事件
                         this.$data._$rendering = null; // 当前帧渲染完成，释放掉
                         if (this.$data._$auto) {
@@ -70,6 +80,13 @@ export default class {
                             this.render();
                         }
                     })
+                },
+                // 刷新渲染器
+                refresh() {
+                    this.$data._$renderer.setSize(this.width, this.height);
+                    this.$data._$renderer.setPixelRatio(this.ratio);
+                    this.$data._$renderer.setClearColor(new THREE.Color(this.clearColor).getHex(), this.clearAlpha);
+                    this.render();
                 },
                 // 设置渲染状态
                 setStatus(status) {
@@ -81,11 +98,11 @@ export default class {
                     switch (status) {
                         case  1:
                             this.$data._$status = 1;
-                            this.info("ლ(´ڡ`ლ) Vue3D Start: " + this.id);
+                            this.info("ლ(´ڡ`ლ) Vue3D Status: Start");
                             break;
                         case  2:
                             this.$data._$status = 2;
-                            this.info("ლ(´ڡ`ლ) Vue3D Render: " + this.id);
+                            this.info("ლ(´ڡ`ლ) Vue3D Status: Render");
                             break;
                         default:
                             return;
@@ -100,24 +117,35 @@ export default class {
                     this.info("ლ(´ڡ`ლ) Vue3D Pause: " + this.$data._$pause);
                 },
                 getPure() {
-                    return this.$data._$pure;
+                    return this.$data._$play;
                 },
                 setPure() {
-                    this.$data._$pure = !this.$data._$pure;
+                    this.$data._$play = !this.$data._$play;
                     this.render();
                 },
-                setSize(width, height) {
-                    this.$data._$renderer.setSize(width, height);
+                setSize(width, height, refresh) {
+                    this.width = width;
+                    this.height = height;
+                    if (refresh) this.refresh();
+                    // this.$data._$renderer.setSize(width, height);
                 },
-                setPixelRatio(ratio) {
-                    this.$data._$renderer.setPixelRatio(ratio);
+                setPixelRatio(ratio, refresh) {
+                    this.ratio = ratio;
+                    if (refresh) this.refresh();
+                    // this.$data._$renderer.setPixelRatio(ratio);
                 },
-                setClearColor(bgColor, alpha) {
-                    this.$data._$renderer.setClearColor(new THREE.Color(bgColor).getHex(), alpha);
+                setClearColor(clearColor, clearAlpha, refresh) {
+                    this.clearColor = clearColor;
+                    this.clearAlpha = clearAlpha;
+                    if (refresh) this.refresh();
+                    // this.$data._$renderer.setClearColor(new THREE.Color(clearColor).getHex(), clearAlpha);
+                },
+                getGodCamera() {
+                    return this.$data._$camera;
                 },
                 addCamera(camera) {
                     this.$data.cameras.push(camera);
-                    this.$emit("reset-renderer");
+                    this.refresh();
                 }
             }
         });

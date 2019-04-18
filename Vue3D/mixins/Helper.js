@@ -1,31 +1,26 @@
 export default {
     name: "Helper",
-    props: {
-        camera_index: {type: Number, default: 0}
-    },
     data() {
         return {
+            // Vue3d Base
             V$dom: null,
             V$scene: null,
             V$camera: null,
-            // 渲染器
+            // Renderer
             renderer: null,
-
-            active: false,
-            helper: null,
+            // Helper
+            active: true,
+            plugin: null,
         }
     },
     watch: {
         active(val, oldVal) {
             if (val === oldVal) return;
-            val ? this.setActive : this.setUnactive
-            let Unactive =1;
-            Unactive
+            this.setActive(val);
         }
     },
     created() {
-        if (this.$parent.hasOwnProperty('V$Scene')) {
-            // this.setActive(this.$parent);
+        if (this.$parent.hasOwnProperty('V$scene')) {
             this.V$dom = this.$parent.V$dom;
             this.V$scene = this.$parent.V$scene;
             this.V$camera = this.$parent.V$camera;
@@ -34,19 +29,29 @@ export default {
             console.error(this.$options.name + " should slot on Vue3D Component");
         }
     },
+    beforeMount() {
+        if (this.plugin) {
+            this.setActive(this.active);
+        }
+    },
     methods: {
-        setActive() {
-            this.V$scene.add(this.helper);
-        },
-        setUnactive() {
-            this.V$scene.remove(this.helper);
+        setActive(active) {
+            if (active) {
+                this.V$scene.add(this.plugin);
+            } else {
+                this.V$scene.remove(this.plugin);
+            }
         },
         render() {
             this.renderer.render();
         }
     },
-    // DOM Render
+    /**
+     * Vue V-DOM Render
+     * Helper不显示在页面元素中，返回一个空值
+     * @returns {null} 返回且仅返回空值
+     */
     render() {
-        return ""
+        return null;
     }
 }
