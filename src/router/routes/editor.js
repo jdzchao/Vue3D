@@ -1,6 +1,6 @@
 import PageSite from '@/views/_layout/PageSite'
 
-const vue3d = {
+const editor = {
     path: '/vue3d',
     component: PageSite,
     redirect: '/vue3d/index',
@@ -11,13 +11,13 @@ const vue3d = {
         {
             path: 'index',
             name: 'Index',
-            component: () => import('@/views/vue3d/index'),
+            component: () => import('@/views/editor/index'),
             meta: {
                 title: 'editor', icon: 'scene', noCache: true,
-                roles: ['site', 'vue3d']
+                roles: ['site', 'editor']
             }
         },
     ]
 }
 
-export default vue3d
+export default editor

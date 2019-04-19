@@ -3,7 +3,7 @@ export default {
     data() {
         return {
             // Vue3d Base
-            V$dom: null,
+            canvas: null,
             V$scene: null,
             V$camera: null,
             // Renderer
@@ -21,10 +21,11 @@ export default {
     },
     created() {
         if (this.$parent.hasOwnProperty('V$scene')) {
-            this.V$dom = this.$parent.V$dom;
+            this.canvas = this.$parent.V$dom;
             this.V$scene = this.$parent.V$scene;
             this.V$camera = this.$parent.V$camera;
             this.renderer = this.$parent.renderer;
+            // console.log(this.V$dom, this.V$scene, this.V$camera)
         } else {
             console.error(this.$options.name + " should slot on Vue3D Component");
         }

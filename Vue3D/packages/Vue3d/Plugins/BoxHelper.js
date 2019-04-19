@@ -5,11 +5,11 @@ export default {
     name: "V4hBox",
     mixins: [Plugin],
     props: {
-        target: {type: Object},
         color: {type: String, default: 'rgb(255,255,0)'}
     },
     data() {
         return {
+            target: null,
             box: new THREE.BoxHelper(),
             position: {x: 0, y: 0, z: 0},
             rotation: {x: 0, y: 0, z: 0},
@@ -17,26 +17,38 @@ export default {
         }
     },
     created() {
+        this.box.color = this.color;
         this.plugin = this.box;
+        this.renderer.on("pick", this.pickTarget)
     },
-    watch: {
-        target(val) {
+    methods: {
+        pickTarget(val) {
             if (val) {
+                this.target = val;
                 this.position = val.position;
                 this.rotation = val.rotation;
                 this.scale = val.scale;
                 this.box.setFromObject(this.target);
                 this.scene.add(this.box);
-                this.update();
+                this.box.update();
             } else {
                 this.scene.remove(this.box);
             }
         },
-        color(val) {
-            if (val) {
-                this.box.color = val;
-            }
-        },
+    },
+    watch: {
+        // target(val){
+        //     if (val) {
+        //         this.position = val.position;
+        //         this.rotation = val.rotation;
+        //         this.scale = val.scale;
+        //         this.box.setFromObject(this.target);
+        //         this.scene.add(this.box);
+        //         this.box.update();
+        //     } else {
+        //         this.scene.remove(this.box);
+        //     }
+        // },
         position: {
             deep: true,
             handler() {

@@ -6,7 +6,7 @@ import error from './routes/error'
 
 // import member from './routes/member'
 // import setting from './routes/setting'
-import vue3d from './routes/vue3d'
+import editor from './routes/editor'
 
 Vue.use(Router);
 
@@ -14,7 +14,7 @@ Vue.use(Router);
 export const asyncRouterMap = [
     // member,
     // setting,
-    // vue3d,
+    editor,
     error,
     {path: '*', redirect: '/error', hidden: true},
 ]

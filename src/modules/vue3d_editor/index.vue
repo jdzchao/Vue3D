@@ -4,17 +4,17 @@
             <panel-scene></panel-scene>
         </div>
         <div class="tools">
-            <el-tabs type="border-card" class="tabs">
-                <el-tab-pane label="Inspector">
-                    <panel-inspector></panel-inspector>
-                </el-tab-pane>
-                <el-tab-pane label="Hierarchy">
-                    <panel-hierarchy></panel-hierarchy>
-                </el-tab-pane>
-            </el-tabs>
-            <panel-menu></panel-menu>
+<!--            <el-tabs type="border-card" class="tabs">-->
+<!--                <el-tab-pane label="Inspector">-->
+<!--                    <panel-inspector></panel-inspector>-->
+<!--                </el-tab-pane>-->
+<!--                <el-tab-pane label="Hierarchy">-->
+<!--                    <panel-hierarchy></panel-hierarchy>-->
+<!--                </el-tab-pane>-->
+<!--            </el-tabs>-->
+<!--            <panel-menu></panel-menu>-->
         </div>
-        <panel-dialog></panel-dialog>
+<!--        <panel-dialog></panel-dialog>-->
     </div>
 </template>
 

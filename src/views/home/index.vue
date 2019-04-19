@@ -20,7 +20,6 @@
         Vue3d,
         V3dCameraPerspective,
         V3dGeomCylinder,
-        V3dGeomBox,
         V3dLightDirectional,
         V3dLightRectArea,
         V3dLightSpot,

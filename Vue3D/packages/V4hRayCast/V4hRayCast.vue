@@ -8,11 +8,6 @@
         props: {
             near: {type: Number, default: 0},
             far: {type: Number, default: 1000},
-            filter: {
-                type: Array, default: () => {
-                    return ["Mesh"]
-                }
-            }
         },
         data() {
             return {
@@ -67,8 +62,8 @@
             },
             // 捕获射线
             rayCaster() {
-                this.caster.setFromCamera(this.point, this.camera);
-                this.target = this.caster.intersectObjects(this.renderer.scene.children, true);
+                this.caster.setFromCamera(this.point, this.V$camera);
+                this.target = this.caster.intersectObjects(this.V$scene.children, true);
                 this.$emit('cast', this.target);
                 this.charged = false;
             },

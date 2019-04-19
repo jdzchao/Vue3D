@@ -95,7 +95,7 @@ export default {
                 return;
             }
             if (obj.hasOwnProperty('V$scene')) {
-                this.scene = obj.V$scene;
+                this.scene = obj.scene;
                 this.renderer = obj.renderer;
                 this.parent = obj;
             } else if (obj.hasOwnProperty("scene") && obj.hasOwnProperty('object3d')) {

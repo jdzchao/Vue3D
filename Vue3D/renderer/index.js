@@ -3,14 +3,15 @@ import * as THREE from 'three'
 import debug from './debug'
 import delegation from './delegation'
 import event from './event'
+import scenes from './scenes'
 
 /**
  * 渲染总线
  */
 export default class {
-    constructor(opt) {
+    constructor() {
         return new Vue({
-            mixins: [debug, delegation, event,],
+            mixins: [debug, delegation, event, scenes],
             data: {
                 // option
                 _$auto: false, // 是否自动逐帧渲染
@@ -22,13 +23,8 @@ export default class {
                 _$status: 0, // 渲染器状态 0:awake; 1:start; 2:render;
                 // scene
                 _$canvas: null, // The <canvas> dom
-                _$scene: null, // Base scene
-                _$cameras: [], // Array Cameras
+                _$scene: null, // Base Scene
                 _$camera: null, // God's Perspective Camera
-
-                scene: null, // activated Scene
-                cameras: [], // Cameras Array
-                camIndex: 0, // activated Camera
 
                 width: 0, // renderer width
                 height: 0, // renderer height
@@ -38,23 +34,31 @@ export default class {
             },
             watch: {},
             methods: {
-                init(params, callback) {
-                    this.$data._$canvas = params.canvas;
-                    this.$data._$scene = new THREE.Scene();
-                    this.$data._$cameras = new THREE.ArrayCamera(this.cameras);
-                    this.$data._$renderer = new THREE.WebGLRenderer(params);
-                    this.$data._$camera = new THREE.PerspectiveCamera(50, this.width / this.height);
+                init(id, canvas, params, callback) {
+                    params['canvas'] = canvas;
 
-                    this.scene = new THREE.Scene();
-                    this.$data._$scene.add(this.scene);
+                    this.$data._$canvas = canvas;
+                    this.$data._$scene = new THREE.Scene();
+                    this.$data._$camera = new THREE.PerspectiveCamera(50, this.width / this.height);
+                    this.$data._$renderer = new THREE.WebGLRenderer(params);
+
+                    // set name
+                    this.$data._$scene.name = id;
+                    this.$data._$camera.name = id;
+
+                    this.$data._$camera.position.z = 100;
+
                     this.$data._$scene.add(this.$data._$camera);
 
+                    this.scenes_init();
+
                     this.render();
+
                     callback && callback({
                         _$scene: this.$data._$scene,
+                        _$camera: this.$data._$camera,
                         scene: this.scene,
                         cameras: this.cameras,
-                        canvas: this.canvas,
                     });
                 },
                 // 渲染一帧
@@ -69,8 +73,13 @@ export default class {
                         this.delegationCall(); // 调用委托中的方法
                         // 当 pure 为真时，则仅渲染 standard scene
                         this.$data._$play ?
-                            this.$data._$renderer.render(this.scene, this.$data._$cameras) :
+                            this.$data._$renderer.render(this.scene, this.cameras) :
                             this.$data._$renderer.render(this.$data._$scene, this.$data._$camera);
+                        if (this.$data._$play) {
+                            console.log("render active", this.$data.$scene, this.$data.$cameras);
+                        } else {
+                            console.log("render base", this.$data._$scene, this.$data._$camera);
+                        }
                         this.$emit("update"); // 正常来讲只有这里能触发update事件
                         this.$data._$rendering = null; // 当前帧渲染完成，释放掉
                         if (this.$data._$auto) {
@@ -114,10 +123,10 @@ export default class {
                     this.$data._$pause = !this.$data._$pause;
                     this.info("ლ(´ڡ`ლ) Vue3D Pause => " + this.$data._$pause);
                 },
-                getPure() {
+                getPlay() {
                     return this.$data._$play;
                 },
-                setPure() {
+                setPlay() {
                     this.$data._$play = !this.$data._$play;
                     this.render();
                 },
@@ -138,13 +147,12 @@ export default class {
                     if (refresh) this.refresh();
                     // this.$data._$renderer.setClearColor(new THREE.Color(clearColor).getHex(), clearAlpha);
                 },
-                getGodCamera() {
+                getBaseScene() {
+                    return this.$data._$scene;
+                },
+                getBaseCamera() {
                     return this.$data._$camera;
                 },
-                addCamera(camera) {
-                    this.$data.cameras.push(camera);
-                    this.refresh();
-                }
             }
         });
     }

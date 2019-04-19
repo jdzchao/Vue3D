@@ -19,6 +19,7 @@ import V4hSkyBox from "./packages/V4hSkyBox";
 // 工具
 import Materials from './utils/Materials'
 import Utils from './utils/Utils'
+import Config from './config'
 
 export {
     Vue3d,
@@ -35,6 +36,7 @@ export {
     V4hSkyBox,
     // utils
     Materials,
+    Config
 };
 
 /**
