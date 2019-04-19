@@ -29,6 +29,12 @@ export default {
         scenes_addCamera(camera) {
             this.$data.cameras.push(camera);
             this.refresh();
+        },
+        scenes_getScene() {
+            return this.$data.$scene;
+        },
+        scenes_getCamera() {
+            return this.$data.cameras[this.$data.$camIndex];
         }
     }
 }

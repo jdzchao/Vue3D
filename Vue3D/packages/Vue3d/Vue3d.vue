@@ -2,8 +2,9 @@
     <canvas :id="id">
         Sorry, your web browser does not support WebGL
         <template v-if="slot">
-            <grid-helper v-bind="config.grid" v-if="plugins.grid"></grid-helper>
             <box-helper v-bind="config.box" v-if="plugins.box"></box-helper>
+            <grid-helper v-bind="config.grid" v-if="plugins.grid"></grid-helper>
+            <ray-caster v-bind="config.rayCaster" v-if="plugins.rayCaster"></ray-caster>
             <slot></slot>
         </template>
     </canvas>
@@ -11,15 +12,17 @@
 
 <script>
     import Renderer from "../../renderer";
-    import GridHelper from "./Plugins/GridHelper"
     import BoxHelper from "./Plugins/BoxHelper"
-    import Config from "../../config" // 默认推荐配置
+    import GridHelper from "./Plugins/GridHelper"
+    import RayCaster from "./Plugins/RayCaster"
+    import Config from "../../config"
 
     export default {
         name: "vue-3d",
         components: {
+            BoxHelper,
             GridHelper,
-            BoxHelper
+            RayCaster,
         },
         props: {
             id: {type: String, default: 'Vue3D'},
@@ -59,7 +62,6 @@
         },
         mounted() {
             this.V$dom = this.$el;
-            console.log(this.width);
             this.renderer = new Renderer();
             /* renderer config */
             let renderConf = this.config.hasOwnProperty('renderer') ? this.config['renderer'] : {};

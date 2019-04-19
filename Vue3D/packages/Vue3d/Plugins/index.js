@@ -1,16 +1,17 @@
 export default {
     name: "Plugin",
+    props: {
+        active: {type: Boolean, default: true}
+    },
     data() {
         return {
             // Vue3d Base
             V$dom: null,
             V$scene: null,
             V$camera: null,
-            // Renderer
-            renderer: null,
-            // Helper
-            active: true,
-            plugin: null,
+
+            renderer: null, // Renderer
+            plugin: null, // handler
         }
     },
     watch: {

@@ -4,6 +4,7 @@ import debug from './debug'
 import delegation from './delegation'
 import event from './event'
 import scenes from './scenes'
+import orbit from './orbit'
 
 /**
  * 渲染总线
@@ -11,7 +12,7 @@ import scenes from './scenes'
 export default class {
     constructor() {
         return new Vue({
-            mixins: [debug, delegation, event, scenes],
+            mixins: [debug, delegation, event, scenes, orbit],
             data: {
                 // option
                 _$auto: false, // 是否自动逐帧渲染
@@ -46,11 +47,10 @@ export default class {
                     this.$data._$scene.name = id;
                     this.$data._$camera.name = id;
 
-                    this.$data._$camera.position.z = 100;
-
                     this.$data._$scene.add(this.$data._$camera);
 
                     this.scenes_init();
+                    this.orbit_init();
 
                     this.render();
 
@@ -71,14 +71,18 @@ export default class {
                     this.$data._$rendering = requestAnimationFrame(() => {
                         this.setStatus('render'); // 切换渲染器状态
                         this.delegationCall(); // 调用委托中的方法
+
                         // 当 pure 为真时，则仅渲染 standard scene
                         this.$data._$play ?
                             this.$data._$renderer.render(this.scene, this.cameras) :
                             this.$data._$renderer.render(this.$data._$scene, this.$data._$camera);
+
                         this.$emit("update"); // 正常来讲只有这里能触发update事件
+
                         this.$data._$rendering = null; // 当前帧渲染完成，释放掉
+
                         if (this.$data._$auto) {
-                            // 当 auto 为真时，进入死循环 递归渲染
+                            // 当 auto 为真时，进入递归循环 渲染
                             this.render();
                         }
                     })
@@ -113,17 +117,17 @@ export default class {
                 },
                 setAuto() {
                     this.$data._$auto = !this.$data._$auto;
+                    this.emit("auto", this.$data._$auto);
                     this.info("ლ(´ڡ`ლ) Vue3D Auto => " + this.$data._$auto);
                 },
                 setPause() {
                     this.$data._$pause = !this.$data._$pause;
+                    this.emit("pause", this.$data._$pause);
                     this.info("ლ(´ڡ`ლ) Vue3D Pause => " + this.$data._$pause);
-                },
-                getPlay() {
-                    return this.$data._$play;
                 },
                 setPlay() {
                     this.$data._$play = !this.$data._$play;
+                    this.emit("play", this.$data._$play);
                     this.render();
                 },
                 setSize(width, height, refresh) {

@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/jdzchao/Vue3D#readme",
   "dependencies": {
-    "three": "^0.100.0"
+    "three": "^0.102.1"
   }
 }

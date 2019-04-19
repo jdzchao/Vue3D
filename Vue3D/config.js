@@ -8,6 +8,10 @@ export default {
         antialias: true,
         preserveDrawingBuffer: true,
     },
+    // plugin : box helper
+    box: {
+        color: 'rgb(255,255,0)'
+    },
     // plugin : grid helper
     grid: {
         size: 1000,
@@ -15,8 +19,9 @@ export default {
         colorCenterLine: 'rgb(136,136,136)',
         colorGrid: 'rgb(68,68,68)',
     },
-    // plugin : box helper
-    box: {
-        color: 'rgb(255,255,0)'
+    rayCaster: {
+        near: 0,
+        far: 1000,
     }
+
 }

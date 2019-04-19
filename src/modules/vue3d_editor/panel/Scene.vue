@@ -1,15 +1,15 @@
 <template>
     <div id="panel-scene">
-        <vue-3d ref="scene" :width="width" :height="height" :config="config" :plugins="{grid:true}">
-<!--            <v3d-camera-perspective ref="camera" :dis="10" :size="1" :x="0" :y="0" :width="500" :height="500"-->
-<!--                                    @ready="setCamera">-->
+        <vue-3d ref="scene" :width="width" :height="height" :config="config" :plugins="{grid:true,
+        rayCaster:true}">
+            <!--            <v3d-camera-perspective ref="camera" :dis="10" :size="1" :x="0" :y="0" :width="500" :height="500"-->
+            <!--                                    @ready="setCamera">-->
 
-<!--            </v3d-camera-perspective>-->
+            <!--            </v3d-camera-perspective>-->
             <v3d-light-rect-area :width="100" :height="100" :intensity="1"
                                  :target="{x:5,y:0,z:0}" :position="{x:0,y:0,z:10}"></v3d-light-rect-area>
             <v3d-geom-cylinder :material="Materials.standard()" :radialSegments="50"></v3d-geom-cylinder>
             <!--            <v4h-orbit-controls :index="0" :max="1000"></v4h-orbit-controls>-->
-            <v4h-ray-cast @cast="cast"></v4h-ray-cast>
             <!--            <v4h-grid slot="v4h"></v4h-grid>-->
         </vue-3d>
     </div>

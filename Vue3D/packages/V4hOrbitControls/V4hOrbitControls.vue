@@ -1,5 +1,6 @@
 <script>
-    import THREE from "./OrbitControls"
+    import *as THREE from "three"
+    import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
     import Helper from "../../mixins/Helper"
 
     export default {
@@ -19,7 +20,7 @@
         },
         mounted() {
             if (this.active) {
-                this.control = new THREE.OrbitControls(this.camera, this.canvas);
+                this.control = new OrbitControls(this.camera, this.canvas);
                 this.control.addEventListener('change', this.render, false);
 
                 this.control.type = 'orbit';
