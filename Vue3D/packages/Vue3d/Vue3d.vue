@@ -59,6 +59,7 @@
         },
         mounted() {
             this.V$dom = this.$el;
+            console.log(this.width);
             this.renderer = new Renderer();
             /* renderer config */
             let renderConf = this.config.hasOwnProperty('renderer') ? this.config['renderer'] : {};

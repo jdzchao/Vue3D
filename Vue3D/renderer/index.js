@@ -26,8 +26,8 @@ export default class {
                 _$scene: null, // Base Scene
                 _$camera: null, // God's Perspective Camera
 
-                width: 0, // renderer width
-                height: 0, // renderer height
+                width: 100, // renderer width
+                height: 100, // renderer height
                 ratio: 1, // renderer ratio
                 clearColor: "rgb(25,25,25)", // renderer clear color
                 clearAlpha: 1, // renderer clear alpha
@@ -75,11 +75,6 @@ export default class {
                         this.$data._$play ?
                             this.$data._$renderer.render(this.scene, this.cameras) :
                             this.$data._$renderer.render(this.$data._$scene, this.$data._$camera);
-                        if (this.$data._$play) {
-                            console.log("render active", this.$data.$scene, this.$data.$cameras);
-                        } else {
-                            console.log("render base", this.$data._$scene, this.$data._$camera);
-                        }
                         this.$emit("update"); // 正常来讲只有这里能触发update事件
                         this.$data._$rendering = null; // 当前帧渲染完成，释放掉
                         if (this.$data._$auto) {
@@ -90,6 +85,7 @@ export default class {
                 },
                 // 刷新渲染器
                 refresh() {
+                    this.$data._$camera.aspect = this.width / this.height;
                     this.$data._$renderer.setSize(this.width, this.height);
                     this.$data._$renderer.setPixelRatio(this.ratio);
                     this.$data._$renderer.setClearColor(new THREE.Color(this.clearColor).getHex(), this.clearAlpha);
