@@ -44,7 +44,7 @@ export {
  */
 export default {
     install: function (Vue, options) {
-        // Vue.prototype.$vue3d = Vue3d;
+        // Vue.prototype.$editor = Vue3d;
         Vue.component("vue-3d", Vue3d);
         Vue.component("v3d-camera-perspective", V3dCameraPerspective);
         Vue.component("v3d-geom-box", V3dGeomBox);

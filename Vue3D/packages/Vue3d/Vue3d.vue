@@ -4,7 +4,6 @@
         <template v-if="slot">
             <box-helper v-bind="config.box" v-if="plugins.box"></box-helper>
             <grid-helper v-bind="config.grid" v-if="plugins.grid"></grid-helper>
-            <ray-caster v-bind="config.rayCaster" v-if="plugins.rayCaster"></ray-caster>
             <slot></slot>
         </template>
     </canvas>
@@ -14,7 +13,6 @@
     import Renderer from "../../renderer";
     import BoxHelper from "./Plugins/BoxHelper"
     import GridHelper from "./Plugins/GridHelper"
-    import RayCaster from "./Plugins/RayCaster"
     import Config from "../../config"
 
     export default {
@@ -22,7 +20,6 @@
         components: {
             BoxHelper,
             GridHelper,
-            RayCaster,
         },
         props: {
             id: {type: String, default: 'Vue3D'},
@@ -62,7 +59,7 @@
         },
         mounted() {
             this.V$dom = this.$el;
-            this.renderer = new Renderer();
+            this.renderer = new Renderer(this.width, this.height);
             /* renderer config */
             let renderConf = this.config.hasOwnProperty('renderer') ? this.config['renderer'] : {};
             this.renderer.init(this.id, this.$el, renderConf, (res) => {

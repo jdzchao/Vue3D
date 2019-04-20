@@ -1,7 +1,6 @@
 <template>
     <div id="panel-scene">
-        <vue-3d ref="scene" :width="width" :height="height" :config="config" :plugins="{grid:true,
-        rayCaster:true}">
+        <vue-3d ref="scene" :width="width" :height="height" :config="config" :plugins="plugins">
             <!--            <v3d-camera-perspective ref="camera" :dis="10" :size="1" :x="0" :y="0" :width="500" :height="500"-->
             <!--                                    @ready="setCamera">-->
 
@@ -56,7 +55,8 @@
                 rotation: {x: 0, y: 0, z: 0},
                 scale: {x: 1, y: 1, z: 1},
                 Materials,
-                config: Config
+                config: Config,
+                plugins: {box: true, grid: true}
             }
         },
         methods: {

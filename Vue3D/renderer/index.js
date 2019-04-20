@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import * as THREE from 'three'
+import capture from './capture'
 import debug from './debug'
 import delegation from './delegation'
 import event from './event'
@@ -10,9 +11,9 @@ import orbit from './orbit'
  * 渲染总线
  */
 export default class {
-    constructor() {
+    constructor(width, height) {
         return new Vue({
-            mixins: [debug, delegation, event, scenes, orbit],
+            mixins: [capture, debug, delegation, event, scenes, orbit],
             data: {
                 // option
                 _$auto: false, // 是否自动逐帧渲染
@@ -27,8 +28,8 @@ export default class {
                 _$scene: null, // Base Scene
                 _$camera: null, // God's Perspective Camera
 
-                width: 100, // renderer width
-                height: 100, // renderer height
+                width: width | 100, // renderer width
+                height: height | 100, // renderer height
                 ratio: 1, // renderer ratio
                 clearColor: "rgb(25,25,25)", // renderer clear color
                 clearAlpha: 1, // renderer clear alpha
@@ -37,10 +38,9 @@ export default class {
             methods: {
                 init(id, canvas, params, callback) {
                     params['canvas'] = canvas;
-
                     this.$data._$canvas = canvas;
                     this.$data._$scene = new THREE.Scene();
-                    this.$data._$camera = new THREE.PerspectiveCamera(50, this.width / this.height);
+                    this.$data._$camera = new THREE.PerspectiveCamera(45, this.width / this.height);
                     this.$data._$renderer = new THREE.WebGLRenderer(params);
 
                     // set name
@@ -51,6 +51,7 @@ export default class {
 
                     this.scenes_init();
                     this.orbit_init();
+                    this.capture_init();
 
                     this.render();
 
@@ -90,6 +91,7 @@ export default class {
                 // 刷新渲染器
                 refresh() {
                     this.$data._$camera.aspect = this.width / this.height;
+                    this.$data._$camera.updateProjectionMatrix();// 摄像机参数改变后必须执行生效
                     this.$data._$renderer.setSize(this.width, this.height);
                     this.$data._$renderer.setPixelRatio(this.ratio);
                     this.$data._$renderer.setClearColor(new THREE.Color(this.clearColor).getHex(), this.clearAlpha);

@@ -10,7 +10,7 @@ export default {
     data() {
         return {
             target: null,
-            box: new THREE.BoxHelper(),
+            box: new THREE.Box3(),
             position: {x: 0, y: 0, z: 0},
             rotation: {x: 0, y: 0, z: 0},
             scale: {x: 1, y: 1, z: 1},
@@ -18,56 +18,46 @@ export default {
     },
     created() {
         this.box.color = this.color;
-        this.plugin = this.box;
-        this.renderer.on("pick", this.pickTarget)
+        this.plugin = new THREE.Box3Helper(this.box, this.color);
+        this.renderer.on("capture", this.pickTarget)
     },
     methods: {
         pickTarget(val) {
-            if (val) {
+            if (val && val.hasOwnProperty('object')) {
+                val = val.object;
                 this.target = val;
                 this.position = val.position;
                 this.rotation = val.rotation;
                 this.scale = val.scale;
                 this.box.setFromObject(this.target);
-                this.scene.add(this.box);
-                this.box.update();
+                this.V$scene.add(this.plugin);
+                this.renderer.render();
             } else {
-                this.scene.remove(this.box);
+                this.V$scene.remove(this.plugin);
+                this.renderer.render();
             }
+        },
+        setActive() {
+            return;
         },
     },
     watch: {
-        // target(val){
-        //     if (val) {
-        //         this.position = val.position;
-        //         this.rotation = val.rotation;
-        //         this.scale = val.scale;
-        //         this.box.setFromObject(this.target);
-        //         this.scene.add(this.box);
-        //         this.box.update();
-        //     } else {
-        //         this.scene.remove(this.box);
-        //     }
-        // },
         position: {
             deep: true,
             handler() {
                 if (!this.target) return;
-                this.box.update();
             }
         },
         rotation: {
             deep: true,
             handler() {
                 if (!this.target) return;
-                this.box.update();
             }
         },
         scale: {
             deep: true,
             handler() {
                 if (!this.target) return;
-                this.box.update();
             }
         },
     }
