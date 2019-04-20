@@ -63,7 +63,7 @@ export default {
             this.caster.setFromCamera(this.point, this.V$camera);
             let target = this.caster.intersectObjects(this.renderer.scenes_getScene().children, true);
             this.renderer.info("Vue3D cast: ", target);
-            this.renderer.$emit('cast', target);
+            this.renderer.emit('cast', target);
             this.charged = false;
         },
         // 射线充能 【兼容拖动事件】
