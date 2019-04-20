@@ -1,5 +1,5 @@
 /**
- * 总线事件委托
+ * 总线事件
  */
 export default {
     methods: {

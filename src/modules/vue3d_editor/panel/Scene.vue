@@ -1,6 +1,10 @@
 <template>
     <div id="panel-scene">
+
         <vue-3d ref="scene" :width="width" :height="height" :config="config" :plugins="plugins">
+            <v3d-scene>
+
+            </v3d-scene>
             <!--            <v3d-camera-perspective ref="camera" :dis="10" :size="1" :x="0" :y="0" :width="500" :height="500"-->
             <!--                                    @ready="setCamera">-->
 
@@ -18,15 +22,13 @@
     import {mapGetters, mapState} from 'vuex'
     import {
         Vue3d,
-        V4hRayCast,
-        V4hSkyBox,
         V3dLightAmbient,
-        V4hOrbitControls,
         V3dLightDirectional,
         V3dLightRectArea,
         V3dLightSpot,
         V3dGeomCylinder,
         V3dCameraPerspective,
+        V3dScene,
         Materials,
         Config
     } from '_v3d'
@@ -35,18 +37,16 @@
 
     export default {
         name: "PanelScene",
-        components: {
-            Vue3d,
-            V4hRayCast,
-            V4hSkyBox,
-            V3dLightAmbient,
-            V4hOrbitControls,
-            V3dLightDirectional,
-            V3dLightRectArea,
-            V3dLightSpot,
-            V3dGeomCylinder,
-            V3dCameraPerspective
-        },
+        // components: {
+        //     Vue3d,
+        //     V3dScene,
+        //     V3dLightAmbient,
+        //     V3dLightDirectional,
+        //     V3dLightRectArea,
+        //     V3dLightSpot,
+        //     V3dGeomCylinder,
+        //     V3dCameraPerspective
+        // },
         data() {
             return {
                 width: 100,
@@ -61,8 +61,8 @@
         },
         methods: {
             sceneResize() {
-                this.width = this.$store.state.vue3d.sWidth = this.$el.clientWidth;
-                this.height = this.$store.state.vue3d.sHeight = this.$el.clientHeight;
+                this.width = this.$el.clientWidth;
+                this.height = this.$el.clientHeight;
             },
             ray(targets) {
                 this.$store.dispatch('GetSelectedByRay', targets).then(res => {
@@ -128,10 +128,9 @@
             },
         },
         mounted() {
-            console.log(this.$refs.scene.V$scene)
-            this.$store.state.vue3d.canvas = this.$refs.scene;
-            this.sceneResize();
-            window.addEventListener("resize", this.sceneResize);
+            console.log(this.$refs.scene.V$scene, this.$refs.scene.scene);
+            this.resize();
+            window.addEventListener("resize", this.resize);
         },
     }
 </script>

@@ -50,9 +50,9 @@
                 V$scene: null, // Base Scene
                 V$camera: null, // Base Camera
                 /* public */
-                scene: null, // standard scene
-                cameras: [], // Camera Array
                 renderer: null,
+                scene: null, // activate scene
+                cameras: [], // activate camera Array
                 /* status */
                 slot: false,
             }
@@ -69,9 +69,6 @@
                 this.cameras = res.cameras;
                 this.slot = true; // 开始挂载子组件
             });
-            // this.renderer.setSize(this.width, this.height);
-            // this.renderer.setPixelRatio(this.ratio);
-            // this.renderer.refresh();
         },
         watch: {
             width(val, oldVal) {

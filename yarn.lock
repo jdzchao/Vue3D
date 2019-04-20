@@ -3296,10 +3296,10 @@ element-china-area-data@^4.1.2:
     china-area-data "^4.0.0"
     lodash "^4.17.10"
 
-element-ui@^2.6.3:
-  version "2.6.3"
-  resolved "https://registry.yarnpkg.com/element-ui/-/element-ui-2.6.3.tgz#e5c87ca3cdc988586320c826872720a8cdc7db44"
-  integrity sha512-vV2HfFkCH8KhxunSBFLnA+/jJY3UxMMbhBjiHoO3pZOX/8OQ8QbeatAnjBFDu6dRRGb0DGERUtY2WBeVYegs/A==
+element-ui@^2.7.2:
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/element-ui/-/element-ui-2.7.2.tgz#8bc5bef5c3c53a2170422516b4324e70069c23d1"
+  integrity sha512-Exh9QTkm9gwMMPzg1TyaTlBKyr3k4K9XcC5vl0A/mneDvJX//RsURGuOWsCNDVQMdhh5h9e+W5icosh+pKfbCg==
   dependencies:
     async-validator "~1.8.1"
     babel-helper-vue-jsx-merge-props "^2.0.0"
@@ -5657,10 +5657,10 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-mathjs@^5.8.0:
-  version "5.8.0"
-  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-5.8.0.tgz#25e36843db3b577f89193d1b7d299c27eab58ed7"
-  integrity sha512-hFHcxpG9IwNKP50NLg8PUnYSWUUotyJs1HAn9GTosJ6Q9LBNd2owSB/DvFm9vG88IkhGlo8evE+aiAzBweVK6A==
+mathjs@^5.9.0:
+  version "5.9.0"
+  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-5.9.0.tgz#e926feb1c67c2cae103512dd35ddc2573106e1e5"
+  integrity sha512-f1xmJklkTCr48y023cFy/ZSoVzOfgHp1gutvebi/Vv5RLly6j8G9T2/XHkfXewZKcwPDbhBkFEYljaCjudxulQ==
   dependencies:
     complex.js "2.0.11"
     decimal.js "10.1.1"
@@ -7711,9 +7711,9 @@ requires-port@^1.0.0:
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
 
 resize-observer-polyfill@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.0.tgz#660ff1d9712a2382baa2cad450a4716209f9ca69"
-  integrity sha512-M2AelyJDVR/oLnToJLtuDJRBBWUGUvvGigj1411hXhAdyFWqMaqHp7TixW3FpiLuVaikIcR1QL+zqoJoZlOgpg==
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
+  integrity sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==
 
 resolve-cwd@^2.0.0:
   version "2.0.0"
@@ -7898,10 +7898,10 @@ schema-utils@^1.0.0:
     ajv-errors "^1.0.0"
     ajv-keywords "^3.1.0"
 
-screenfull@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/screenfull/-/screenfull-4.1.0.tgz#30eb338f615941f5a2cdd96c14e36063d2d9d764"
-  integrity sha512-/qH0HAmc+ilbZ9Vf8J7RHjjecSdqmjIh98iMkA6uCSKcHdJK1TiXhTbR+cin8rG70xi4Peyz7wW1KJVP6sp30g==
+screenfull@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/screenfull/-/screenfull-4.2.0.tgz#d5252a5a0f56504719abbed9ebbcd9208115da03"
+  integrity sha512-qpyI9XbwuMJElWRP5vTgxkFAl4k7HpyhIqBFOZEwX9QBXn0MAuRSpn7LOc6/4CeSwoz61oBu1VPV+2fbIWC+5Q==
 
 scss-tokenizer@^0.2.3:
   version "0.2.3"

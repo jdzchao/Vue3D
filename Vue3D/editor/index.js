@@ -3,7 +3,7 @@ import event from './event'
 
 const editor = {
     mixins: [event],
-    methods: {}
+    methods: {},
 };
 
 /**

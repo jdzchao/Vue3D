@@ -17,7 +17,8 @@ import '@/utils/global'
 
 import i18n from './i18n'
 
-// Vue.use(Vue3D);
+Vue.use(Vue3D);
+
 Vue.use(ElementUI, {
     i18n: (key, value) => i18n.t(key, value)
 })

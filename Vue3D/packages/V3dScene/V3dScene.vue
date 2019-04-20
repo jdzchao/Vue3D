@@ -1,16 +1,33 @@
 <template>
-    <object name="scene">
+    <object :name="$options.name" style="display:none;">
         <slot></slot>
     </object>
 </template>
 <script>
+    import * as THREE from 'three'
+
     export default {
-        name: "StandardScene",
+        name: "V3dScene",
         data() {
             return {
-                V$dom: this.$parent.V$dom,
-                V$scene: this.$parent.scene,
-                renderer: this.$parent.renderer
+                V$dom: null,
+                V$scene: null,
+                V$camera: [],
+                renderer: null,
+            }
+        },
+        created() {
+            if (this.hasOwnProperty("$parent") && this.$parent.hasOwnProperty('V$scene')) {
+                this.V$dom = this.$parent.V$dom;
+                this.V$scene = this.$parent.V$scene;
+                this.V$camera = this.$parent.V$camera;
+                this.renderer = this.$parent.renderer;
+                this.$parent.scene = new THREE.Scene();
+                this.$parent.cameras = [];
+                console.log(this.renderer.scenes_getCamera());
+            } else {
+                console.error(this.$options.name + " should slot in Vue3D Component");
+                return;
             }
         }
     }

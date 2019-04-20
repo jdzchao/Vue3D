@@ -31,10 +31,10 @@ export default {
                 this.scale = val.scale;
                 this.box.setFromObject(this.target);
                 this.V$scene.add(this.plugin);
-                this.renderer.render();
+                this.render();
             } else {
                 this.V$scene.remove(this.plugin);
-                this.renderer.render();
+                this.render();
             }
         },
         setActive() {

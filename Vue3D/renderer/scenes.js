@@ -6,6 +6,8 @@ import * as THREE from "three";
 export default {
     data() {
         return {
+            $scenes: [],
+
             $scene: null, // default scene
             $cameras: [], // default cameras
             $camIndex: 0, // default camera index
@@ -18,13 +20,16 @@ export default {
     methods: {
         scenes_init() {
             this.$data.$scene = new THREE.Scene();
-            this.$data.$cameras = new THREE.ArrayCamera(this.$data.$cameras);
-
+            let cameras = new THREE.ArrayCamera(this.$data.$cameras);
             // 默认激活的场景和像机
             this.scene = this.$data.$scene;
-            this.cameras = this.$data.$cameras;
+            this.cameras = cameras;
             // 添加到 Base Scene 中去
             this.$data._$scene.add(this.$data.$scene);
+        },
+        scenes_add(scene) {
+            if (scene && scene.type !== "Scene") return;
+            this.$data.$scenes.push(scene);
         },
         scenes_addCamera(camera) {
             this.$data.cameras.push(camera);

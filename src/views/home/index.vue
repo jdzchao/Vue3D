@@ -1,16 +1,9 @@
 <template>
     <div id="editor">
-        <vue-3d ref="scene" :width="width" :height="height" :params="params" :plugins="{grid:true}">
-            <v3d-camera-perspective ref="camera" :dis="10" :size="1" :x="0" :y="0" :width="500" :height="500"
-                                    @ready="setCamera">
-
-            </v3d-camera-perspective>
+        <vue-3d ref="scene" :width="width" :height="height" :config="config" :plugins="plugins">
             <v3d-light-rect-area :width="100" :height="100" :intensity="1"
                                  :target="{x:5,y:0,z:0}" :position="{x:0,y:0,z:10}"></v3d-light-rect-area>
             <v3d-geom-cylinder :material="Materials.standard()" :radialSegments="50"></v3d-geom-cylinder>
-            <!--            <v4h-orbit-controls :index="0" :max="1000"></v4h-orbit-controls>-->
-            <!--            <v4h-ray-cast @cast="cast"></v4h-ray-cast>-->
-            <!--            <v4h-grid slot="v4h"></v4h-grid>-->
         </vue-3d>
     </div>
 </template>
@@ -24,49 +17,34 @@
         V3dLightRectArea,
         V3dLightSpot,
         V3dLightAmbient,
-        V4hOrbitControls,
-        V4hRayCast,
-        V4hSkyBox,
-        Materials
+        Materials,
+        Config
     } from "_v3d"
 
     export default {
         name: "home",
         components: {
             Vue3d,
-            V4hRayCast,
-            V4hSkyBox,
             V3dLightAmbient,
-            V4hOrbitControls,
             V3dLightDirectional,
             V3dLightRectArea,
             V3dLightSpot,
             V3dGeomCylinder,
-            V3dCameraPerspective
+            V3dCameraPerspective,
         },
         data() {
             return {
-                width: 50,
-                height: 50,
+                width: 100,
+                height: 100,
+                position: {x: 0, y: 0, z: 0},
+                rotation: {x: 0, y: 0, z: 0},
+                scale: {x: 1, y: 1, z: 1},
                 Materials,
-                position: {x: 0, y: 0, z: 50},
-                params: {
-                    alpha: true,
-                    antialias: true,
-                    preserveDrawingBuffer: true,
-                }
+                config: Config,
+                plugins: {box: true, grid: true}
             }
         },
         methods: {
-            debug(obj) {
-                console.log(obj)
-            },
-            setCamera(camera) {
-                camera.position.z = 50;
-            },
-            cast(obj) {
-                console.log(obj)
-            },
             resize() {
                 this.width = this.$el.clientWidth;
                 this.height = this.$el.clientHeight;
