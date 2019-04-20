@@ -87,7 +87,7 @@ export default {
         },
         // 分析结果
         _AnalysisTargets(targets) {
-            this.$emit('raycast', targets);
+            this.emit('raycast', targets);
             if (targets.length > 0) {
                 targets.forEach((target) => {
                     if (target.object.type) {
