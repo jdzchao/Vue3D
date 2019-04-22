@@ -8,6 +8,9 @@
 
     export default {
         name: "V3dScene",
+        props: {
+            id: {type: String, required: true}
+        },
         data() {
             return {
                 V$dom: null,
@@ -17,6 +20,7 @@
             }
         },
         created() {
+            console.log("out")
             if (this.hasOwnProperty("$parent") && this.$parent.hasOwnProperty('V$scene')) {
                 this.V$dom = this.$parent.V$dom;
                 this.V$scene = this.$parent.V$scene;

@@ -1,8 +1,7 @@
 <template>
     <div id="panel-scene">
-
         <vue-3d ref="scene" :width="width" :height="height" :config="config" :plugins="plugins">
-            <v3d-scene>
+            <v3d-scene id="scene">
 
             </v3d-scene>
             <!--            <v3d-camera-perspective ref="camera" :dis="10" :size="1" :x="0" :y="0" :width="500" :height="500"-->
