@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import config from './_config' // 加载默认配置
+/** 组件 **/
 import debug from './debug'
 import delegation from './delegation'
 import event from './event'
 
-const editor = {
+const bus = {
     mixins: [debug, delegation, event],
     data: {
         config: config, // 配置文件
@@ -30,7 +31,4 @@ const editor = {
     }
 };
 
-/**
- * 编辑器总线
- */
-export default new Vue(editor);
+export default new Vue(bus);
