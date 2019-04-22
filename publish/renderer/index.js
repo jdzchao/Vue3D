@@ -1,11 +1,19 @@
 import Vue from 'vue'
 import * as THREE from 'three'
+import Bus from '../bus'
 import capture from './capture'
-import debug from './debug'
-import delegation from './delegation'
 import event from './event'
 import scenes from './scenes'
 import orbit from './orbit'
+
+class Vue3D {
+    constructor() {
+        this.type = "Vue3D";
+        this.renderer = null;
+        this.status = 'awake';
+        this.uuid = '';
+    }
+}
 
 /**
  * 渲染总线
@@ -13,7 +21,7 @@ import orbit from './orbit'
 export default class {
     constructor(width, height) {
         return new Vue({
-            mixins: [capture, debug, delegation, event, scenes, orbit],
+            mixins: [capture, event, scenes, orbit],
             data: {
                 // option
                 _$auto: false, // 是否自动逐帧渲染
@@ -33,6 +41,9 @@ export default class {
                 ratio: 1, // renderer ratio
                 clearColor: "rgb(25,25,25)", // renderer clear color
                 clearAlpha: 1, // renderer clear alpha
+
+                // renderer info
+                info: new Vue3D()
             },
             watch: {},
             methods: {
@@ -48,6 +59,9 @@ export default class {
                     this.$data._$camera.name = id;
 
                     this.$data._$scene.add(this.$data._$camera);
+
+                    this.info.uuid = this.$data._$scene.uuid;
+                    this.info.renderer = this;
 
                     this.scenes_init();
                     this.orbit_init();
@@ -71,7 +85,7 @@ export default class {
                     if (this.$data._$rendering || this.$data._$pause) return;
                     this.$data._$rendering = requestAnimationFrame(() => {
                         this.setStatus('render'); // 切换渲染器状态
-                        this.delegationCall(); // 调用委托中的方法
+                        Bus.delegationCall(); // 调用委托中的方法
 
                         // 当 pure 为真时，则仅渲染 standard scene
                         this.$data._$play ?
@@ -107,11 +121,14 @@ export default class {
                     switch (status) {
                         case  1:
                             this.$data._$status = 1;
-                            this.info("ლ(´ڡ`ლ) Vue3D Status => Start");
+                            this.info.status = 'Start';
+                            Bus.emit("start", this.info);
                             break;
                         case  2:
                             this.$data._$status = 2;
-                            this.info("ლ(´ڡ`ლ) Vue3D Status => Render");
+                            this.info.status = 'Render';
+                            Bus.emit("render", this.info);
+                            // Bus.info("ლ(´ڡ`ლ) Vue3D Status => Render");
                             break;
                         default:
                             return;
@@ -120,12 +137,12 @@ export default class {
                 setAuto() {
                     this.$data._$auto = !this.$data._$auto;
                     this.emit("auto", this.$data._$auto);
-                    this.info("ლ(´ڡ`ლ) Vue3D Auto => " + this.$data._$auto);
+                    Bus.info("ლ(´ڡ`ლ) Vue3D Auto => " + this.$data._$auto);
                 },
                 setPause() {
                     this.$data._$pause = !this.$data._$pause;
                     this.emit("pause", this.$data._$pause);
-                    this.info("ლ(´ڡ`ლ) Vue3D Pause => " + this.$data._$pause);
+                    Bus.info("ლ(´ڡ`ლ) Vue3D Pause => " + this.$data._$pause);
                 },
                 setPlay() {
                     this.$data._$play = !this.$data._$play;

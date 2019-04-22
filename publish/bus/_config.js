@@ -2,12 +2,16 @@
  * Vue3d 推荐配置
  */
 export default {
+    debug: true,
     // WebGLRenderer Constructor parameters
     renderer: {
         alpha: true,
         antialias: true,
         preserveDrawingBuffer: true,
     },
+    /****************************************
+     ** PLUGINS Setting
+     ****************************************/
     // plugin : box helper
     box: {
         color: 'rgb(255,255,0)'

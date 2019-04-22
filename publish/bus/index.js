@@ -1,13 +1,33 @@
 import Vue from 'vue'
-import config from './config'
+import config from './_config' // 加载默认配置
+import debug from './debug'
+import delegation from './delegation'
 import event from './event'
 
 const editor = {
-    mixins: [event],
+    mixins: [debug, delegation, event],
     data: {
         config: config, // 配置文件
     },
-    methods: {},
+    methods: {
+        // renderer start
+        start(renderer) {
+            this.info("Vue3D Start", renderer);
+        },
+        // renderer render
+        render(renderer) {
+            this.info("Vue3D Render", renderer);
+        },
+        // 读取配置文件
+        loadConf(conf) {
+            if (typeof conf !== 'object') return;
+            this.config = Object.assign(this.config, conf);
+        }
+    },
+    created() {
+        this.$on('start', this.start);
+        this.$on('render', this.render);
+    }
 };
 
 /**

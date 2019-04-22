@@ -1,3 +1,5 @@
+import Bus from './index'
+
 /**
  * 事件委托
  */
@@ -13,7 +15,7 @@ export default {
             if (typeof func === 'function') {
                 this.$data._$delegation.push(func);
             } else {
-                this.error('Render delegation need a function');
+                Bus.error('Render delegation need a function');
             }
         },
         // 从委托中移除方法
@@ -22,7 +24,7 @@ export default {
             if (index >= 0) {
                 this.$data._$delegation.slice(index, 1);
             } else {
-                this.warn('Function is not found in render delegation');
+                Bus.warn('Function is not found in render delegation');
             }
         },
         // 执行委托
