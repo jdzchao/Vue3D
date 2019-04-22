@@ -26,6 +26,7 @@ const bus = {
         }
     },
     created() {
+        /** 监听总线事件 **/
         this.$on('start', this.start);
         this.$on('render', this.render);
     }
