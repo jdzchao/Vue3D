@@ -1,4 +1,4 @@
-import editor from '../editor'
+import editor from '../bus'
 
 /**
  * 总线事件

@@ -1,4 +1,5 @@
 // 渲染器 && 主场景
+import Bus from './bus'
 import Vue3d from "./packages/Vue3d"
 import V3dScene from "./packages/V3dScene"
 // 摄像机
@@ -15,10 +16,9 @@ import V3dLightSpot from "./packages/V3dLightSpot" // Spot Light
 // 工具
 import Materials from './utils/Materials'
 import Utils from './utils/Utils'
-import Config from './config'
-import editor from './editor'
 
 export {
+    Bus,
     Vue3d,
     V3dScene,
     V3dCameraPerspective,
@@ -30,7 +30,6 @@ export {
     V3dLightSpot,
     // utils
     Materials,
-    Config
 };
 
 /**
@@ -38,7 +37,7 @@ export {
  */
 export default {
     install: function (Vue, opt) {
-        Vue.prototype.V3d$editor = editor; // 全局编辑器总线
+        Vue.prototype.$vue3d = Bus; // 全局编辑器总线
         Vue.component("vue-3d", Vue3d);
         Vue.component("v3d-scene", V3dScene);
         Vue.component("v3d-camera-perspective", V3dCameraPerspective);

@@ -1,6 +1,6 @@
 <template>
     <div class="demo">
-        <vue-3d ref="scene" :width="width" :height="height" :config="config" :plugins="plugins">
+        <vue-3d ref="scene" :width="width" :height="height" :plugins="plugins">
             <v3d-light-rect-area :width="100" :height="100" :intensity="1"
                                  :target="{x:5,y:0,z:0}" :position="{x:0,y:0,z:10}"></v3d-light-rect-area>
             <v3d-geom-cylinder :material="Materials.standard()" :radialSegments="50"></v3d-geom-cylinder>
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-    import {Materials, Config} from '@v3d'
+    import {Materials} from '@v3d'
 
     export default {
         name: "DemoDev",
@@ -21,7 +21,6 @@
                 rotation: {x: 0, y: 0, z: 0},
                 scale: {x: 1, y: 1, z: 1},
                 Materials,
-                config: Config,
                 plugins: {box: true, grid: true}
             }
         },

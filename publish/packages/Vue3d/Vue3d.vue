@@ -10,10 +10,10 @@
 </template>
 
 <script>
+    import Bus from "../../bus"
     import Renderer from "../../renderer";
     import BoxHelper from "./Plugins/BoxHelper"
     import GridHelper from "./Plugins/GridHelper"
-    import Config from "../../config"
 
     export default {
         name: "vue-3d",
@@ -30,7 +30,7 @@
             // Vue3d Configs Object
             config: {
                 type: Object, default() {
-                    return Config
+                    return Bus.config
                 }
             },
 
