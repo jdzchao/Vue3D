@@ -13,11 +13,15 @@ const bus = {
     methods: {
         // renderer start
         start(renderer) {
-            this.info("Vue3D Start:", renderer);
+            this.warn("Vue3D 'start' event:", {renderer});
         },
         // renderer render
         render(renderer) {
-            this.info("Vue3D Render:", renderer);
+            this.warn("Vue3D 'render' event:", {renderer});
+        },
+        // capture object
+        capture(renderer, target) {
+            this.warn("Vue3D 'capture' event:", {renderer, target})
         },
         // 读取配置文件
         loadConf(conf) {
@@ -27,8 +31,11 @@ const bus = {
     },
     created() {
         /** 监听总线事件 **/
-        this.$on('start', this.start);
-        this.$on('render', this.render);
+        if (this.config.debug) {
+            this.$on('start', this.start);
+            this.$on('render', this.render);
+            this.$on('capture', this.capture);
+        }
     }
 };
 

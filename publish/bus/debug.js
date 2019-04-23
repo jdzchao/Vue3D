@@ -11,13 +11,13 @@ export default {
             if (!this.config.debug) return;
             console.info(...args);
         },
-        error(...args) {
-            if (!this.config.debug) return;
-            console.error(...args);
-        },
         warn(...args) {
             if (!this.config.debug) return;
             console.warn(...args);
+        },
+        error(...args) {
+            if (!this.config.debug) return;
+            console.error(...args);
         }
     }
 }

@@ -20,7 +20,6 @@
             }
         },
         created() {
-            console.log("out")
             if (this.hasOwnProperty("$parent") && this.$parent.hasOwnProperty('V$scene')) {
                 this.V$dom = this.$parent.V$dom;
                 this.V$scene = this.$parent.V$scene;
@@ -28,7 +27,6 @@
                 this.renderer = this.$parent.renderer;
                 this.$parent.scene = new THREE.Scene();
                 this.$parent.cameras = [];
-                console.log(this.renderer.scenes_getCamera());
             } else {
                 console.error(this.$options.name + " should slot in Vue3D Component");
                 return;
