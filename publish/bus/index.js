@@ -13,11 +13,11 @@ const bus = {
     methods: {
         // renderer start
         start(renderer) {
-            this.info("Vue3D Start", renderer);
+            this.info("Vue3D Start:", renderer);
         },
         // renderer render
         render(renderer) {
-            this.info("Vue3D Render", renderer);
+            this.info("Vue3D Render:", renderer);
         },
         // 读取配置文件
         loadConf(conf) {

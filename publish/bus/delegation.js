@@ -28,9 +28,9 @@ export default {
             }
         },
         // 执行委托
-        delegationCall() {
+        delegationCall(renderer) {
             this.$data._$delegation.forEach((func) => {
-                func();
+                func(renderer);
             });
         }
     }

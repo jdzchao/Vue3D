@@ -85,7 +85,7 @@ export default class {
                     if (this.$data._$rendering || this.$data._$pause) return;
                     this.$data._$rendering = requestAnimationFrame(() => {
                         this.setStatus('render'); // 切换渲染器状态
-                        Bus.delegationCall(); // 调用委托中的方法
+                        Bus.delegationCall(this); // 调用委托中的方法
 
                         // 当 pure 为真时，则仅渲染 standard scene
                         this.$data._$play ?
@@ -175,4 +175,4 @@ export default class {
             }
         });
     }
-};
+}
