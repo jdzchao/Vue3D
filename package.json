@@ -11,7 +11,7 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "normalize.css": "^8.0.1",
-    "three": "0.102.1",
+    "three": "0.103.0",
     "vue": "^2.6.10"
   },
   "devDependencies": {

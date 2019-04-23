@@ -6,11 +6,11 @@
 
 <script>
     import * as THREE from "three"
-    import Light from "../../mixins/Light"
+    import Object3d_Light from "../../mixins/Object3d_Light"
 
     export default {
         name: "V3dLightSpot",
-        mixins: [Light],
+        mixins: [Object3d_Light],
         props: {
             distance: {type: Number, default: 0},
             angle: {type: Number, default: Math.PI},

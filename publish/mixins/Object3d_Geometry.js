@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import Object3d from "./Object3d"
 
 export default {
-    name: "Geometry",
+    name: "Object3d_Geometry",
     mixins: [Object3d],
     props: {
         buffer: false,

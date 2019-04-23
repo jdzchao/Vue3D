@@ -7,11 +7,11 @@
 <script>
 
     import * as THREE from "three"
-    import Camera from "../../mixins/Camera";
+    import Object3d_Camera from "../../mixins/Object3d_Camera";
 
     export default {
         name: "V3dCameraPerspective",
-        mixins: [Camera],
+        mixins: [Object3d_Camera],
         props: {
             near: {type: Number, default: 1},
             far: {type: Number, default: 1000},

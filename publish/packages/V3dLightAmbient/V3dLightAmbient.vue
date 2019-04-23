@@ -5,11 +5,11 @@
 </template>
 <script>
     import * as THREE from "three"
-    import Light from "../../mixins/Light"
+    import Object3d_Light from "../../mixins/Object3d_Light"
 
     export default {
         name: "V3dLightAmbient",
-        mixins: [Light],
+        mixins: [Object3d_Light],
         props: {},
         created() {
             this.light = new THREE.AmbientLight(this.color, this.intensity);

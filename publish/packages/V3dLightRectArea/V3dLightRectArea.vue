@@ -7,11 +7,11 @@
 <script>
     import * as THREE from "three"
     import rectAreaLightUniforms from "./RectAreaLightUniformsLib"
-    import Light from "../../mixins/Light"
+    import Object3d_Light from "../../mixins/Object3d_Light"
 
     export default {
         name: "V3dLightRectArea",
-        mixins: [Light],
+        mixins: [Object3d_Light],
         props: {
             width: {type: Number, default: 10},
             height: {type: Number, default: 10},

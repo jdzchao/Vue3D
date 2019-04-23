@@ -2,7 +2,7 @@ import * as THREE from "three"
 import Object3d from "./Object3d"
 
 export default {
-    name: "Camera",
+    name: "Object3d_Camera",
     mixins: [Object3d],
     props: {
         x: {type: Number, default: 0}, // viewport x 零点：左

@@ -14,6 +14,7 @@
     import Renderer from "../../renderer";
     import BoxHelper from "./Plugins/BoxHelper"
     import GridHelper from "./Plugins/GridHelper"
+    import Scene_SkyBox from "../../mixins/Scene_SkyBox"
 
     export default {
         name: "vue-3d",
@@ -21,6 +22,7 @@
             BoxHelper,
             GridHelper,
         },
+        mixins: [Scene_SkyBox],
         props: {
             id: {type: String, default: 'Vue3D'},
             width: {type: Number, default: 500},
@@ -38,6 +40,7 @@
             plugins: {
                 type: Object, default() {
                     return {
+                        box: false,
                         grid: false,
                     }
                 }
@@ -55,6 +58,7 @@
                 cameras: [], // activate camera Array
                 /* status */
                 slot: false,
+                background: null,
             }
         },
         mounted() {
@@ -82,6 +86,11 @@
             ratio(val, oldVal) {
                 if (val === oldVal) return;
                 this.renderer.setPixelRatio(this.ratio, true);
+            },
+            background(val, oldVal) {
+                if (val === oldVal) return;
+                this.scene.background = val;
+                this.renderer.render();
             }
         }
     }

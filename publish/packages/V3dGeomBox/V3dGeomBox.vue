@@ -6,11 +6,11 @@
 
 <script>
     import * as THREE from "three"
-    import Geometry from "../../mixins/Geometry"
+    import Object3d_Geometry from "../../mixins/Object3d_Geometry"
 
     export default {
         name: "V3dGeomBox",
-        mixins: [Geometry],
+        mixins: [Object3d_Geometry],
         props: {
             x: {type: Number, default: 1},
             y: {type: Number, default: 1},

@@ -1,6 +1,6 @@
 <template>
     <div class="demo">
-        <vue-3d ref="scene" :width="width" :height="height" :plugins="plugins">
+        <vue-3d ref="scene" :width="width" :height="height" :plugins="plugins" :skybox="skybox">
             <v3d-light-rect-area :width="100" :height="100" :intensity="1"
                                  :target="{x:5,y:0,z:0}" :position="{x:0,y:0,z:10}"></v3d-light-rect-area>
             <v3d-geom-cylinder :material="Materials.standard()" :radialSegments="50"></v3d-geom-cylinder>
@@ -21,7 +21,10 @@
                 rotation: {x: 0, y: 0, z: 0},
                 scale: {x: 1, y: 1, z: 1},
                 Materials,
-                plugins: {box: true, grid: true}
+                plugins: {box: true, grid: true},
+                skybox:{
+                    texture:['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg']
+                }
             }
         },
         methods: {

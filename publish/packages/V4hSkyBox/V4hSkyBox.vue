@@ -27,14 +27,17 @@
             }
         },
         methods: {
-            cubeTexture() {
-                let loader = new THREE.CubeTextureLoader();
-                loader.crossOrigin = 'anonymous';
-                loader.setPath(this.path);
-                loader.load(this.texture, (texture) => {
-                    this.root.scene.background = texture;
-                    this.root.render();
-                });
+            hdrCubeMap() {
+                // let loader = new THREE.HDRCubeTextureLoader();
+                // loader.crossOrigin = 'anonymous';
+                // loader.setPath(this.path);
+                // loader.load(this.texture, (texture) => {
+                //     this.root.scene.background = texture;
+                //     this.root.render();
+                // });
+            },
+            ldrCubeMap() {
+
             },
             simpleTexture() {
                 // let loader = new THREE.TextureLoader();

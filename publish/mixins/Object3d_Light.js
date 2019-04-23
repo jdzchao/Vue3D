@@ -1,7 +1,7 @@
 import Object3d from "./Object3d"
 
 export default {
-    name: "Light",
+    name: "Object3d_Light",
     mixins: [Object3d],
     props: {
         helper: {type: Boolean, default: false},

@@ -40,6 +40,9 @@ export default {
         },
         scenes_getCamera() {
             return this.$data.cameras[this.$data.$camIndex];
+        },
+        scenes_setSkyBox(path, texture) {
+
         }
     }
 }
