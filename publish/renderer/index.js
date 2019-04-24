@@ -66,7 +66,7 @@ export default class {
                     this.render();
 
                     callback && callback({
-                        scene: this.scene,
+                        scene: this.scenes_activate,
                         cameras: this.cameras,
                     });
 

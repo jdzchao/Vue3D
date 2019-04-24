@@ -1,48 +1,46 @@
-import * as THREE from "three";
+import Bus from "../bus"
 
 /**
- * 场景管理（Play mode）
+ * 子场景管理器
  */
 export default {
     data() {
         return {
-            $scenes: [],
-
-            $scene: null, // default scene
-            $cameras: [], // default cameras
-            $camIndex: 0, // default camera index
-
-            scene: null, // activated Scene
-            cameras: [], // activated Cameras
-            camIndex: 0, // activated Camera index
+            scenes_manager: [],
+            scenes_index: 0,
+            // activated Scene
+            scenes_activate: null,
         }
     },
     methods: {
+        // 初始化场景管理器及默认场景
         scenes_init() {
-            this.$data.$scene = new THREE.Scene();
-            let cameras = new THREE.ArrayCamera(this.$data.$cameras);
-            // 默认激活的场景和像机
-            this.scene = this.$data.$scene;
-            this.cameras = cameras;
+            this.scenes_activate = Bus.scene_init('default');
             // 添加到 Base Scene 中去
-            this.$data._$scene.add(this.$data.$scene);
+            this.getBaseScene().add(this.scenes_activate);
         },
-        scenes_add(scene) {
-            if (scene && scene.type !== "Scene") return;
-            this.$data.$scenes.push(scene);
+        // 添加场景，添加成功后默认场景将被替换
+        scenes_add(name) {
+            let scene = Bus.scene_init(name);
+            if (this.scenes_manager.length === 0) {
+                this.scenes_change(scene);
+            }
+            this.scenes_manager.push(scene);
+            this.render();
+            return scene;
         },
-        scenes_addCamera(camera) {
-            this.$data.cameras.push(camera);
-            this.refresh();
+        // 切换场景
+        scenes_change(scene) {
+            if (scene.type !== 'Scene') return;
+            this.getBaseScene().remove(this.scenes_activate);
+            this.getBaseScene().add(scene);
+            this.scenes_activate = scene;
+            this.render();
         },
-        scenes_getScene() {
-            return this.$data.$scene;
+        // 通过索引获取场景
+        scenes_getByIndex(index) {
+            if (index <= this.scenes_manager.length)
+                return this.scenes_manager[index];
         },
-        scenes_getCamera() {
-            return this.$data.cameras[this.$data.$camIndex];
-        },
-        scenes_setSkyBox(path, texture) {
-
-        }
     }
 }

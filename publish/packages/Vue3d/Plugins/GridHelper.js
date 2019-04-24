@@ -2,7 +2,7 @@ import *as THREE from "three"
 import Plugin from "./index"
 
 /**
- * 场景网格线
+ * 场景网格辅助线
  */
 export default {
     name: "GridHelper",
@@ -21,5 +21,6 @@ export default {
     created() {
         this.grid = new THREE.GridHelper(this.size, this.divisions, this.colorCenterLine, this.colorGrid);
         this.plugin = this.grid;
+        this.vue3d_add(this.grid);
     }
 }

@@ -10,19 +10,22 @@ export default {
     data() {
         return {
             target: null,
-            box: new THREE.Box3(),
+            box: null,
             position: {x: 0, y: 0, z: 0},
             rotation: {x: 0, y: 0, z: 0},
             scale: {x: 1, y: 1, z: 1},
         }
     },
     created() {
-        this.box.color = this.color;
+        this.box = new THREE.Box3();
         this.plugin = new THREE.Box3Helper(this.box, this.color);
-        this.renderer.on("capture", this.pickTarget)
+        this.renderer.on("capture", this.setBox)
+    },
+    beforeMount() {
+        if (this.plugin) this.vue3d_remove(this.plugin);
     },
     methods: {
-        pickTarget(val) {
+        setBox(val) {
             if (val && val.hasOwnProperty('object')) {
                 val = val.object;
                 this.target = val;
@@ -31,14 +34,9 @@ export default {
                 this.scale = val.scale;
                 this.box.setFromObject(this.target);
                 this.vue3d_add(this.plugin);
-                this.render();
             } else {
                 this.vue3d_remove(this.plugin);
-                this.render();
             }
-        },
-        setActive() {
-            return;
         },
     },
     watch: {

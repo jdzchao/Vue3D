@@ -56,24 +56,23 @@
                 /* public */
                 renderer: null, // Vue3D Renderer Bus
                 scene: null, // activate scene
-                cameras: [], // activate camera Array
                 /* status */
                 slot: false,
                 background: null,
             }
         },
         methods: {
-            inherit_base() {
+            // 获取基础挂载对象
+            fetch_base() {
                 return {
                     $_canvas: this.$data.$_canvas,
                     $_scene: this.$data.$_scene,
-                    $_camera: this.$data.$_camera
+                    $_camera: this.$data.$_camera,
+                    renderer: this.renderer
                 }
             },
-            inherit_activate() {
-            },
             resize() {
-                console.log(this.renderer)
+                if (!this.renderer) return;
                 this.renderer.setSize(this.width, this.height, true);
             }
         },

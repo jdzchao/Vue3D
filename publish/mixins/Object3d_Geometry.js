@@ -14,12 +14,8 @@ export default {
             geometry: null
         }
     },
-    watch: {
-        material(val, oldVal) {
-            if (oldVal !== val && oldVal !== null) {
-                this.setMaterial(val);
-            }
-        },
+    beforeMount() {
+        this.setMaterial(this.material);
     },
     methods: {
         setMaterial(mtl) {
@@ -28,7 +24,12 @@ export default {
             }
         }
     },
-    beforeMount() {
-        this.setMaterial(this.material);
-    }
+    watch: {
+        material(val, oldVal) {
+            if (oldVal !== val && oldVal !== null) {
+                this.setMaterial(val);
+            }
+        },
+    },
+
 }

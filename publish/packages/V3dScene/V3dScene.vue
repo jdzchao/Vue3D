@@ -4,8 +4,6 @@
     </object>
 </template>
 <script>
-    import * as THREE from 'three'
-
     export default {
         name: "V3dScene",
         props: {
@@ -13,23 +11,23 @@
         },
         data() {
             return {
-                V$dom: null,
-                V$scene: null,
-                V$camera: [],
+                $_canvas: null,
+                $_scene: null,
+                $_camera: null,
                 renderer: null,
+                scene: null,
             }
         },
         created() {
-            if (this.hasOwnProperty("$parent") && this.$parent.hasOwnProperty('V$scene')) {
-                this.V$dom = this.$parent.V$dom;
-                this.V$scene = this.$parent.V$scene;
-                this.V$camera = this.$parent.V$camera;
-                this.renderer = this.$parent.renderer;
-                this.$parent.scene = new THREE.Scene();
-                this.$parent.cameras = [];
+            let base = this.$parent.fetch_base && this.$parent.fetch_base();
+            if (base) {
+                this.$data.$_canvas = base.$_canvas;
+                this.$data.$_scene = base.$_scene;
+                this.$data.$_camera = base.$_camera;
+                this.renderer = base.renderer;
+                this.scene = this.renderer.scenes_add(this.id);
             } else {
-                console.error(this.$options.name + " should slot in Vue3D Component");
-                return;
+                console.error(this.$options.name + " should slot on Vue3D Component");
             }
         }
     }

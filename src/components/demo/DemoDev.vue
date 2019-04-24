@@ -1,9 +1,12 @@
 <template>
     <div class="demo">
         <vue-3d ref="scene" :width="width" :height="height" :plugins="plugins">
-            <v3d-light-rect-area :width="100" :height="100" :intensity="1"
-                                 :target="{x:5,y:0,z:0}" :position="{x:0,y:0,z:10}"></v3d-light-rect-area>
-            <v3d-geom-cylinder :material="Materials.standard()" :radialSegments="50"></v3d-geom-cylinder>
+            <v3d-scene id="demo">
+                <v3d-light-rect-area :width="100" :height="100" :intensity="1"
+                                     :target="{x:5,y:0,z:0}" :position="{x:0,y:0,z:10}"></v3d-light-rect-area>
+                <v3d-geom-cylinder :material="Materials.standard()" :radialSegments="50"></v3d-geom-cylinder>
+            </v3d-scene>
+
         </vue-3d>
     </div>
 </template>
@@ -31,12 +34,11 @@
             resize() {
                 this.width = this.$el.clientWidth;
                 this.height = this.$el.clientHeight;
-                console.log(this.width,this.height)
             },
         },
         mounted() {
-            console.log(this.$refs.scene.V$scene, this.$refs.scene.scene);
             this.resize();
+            console.log(this.$refs.scene.$data.$_scene);
             window.addEventListener("resize", this.resize);
         }
     }
