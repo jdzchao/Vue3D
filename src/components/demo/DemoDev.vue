@@ -6,7 +6,6 @@
                                      :target="{x:5,y:0,z:0}" :position="{x:0,y:0,z:10}"></v3d-light-rect-area>
                 <v3d-geom-cylinder :material="Materials.standard()" :radialSegments="50"></v3d-geom-cylinder>
             </v3d-scene>
-
         </vue-3d>
     </div>
 </template>
