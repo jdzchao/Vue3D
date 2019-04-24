@@ -1,10 +1,27 @@
 import * as THREE from "three"
 import {PMREMGenerator} from 'three/examples/jsm/pmrem/PMREMGenerator'
+import {PMREMCubeUVPacker} from 'three/examples/jsm/pmrem/PMREMCubeUVPacker'
+import Bus from '../bus'
+
 export default {
     name: "Scene_SkyBox",
     props: {
+        /**
+         * skybox
+         * @key:path String
+         * @key:texture Array
+         * Texture naming convention
+         *            [3]py
+         *      [2]nx [5]pz [1]px [6]nz
+         *            [4]ny
+         */
         skybox: {
-            type: Object
+            type: Object, default() {
+                return {
+                    path: '',
+                    texture: []
+                }
+            }
         }
     },
     data() {
@@ -14,42 +31,35 @@ export default {
         }
     },
     methods: {
-        hdrCubeMap() {
-            // let loader = new THREE.HDRCubeTextureLoader();
-            // loader.crossOrigin = 'anonymous';
-            // loader.setPath(this.path);
-            // loader.load(this.texture, (texture) => {
-            //     this.root.scene.background = texture;
-            //     this.root.render();
-            // });
-        },
         ldrCubeMap() {
-
-        },
-        cubeTexture() {
             let loader = new THREE.CubeTextureLoader();
             loader.crossOrigin = 'anonymous';
             loader.setPath(this.skybox.path);
             loader.load(this.skybox.texture, (texture) => {
-                // this.background = texture;
                 loader.encoding = THREE.GammaEncoding;
-                let pmremGenerator = new PMREMGenerator( loader );
-                pmremGenerator.update( renderer );
-                var pmremCubeUVPacker = new THREE.PMREMCubeUVPacker( pmremGenerator.cubeLods );
-                pmremCubeUVPacker.update( renderer );
-                ldrCubeRenderTarget = pmremCubeUVPacker.CubeUVRenderTarget;
+                let pmremGenerator = new PMREMGenerator(loader);
+                console.log(this.renderer.getRenderer())
+                // pmremGenerator.update(this.renderer.getRenderer());
+                let pmremCubeUVPacker = new PMREMCubeUVPacker(pmremGenerator.cubeLods);
+                // pmremCubeUVPacker.update(this.renderer.getRenderer());
+
+                // texture.minFilter = THREE.NearestFilter;
+                this.background = texture;
+                this.envMap = pmremCubeUVPacker.CubeUVRenderTarget;
                 pmremGenerator.dispose();
                 pmremCubeUVPacker.dispose();
+            }, null, err => {
+                Bus.error(err)
             });
         },
     },
     mounted() {
-        this.$nextTick(function () {
-            if (!this.skybox || !this.skybox.texture) return;
-            if (!this.skybox.path) {
-                this.skybox.path = '/public/skybox/';
+        this.$nextTick(() => {
+            if (!this.skybox || !this.skybox.path) return;
+            if (!Array.isArray(this.skybox.texture) || this.skybox.texture.length !== 6) {
+                this.skybox.texture = ['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png'];
             }
-            console.log(this.skybox.path)
+            this.ldrCubeMap();
         })
 
     }

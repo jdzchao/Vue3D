@@ -10,6 +10,7 @@
 </template>
 
 <script>
+    import * as THREE from 'three'
     import Bus from "../../bus"
     import Renderer from "../../renderer";
     import BoxHelper from "./Plugins/BoxHelper"
@@ -48,12 +49,12 @@
         },
         data() {
             return {
-                /* protected */
-                V$dom: null,
-                V$scene: null, // Base Scene
-                V$camera: null, // Base Camera
+                /* Vue3D Base Component */
+                $_canvas: null, // canvas dom
+                $_scene: null, // Base Scene
+                $_camera: null, // Base Camera
                 /* public */
-                renderer: null,
+                renderer: null, // Vue3D Renderer Bus
                 scene: null, // activate scene
                 cameras: [], // activate camera Array
                 /* status */
@@ -61,34 +62,60 @@
                 background: null,
             }
         },
+        methods: {
+            inherit_base() {
+                return {
+                    $_canvas: this.$data.$_canvas,
+                    $_scene: this.$data.$_scene,
+                    $_camera: this.$data.$_camera
+                }
+            },
+            inherit_activate() {
+            },
+            resize() {
+                console.log(this.renderer)
+                this.renderer.setSize(this.width, this.height, true);
+            }
+        },
         mounted() {
-            this.V$dom = this.$el;
-            this.renderer = new Renderer(this.width, this.height);
-            /* renderer config */
-            let renderConf = this.config.hasOwnProperty('renderer') ? this.config['renderer'] : {};
-            this.renderer.init(this.id, this.$el, renderConf, (res) => {
-                this.V$scene = res._$scene;
-                this.V$camera = res._$camera;
-                this.scene = res.scene;
-                this.cameras = res.cameras;
-                this.slot = true; // 开始挂载子组件
-            });
+            // 初始化基础组件
+            this.$data.$_canvas = this.$el;
+            this.$data.$_scene = new THREE.Scene();
+            this.$data.$_camera = new THREE.PerspectiveCamera(45, this.width / this.height);
+            // 设置ID
+            this.$data.$_scene.name = this.id;
+            this.$data.$_camera.name = this.id;
+            // 初始化 Vue3D Renderer
+            this.renderer = new Renderer().init(
+                this.$data.$_canvas,
+                this.$data.$_scene,
+                this.$data.$_camera,
+                this.config.hasOwnProperty('renderer') ? this.config['renderer'] : {}, // 读取配置文件
+                // callback
+                res => {
+                    this.scene = res.scene;
+                    this.cameras = res.cameras;
+                    // 开始加载子组件
+                    this.slot = true;
+                    this.resize();
+                });
         },
         watch: {
             width(val, oldVal) {
-                if (val === oldVal) return;
-                this.renderer.setSize(this.width, this.height, true);
+                if (val === oldVal || !this.slot) return;
+                this.resize();
             },
             height(val, oldVal) {
-                if (val === oldVal) return;
-                this.renderer.setSize(this.width, this.height, true);
+                if (val === oldVal || !this.slot) return;
+                this.resize();
             },
             ratio(val, oldVal) {
-                if (val === oldVal) return;
+                if (val === oldVal || !this.slot) return;
                 this.renderer.setPixelRatio(this.ratio, true);
             },
             background(val, oldVal) {
                 if (val === oldVal) return;
+                this.$data.$_scene.background = val;
                 this.scene.background = val;
                 this.renderer.render();
             }

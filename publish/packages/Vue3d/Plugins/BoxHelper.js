@@ -2,7 +2,7 @@ import *as THREE from "three"
 import Plugin from "./index"
 
 export default {
-    name: "V4hBox",
+    name: "BoxHelper",
     mixins: [Plugin],
     props: {
         color: {type: String, default: 'rgb(255,255,0)'}
@@ -30,10 +30,10 @@ export default {
                 this.rotation = val.rotation;
                 this.scale = val.scale;
                 this.box.setFromObject(this.target);
-                this.V$scene.add(this.plugin);
+                this.vue3d_add(this.plugin);
                 this.render();
             } else {
-                this.V$scene.remove(this.plugin);
+                this.vue3d_remove(this.plugin);
                 this.render();
             }
         },

@@ -16,10 +16,10 @@ class Vue3D {
 }
 
 /**
- * 渲染总线
+ * Vue3D 渲染总线
  */
 export default class {
-    constructor(width, height) {
+    constructor() {
         return new Vue({
             mixins: [capture, event, scenes, orbit],
             data: {
@@ -28,7 +28,7 @@ export default class {
                 _$pause: false, // 是否暂停渲染
                 _$play: false, // 是否开启运行模式
                 // renderer
-                _$renderer: null, // 渲染器
+                _$renderer: null, // Three renderer
                 _$rendering: null, // 渲染器正在渲染当前帧
                 _$status: 0, // 渲染器状态 0:awake; 1:start; 2:render;
                 // scene
@@ -36,8 +36,8 @@ export default class {
                 _$scene: null, // Base Scene
                 _$camera: null, // God's Perspective Camera
 
-                width: width | 100, // renderer width
-                height: height | 100, // renderer height
+                width: 100, // renderer width
+                height: 100, // renderer height
                 ratio: 1, // renderer ratio
                 clearColor: "rgb(25,25,25)", // renderer clear color
                 clearAlpha: 1, // renderer clear alpha
@@ -47,16 +47,12 @@ export default class {
             },
             watch: {},
             methods: {
-                init(id, canvas, params, callback) {
-                    params['canvas'] = canvas;
+                init(canvas, scene, camera, renderer_params, callback) {
+                    renderer_params['canvas'] = canvas;
                     this.$data._$canvas = canvas;
-                    this.$data._$scene = new THREE.Scene();
-                    this.$data._$camera = new THREE.PerspectiveCamera(45, this.width / this.height);
-                    this.$data._$renderer = new THREE.WebGLRenderer(params);
-
-                    // set name
-                    this.$data._$scene.name = id;
-                    this.$data._$camera.name = id;
+                    this.$data._$scene = scene;
+                    this.$data._$camera = camera;
+                    this.$data._$renderer = new THREE.WebGLRenderer(renderer_params);
 
                     this.$data._$scene.add(this.$data._$camera);
 
@@ -70,11 +66,11 @@ export default class {
                     this.render();
 
                     callback && callback({
-                        _$scene: this.$data._$scene,
-                        _$camera: this.$data._$camera,
                         scene: this.scene,
                         cameras: this.cameras,
                     });
+
+                    return this;
                 },
                 // 渲染一帧
                 render() {
@@ -165,6 +161,9 @@ export default class {
                     this.clearAlpha = clearAlpha;
                     if (refresh) this.refresh();
                     // this.$data._$renderer.setClearColor(new THREE.Color(clearColor).getHex(), clearAlpha);
+                },
+                getRenderer() {
+                    return this.$data._$renderer;
                 },
                 getBaseScene() {
                     return this.$data._$scene;
