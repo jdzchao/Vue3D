@@ -72,7 +72,7 @@ export default {
     methods: {
         // 根据vue组件递归查询scene节点
         V$recursion(parent) {
-            if (parent.$options.name === 'vue-3d' || parent.$options.name === 'V3dScene') {
+            if (parent.$options.name === 'vue3d' || parent.$options.name === 'V3dScene') {
                 this.scene = parent.scene;
                 this.renderer = parent.renderer;
                 this.parent = parent;

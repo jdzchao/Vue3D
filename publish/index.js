@@ -39,7 +39,7 @@ export default {
     install: function (Vue, opt) {
         Bus.loadConf(opt); // 加载用户配置
         Vue.prototype.$vue3d = Bus; // 全局编辑器总线
-        Vue.component("vue-3d", Vue3d);
+        Vue.component("vue3d", Vue3d);
         Vue.component("v3d-scene", V3dScene);
         Vue.component("v3d-camera-perspective", V3dCameraPerspective);
         Vue.component("v3d-geom-box", V3dGeomBox);
