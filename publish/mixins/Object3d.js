@@ -40,11 +40,6 @@ export default {
         }
     },
     created() {
-        // check Vue component parent
-        if (!this.$parent) {
-            console.error(this.$options.name + " must slot in Vue3D-Component");
-            return;
-        }
         // check Vue3D component parent
         if (!this.parent) {
             this.V$recursion(this.$parent)
@@ -72,6 +67,10 @@ export default {
     methods: {
         // 根据vue组件递归查询scene节点
         V$recursion(parent) {
+            if (!this.$parent) {
+                console.error(this.$options.name + " must slot in Vue3D-Component");
+                return;
+            }
             if (parent.$options.name === 'vue3d' || parent.$options.name === 'V3dScene') {
                 this.scene = parent.scene;
                 this.renderer = parent.renderer;
