@@ -20,15 +20,19 @@ export default {
             this.$once(event, callback);
         },
         /****************************************
-         * Event Callback for Debug
+         * Event Callback for example
          ****************************************/
         // renderer status
         event_status(renderer, status) {
-            this.warn("Vue3D Renderer in status: ", {renderer, status})
+            this.warn("Vue3D 'status' event: ", {renderer, status})
         },
         // capture object
         event_capture(renderer, target) {
             this.warn("Vue3D 'capture' event: ", {renderer, target})
+        },
+        // capture all objects
+        event_capture_all(renderer, targets) {
+            this.warn("Vue3D 'capture_all' event: ", {renderer, targets})
         },
     },
     created() {
@@ -36,6 +40,7 @@ export default {
         if (this.config.debug) {
             this.$on('status', this.event_status);
             this.$on('capture', this.event_capture);
+            this.$on('capture_all', this.event_capture_all);
         }
     },
 }

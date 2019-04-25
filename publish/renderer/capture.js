@@ -87,6 +87,7 @@ export default {
         },
         // 分析结果
         _AnalysisTargets(targets) {
+            this.emit('capture_all', targets);
             if (targets.length > 0) {
                 targets.forEach((target) => {
                     if (target.object.type) {
