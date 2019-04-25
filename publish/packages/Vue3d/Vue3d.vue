@@ -98,6 +98,7 @@
                     this.slot = true;
                     this.resize();
                 });
+            Bus.managerAdd(this.id, this);
         },
         watch: {
             width(val, oldVal) {
