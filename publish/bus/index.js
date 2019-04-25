@@ -10,7 +10,6 @@ const bus = {
     mixins: [debug, delegation, event, utils],
     data: {
         config: config, // 配置文件
-        manager: {}, // Vue3D 实例管理器
     },
     methods: {
         /**
@@ -21,21 +20,6 @@ const bus = {
             if (typeof conf !== 'object') return;
             this.config = Object.assign(this.config, conf);
         },
-        /**
-         * 添加vue3d实例
-         * @param id
-         * @param vue3d
-         */
-        managerAdd(id, vue3d) {
-            this.manager[id] = vue3d;
-        },
-        /**
-         * 移除vue3d实例
-         * @param id
-         */
-        managerRemove(id) {
-            delete this.manager[id];
-        }
     },
 };
 
