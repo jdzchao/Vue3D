@@ -22,24 +22,19 @@ export default {
         /****************************************
          * Event Callback for Debug
          ****************************************/
-        // // renderer start
-        // event_start(renderer) {
-        //     this.warn("Vue3D 'start' event:", {renderer});
-        // },
-        // // renderer render
-        // event_render(renderer) {
-        //     this.warn("Vue3D 'render' event:", {renderer});
-        // },
+        // renderer status
+        event_status(renderer, status) {
+            this.warn("Vue3D Renderer in status: ", {renderer, status})
+        },
         // capture object
         event_capture(renderer, target) {
-            this.warn("Vue3D 'capture' event:", {renderer, target})
+            this.warn("Vue3D 'capture' event: ", {renderer, target})
         },
     },
     created() {
         /** 监听总线事件 **/
         if (this.config.debug) {
-            // this.$on('start', this.event_start);
-            // this.$on('render', this.event_render);
+            this.$on('status', this.event_status);
             this.$on('capture', this.event_capture);
         }
     },
