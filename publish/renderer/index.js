@@ -69,12 +69,12 @@ export default class {
                         this.setStatus(2); // 切换渲染器状态
                         Bus.delegationCall(this); // 调用委托中的方法
 
+                        this.emit("update"); // 触发组件更新事件
+
                         // 当 pure 为真时，则仅渲染 standard scene
                         this.$data._$play ?
                             this.$data._$renderer.render(this.scene, this.cameras) :
                             this.$data._$renderer.render(this.$data._$scene, this.$data._$camera);
-
-                        this.emit("update"); // 正常来讲只有这里能触发update事件
 
                         this.$data._$rendering = null; // 当前帧渲染完成，释放掉
 

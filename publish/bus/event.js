@@ -24,16 +24,24 @@ export default {
          ****************************************/
         // renderer status
         event_status(renderer, status) {
-            this.warn("Vue3D 'status' event: ", {renderer, status})
+            this.info("Vue3D 'status' event: ", {renderer, status})
         },
         // capture object
         event_capture(renderer, target) {
-            this.warn("Vue3D 'capture' event: ", {renderer, target})
+            this.info("Vue3D 'capture' event: ", {renderer, target})
         },
         // capture all objects
         event_capture_all(renderer, targets) {
-            this.warn("Vue3D 'capture_all' event: ", {renderer, targets})
+            this.info("Vue3D 'capture_all' event: ", {renderer, targets})
         },
+        // let renderer render
+        event_render(renderer) {
+            this.info("Vue3D 'render' event: ", renderer)
+        },
+        // let vue3d components update
+        event_update(renderer){
+            this.info("Vue3D 'update' event: ", renderer)
+        }
     },
     created() {
         /** 监听总线事件 **/
@@ -41,6 +49,8 @@ export default {
             this.$on('status', this.event_status);
             this.$on('capture', this.event_capture);
             this.$on('capture_all', this.event_capture_all);
+            this.$on('render', this.event_render);
+            this.$on('update', this.event_update);
         }
     },
 }
