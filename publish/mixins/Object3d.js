@@ -71,7 +71,7 @@ export default {
                 console.error(this.$options.name + " must slot in Vue3D-Component");
                 return;
             }
-            if (parent.$options.name === 'vue3d' || parent.$options.name === 'V3dScene') {
+            if (parent.$options.name === 'Vue3d' || parent.$options.name === 'V3dScene') {
                 this.scene = parent.scene;
                 this.renderer = parent.renderer;
                 this.parent = parent;

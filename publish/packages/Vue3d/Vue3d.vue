@@ -18,7 +18,7 @@
     import Scene_SkyBox from "../../mixins/Scene_SkyBox"
 
     export default {
-        name: "vue3d",
+        name: "Vue3d",
         components: {
             BoxHelper,
             GridHelper,

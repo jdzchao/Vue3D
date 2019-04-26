@@ -17,8 +17,7 @@ import V3dLightSpot from "./packages/V3dLightSpot" // Spot Light
 import Materials from './utils/Materials'
 import Utils from './utils/Utils'
 
-export {
-    Bus,
+const components = [
     Vue3d,
     V3dScene,
     V3dCameraPerspective,
@@ -28,25 +27,31 @@ export {
     V3dLightDirectional,
     V3dLightRectArea,
     V3dLightSpot,
-    // utils
-    Materials,
+];
+
+const install = function (Vue, opts = {}) {
+    Bus.loadConf(opts);
+
+    components.forEach(component => {
+        Vue.component(component.name, component);
+    });
+
+    Vue.prototype.$vue3d = Bus; // 全局总线
 };
 
-/**
- * 全局加载
- */
 export default {
-    install: function (Vue, opt) {
-        Bus.loadConf(opt); // 加载用户配置
-        Vue.prototype.$vue3d = Bus; // 全局编辑器总线
-        Vue.component("vue3d", Vue3d);
-        Vue.component("v3d-scene", V3dScene);
-        Vue.component("v3d-camera-perspective", V3dCameraPerspective);
-        Vue.component("v3d-geom-box", V3dGeomBox);
-        Vue.component("v3d-geom-cylinder", V3dGeomCylinder);
-        Vue.component("v3d-light-ambient", V3dLightAmbient);
-        Vue.component("v3d-light-directional", V3dLightDirectional);
-        Vue.component("v3d-light-rect-area", V3dLightRectArea);
-        Vue.component("v3d-light-spot", V3dLightSpot);
-    }
+    install,
 };
+
+export {
+    Vue3d,
+    V3dScene,
+    V3dCameraPerspective,
+    V3dGeomBox,
+    V3dGeomCylinder,
+    V3dLightAmbient,
+    V3dLightDirectional,
+    V3dLightRectArea,
+    V3dLightSpot,
+    Utils, Materials
+}
