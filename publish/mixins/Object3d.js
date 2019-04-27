@@ -47,14 +47,7 @@ export default {
     },
     mounted() {
         this.renderer.$on("update", this.onRender);
-        this.V$setPosition();
-        this.V$setRotation();
-        this.V$setScale();
-        this.V$setTarget();
-        this.V$addObject3d(this.object3d);
-        this.slotIn();
-        this.onReady();
-        this.render();
+        if (this.object3d) this.init();
     },
     updated() {
         this.render();
@@ -65,6 +58,16 @@ export default {
         this.V$removeObject3d(this.object3d);
     },
     methods: {
+        init() {
+            this.setPosition();
+            this.setRotation();
+            this.setScale();
+            this.setTarget();
+            this.V$addObject3d(this.object3d);
+            this.slotIn();
+            this.onReady();
+            this.render();
+        },
         // 根据vue组件递归查询scene节点
         V$recursion(parent) {
             if (!this.$parent) {
@@ -95,19 +98,19 @@ export default {
         V$removeObject3d(object3d) {
             this.removeObject3d(object3d, true);
         },
-        V$setPosition() {
+        setPosition() {
             this.object3d.position.set(this.position.x, this.position.y, this.position.z);
             this.render();
         },
-        V$setRotation() {
+        setRotation() {
             this.object3d.rotation.set(this.rotation.x, this.rotation.y, this.rotation.z);
             this.render();
         },
-        V$setScale() {
+        setScale() {
             this.object3d.scale.set(this.scale.x, this.scale.y, this.scale.z);
             this.render();
         },
-        V$setTarget() {
+        setTarget() {
             this.object3d.lookAt(this.target.x, this.target.y, this.target.z);
         },
         addObject3d(object3d, inNode) {
@@ -152,51 +155,51 @@ export default {
     watch: {
         "position.x"(val, oldVal) {
             if (val === oldVal) return;
-            this.V$setPosition();
+            this.setPosition();
         },
         "position.y"(val, oldVal) {
             if (val === oldVal) return;
-            this.V$setPosition();
+            this.setPosition();
         },
         "position.z"(val, oldVal) {
             if (val === oldVal) return;
-            this.V$setPosition();
+            this.setPosition();
         },
         "rotation.x"(val, oldVal) {
             if (val === oldVal) return;
-            this.V$setRotation();
+            this.setRotation();
         },
         "rotation.y"(val, oldVal) {
             if (val === oldVal) return;
-            this.V$setRotation();
+            this.setRotation();
         },
         "rotation.z"(val, oldVal) {
             if (val === oldVal) return;
-            this.V$setRotation();
+            this.setRotation();
         },
         "scale.x"(val, oldVal) {
             if (val === oldVal) return;
-            this.V$setScale();
+            this.setScale();
         },
         "scale.y"(val, oldVal) {
             if (val === oldVal) return;
-            this.V$setScale();
+            this.setScale();
         },
         "scale.z"(val, oldVal) {
             if (val === oldVal) return;
-            this.V$setScale();
+            this.setScale();
         },
         "target.x"(val, oldVal) {
             if (val === oldVal) return;
-            this.V$setTarget();
+            this.setTarget();
         },
         "target.y"(val, oldVal) {
             if (val === oldVal) return;
-            this.V$setTarget();
+            this.setTarget();
         },
         "target.z"(val, oldVal) {
             if (val === oldVal) return;
-            this.V$setTarget();
+            this.setTarget();
         },
     },
 }

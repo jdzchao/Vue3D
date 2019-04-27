@@ -12,10 +12,13 @@ import V3dLightAmbient from "./packages/V3dLightAmbient" // Ambient Light
 import V3dLightDirectional from "./packages/V3dLightDirectional" // Directional Light
 import V3dLightRectArea from "./packages/V3dLightRectArea" // RectArea Light
 import V3dLightSpot from "./packages/V3dLightSpot" // Spot Light
+// Loader
+import V3dLoaderObj from "./packages/V3dLoaderObj";
 // Helper
 // 工具
 import Materials from './utils/Materials'
 import Utils from './utils/Utils'
+
 
 const components = [
     Vue3d,
@@ -27,6 +30,7 @@ const components = [
     V3dLightDirectional,
     V3dLightRectArea,
     V3dLightSpot,
+    V3dLoaderObj,
 ];
 
 const install = function (Vue, opts = {}) {
@@ -53,5 +57,6 @@ export {
     V3dLightDirectional,
     V3dLightRectArea,
     V3dLightSpot,
-    Utils, Materials
+    V3dLoaderObj,
+    Bus, Utils, Materials
 }
