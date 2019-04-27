@@ -4,7 +4,7 @@
 export default {
     debug: true,
     capture: true,
-    orbit: false,
+    orbit: true,
     scenes: true,
     // WebGLRenderer Constructor parameters
     renderer: {
