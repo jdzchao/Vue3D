@@ -73,7 +73,7 @@
             }
         },
         mounted() {
-            Bus.loadConf(this.config); // 加载配置文件
+            let config = Bus.loadConf(this.config); // 加载配置文件
             // 初始化基础组件
             this.$data.$_canvas = this.$el;
             this.$data.$_scene = new THREE.Scene();
@@ -86,7 +86,7 @@
                 this.$data.$_canvas,
                 this.$data.$_scene,
                 this.$data.$_camera,
-                this.config.hasOwnProperty('renderer') ? this.config['renderer'] : {}, // 读取配置文件
+                config.hasOwnProperty('renderer') ? config['renderer'] : {}, // 读取配置文件
                 // callback
                 res => {
                     this.scene = res.scene;

@@ -34,7 +34,7 @@ const components = [
 ];
 
 const install = function (Vue, opts = {}) {
-    Bus.loadConf(opts);
+    Bus.setConf(opts);
 
     components.forEach(component => {
         Vue.component(component.name, component);

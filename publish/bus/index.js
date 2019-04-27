@@ -13,13 +13,22 @@ const bus = {
     },
     methods: {
         /**
-         * 加载配置文件
+         * 设置配置文件
+         * @param conf
+         */
+        setConf(conf) {
+            if (typeof conf !== 'object') return;
+            this.config = Object.assign(this.config, conf);
+            return this.config;
+        },
+        /**
+         * 读取配置文件
          * @param conf
          */
         loadConf(conf) {
             if (typeof conf !== 'object') return;
-            this.config = Object.assign(this.config, conf);
-        },
+            return Object.assign({}, this.config, conf);
+        }
     },
 };
 
