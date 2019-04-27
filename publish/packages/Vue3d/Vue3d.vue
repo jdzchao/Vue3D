@@ -86,7 +86,7 @@
                 this.$data.$_canvas,
                 this.$data.$_scene,
                 this.$data.$_camera,
-                config.hasOwnProperty('renderer') ? config['renderer'] : {}, // 读取配置文件
+                config, // 读取配置文件
                 // callback
                 res => {
                     this.scene = res.scene;
