@@ -31,11 +31,7 @@
             ratio: {type: Number, default: 0},
 
             // Vue3d Configs Object
-            config: {
-                type: Object, default() {
-                    return Bus.config
-                }
-            },
+            config: {type: Object},
 
             // helper components
             plugins: {
@@ -77,6 +73,7 @@
             }
         },
         mounted() {
+            Bus.loadConf(this.config); // 加载配置文件
             // 初始化基础组件
             this.$data.$_canvas = this.$el;
             this.$data.$_scene = new THREE.Scene();
