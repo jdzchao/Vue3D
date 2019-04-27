@@ -73,7 +73,7 @@
             }
         },
         mounted() {
-            let config = Bus.loadConf(this.config); // 加载配置文件
+            let config = Bus.setConf(this.config); // 加载配置文件
             // 初始化基础组件
             this.$data.$_canvas = this.$el;
             this.$data.$_scene = new THREE.Scene();

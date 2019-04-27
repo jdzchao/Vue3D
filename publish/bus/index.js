@@ -23,11 +23,15 @@ const bus = {
         },
         /**
          * 读取配置文件
+         * INFO: 读取的时候不会修改配置文件，但是可以传入对象合并配置信息并返回新配置。
          * @param conf
          */
         loadConf(conf) {
-            if (typeof conf !== 'object') return;
-            return Object.assign({}, this.config, conf);
+            if (typeof conf !== 'object') {
+                return this.config;
+            } else {
+                return Object.assign({}, this.config, conf);
+            }
         }
     },
 };
