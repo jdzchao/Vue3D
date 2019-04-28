@@ -11,9 +11,6 @@ export default {
         return {
             target: null,
             box: null,
-            position: {x: 0, y: 0, z: 0},
-            rotation: {x: 0, y: 0, z: 0},
-            scale: {x: 1, y: 1, z: 1},
         }
     },
     created() {
@@ -29,9 +26,6 @@ export default {
             if (val && val.hasOwnProperty('object')) {
                 val = val.object;
                 this.target = val;
-                this.position = val.position;
-                this.rotation = val.rotation;
-                this.scale = val.scale;
                 this.box.setFromObject(this.target);
                 this.vue3d_add(this.plugin);
             } else {
@@ -40,23 +34,26 @@ export default {
         },
     },
     watch: {
-        position: {
+        "target.position": {
             deep: true,
             handler() {
                 if (!this.target) return;
+                this.box.setFromObject(this.target);
             }
         },
-        rotation: {
+        "target.rotation": {
             deep: true,
             handler() {
                 if (!this.target) return;
+                this.box.setFromObject(this.target);
             }
         },
-        scale: {
+        "target.scale": {
             deep: true,
             handler() {
                 if (!this.target) return;
+                this.box.setFromObject(this.target);
             }
-        },
+        }
     }
 }

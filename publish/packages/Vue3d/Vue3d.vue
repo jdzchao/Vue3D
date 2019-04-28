@@ -94,6 +94,7 @@
                     // 开始加载子组件
                     this.slot = true;
                     this.resize();
+                    this.$emit('success');
                 });
         },
         watch: {

@@ -35,8 +35,9 @@ export default class {
             },
             watch: {},
             methods: {
-                init(canvas, scene, camera, renderer_params, callback) {
+                init(canvas, scene, camera, config, callback) {
                     this.setStatus(0);
+                    let renderer_params = config.renderer;
                     renderer_params['canvas'] = canvas;
                     this.$data._$canvas = canvas;
                     this.$data._$scene = scene;
@@ -45,9 +46,9 @@ export default class {
 
                     this.$data._$scene.add(this.$data._$camera);
 
-                    this.scenes_init();
-                    this.orbit_init();
-                    this.capture_init();
+                    if (config.scenes) this.scenes_init(config.scenes);
+                    if (config.orbit) this.orbit_init(config.orbit);
+                    if (config.capture) this.capture_init(config.capture);
 
                     this.render();
 

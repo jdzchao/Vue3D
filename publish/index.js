@@ -13,8 +13,7 @@ import V3dLightDirectional from "./packages/V3dLightDirectional" // Directional 
 import V3dLightRectArea from "./packages/V3dLightRectArea" // RectArea Light
 import V3dLightSpot from "./packages/V3dLightSpot" // Spot Light
 // Loader
-import V3dLoaderObj from "./packages/V3dLoaderObj";
-// Helper
+import V3dLoaderObj from "./packages/V3dLoaderObj"; // Obj Loader
 // 工具
 import Materials from './utils/Materials'
 import Utils from './utils/Utils'

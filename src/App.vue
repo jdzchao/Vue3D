@@ -10,7 +10,6 @@
     import TopBar from "@c/TopBar";
     import FootBar from "@c/FootBar";
     import SceneContent from "@c/SceneContent";
-    import {Bus} from "@v3d"
 
     export default {
         name: 'app',
