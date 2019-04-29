@@ -18,6 +18,6 @@ export default {
     beforeMount() {
         this.camera.viewport = new THREE.Vector4(this.x, this.y, this.width, this.height);
         this.object3d = this.camera;
-        this.renderer.scenes_addCamera(this.camera);
+        this.scene.cameras.push(this.camera);
     }
 }

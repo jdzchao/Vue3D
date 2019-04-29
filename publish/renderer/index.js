@@ -74,13 +74,13 @@ export default class {
 
                         // 当 pure 为真时，则仅渲染 standard scene
                         this.$data._$play ?
-                            this.$data._$renderer.render(this.scene, this.cameras) :
+                            this.$data._$renderer.render(this.scenes_activate, this.scenes_activate.arrayCamera) :
                             this.$data._$renderer.render(this.$data._$scene, this.$data._$camera);
 
                         this.$data._$rendering = null; // 当前帧渲染完成，释放掉
 
+                        // 当 auto 为真时，进入递归循环 渲染
                         if (this.$data._$auto) {
-                            // 当 auto 为真时，进入递归循环 渲染
                             this.render();
                         }
                     })
@@ -104,15 +104,24 @@ export default class {
                     this.$data._$status = status;
                     this.emit("status", status_enum[status]);
                 },
+                getAuto() {
+                    return this.$data._$auto;
+                },
                 setAuto() {
                     this.$data._$auto = !this.$data._$auto;
                     this.emit("auto", this.$data._$auto);
                     Bus.info("ლ(´ڡ`ლ) Vue3D Auto => " + this.$data._$auto);
                 },
+                getPause() {
+                    return this.$data._$pause;
+                },
                 setPause() {
                     this.$data._$pause = !this.$data._$pause;
                     this.emit("pause", this.$data._$pause);
                     Bus.info("ლ(´ڡ`ლ) Vue3D Pause => " + this.$data._$pause);
+                },
+                getPlay() {
+                    return this.$data._$play;
                 },
                 setPlay() {
                     this.$data._$play = !this.$data._$play;

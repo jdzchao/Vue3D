@@ -1,6 +1,6 @@
 <template>
     <object :name="$options.name" style="display:none;">
-        <slot></slot>
+        <slot v-if="slot"></slot>
     </object>
 </template>
 <script>
@@ -16,6 +16,7 @@
                 $_camera: null,
                 renderer: null,
                 scene: null,
+                slot: false,
             }
         },
         created() {
@@ -26,6 +27,7 @@
                 this.$data.$_camera = base.$_camera;
                 this.renderer = base.renderer;
                 this.scene = this.renderer.scenes_add(this.id);
+                this.slot = true;
             } else {
                 console.error(this.$options.name + " should slot on Vue3D Component");
             }

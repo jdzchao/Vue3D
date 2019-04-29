@@ -70,7 +70,7 @@
             resize() {
                 if (!this.renderer) return;
                 this.renderer.setSize(this.width, this.height, true);
-            }
+            },
         },
         mounted() {
             let config = Bus.setConf(this.config); // 加载配置文件
