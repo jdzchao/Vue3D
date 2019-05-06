@@ -17,8 +17,9 @@ const bus = {
          * @param conf
          */
         setConf(conf) {
-            if (typeof conf !== 'object') return;
-            this.config = Object.assign(this.config, conf);
+            if (typeof conf === 'object') {
+                this.config = Object.assign(this.config, conf);
+            }
             return this.config;
         },
         /**

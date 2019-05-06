@@ -2,8 +2,8 @@
     <canvas :id="id">
         Sorry, your web browser does not support WebGL
         <template v-if="slot">
-            <box-helper v-bind="config.box" v-if="plugins.box"></box-helper>
-            <grid-helper v-bind="config.grid" v-if="plugins.grid"></grid-helper>
+            <box-helper v-bind="conf.box" v-if="plugins.box"></box-helper>
+            <grid-helper v-bind="conf.grid" v-if="plugins.grid"></grid-helper>
             <slot></slot>
         </template>
     </canvas>
@@ -55,6 +55,7 @@
                 /* status */
                 slot: false,
                 background: null,
+                conf: null,
             }
         },
         methods: {
@@ -73,7 +74,7 @@
             },
         },
         mounted() {
-            let config = Bus.setConf(this.config); // 加载配置文件
+            this.conf = Bus.setConf(this.config); // 加载配置文件
             // 初始化基础组件
             this.$data.$_canvas = this.$el;
             this.$data.$_scene = new THREE.Scene();
@@ -86,7 +87,7 @@
                 this.$data.$_canvas,
                 this.$data.$_scene,
                 this.$data.$_camera,
-                config, // 读取配置文件
+                this.conf, // 读取配置文件
                 // callback
                 res => {
                     this.scene = res.scene;
