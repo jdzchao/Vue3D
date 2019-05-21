@@ -7,7 +7,7 @@ export default {
             $_scene: null,
             $_camera: null,
             // Vue3D Activate
-            renderer: null, // renderer
+            vue3d: null, // renderer
             plugin: null, // Object3D plugin handler
         }
     },
@@ -21,16 +21,16 @@ export default {
             this.render();
         },
         render() {
-            this.renderer.render();
+            this.vue3d.render();
         }
     },
     created() {
-        let base = this.$parent.fetch_base && this.$parent.fetch_base();
-        if (base) {
-            this.$data.$_canvas = base.$_canvas;
-            this.$data.$_scene = base.$_scene;
-            this.$data.$_camera = base.$_camera;
-            this.renderer = base.renderer;
+        let vue3d = this.$parent.vue3d && this.$parent.vue3d();
+        if (vue3d) {
+            this.$data.$_canvas = vue3d.$_canvas;
+            this.$data.$_scene = vue3d.$_scene;
+            this.$data.$_camera = vue3d.$_camera;
+            this.vue3d = this.$parent;
         } else {
             console.error(this.$options.name + " should slot on Vue3D Component");
         }

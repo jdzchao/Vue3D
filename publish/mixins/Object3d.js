@@ -32,21 +32,28 @@ export default {
     },
     data() {
         return {
-            visible: true, // 是否可见
+            vue3d: null, // Vue3D component
             scene: null, // mounted scene
             object3d: null, // 当前三维对象
             parent: null, // 父级三维对象
             slot: false, // 是否挂载子节点
+            visible: true, // 是否可见
         }
     },
     created() {
+        if (!this.$parent) {
+            console.error(this.$options.name + " must slot in Vue3D-Component");
+            return;
+        }
         // check Vue3D component parent
         if (!this.parent) {
-            this.V$recursion(this.$parent)
+            this._recursion(this.$parent)
         }
     },
     mounted() {
-        this.renderer.$on("update", this.onRender);
+
+        this.vue3d.on("update", this.onRender);
+        console.log(this.vue3d.on)
         if (this.object3d) this.init();
     },
     updated() {
@@ -55,7 +62,7 @@ export default {
     beforeDestroy() {
         this.onDestroy();
         this.slotOut();
-        this.V$removeObject3d(this.object3d);
+        this._removeObject3d(this.object3d);
     },
     methods: {
         init() {
@@ -63,31 +70,31 @@ export default {
             this.setRotation();
             this.setScale();
             this.setTarget();
-            this.V$addObject3d(this.object3d);
+            this._addObject3d(this.object3d);
             this.slotIn();
             this.onReady();
             this.render();
         },
         // 根据vue组件递归查询scene节点
-        V$recursion(parent) {
-            if (!this.$parent) {
-                console.error(this.$options.name + " must slot in Vue3D-Component");
-                return;
-            }
-            if (parent.$options.name === 'Vue3d' || parent.$options.name === 'V3dScene') {
-                this.scene = parent.scene;
-                this.renderer = parent.renderer;
+        _recursion(parent) {
+            if (parent.$options.name === 'Vue3d') { // 当前挂载于Vue3D 根节点
+                this.scene = parent.active_scene();
+                this.vue3d = parent;
                 this.parent = parent;
-            } else if (parent.hasOwnProperty("scene") && parent.hasOwnProperty('object3d')) {
+            } else if (parent.$options.name === 'V3dScene') { // 当前挂载于 V3dScene 子节点
                 this.scene = parent.scene;
-                this.renderer = parent.renderer;
+                this.vue3d = parent.vue3d;
+                this.parent = parent;
+            } else if (parent.hasOwnProperty("scene") && parent.hasOwnProperty('object3d')) { // 当前挂载于 其他 子节点
+                this.scene = parent.scene;
+                this.vue3d = parent.vue3d;
                 this.parent = parent;
             } else {
-                this.V$recursion(parent.$parent);
+                this._recursion(parent.$parent);
             }
         },
         // 插槽中添加三维对象
-        V$addObject3d(object3d) {
+        _addObject3d(object3d) {
             if (this.inTree) {
                 this.addObject3d(object3d, true);
             } else {
@@ -95,7 +102,7 @@ export default {
             }
         },
         // 插槽中移除三位对象
-        V$removeObject3d(object3d) {
+        _removeObject3d(object3d) {
             this.removeObject3d(object3d, true);
         },
         setPosition() {
@@ -119,7 +126,6 @@ export default {
             } else {
                 this.scene.add(object3d);
             }
-            // this.root.rendererDelegationAdd(this.onRender);
         },
         removeObject3d(object3d, inNode) {
             if (inNode && this.parent.hasOwnProperty('object3d')) {
@@ -127,8 +133,7 @@ export default {
             } else {
                 this.removeObject3d(object3d);
             }
-            this.renderer.$off("update", this.onRender);
-            // this.root.rendererDelegationRemove(this.onRender);
+            this.vue3d.off("update", this.onRender);
         },
         // 激活插槽
         slotIn() {
@@ -140,7 +145,7 @@ export default {
         },
         // 渲染
         render() {
-            this.renderer.render();
+            this.vue3d.render();
         },
         onReady() {
             this.$emit('ready', this.object3d);

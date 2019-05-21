@@ -13,10 +13,7 @@
 
     export default {
         name: 'app',
-        components: {FootBar, TopBar, SceneContent},
-        data() {
-            return {}
-        },
+        components: {SceneContent, FootBar, TopBar},
     }
 </script>
 <style>

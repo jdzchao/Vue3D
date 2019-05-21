@@ -2,7 +2,6 @@ import Vue from 'vue'
 import * as THREE from 'three'
 import Bus from '../bus'
 import capture from './capture'
-import event from './event'
 import scenes from './scenes'
 import orbit from './orbit'
 
@@ -12,7 +11,7 @@ import orbit from './orbit'
 export default class {
     constructor() {
         return new Vue({
-            mixins: [capture, event, scenes, orbit],
+            mixins: [capture,  scenes, orbit],
             data: {
                 // option
                 _$auto: false, // 是否自动逐帧渲染

@@ -21,7 +21,7 @@ export default {
     },
     // plugin : grid helper
     grid: {
-        size: 1000,
+        size: 10,
         divisions: 10,
         colorCenterLine: 'rgb(136,136,136)',
         colorGrid: 'rgb(68,68,68)',

@@ -1,5 +1,5 @@
-import *as THREE from "three"
-import Plugin from "./index"
+import *as THREE from "three/src/Three"
+import Plugin from "./_mixin_"
 
 export default {
     name: "BoxHelper",
@@ -16,7 +16,7 @@ export default {
     created() {
         this.box = new THREE.Box3();
         this.plugin = new THREE.Box3Helper(this.box, this.color);
-        this.renderer.on("capture", this.setBox)
+        this.vue3d.on("capture", this.setBox)
     },
     beforeMount() {
         if (this.plugin) this.vue3d_remove(this.plugin);

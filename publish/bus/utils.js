@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 
 /**
- * 调试器
+ * 工具
  */
 export default {
     methods: {

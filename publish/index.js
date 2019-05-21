@@ -1,6 +1,8 @@
-// 渲染器 && 主场景
+// 全局总线
 import Bus from './bus'
-import Vue3d from "./packages/Vue3d"
+// 核心组件
+import Vue3d from "./core"
+// 场景
 import V3dScene from "./packages/V3dScene"
 // 摄像机
 import V3dCameraPerspective from "./packages/V3dCameraPerspective" // 透视像机

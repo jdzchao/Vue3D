@@ -17,8 +17,10 @@ export default {
     methods: {
         setHelper() {
             this.addObject3d(this.lightHelper, true);
-            this.renderer.$on("update", this.lightHelper.update);
-        }
+        },
+        onRender() {
+            this.lightHelper.update()
+        },
     },
     beforeMount() {
         this.object3d = this.light;

@@ -7,7 +7,7 @@
 
 <script>
     export default {
-        name: "LogoVue3d"
+        name: "Logo"
     }
 </script>
 

@@ -14,19 +14,19 @@
                 $_canvas: null,
                 $_scene: null,
                 $_camera: null,
-                renderer: null,
+                vue3d: null,
                 scene: null,
                 slot: false,
             }
         },
         created() {
-            let base = this.$parent.fetch_base && this.$parent.fetch_base();
+            let base = this.$parent.vue3d && this.$parent.vue3d();
             if (base) {
                 this.$data.$_canvas = base.$_canvas;
                 this.$data.$_scene = base.$_scene;
                 this.$data.$_camera = base.$_camera;
-                this.renderer = base.renderer;
-                this.scene = this.renderer.scenes_add(this.id);
+                this.vue3d = this.$parent;
+                this.scene = this.$parent.add_scene(this.id);
                 this.slot = true;
             } else {
                 console.error(this.$options.name + " should slot on Vue3D Component");
