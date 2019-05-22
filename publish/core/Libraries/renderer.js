@@ -4,11 +4,11 @@ import Bus from "../../bus";
 class Renderer {
     constructor(canvas, params) {
         this.renderer = new THREE.WebGLRenderer({canvas, ...params});
-        this._rendering = null;
-        this._pause = false;
-        this._auto = false;
-        this._scene = null;
-        this._camera = null;
+        this._rendering = null; // render handler
+        this._pause = false; // pause renderer status
+        this._auto = false; // auto renderer status
+        this._scene = null; // Base Scene
+        this._camera = null; // Base Camera
         this.width = 500;
         this.height = 500;
         this.ratio = 1;
@@ -53,6 +53,7 @@ class Renderer {
         this._camera.aspect = this.width / this.height;
         // 摄像机参数改变后必须执行生效
         this._camera.updateProjectionMatrix();
+        return this;
     }
 
     /**
@@ -64,6 +65,8 @@ class Renderer {
         this.width = width;
         this.height = height;
         this.renderer.setSize(width, height);
+        console.log(this.renderer.getSize())
+        return this;
     }
 
     /**
@@ -72,7 +75,9 @@ class Renderer {
      */
     setPixelRatio(ratio) {
         this.ratio = ratio;
+        console.log(ratio)
         this.renderer.setPixelRatio(ratio);
+        return this;
     }
 
     /**
@@ -84,6 +89,7 @@ class Renderer {
         this.clearColor = clearColor;
         this.clearAlpha = clearAlpha;
         this.renderer.setClearColor(new THREE.Color(clearColor).getHex(), clearAlpha);
+        return this;
     }
 
     /**
@@ -100,6 +106,7 @@ class Renderer {
     setPause() {
         this._pause = !this._pause;
         Bus.info("ლ(´ڡ`ლ) Vue3D Auto => " + this._pause);
+        return this;
     }
 
     /**
@@ -116,6 +123,7 @@ class Renderer {
     setAuto() {
         this._auto = !this._auto;
         Bus.info("ლ(´ڡ`ლ) Vue3D Auto => " + this._auto);
+        return this;
     }
 
 }

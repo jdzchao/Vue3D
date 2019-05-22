@@ -51,9 +51,7 @@ export default {
         }
     },
     mounted() {
-
-        this.vue3d.on("update", this.onRender);
-        console.log(this.vue3d.on)
+        this.vue3d.on("update", this.render);
         if (this.object3d) this.init();
     },
     updated() {

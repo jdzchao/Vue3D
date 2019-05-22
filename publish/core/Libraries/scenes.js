@@ -6,9 +6,7 @@ class ScenesManager {
         this.activated = null; // activated scene
 
         this.base_scene = base_scene; // vue3d base scene
-
         this.default = Bus.scene_init('default'); // vue3d default sub-scene
-
         this.base_scene.add(this.default);
 
         return this;

@@ -19,7 +19,7 @@ export default {
             this.addObject3d(this.lightHelper, true);
         },
         onRender() {
-            this.lightHelper.update()
+            this.lightHelper.update();
         },
     },
     beforeMount() {
