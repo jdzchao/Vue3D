@@ -15,8 +15,6 @@ class Renderer {
         this.clearColor = 'rgb(25,25,25)'; // renderer clear color
         this.clearAlpha = 1; // renderer clear alpha
 
-        this.setSize(this.width, this.height);
-        this.setPixelRatio(this.ratio);
         this.setClearColor(this.clearColor, this.clearAlpha);
 
         return this;
@@ -50,9 +48,6 @@ class Renderer {
     setActive(scene, camera) {
         this._scene = scene;
         this._camera = camera;
-        this._camera.aspect = this.width / this.height;
-        // 摄像机参数改变后必须执行生效
-        this._camera.updateProjectionMatrix();
         return this;
     }
 
@@ -65,7 +60,6 @@ class Renderer {
         this.width = width;
         this.height = height;
         this.renderer.setSize(width, height);
-        console.log(this.renderer.getSize())
         return this;
     }
 
@@ -75,7 +69,6 @@ class Renderer {
      */
     setPixelRatio(ratio) {
         this.ratio = ratio;
-        console.log(ratio)
         this.renderer.setPixelRatio(ratio);
         return this;
     }
@@ -89,6 +82,12 @@ class Renderer {
         this.clearColor = clearColor;
         this.clearAlpha = clearAlpha;
         this.renderer.setClearColor(new THREE.Color(clearColor).getHex(), clearAlpha);
+        return this;
+    }
+
+    setAspect() {
+        this._camera.aspect = this.width / this.height;
+        this._camera.updateProjectionMatrix();// 摄像机参数改变后必须执行生效
         return this;
     }
 

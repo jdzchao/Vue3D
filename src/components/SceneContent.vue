@@ -1,6 +1,5 @@
 <template>
     <div id="content">
-        <!--        <three :width="width" :height="height"></three>-->
         <vue3d ref="scene" :width="width" :height="height" :plugins="plugins">
             <v3d-scene id="demo">
                 <v3d-light-rect-area :width="100" :height="100" :intensity="1"
@@ -40,7 +39,6 @@
             resize() {
                 this.width = this.$el.clientWidth;
                 this.height = this.$el.clientHeight;
-                console.log(this.width, this.height)
             },
         },
         mounted() {

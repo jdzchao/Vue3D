@@ -5,7 +5,7 @@ class Orbit {
     constructor(camera, canvas) {
         this.enabled = true;
         this.control = new OrbitControls(camera, canvas);
-
+        camera.position.set(0, 0, 10);
         return this;
     }
 

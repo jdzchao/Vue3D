@@ -76,15 +76,10 @@
             this.$data.$_scene.name = this.id;
             this.$data.$_camera.name = this.id;
             // 初始化 Vue3D Renderer
-            this.renderer = new Renderer(this.$data.$_canvas, {});
-            this.renderer.setPixelRatio(window.devicePixelRatio);
-            this.renderer.setSize(window.innerWidth, window.innerHeight);
-
-            this.$data.$_camera.position = new THREE.Vector3(0, 0, -500)
+            this.renderer = new Renderer(this.$data.$_canvas, this.conf.renderer);
             // 初始化 Scenes Manager
-            // this.scenes = new ScenesManager(this.$data.$_scene);
+            this.scenes = new ScenesManager(this.$data.$_scene);
             // 初始化 Libraries
-            // this.$data.$_camera.position.set(0, 0, 1000)
             this.orbit = new Orbit(this.$data.$_camera, this.$data.$_canvas);
             this.orbit.control.addEventListener('change', this.render, false);
             // 渲染第一帧
@@ -92,7 +87,6 @@
                 this.setStatus('start');
                 this.slot = true;
             })
-
         },
         methods: {
             /**
@@ -136,7 +130,7 @@
              */
             windowResize() {
                 if (!this.renderer) return;
-                this.renderer.setSize(this.width, this.height);
+                this.renderer.setSize(this.width, this.height).setAspect();
                 this.renderer.setPixelRatio(this.ratio);
                 // this.renderer.setActive(this.$data.$_scene, this.$data.$_camera);
                 this.render();
