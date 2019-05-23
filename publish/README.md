@@ -17,33 +17,40 @@ npm install --save vue3d
 yarn add vue3d
 ```
 
-## Usage
+## 引用
 
 ### 全局引用
-main.js
+在main.js中
 ``` javascript
 import Vue3D from 'vue3d'
 Vue.use(Vue3D);
 ```
+
+### 按需引用
 任意组件中
+```
+import {vue3d,v3dScene,v3dComponent} from "vue3d"
+```
+
+## 使用
 ``` vue
 <template>
-  <v3d-scene>
-    <vue3d-components></vue3d-components>
-  </v3d-scene>
+  <vue3d>
+    <v3d-scene>
+        <v3d-components></vue3d-components>
+    </v3d-scene>
+  </vue3d>
 </template>
 
 <script>
 export default {
    components: {
+      vue3d
       V3dScene,
-      ... // Vue3dComponents
+      Vue3dComponents
    },
 }
 </script>
-
-// this.$vue3d.Materials; // 注册的全局材质
-// this.$vue3d.Utils; // 注册的全局工具
 ```
 ### javascript
 ``` bash
