@@ -29,7 +29,7 @@ Vue.use(Vue3D);
 ### 按需引用
 任意组件中
 ```
-import {vue3d,v3dScene,v3dComponent} from "vue3d"
+import {Vue3d, V3dScene, V3dCamera, V3dLight, ...} from "vue3d"
 ```
 
 ## 使用
@@ -45,9 +45,7 @@ import {vue3d,v3dScene,v3dComponent} from "vue3d"
 <script>
 export default {
    components: {
-      vue3d
-      V3dScene,
-      Vue3dComponents
+      Vue3d, V3dScene, V3dCamera, V3dLight, ...
    },
 }
 </script>
