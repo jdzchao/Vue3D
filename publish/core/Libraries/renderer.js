@@ -85,6 +85,10 @@ class Renderer {
         return this;
     }
 
+    /**
+     * Set renderer camera's Aspect
+     * @returns {Renderer}
+     */
     setAspect() {
         this._camera.aspect = this.width / this.height;
         this._camera.updateProjectionMatrix();// 摄像机参数改变后必须执行生效
