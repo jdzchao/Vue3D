@@ -3,7 +3,7 @@
         <template v-if="slot">
             <slot></slot>
             <box-helper v-bind="conf.box" v-if="plugins.box"></box-helper>
-            <!--            <grid-helper v-bind="conf.grid" v-if="plugins.grid"></grid-helper>-->
+            <grid-helper v-bind="conf.grid" v-if="plugins.grid"></grid-helper>
         </template>
         Sorry, your web browser does not support WebGL
     </canvas>
@@ -89,6 +89,7 @@
                 this.setStatus('start');
                 this.slot = true;
             })
+            console.log(this.$data.$_scene);
         },
         methods: {
             /**
