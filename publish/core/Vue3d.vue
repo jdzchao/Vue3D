@@ -17,6 +17,7 @@
     import GridHelper from "./Plugins/GridHelper"
     // Mixins
     import event from "./Mixins/event"
+    import capture from "./Mixins/capture"
     // Libraries
     import Renderer from "./Libraries/renderer"
     import Orbit from "./Libraries/orbit";
@@ -28,7 +29,7 @@
             BoxHelper,
             GridHelper,
         },
-        mixins: [event],
+        mixins: [capture, event],
         props: {
             id: {type: String, default: 'Vue3D'},
             width: {type: Number, required: true},
@@ -56,13 +57,14 @@
                 $_camera: null, // Base Camera
                 /* status */
                 slot: false,
-                background: null,
-                conf: null,
                 status: 'awake',
                 /* libraries */
                 renderer: null, // renderer
                 orbit: null, // orbit control
                 scenes: null, // scenes manager
+                /* config */
+                conf: null,
+                background: null,
             }
         },
         mounted() {

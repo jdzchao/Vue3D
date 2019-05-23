@@ -34,7 +34,7 @@ class ScenesManager {
         if (this.manager.length === 0) {
             this.base_scene.remove(this.default);
             this.base_scene.add(scene);
-            this.activated = 1;
+            this.activated = 0;
         }
         this.manager.push(scene);
         return scene;

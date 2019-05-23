@@ -14,16 +14,16 @@ export default {
             _$supportTouch: "ontouchend" in document // is support touch
         }
     },
+    mounted() {
+        this.$data._$caster = new THREE.Raycaster();
+        this.$data._$point = new THREE.Vector2();
+        if (this.$data._$supportTouch) {
+            this.$el.addEventListener('touchstart', this._charge, false);
+        } else {
+            this.$el.addEventListener('mousedown', this._charge, false);
+        }
+    },
     methods: {
-        capture_init() {
-            this.$data._$caster = new THREE.Raycaster();
-            this.$data._$point = new THREE.Vector2();
-            if (this.$data._$supportTouch) {
-                this.$data._$canvas.addEventListener('touchstart', this._charge, false);
-            } else {
-                this.$data._$canvas.addEventListener('mousedown', this._charge, false);
-            }
-        },
         capture_set(obj) {
             this.captured = obj;
             this.render();
@@ -40,26 +40,27 @@ export default {
         },
         // 鼠标点击射线
         _mouseCaster(event) {
-            this.$data._$canvas.removeEventListener('mousemove', this._leakage, false);
-            this.$data._$canvas.removeEventListener('mouseup', this._mouseCaster, false);
+            this.$el.removeEventListener('mousemove', this._leakage, false);
+            this.$el.removeEventListener('mouseup', this._mouseCaster, false);
             if (!this.$data._$charged) return;
-            this.$data._$point.x = (event.offsetX / this.$data._$canvas.clientWidth) * 2 - 1;
-            this.$data._$point.y = -(event.offsetY / this.$data._$canvas.clientHeight) * 2 + 1;
+            this.$data._$point.x = (event.offsetX / this.$el.clientWidth) * 2 - 1;
+            this.$data._$point.y = -(event.offsetY / this.$el.clientHeight) * 2 + 1;
             this._rayCaster();
         },
         // 触摸点击射线
         _touchCaster(event) {
-            this.$data._$canvas.removeEventListener('touchmove', this._leakage, false);
-            this.$data._$canvas.removeEventListener('touchend', this._touchCaster, false);
+            this.$el.removeEventListener('touchmove', this._leakage, false);
+            this.$el.removeEventListener('touchend', this._touchCaster, false);
             if (!this.$data._$charged) return;
-            this.$data._$point.x = (event.changedTouches[0].clientX / this.$data._$canvas.clientWidth) * 2 - 1;
-            this.$data._$point.y = -(event.changedTouches[0].clientY / this.$data._$canvas.clientHeight) * 2 + 1;
+            this.$data._$point.x = (event.changedTouches[0].clientX / this.$el.clientWidth) * 2 - 1;
+            this.$data._$point.y = -(event.changedTouches[0].clientY / this.$el.clientHeight) * 2 + 1;
             this._rayCaster();
         },
         // 捕获射线
         _rayCaster() {
-            this.$data._$caster.setFromCamera(this.$data._$point, this.$data._$camera);
-            let targets = this.$data._$caster.intersectObjects(this.scenes_activate.children, true);
+            this.$data._$caster.setFromCamera(this.$data._$point, this.$data.$_camera);
+            console.log(this.scenes.active())
+            let targets = this.$data._$caster.intersectObjects(this.scenes.active().children, true);
             this._AnalysisTargets(targets);
             this.$data._$charged = false;
         },
@@ -68,11 +69,11 @@ export default {
             if (this.$data._$charged) return;
             this.$data._$charged = true;
             if (this.$data._$supportTouch) {
-                this.$data._$canvas.addEventListener('touchmove', this._leakage, false);
-                this.$data._$canvas.addEventListener('touchend', this._touchCaster, false);
+                this.$el.addEventListener('touchmove', this._leakage, false);
+                this.$el.addEventListener('touchend', this._touchCaster, false);
             } else {
-                this.$data._$canvas.addEventListener('mousemove', this._leakage, false);
-                this.$data._$canvas.addEventListener('mouseup', this._mouseCaster, false);
+                this.$el.addEventListener('mousemove', this._leakage, false);
+                this.$el.addEventListener('mouseup', this._mouseCaster, false);
             }
         },
         // 兼容拖动事件
