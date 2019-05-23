@@ -1,14 +1,28 @@
 <template>
-    <canvas></canvas>
+    <canvas>
+        <template v-if="slot">
+            <slot></slot>
+            <box-helper></box-helper>
+            <grid-helper></grid-helper>
+        </template>
+    </canvas>
 </template>
 
 <script>
     import * as THREE from "three"
+    import event from "@v3d/core/Mixins/event"
     import Renderer from "@v3d/core/Libraries/renderer"
     import Orbit from "@v3d/core/Libraries/orbit"
+    import BoxHelper from "@v3d/core/Plugins/BoxHelper"
+    import GridHelper from "@v3d/core/Plugins/GridHelper"
 
     export default {
         name: "three",
+        components: {
+            BoxHelper,
+            GridHelper,
+        },
+        mixins: {event},
         props: {
             width: {type: Number, required: true},
             height: {type: Number, required: true},
@@ -21,6 +35,7 @@
                 renderer: null,
                 mesh: null,
                 orbit: null,
+                slot: false,
             }
         },
         mounted() {
@@ -52,6 +67,13 @@
             console.log(this.scene)
         },
         methods: {
+            vue3d() {
+                return {
+                    $_canvas: this.$data.$_canvas,
+                    $_scene: this.$data.$_scene,
+                    $_camera: this.$data.$_camera,
+                }
+            },
             render() {
                 this.renderer.render(() => {
                     // this.setStatus('render');

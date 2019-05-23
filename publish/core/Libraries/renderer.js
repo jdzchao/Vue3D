@@ -29,7 +29,7 @@ class Renderer {
         this._rendering = requestAnimationFrame(() => {
             Bus.delegationCall(this); // 调用委托中的方法
 
-            callback && callback()
+            callback && callback();
 
             this.renderer.render(this._scene, this._camera);
             this._rendering = null; // 当前帧渲染完成，释放
