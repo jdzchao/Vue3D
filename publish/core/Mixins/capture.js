@@ -59,7 +59,6 @@ export default {
         // 捕获射线
         _rayCaster() {
             this.$data._$caster.setFromCamera(this.$data._$point, this.$data.$_camera);
-            console.log(this.scenes.active())
             let targets = this.$data._$caster.intersectObjects(this.scenes.active().children, true);
             this._AnalysisTargets(targets);
             this.$data._$charged = false;

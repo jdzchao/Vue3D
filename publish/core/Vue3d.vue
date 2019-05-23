@@ -130,7 +130,7 @@
             /**
              * 重置窗口大小
              */
-            windowResize() {
+            resize() {
                 if (!this.renderer) return;
                 this.renderer.setSize(this.width, this.height).setAspect();
                 this.renderer.setPixelRatio(this.ratio);
@@ -152,15 +152,15 @@
         watch: {
             width(val, oldVal) {
                 if (val === oldVal) return;
-                this.windowResize();
+                this.resize();
             },
             height(val, oldVal) {
                 if (val === oldVal) return;
-                this.windowResize();
+                this.resize();
             },
             ratio(val, oldVal) {
                 if (val === oldVal) return;
-                this.windowResize();
+                this.resize();
             },
             background(val, oldVal) {
                 if (val === oldVal) return;

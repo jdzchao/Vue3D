@@ -16,11 +16,10 @@
 <script>
     import {Materials} from '@v3d'
     import V3dLightDirectional from "@v3d/packages/V3dLightDirectional/V3dLightDirectional";
-    import Three from "@/dev/three";
 
     export default {
         name: "SceneContent",
-        components: {Three, V3dLightDirectional},
+        components: {V3dLightDirectional},
         data() {
             return {
                 width: 0,
