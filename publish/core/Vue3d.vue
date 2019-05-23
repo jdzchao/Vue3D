@@ -58,6 +58,7 @@
                 /* status */
                 slot: false,
                 status: 'awake',
+                play: false,
                 /* libraries */
                 renderer: null, // renderer
                 orbit: null, // orbit control
@@ -86,9 +87,10 @@
             this.orbit.control.addEventListener('change', this.render, false);
             // 渲染第一帧
             this.renderer.setActive(this.$data.$_scene, this.$data.$_camera).render(() => {
-                this.setStatus('start');
                 this.slot = true;
-            })
+                this.setStatus('start');
+                this.$emit('success');
+            });
             console.log(this.$data.$_scene);
         },
         methods: {
@@ -137,6 +139,17 @@
                 this.renderer.setPixelRatio(this.ratio);
                 // this.renderer.setActive(this.$data.$_scene, this.$data.$_camera);
                 this.render();
+            },
+            getPlay() {
+                return this.play;
+            },
+            setPlay() {
+                this.play = !this.play;
+                if (this.play) {
+                    this.renderer.setActive(this.active_scene(), this.active_scene().arrayCamera);
+                } else {
+                    this.renderer.setActive(this.$data.$_scene, this.$data.$_camera);
+                }
             },
             /**
              * 设置当前状态
