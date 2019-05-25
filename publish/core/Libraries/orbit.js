@@ -1,9 +1,7 @@
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 
 class Orbit {
-
     constructor(camera, canvas) {
-        this.enabled = true;
         this.control = new OrbitControls(camera, canvas);
         camera.position.set(0, 0, 10);
         return this;
@@ -13,12 +11,12 @@ class Orbit {
         this.control.update();
     }
 
-    enable() {
+    get enabled() {
         this.control.enabled = true;
     }
 
-    disable() {
-        this.control.enabled = false;
+    set enabled(val) {
+        this.control.enabled = val;
     }
 }
 
