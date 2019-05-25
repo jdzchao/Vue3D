@@ -113,7 +113,7 @@
             this.scenes = new ScenesManager(this.$data.$_scene);
             // 初始化 Libraries
             this.orbit = new Orbit(this.$data.$_camera, this.$data.$_canvas);
-            this.orbit.control.addEventListener('change', this.orbit_change, false);
+            this.orbit.control.addEventListener('change', this.render, false);
             // 渲染第一帧
             this.renderer.setActive(this.$data.$_scene, this.$data.$_camera).render(() => {
                 this.slot = true;
@@ -140,7 +140,7 @@
             render(callback) {
                 this.renderer.render(() => {
                     this.status = 'render';
-                    callback && callback();
+                    if (typeof callback === "function") callback();
                     this.emit("update"); // 向组件发送更新指令
                 });
             },
@@ -168,15 +168,6 @@
                 this.renderer.setPixelRatio(this.ratio);
                 // this.renderer.setActive(this.$data.$_scene, this.$data.$_camera);
                 this.render();
-            },
-            /**
-             * orbit control on change event
-             */
-            orbit_change() {
-                if (this.play) return;
-                this.render(() => {
-                    this.orbit.update();
-                });
             },
         },
         watch: {
