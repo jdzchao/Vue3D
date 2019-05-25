@@ -27,6 +27,7 @@ class Renderer {
     render(callback) {
         if (this._rendering || this._pause) return;
         this._rendering = requestAnimationFrame(() => {
+
             Bus.delegationCall(this); // 调用委托中的方法
 
             callback && callback();
@@ -35,7 +36,7 @@ class Renderer {
             this._rendering = null; // 当前帧渲染完成，释放
 
             if (this._auto) {
-                this.render();
+                this.render(callback);
             }
         })
     }

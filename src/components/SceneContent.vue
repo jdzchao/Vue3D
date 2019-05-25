@@ -6,22 +6,44 @@
                 <v3d-light-rect-area :width="100" :height="100" :intensity="1"
                                      :target="{x:5,y:0,z:0}" :position="{x:0,y:0,z:10}"></v3d-light-rect-area>
                 <v3d-light-directional></v3d-light-directional>
-                <v3d-geom-cylinder :material="Materials.standard()" :radialSegments="50"></v3d-geom-cylinder>
-                <!--                <v3d-loader-obj path="/models/obj/Cerberus.obj"-->
-                <!--                                :material="Materials.standard()"></v3d-loader-obj>-->
+                <v3d-geom-cylinder :material="Materials.standard()" :radialSegments="50" :position="{x:5,y:0,z:0}"></v3d-geom-cylinder>
+                <v3d-loader-obj path="/models/obj/Cerberus.obj"
+                                :material="Materials.standard()"></v3d-loader-obj>
             </v3d-scene>
         </vue3d>
     </div>
 </template>
 
 <script>
-    import {Materials} from '@v3d'
-    import V3dLightDirectional from "@v3d/packages/V3dLightDirectional/V3dLightDirectional";
-    import Three from "@/dev/three";
+    import {
+        Bus,
+        Vue3d,
+        V3dScene,
+        V3dCameraPerspective,
+        V3dGeomBox,
+        V3dGeomCylinder,
+        V3dLightAmbient,
+        V3dLightDirectional,
+        V3dLightRectArea,
+        V3dLightSpot,
+        V3dLoaderObj,
+        Materials
+    } from "@v3d";
 
     export default {
         name: "SceneContent",
-        components: {Three, V3dLightDirectional},
+        components: {
+            Vue3d,
+            V3dScene,
+            V3dCameraPerspective,
+            V3dGeomBox,
+            V3dGeomCylinder,
+            V3dLightAmbient,
+            V3dLightDirectional,
+            V3dLightRectArea,
+            V3dLightSpot,
+            V3dLoaderObj,
+        },
         data() {
             return {
                 width: 0,
@@ -43,6 +65,7 @@
             },
         },
         mounted() {
+            Bus.setConf({debug: false})
             this.resize();
             window.addEventListener("resize", this.resize);
         }

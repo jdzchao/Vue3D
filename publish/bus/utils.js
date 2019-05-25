@@ -10,7 +10,6 @@ export default {
             scene.name = name ? name : scene.uuid;
             scene.cameras = [];
             scene.arrayCamera = new THREE.ArrayCamera(scene.cameras);
-            scene.add(scene.arrayCamera);
             return scene;
         }
     }

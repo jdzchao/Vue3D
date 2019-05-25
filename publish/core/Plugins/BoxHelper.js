@@ -22,10 +22,9 @@ export default {
         if (this.plugin) this.vue3d_remove(this.plugin);
     },
     methods: {
-        setBox(val) {
-            if (val && val.hasOwnProperty('object')) {
-                val = val.object;
-                this.target = val;
+        setBox(obj) {
+            if (obj) {
+                this.target = obj;
                 this.box.setFromObject(this.target);
                 this.vue3d_add(this.plugin);
             } else {

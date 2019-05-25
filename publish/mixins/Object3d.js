@@ -29,6 +29,9 @@ export default {
                 return {x: 0, y: 0, z: 0}
             }
         },
+        name: {
+            type: String,
+        }
     },
     data() {
         return {
@@ -64,6 +67,7 @@ export default {
     },
     methods: {
         init() {
+            this.object3d.name = this.name || this.$options.name;
             this.setPosition();
             this.setRotation();
             this.setScale();
@@ -156,6 +160,10 @@ export default {
         }
     },
     watch: {
+        name(val, oldVal) {
+            if (val === oldVal) return;
+            this.object3d.name = val;
+        },
         "position.x"(val, oldVal) {
             if (val === oldVal) return;
             this.setPosition();

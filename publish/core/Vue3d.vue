@@ -57,8 +57,8 @@
                 $_camera: null, // Base Camera
                 /* status */
                 slot: false,
-                status: 'awake',
-                play: false,
+                $_play: false,
+                $_status: 'awake',
                 /* libraries */
                 renderer: null, // renderer
                 orbit: null, // orbit control
@@ -66,6 +66,35 @@
                 /* config */
                 conf: null,
                 background: null,
+            }
+        },
+        computed: {
+            play: {
+                get() {
+                    return this.$data.$_play;
+                },
+                set(val) {
+                    this.$data.$_play = val;
+                    this.orbit.enabled = !val;
+                    if (val) {
+                        this.renderer.setActive(this.active_scene(), this.active_scene().arrayCamera);
+                    } else {
+                        this.renderer.setActive(this.$data.$_scene, this.$data.$_camera);
+                    }
+                    this.emit("play", val);
+                }
+            },
+            status: {
+                get() {
+                    return this.$data.$_status;
+                },
+                set(val) {
+                    const status_enum = ['awake', 'start', 'render'];
+                    if (status_enum.indexOf(val) >= 0) {
+                        this.$data.$_status = val;
+                        this.emit("status", val);
+                    }
+                }
             }
         },
         mounted() {
@@ -84,11 +113,11 @@
             this.scenes = new ScenesManager(this.$data.$_scene);
             // 初始化 Libraries
             this.orbit = new Orbit(this.$data.$_camera, this.$data.$_canvas);
-            this.orbit.control.addEventListener('change', this.render, false);
+            this.orbit.control.addEventListener('change', this.orbit_change, false);
             // 渲染第一帧
             this.renderer.setActive(this.$data.$_scene, this.$data.$_camera).render(() => {
                 this.slot = true;
-                this.setStatus('start');
+                this.status = 'start';
                 this.$emit('success');
             });
             console.log(this.$data.$_scene);
@@ -108,10 +137,10 @@
             /**
              * 渲染一帧
              */
-            render() {
+            render(callback) {
                 this.renderer.render(() => {
-                    this.setStatus('render');
-                    this.orbit.update();
+                    this.status = 'render';
+                    callback && callback();
                     this.emit("update"); // 向组件发送更新指令
                 });
             },
@@ -140,27 +169,14 @@
                 // this.renderer.setActive(this.$data.$_scene, this.$data.$_camera);
                 this.render();
             },
-            getPlay() {
-                return this.play;
-            },
-            setPlay() {
-                this.play = !this.play;
-                if (this.play) {
-                    this.renderer.setActive(this.active_scene(), this.active_scene().arrayCamera);
-                } else {
-                    this.renderer.setActive(this.$data.$_scene, this.$data.$_camera);
-                }
-            },
             /**
-             * 设置当前状态
-             * @param status
+             * orbit control on change event
              */
-            setStatus(status) {
-                const status_enum = ['awake', 'start', 'render'];
-                if (status_enum.indexOf(status) >= 0) {
-                    this.status = status;
-                    this.emit("status", this.status);
-                }
+            orbit_change() {
+                if (this.play) return;
+                this.render(() => {
+                    this.orbit.update();
+                });
             },
         },
         watch: {

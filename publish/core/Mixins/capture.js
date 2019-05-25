@@ -26,7 +26,7 @@ export default {
     methods: {
         capture_set(obj) {
             this.captured = obj;
-            this.render();
+            this.emit('capture', obj);
         },
         capture_get() {
             return this.captured
@@ -89,16 +89,15 @@ export default {
         _AnalysisTargets(targets) {
             this.emit('capture_all', targets);
             if (targets.length > 0) {
-                targets.forEach((target) => {
+                for (let i = 0; i < targets.length; i++) {
+                    let target = targets[i];
                     if (target.object.type) {
-                        this.captured = target.object;
-                        this.emit('capture', target);
-                        return;
+                        this.capture_set(target.object);
+                        break;
                     }
-                    this.emit('capture', null);
-                });
+                }
             } else {
-                this.emit('capture', null);
+                this.capture_set(null);
             }
         }
     }
