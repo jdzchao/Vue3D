@@ -57,7 +57,7 @@ class ScenesManager {
      * @returns {*}
      */
     getByIndex(index) {
-        if (index <= this.manager.length)
+        if (index >= 0 && index < this.manager.length)
             return this.manager[index];
     }
 
