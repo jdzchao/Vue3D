@@ -6,7 +6,7 @@ import *as THREE from "three"
 export default {
     data() {
         return {
-            captured: null, // captured object3d
+            captured: null, // target object3d
             /// Ray Capture
             _$caster: null, // ray caster
             _$point: null, // screen point
@@ -59,7 +59,7 @@ export default {
         // 捕获射线
         _rayCaster() {
             this.$data._$caster.setFromCamera(this.$data._$point, this.$data.$_camera);
-            let targets = this.$data._$caster.intersectObjects(this.scenes.active().children, true);
+            let targets = this.$data._$caster.intersectObjects(this._scenes.active().children, true);
             this._AnalysisTargets(targets);
             this.$data._$charged = false;
         },

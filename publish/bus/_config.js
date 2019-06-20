@@ -19,16 +19,6 @@ export default {
     /****************************************
      ** PLUGINS Setting
      ****************************************/
-    // plugin : box helper
-    box: {
-        color: 'rgb(255,255,0)'
-    },
-    // plugin : grid helper
-    grid: {
-        size: 100,
-        divisions: 10,
-        colorCenterLine: 'rgb(136,136,136)',
-        colorGrid: 'rgb(68,68,68)',
-    },
+
 
 }
