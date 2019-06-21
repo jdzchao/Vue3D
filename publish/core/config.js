@@ -1,5 +1,3 @@
-import Bus from '../bus'
-
 /**
  * 配置文件
  */
@@ -21,7 +19,11 @@ const config = {
     /****************************************
      ** PLUGINS Setting
      ****************************************/
-    capture: true,
+    capture: {
+        enabled: true,
+        near: 0,
+        far: 5000
+    },
 }
 
 
