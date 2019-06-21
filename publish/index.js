@@ -46,9 +46,12 @@ if (typeof window !== 'undefined' && window.Vue) {
     install(window.Vue);
 }
 
-export default{
-    Bus,
+export default {
     install,
+}
+
+export {
+    Bus,
     Vue3d,
     V3dScene,
     V3dCameraPerspective,
@@ -59,6 +62,5 @@ export default{
     V3dLightRectArea,
     V3dLightSpot,
     V3dLoaderObj,
-
     Materials
 }
