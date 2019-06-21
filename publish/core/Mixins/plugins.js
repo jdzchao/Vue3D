@@ -16,17 +16,10 @@ export default {
                 this.$data.$_canvas,
                 this.$data.$_camera,
                 this.scenes, // 场景管理器
-                this.onCapture
+                (object3d) => {
+                    this.emit('capture', object3d)
+                }
             );
         })
     },
-    methods: {
-        /**
-         * 获取点击捕获的目标
-         * @param object3d
-         */
-        onCapture(object3d) {
-            this.emit('capture', object3d)
-        }
-    }
 }

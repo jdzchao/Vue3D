@@ -10,7 +10,7 @@ const bus = {
     data: {
         // 配置文件
         config: {
-            debug: true, // Debug mode
+            debug: true, // Debug Mode
         },
     },
     methods: {
