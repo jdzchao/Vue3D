@@ -6,7 +6,7 @@
 
 <script>
     import * as THREE from "three"
-    import Object3d_Geometry from "../../mixins/Object3d_Geometry"
+    import Object3d_Geometry from "../../../mixins/Object3d_Geometry"
 
     export default {
         name: "V3dGeomBox",

@@ -42,12 +42,13 @@ const install = function (Vue, opts = {}) {
     Vue.prototype.$vue3d = Bus; // 全局总线
 };
 
-export default {
-    install,
-};
+if (typeof window !== 'undefined' && window.Vue) {
+    install(window.Vue);
+}
 
-export {
+export default{
     Bus,
+    install,
     Vue3d,
     V3dScene,
     V3dCameraPerspective,

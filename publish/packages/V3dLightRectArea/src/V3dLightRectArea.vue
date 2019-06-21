@@ -7,7 +7,7 @@
 <script>
     import * as THREE from "three"
     import rectAreaLightUniforms from "./RectAreaLightUniformsLib"
-    import Object3d_Light from "../../mixins/Object3d_Light"
+    import Object3d_Light from "../../../mixins/Object3d_Light"
 
     export default {
         name: "V3dLightRectArea",

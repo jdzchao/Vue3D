@@ -7,7 +7,7 @@
 <script>
 
     import * as THREE from "three"
-    import Object3d_Camera from "../../mixins/Object3d_Camera";
+    import Object3d_Camera from "../../../mixins/Object3d_Camera";
 
     export default {
         name: "V3dCameraPerspective",

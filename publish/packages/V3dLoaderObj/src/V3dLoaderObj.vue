@@ -6,7 +6,7 @@
 
 <script>
     import {OBJLoader} from 'three/examples/jsm/loaders/OBJLoader'
-    import Object3d_Loader from '../../mixins/Object3d_Loader'
+    import Object3d_Loader from '../../../mixins/Object3d_Loader'
 
     export default {
         name: "V3dLoaderObj",
