@@ -9,36 +9,24 @@
 
 <script>
     import * as THREE from 'three/src/Three'
-    import Bus from "../bus"
+    import config from './config'
     // Mixins
     import event from "./Mixins/event"
+    import plugins from "./Mixins/plugins"
     // Libraries
     import Renderer from "./Libraries/renderer"
     import ScenesManager from "./Libraries/scenes";
     import Orbit from "./Libraries/orbit";
-    import Capture from "./Libraries/capture"
 
     export default {
         name: "Vue3d",
-        mixins: [event],
+        extends: config,
+        mixins: [event, plugins],
         props: {
             id: {type: String, default: 'Vue3D'},
             width: {type: Number, required: true},
             height: {type: Number, required: true},
             ratio: {type: Number, default: 1},
-
-            // Vue3d Configs Object
-            config: {type: Object},
-
-            // plugins components
-            plugins: {
-                type: Object, default() {
-                    return {
-                        box: false,
-                        grid: false,
-                    }
-                }
-            }
         },
         data() {
             return {
@@ -47,15 +35,13 @@
                 $_scene: null, // Base Scene
                 $_camera: null, // Base Camera
                 /* status */
-                slot: false,
                 $_play: false,
                 $_status: 'awake',
+                slot: false,
                 /* libraries */
                 renderer: null, // renderer
                 orbit: null, // orbit control
                 scenes: null, // _scenes manager
-                /* config */
-                conf: null,
                 background: null,
             }
         },
@@ -89,11 +75,10 @@
             }
         },
         mounted() {
-            this.conf = Bus.setConf(this.config); // 加载配置文件
             // 初始化基础组件
             this.$data.$_canvas = this.$el;
             this.$data.$_scene = new THREE.Scene();
-            this.$data.$_camera = new THREE.PerspectiveCamera(70, this.width / this.height, 0.1, 5000);
+            this.$data.$_camera = new THREE.PerspectiveCamera(this.conf.camera.fov, this.width / this.height, this.conf.camera.near, this.conf.camera.far);
             this.$data.$_scene.add(this.$data.$_camera);
             // 设置ID
             this.$data.$_scene.name = this.id;
@@ -105,13 +90,6 @@
             // 初始化 Orbit Controller
             this.orbit = new Orbit(this.$data.$_camera, this.$data.$_canvas);
             this.orbit.control.addEventListener('change', this.render, false);
-            // 初始化 Capture
-            this.capture = new Capture(
-                this.$data.$_canvas,
-                this.$data.$_camera,
-                this.scenes, // 场景管理器
-                this.onCapture
-            );
             // 渲染第一帧
             this.renderer.setActive(this.$data.$_scene, this.$data.$_camera).render(() => {
                 this.slot = true;
@@ -166,14 +144,6 @@
                 // this.renderer.setActive(this.$data.$_scene, this.$data.$_camera);
                 this.render();
             },
-            /**
-             * 获取点击捕获的目标
-             * @param object3d
-             */
-            onCapture(object3d) {
-                this.emit('capture', object3d)
-                console.log(object3d)
-            }
         },
         watch: {
             width(val, oldVal) {

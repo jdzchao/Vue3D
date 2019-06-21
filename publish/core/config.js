@@ -1,0 +1,49 @@
+import Bus from '../bus'
+
+/**
+ * 配置文件
+ */
+const config = {
+    // WebGLRenderer parameters
+    renderer: {
+        alpha: true,
+        antialias: true,
+        preserveDrawingBuffer: true,
+    },
+
+    // Base camera
+    camera: {
+        fov: 70,
+        near: 0.1,
+        far: 5000
+    },
+
+    /****************************************
+     ** PLUGINS Setting
+     ****************************************/
+    capture: true,
+}
+
+
+export default {
+    props: {
+        config: {type: Object},  // Vue3d Configs Object
+    },
+    data() {
+        return {
+            conf: config
+        }
+    },
+    created() {
+        this.conf = this.loadConf(this.config)
+    },
+    methods: {
+        loadConf(conf) {
+            if (typeof conf !== 'object') {
+                return this.conf
+            } else {
+                return Object.assign({}, this.conf, conf)
+            }
+        }
+    }
+}
