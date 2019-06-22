@@ -26,7 +26,7 @@
                 this.$data.$_scene = base.$_scene;
                 this.$data.$_camera = base.$_camera;
                 this.vue3d = this.$parent;
-                this.scene = this.$parent.add_scene(this.id);
+                this.scene = this.$parent.scenes.add(this.id);
                 this.slot = true;
             } else {
                 console.error(this.$options.name + " should slot on Vue3D Component");

@@ -54,7 +54,7 @@
                     this.$data.$_play = val;
                     this.orbit.enabled = !val;
                     if (val) {
-                        this.renderer.setActive(this.activated_scene(), this.activated_scene().arrayCamera);
+                        this.renderer.setActive(this.scenes.activated(), this.scenes.activated().arrayCamera);
                     } else {
                         this.renderer.setActive(this.$data.$_scene, this.$data.$_camera);
                     }
@@ -128,22 +128,7 @@
                 this.renderer.setPixelRatio(this.ratio);
                 // this.renderer.setActive(this.$data.$_scene, this.$data.$_camera);
                 this.render();
-            },
-            /**
-             * 添加一个新场景
-             * @param name
-             * @returns {*}
-             */
-            add_scene(name) {
-                return this.scenes.add(name)
-            },
-            /**
-             * 获取当前激活的场景
-             * @returns {never|*|Scene}
-             */
-            activated_scene() {
-                return this.scenes.activated()
-            },
+            }
         },
         watch: {
             width(val, oldVal) {
