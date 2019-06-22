@@ -120,6 +120,16 @@
                 });
             },
             /**
+             * 重置窗口大小
+             */
+            resize() {
+                if (!this.renderer) return;
+                this.renderer.setSize(this.width, this.height).setAspect();
+                this.renderer.setPixelRatio(this.ratio);
+                // this.renderer.setActive(this.$data.$_scene, this.$data.$_camera);
+                this.render();
+            },
+            /**
              * 添加一个新场景
              * @param name
              * @returns {*}
@@ -133,16 +143,6 @@
              */
             activated_scene() {
                 return this.scenes.activated()
-            },
-            /**
-             * 重置窗口大小
-             */
-            resize() {
-                if (!this.renderer) return;
-                this.renderer.setSize(this.width, this.height).setAspect();
-                this.renderer.setPixelRatio(this.ratio);
-                // this.renderer.setActive(this.$data.$_scene, this.$data.$_camera);
-                this.render();
             },
         },
         watch: {
