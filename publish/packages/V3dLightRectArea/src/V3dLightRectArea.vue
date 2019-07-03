@@ -6,7 +6,7 @@
 
 <script>
     import * as THREE from "three"
-    import rectAreaLightUniforms from "./RectAreaLightUniformsLib"
+    import {RectAreaLightUniformsLib} from "three/examples/jsm/lights/RectAreaLightUniformsLib"
     import Object3d_Light from "../../../mixins/Object3d_Light"
 
     export default {
@@ -22,16 +22,13 @@
             }
         },
         created() {
-            rectAreaLightUniforms(THREE);
+            RectAreaLightUniformsLib.init();
             this.light = new THREE.RectAreaLight(this.color, this.intensity, this.width, this.height);
             if (this.helper) {
                 this.lightHelper = new THREE.Mesh(new THREE.PlaneBufferGeometry(), new THREE.MeshBasicMaterial({side: THREE.BackSide}));
                 this.lightHelper.scale.x = this.light.width;
                 this.lightHelper.scale.y = this.light.height;
                 this.light.add(this.lightHelper);
-
-                // let rectLightMeshBack = new THREE.Mesh(new THREE.PlaneBufferGeometry(), new THREE.MeshBasicMaterial({color: 0x080808}));
-                // this.lightHelper.add(rectLightMeshBack);
             }
         }
     }
