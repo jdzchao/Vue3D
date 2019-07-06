@@ -124,7 +124,7 @@
              */
             resize() {
                 if (!this.renderer) return;
-                this.renderer.setSize(this.width, this.height).setAspect();
+                this.renderer.setSize(this.width, this.height);
                 this.renderer.setPixelRatio(this.ratio);
                 // this.renderer.setActive(this.$data.$_scene, this.$data.$_camera);
                 this.render();
