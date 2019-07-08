@@ -14,7 +14,7 @@
         mixins: [Object3d_Camera],
         props: {
             near: {type: Number, default: 0.1},
-            far: {type: Number, default: 1000},
+            far: {type: Number, default: 2000},
             fov: {type: Number, default: 50},
         },
         watch: {
@@ -32,6 +32,7 @@
             updateCamera() {
                 this.camera.fov = this.fov;
                 this.camera.aspect = this.width / this.height;
+                this.camera.viewport.set(this.x, this.y, this.width, this.height);
                 this.camera.updateProjectionMatrix();
             }
         },
