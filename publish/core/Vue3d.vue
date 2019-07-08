@@ -55,8 +55,12 @@
                     this.orbit.enabled = !val;
                     if (val) {
                         this.renderer.setActive(this.scenes.activated(), this.scenes.activated().arrayCamera);
+                        this.renderer.setSize(this.width, this.height);
+                        this.renderer.render();
                     } else {
                         this.renderer.setActive(this.$data.$_scene, this.$data.$_camera);
+                        this.renderer.setSize(this.width, this.height);
+                        this.renderer.render();
                     }
                     this.emit("play", val);
                 }
@@ -126,7 +130,8 @@
                 if (!this.renderer) return;
                 this.renderer.setSize(this.width, this.height);
                 this.renderer.setPixelRatio(this.ratio);
-                // this.renderer.setActive(this.$data.$_scene, this.$data.$_camera);
+                this.$data.$_camera.aspect = this.width / this.height;
+                this.$data.$_camera.updateProjectionMatrix(); // 摄像机参数改变后必须执行生效
                 this.render();
             }
         },
