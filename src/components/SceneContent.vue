@@ -6,10 +6,10 @@
                 <v3d-light-rect-area :width="100" :height="100" :intensity="1"
                                      :target="{x:5,y:0,z:0}" :position="{x:0,y:0,z:10}"></v3d-light-rect-area>
                 <v3d-light-directional></v3d-light-directional>
-                <v3d-geom-cylinder :material="Materials.standard()" :radialSegments="50"
+                <v3d-geom-cylinder :material="Bus.mtl_standard()" :radialSegments="50"
                                    :position="{x:5,y:0,z:0}"></v3d-geom-cylinder>
                 <v3d-loader-obj path="/models/obj/Cerberus.obj"
-                                :material="Materials.standard()"></v3d-loader-obj>
+                                :material="Bus.mtl_standard()"></v3d-loader-obj>
             </v3d-scene>
         </vue3d>
     </div>
@@ -28,7 +28,6 @@
         V3dLightRectArea,
         V3dLightSpot,
         V3dLoaderObj,
-        Materials
     } from "@v3d";
 
     export default {
@@ -47,12 +46,12 @@
         },
         data() {
             return {
+                Bus,
                 width: 0,
                 height: 0,
                 position: {x: 0, y: 0, z: 0},
                 rotation: {x: 0, y: 0, z: 0},
                 scale: {x: 1, y: 1, z: 1},
-                Materials,
                 skybox: {
                     path: '/skybox/'
                 }

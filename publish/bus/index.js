@@ -4,9 +4,10 @@ import debug from './debug'
 import delegation from './delegation'
 import event from './event'
 import utils from './utils'
+import materials from './materials'
 
 const bus = {
-    mixins: [debug, delegation, event, utils],
+    mixins: [debug, delegation, event, utils, materials],
     data: {
         // 配置文件
         config: {
