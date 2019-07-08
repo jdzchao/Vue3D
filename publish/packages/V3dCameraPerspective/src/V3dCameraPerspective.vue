@@ -1,5 +1,5 @@
 <template>
-    <object :name="$options.name" style="display:none;" :aspect="aspect">
+    <object :name="$options.name" style="display:none;">
         <slot v-if="slot"></slot>
     </object>
 </template>
@@ -13,38 +13,30 @@
         name: "V3dCameraPerspective",
         mixins: [Object3d_Camera],
         props: {
-            near: {type: Number, default: 1},
+            near: {type: Number, default: 0.1},
             far: {type: Number, default: 1000},
-            dis: {type: Number, default: 100},
-            size: {type: Number, default: 100},
+            fov: {type: Number, default: 50},
         },
-        computed: {
-            aspect() {
-                this.$nextTick(() => {
-                    this.updateCamera(); // 重置相机相关配置
-                    this.render();
-                });
-                return this.width / this.height;
+        watch: {
+            width() {
+                this.updateCamera()
+            },
+            height() {
+                this.updateCamera()
+            },
+            fov() {
+                this.updateCamera()
             }
         },
         methods: {
-            fov() {
-                let size = this.size;
-                if (this.aspect < 1) {
-                    size = size / this.aspect;
-                } else {
-                    size = size * this.aspect;
-                }
-                return Math.atan(size / this.dis / 2) * (180 / Math.PI);
-            },
             updateCamera() {
-                this.camera.fov = this.fov();
-                this.camera.aspect = this.aspect;
+                this.camera.fov = this.fov;
+                this.camera.aspect = this.width / this.height;
                 this.camera.updateProjectionMatrix();
             }
         },
         created() {
-            this.camera = new THREE.PerspectiveCamera(this.fov(), this.width / this.height, this.near, this.far);
+            this.camera = new THREE.PerspectiveCamera(this.fov, this.width / this.height, this.near, this.far);
         },
 
     }
