@@ -7,8 +7,8 @@
 <script>
 
     import * as THREE from "three"
-    import Object3d from "../../../mixins/Object3d";
     import Bus from "../../../bus"
+    import Object3d from "../../../mixins/Object3d";
 
     export default {
         name: "V3dCameraPerspective",
@@ -21,7 +21,9 @@
             near: {type: Number, default: 0.1},
             far: {type: Number, default: 2000},
             fov: {type: Number, default: 50},
-            withHelper: {type: Boolean, default: true}
+            /* helper */
+            withHelper: {type: Boolean, default: true},
+            visibleHelper: {type: Boolean, default: false},
         },
         data() {
             return {
@@ -39,14 +41,6 @@
             fov() {
                 this.updateCamera()
             },
-            helper(val, oldVal) {
-                if (val === oldVal) return
-                if (val) {
-                    this.scene.add(this.helper)
-                } else {
-                    this.scene.remove(this.helper)
-                }
-            }
         },
         created() {
             this.camera = new THREE.PerspectiveCamera(this.fov, this.width / this.height, this.near, this.far);
@@ -57,7 +51,7 @@
             this.scene.cameras.push(this.camera);
             if (Bus.config.helper && this.withHelper) {
                 this.helper = new THREE.CameraHelper(this.camera);
-                this.helper.visible = false;
+                this.helper.visible = this.visibleHelper;
                 this.object3d.helper = this.helper;
                 this.scene.add(this.helper)
             }
