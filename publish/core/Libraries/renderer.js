@@ -101,7 +101,6 @@ class Renderer {
 
             callback && callback();
 
-            this._setAspect();
             this.renderer.render(this._scene, this._camera);
             this._rendering = null; // 当前帧渲染完成，释放
 
@@ -156,15 +155,6 @@ class Renderer {
         return this;
     }
 
-    /**
-     * Set renderer camera's Aspect
-     * @returns {Renderer}
-     */
-    _setAspect() {
-        this._camera.aspect = this.width / this.height;
-        this._camera.updateProjectionMatrix();// 摄像机参数改变后必须执行生效
-        return this;
-    }
 
 }
 

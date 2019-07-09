@@ -12,6 +12,7 @@ const bus = {
         // 配置文件
         config: {
             debug: true, // Debug Mode
+            helper: true, // Three.js Helper
         },
     },
     methods: {

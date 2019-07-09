@@ -11,7 +11,7 @@ const config = {
 
     // Base camera
     camera: {
-        fov: 70,
+        fov: 60,
         near: 0.1,
         far: 5000
     },
