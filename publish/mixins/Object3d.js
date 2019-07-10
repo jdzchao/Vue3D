@@ -67,7 +67,7 @@ export default {
     },
     methods: {
         init() {
-            this.object3d.vue3d = this;
+            this.object3d.vComponent = this;
             this.object3d.name = this.name || this.$options.name;
             this.setPosition();
             this.setRotation();
