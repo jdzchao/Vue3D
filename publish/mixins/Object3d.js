@@ -8,27 +8,10 @@ export default {
     props: {
         inTree: {type: Boolean, default: true}, // 是否挂载在树节点上。当设置为false时直接挂载在scene根节点上
         name: {type: String, default: ''},
-        position: {
-            type: Object, default() {
-                return new THREE.Vector3()
-            }
-        },
-        rotation: {
-            type: Object, default() {
-                return new THREE.Euler()
-            }
-        },
-        scale: {
-            type: Object, default() {
-                return new THREE.Vector3(1, 1, 1)
-            }
-        },
-        target: {
-            type: Object,
-            default() {
-                return {x: 0, y: 0, z: 0}
-            }
-        },
+        position: {type: Object},
+        rotation: {type: Object},
+        scale: {type: Object},
+        target: {type: Object},
     },
     data() {
         return {
@@ -68,11 +51,11 @@ export default {
             this.object3d.vComponent = this;
             this.object3d.name = this.name || this.$options.name;
 
-            this.addObject3d(this.object3d);
             this.setPosition(this.position);
             this.setRotation(this.rotation);
             this.setScale(this.scale);
-            this.setTarget();
+
+            this.addObject3d(this.object3d);
 
             this.slot = true;
             this.$emit('ready', this.object3d);
@@ -112,33 +95,25 @@ export default {
             this.vue3d.off("update", this.onRender);
         },
         setPosition(val) {
-            if (val.isVector3) {
-                this.object3d.position = val;
-            } else if (val && val.hasOwnProperty('x') && val.hasOwnProperty('y') && val.hasOwnProperty('z')) {
-                let position = new THREE.Vector3(val.x, val.y, val.z);
-                this.object3d.position = position;
-                this.$emit("update:position", position);
+            if (val && val.hasOwnProperty('x') && val.hasOwnProperty('y') && val.hasOwnProperty('z')) {
+                this.object3d.position.set(this.position.x, this.position.y, this.position.z)
             }
+            this.$emit("update:position", this.object3d.position);
             this.render();
         },
         setRotation(val) {
-            if (val.isEuler) {
-                this.object3d.rotation = val;
-            } else if (val && val.hasOwnProperty('x') && val.hasOwnProperty('y') && val.hasOwnProperty('z')) {
-                let rotation = new THREE.Euler(val.x, val.y, val.z);
-                this.object3d.rotation = rotation;
-                this.$emit("update:rotation", rotation);
+            if (val && val.hasOwnProperty('x') && val.hasOwnProperty('y') && val.hasOwnProperty('z')) {
+                let euler = new THREE.Euler(val.x, val.y, val.z)
+                this.object3d.setRotationFromEuler(euler);
             }
+            this.$emit("update:rotation", this.object3d.rotation);
             this.render();
         },
         setScale(val) {
-            if (val.isVector3) {
-                this.object3d.scale = val;
-            } else if (val && val.hasOwnProperty('x') && val.hasOwnProperty('y') && val.hasOwnProperty('z')) {
-                let scale = new THREE.Vector3(val.x, val.y, val.z);
-                this.object3d.scale = scale;
-                this.$emit("update:scale", scale);
+            if (val && val.hasOwnProperty('x') && val.hasOwnProperty('y') && val.hasOwnProperty('z')) {
+                this.object3d.scale.set(this.scale.x, this.scale.y, this.scale.z)
             }
+            this.$emit("update:scale", this.object3d.scale);
             this.render();
         },
         setTarget() {
@@ -159,7 +134,7 @@ export default {
             this.object3d.name = val;
         },
         target(val, oldVal) {
-            if (val === oldVal) return;
+            if (val && val === oldVal) return;
             this.setTarget();
         },
         position(val) {
@@ -174,5 +149,5 @@ export default {
             if (Object.is(this.object3d.scale, val)) return;
             this.setScale(val);
         }
-    },
+    }
 }
