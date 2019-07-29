@@ -7,7 +7,7 @@
     export default {
         name: "V3dScene",
         props: {
-            id: {type: String, required: true}
+            id: {type: String | Number, required: true}
         },
         data() {
             return {
