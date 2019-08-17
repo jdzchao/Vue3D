@@ -4,10 +4,11 @@
     </object>
 </template>
 <script>
+    import * as THREE from 'three'
     export default {
         name: "V3dScene",
         props: {
-            id: {type: String | Number, required: true}
+            name: {type: String | Number, required: true}
         },
         data() {
             return {
@@ -26,7 +27,7 @@
                 this.$data.$_scene = base.$_scene;
                 this.$data.$_camera = base.$_camera;
                 this.vue3d = this.$parent;
-                this.scene = this.$parent.scenes.add(this.id);
+                this.scene = this.$parent.scenes.add(this.name);
                 this.slot = true;
             } else {
                 console.error(this.$options.name + " should slot on Vue3D Component");
