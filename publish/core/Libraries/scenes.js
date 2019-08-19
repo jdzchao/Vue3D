@@ -3,12 +3,12 @@ import Bus from "../../bus";
 class ScenesManager {
     constructor(base_scene) {
         this.manager = [];
-        this.index = 0; // activated scene index
+        this.index = -1; // activated scene index
 
-        this.default = Bus.scene_init('default'); // vue3d default sub-scene
+        // this.default = Bus.scene_init('default'); // vue3d default sub-scene
 
         this.base_scene = base_scene; // vue3d base scene
-        this.base_scene.add(this.default);
+        // this.base_scene.add(this.default);
 
         return this;
     }
@@ -18,8 +18,8 @@ class ScenesManager {
      * @returns {*|Scene|*}
      */
     activated() {
-        if (this.manager.length === 0) {
-            return this.default
+        if (this.manager.length < 0) {
+            return this.base_scene
         } else {
             return this.manager[this.index]
         }
@@ -32,11 +32,7 @@ class ScenesManager {
      */
     add(name) {
         let scene = Bus.scene_init(name);
-        if (this.manager.length === 0) {
-            this.base_scene.remove(this.default);
-            this.base_scene.add(scene);
-            this.index = 0;
-        }
+        this.base_scene.add(scene);
         this.manager.push(scene);
         return scene;
     }
