@@ -31,17 +31,17 @@
         data() {
             return {
                 /* Vue3D Base Component */
-                $_canvas: null, // _canvas dom
-                $_scene: null, // Base Scene
-                $_camera: null, // Base Camera
+                canvas: null, // canvas dom
+                camera: null, // main camera
+
+                renderer: null, // renderer
+                scenes: null, // scenes manager
+                orbit: null, // orbit control
                 /* status */
                 $_play: false,
                 $_status: 'awake',
                 slot: false,
-                /* libraries */
-                renderer: null, // renderer
-                orbit: null, // orbit control
-                scenes: null, // _scenes manager
+                /* setting */
                 background: null,
             }
         },
@@ -52,7 +52,7 @@
                 },
                 set(val) {
                     this.$data.$_play = val;
-                    this.orbit.enabled = !val;
+                    // this.orbit.enabled = !val;
                     if (val) {
                         this.renderer.setActive(this.scenes.activated(), this.scenes.activated().arrayCamera);
                         this.renderer.setSize(this.width, this.height);
@@ -80,22 +80,20 @@
         },
         mounted() {
             // 初始化基础组件
-            this.$data.$_canvas = this.$el;
-            this.$data.$_scene = new THREE.Scene();
-            this.$data.$_camera = new THREE.PerspectiveCamera(this.conf.camera.fov, this.width / this.height, this.conf.camera.near, this.conf.camera.far);
-            this.$data.$_scene.add(this.$data.$_camera);
-            // 设置ID
-            this.$data.$_scene.name = this.id;
-            this.$data.$_camera.name = this.id;
+            this.canvas = this.$el;
             // 初始化 Vue3D Renderer
-            this.renderer = new Renderer(this.$data.$_canvas, this.conf.renderer);
+            this.renderer = new Renderer(this.canvas, this.conf.renderer);
             // 初始化 Scenes Manager
-            this.scenes = new ScenesManager(this.$data.$_scene);
+            this.scenes = new ScenesManager();
+            // 初始化主摄像机
+            this.camera = new THREE.PerspectiveCamera(this.conf.camera.fov, this.width / this.height, this.conf.camera.near, this.conf.camera.far);
+            this.camera.name = 'main';
+            this.scenes.base.cameras.push(this.camera);
             // 初始化 Orbit Controller
-            this.orbit = new Orbit(this.$data.$_camera, this.$data.$_canvas);
+            this.orbit = new Orbit(this.camera, this.canvas);
             this.orbit.control.addEventListener('change', this.render, false);
             // 渲染第一帧
-            this.renderer.setActive(this.$data.$_scene, this.$data.$_camera).render(() => {
+            this.renderer.setActive(this.scenes.base, this.camera).render(() => {
                 this.slot = true;
                 this.status = 'start';
                 this.$emit('success');
@@ -108,9 +106,9 @@
              */
             vue3d() {
                 return {
-                    $_canvas: this.$data.$_canvas,
-                    $_scene: this.$data.$_scene,
-                    $_camera: this.$data.$_camera,
+                    canvas: this.canvas,
+                    scene: this.scenes.base,
+                    camera: this.camera,
                 }
             },
             /**
@@ -130,8 +128,8 @@
                 if (!this.renderer) return;
                 this.renderer.setSize(this.width, this.height);
                 this.renderer.setPixelRatio(this.ratio);
-                this.$data.$_camera.aspect = this.width / this.height;
-                this.$data.$_camera.updateProjectionMatrix(); // 摄像机参数改变后必须执行生效
+                this.camera.aspect = this.width / this.height;
+                this.camera.updateProjectionMatrix(); // 摄像机参数改变后必须执行生效
                 this.render();
             }
         },
@@ -150,7 +148,7 @@
             },
             background(val, oldVal) {
                 if (val === oldVal) return;
-                this.$data.$_scene.background = val;
+                this.scenes.base.background = val;
                 this.scene.background = val;
                 this.render();
             }

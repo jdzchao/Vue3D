@@ -23,9 +23,9 @@
         created() {
             let base = this.$parent.vue3d && this.$parent.vue3d();
             if (base) {
-                this.$data.$_canvas = base.$_canvas;
-                this.$data.$_scene = base.$_scene;
-                this.$data.$_camera = base.$_camera;
+                this.$data.$_canvas = base.canvas;
+                this.$data.$_scene = base.scene;
+                this.$data.$_camera = base.camera;
                 this.vue3d = this.$parent;
                 this.scene = this.$parent.scenes.add(this.name);
                 this.slot = true;

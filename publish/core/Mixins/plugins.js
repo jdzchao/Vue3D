@@ -1,8 +1,8 @@
+import Capture from "../Plugins/capture"
+
 /**
  * 插件路由
  */
-import Capture from "../Libraries/capture"
-
 export default {
     data() {
         return {
@@ -13,8 +13,8 @@ export default {
         this.$nextTick(() => {
             // 初始化 Capture
             this.capture = new Capture(
-                this.$data.$_canvas,
-                this.$data.$_camera,
+                this.canvas,
+                this.camera,
                 this.scenes, // 场景管理器
                 (object3d) => {
                     this.emit('capture', object3d)
