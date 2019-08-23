@@ -2,48 +2,119 @@ import Bus from "../../bus";
 
 class ScenesManager {
     constructor(name) {
-        this.manager = [];
-        this.index = -1; // activated scene index
+        this._base = Bus.init_scene(name); // vue3d base scene
 
-        this.base = Bus.scene_init(name); // vue3d base scene
-        // this.base_scene.add(this.default);
+        this._subs = []; // sub-scene array
+        this._index = -1; // activate sub-scene index
+        this._focused = false; // is focused status
 
         return this;
     }
 
-    /**
-     * Get Active Scene
-     * @returns {*|Scene|*}
-     */
-    activated() {
-        if (this.manager.length < 0 || this.index < 0) {
-            return this.base_scene
-        } else {
-            return this.manager[this.index]
+    get base() {
+        return this._base;
+    }
+
+    // active scene
+    get scene() {
+        return this.getActive();
+    }
+
+    // active arrayCamera
+    get cameras() {
+        let scene = this.getActive();
+        if (scene && scene.hasOwnProperty('arrayCamera')) {
+            return scene.arrayCamera;
         }
+        console.error('Error Scene: ' + this._index);
+        return null;
     }
 
     /**
      * Add scene
-     * @param name
+     * @param scene
      * @returns {*|Scene}
      */
-    add(name) {
-        let scene = Bus.scene_init(name);
-        this.base_scene.add(scene);
-        this.manager.push(scene);
+    add(scene) {
+        if (typeof scene === 'object' && scene.type === "Scene") {
+            this._subs.push(scene);
+        } else if (typeof scene === "string") {
+            scene = Bus.init_scene(name);
+            this._subs.push(scene);
+        } else {
+            return false;
+        }
+        if (!this._focused) {
+            this.base.add(scene);
+        }
         return scene;
     }
 
     /**
-     * Change Active Scene
+     * Remove scene
+     * @param scene
+     */
+    remove(scene) {
+        let index = this._index;
+        if (typeof scene === 'object' && scene.type === "Scene") {
+            index = this._subs.indexOf(scene);
+        } else if (typeof scene === "string") {
+            index = this._subs.findIndex(item => item.name === scene);
+        } else if (typeof scene === "number") {
+            index = scene;
+        }
+        if (!this._focused) {
+            this.base.remove(this._subs[scene]);
+        }
+        this._subs.splice(index, 1);
+    }
+
+    /**
+     * base scene in focus on sub-scene
      * @param index
      */
-    change(index) {
-        if (index < 0 || index >= this.manager.length) return;
-        this.base_scene.remove(this.manager[this.index]);
-        this.base_scene.add(this.manager[index]);
-        this.index = index;
+    focus(index) {
+        if (this._focused) return;
+        if (this._subs.length > index && index >= 0) {
+            this._index = index;
+        }
+        this._unmountAll();
+        this._base.add(this._subs[this._index]);
+        this._focused = true;
+    }
+
+    /**
+     * base scene blur all sub-scenes
+     */
+    blur() {
+        if (!this._focused) return;
+        // this._base.remove(this._subs[this._index]);
+        this._mountAll();
+        this._focused = false;
+    }
+
+    /**
+     * Get Active Scene
+     * @returns {*}
+     */
+    getActive() {
+        if (this._subs.length > index && index >= 0) {
+            return this._subs[this._index];
+        } else {
+            return this._base;
+        }
+    }
+
+    /**
+     * Set Active Scene
+     * @param index
+     */
+    setActive(index) {
+        if (this._subs.length > index && index >= 0) {
+            this._index = index;
+        } else {
+            this._index = -1;
+        }
     }
 
     /**
@@ -51,10 +122,24 @@ class ScenesManager {
      * @param index
      * @returns {*}
      */
-    getByIndex(index) {
-        if (index >= 0 && index < this.manager.length)
-            return this.manager[index];
+    getSceneByIndex(index) {
+        if (this._subs.length > index && index >= 0) {
+            return this._subs[index];
+        }
     }
+
+    _mountAll() {
+        this._subs.forEach(item => {
+            this._base.add(item);
+        })
+    }
+
+    _unmountAll() {
+        this._subs.forEach(item => {
+            this._base.remove(item);
+        })
+    }
+
 
 }
 

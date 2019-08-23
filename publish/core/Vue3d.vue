@@ -54,7 +54,7 @@
                     this.$data.$_play = val;
                     // this.orbit.enabled = !val;
                     if (val) {
-                        this.renderer.setActive(this.scenes.activated(), this.scenes.activated().arrayCamera);
+                        this.renderer.setActive(this.scenes.scene, this.scenes.cameras);
                         this.renderer.setSize(this.width, this.height);
                         this.renderer.render();
                     } else {

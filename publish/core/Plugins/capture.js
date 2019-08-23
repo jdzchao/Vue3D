@@ -116,7 +116,7 @@ class Capture {
     // 捕获射线
     _rayCaster() {
         this._caster.setFromCamera(this._point, this._camera);
-        let targets = this._caster.intersectObjects(this._scenes.activated().children, true);
+        let targets = this._caster.intersectObjects(this._scenes.scene.children, true);
         this._AnalysisTargets(targets);
         this._charged = false;
     }

@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 
-export function scene_init(name) {
+export function init_scene(name) {
     let scene = new THREE.Scene();
     scene.name = name ? name : scene.uuid;
     scene.cameras = [];
@@ -16,7 +16,7 @@ export function get_object_size(object) {
 
 export default {
     methods: {
-        scene_init,
+        init_scene,
         get_object_size
     }
 }

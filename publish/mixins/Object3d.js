@@ -64,7 +64,8 @@ export default {
         // 根据vue组件递归查询scene节点
         _recursion(parent) {
             if (parent.$options.name === 'Vue3d') { // 当前挂载于Vue3D 根节点
-                this.scene = parent.scenes.activated();
+                // this.scene = parent.scenes.activated();
+                this.scene = parent.scenes.base;
                 this.vue3d = parent;
                 this.parent = parent;
             } else if (parent.$options.name === 'V3dScene') { // 当前挂载于 V3dScene 子节点
