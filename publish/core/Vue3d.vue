@@ -102,8 +102,7 @@
         methods: {
             /**
              * 用于挂载时，获取Vue3d基础成员
-             * @returns {{$_camera: any, $_canvas: any, $_scene: any}}
-             */
+             * */
             vue3d() {
                 return {
                     canvas: this.canvas,

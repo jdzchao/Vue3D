@@ -11,6 +11,7 @@ class ScenesManager {
         return this;
     }
 
+    // base scene
     get base() {
         return this._base;
     }
@@ -78,6 +79,7 @@ class ScenesManager {
         if (this._subs.length > index && index >= 0) {
             this._index = index;
         }
+        if (this._index < 0) return;
         this._unmountAll();
         this._base.add(this._subs[this._index]);
         this._focused = true;
@@ -98,7 +100,7 @@ class ScenesManager {
      * @returns {*}
      */
     getActive() {
-        if (this._subs.length > index && index >= 0) {
+        if (this._subs.length > this._index && this._index >= 0) {
             return this._subs[this._index];
         } else {
             return this._base;

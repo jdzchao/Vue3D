@@ -15,10 +15,6 @@
             </v3d-scene>
             <v3d-scene name="demo1">
                 <v3d-camera-perspective :width="width" :height="height" :helper="true"></v3d-camera-perspective>
-                <v3d-light-rect-area :width="100" :height="100" :intensity="1"
-                                     :target="{x:2,y:0,z:0}" :position="{x:0,y:0,z:10}"></v3d-light-rect-area>
-                <!--                <v3d-light-directional ></v3d-light-directional>-->
-                <!--                <v3d-light-spot :visible-helper="true"></v3d-light-spot>-->
                 <v3d-geom-cylinder :material="Bus.mtl_standard()" :radialSegments="50"
                                    :position="{x:-5,y:0,z:0}"></v3d-geom-cylinder>
                 <v3d-loader-obj path="/models/obj/Cerberus.obj"
@@ -79,10 +75,14 @@
         mounted() {
             Bus.setConf({debug: false})
             this.onResize();
-            // window.addEventListener("resize", this.onResize);
-            // setTimeout(() => {
-            //     this.$refs.scene.play = true
-            // }, 3000)
+            window.addEventListener("resize", this.onResize);
+            setTimeout(() => {
+                this.$refs.scene.scenes.focus(0)
+                this.$refs.scene.render()
+                setTimeout(() => {
+                    this.$refs.scene.scenes.blur()
+                }, 1500)
+            }, 3000)
         }
     }
 </script>
