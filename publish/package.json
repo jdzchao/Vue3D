@@ -1,6 +1,6 @@
 {
   "name": "vue3d",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "description": "Vue components based on Three.js",
   "main": "index.js",
   "scripts": {

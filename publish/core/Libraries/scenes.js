@@ -11,6 +11,11 @@ class ScenesManager {
         return this;
     }
 
+    // all sub scenes
+    get all() {
+        return this._subs;
+    }
+
     // base scene
     get base() {
         return this._base;
@@ -41,6 +46,7 @@ class ScenesManager {
             this._subs.push(scene);
         } else if (typeof scene === "string") {
             scene = Bus.init_scene(name);
+            scene.name = name;
             this._subs.push(scene);
         } else {
             return false;
