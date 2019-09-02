@@ -8,7 +8,9 @@ import Vue from 'vue'
 export default {
     data() {
         return {
-            event: new Vue()
+            event: new Vue(), // 事件管理器
+            statuses: ['awake', 'start', 'update'], // 生命周期状态集
+            activity: null, // 当前生命周期
         }
     },
     methods: {
@@ -29,5 +31,12 @@ export default {
         once(event, callback) {
             this.event.$once(event, callback);
         },
+        // 生命周期状态监听
+        lifecycle(status) {
+            if (this.statuses.indexOf(status) >= 0) {
+                this.activity = status;
+                this.emit("lifecycle", status);
+            }
+        }
     }
 }

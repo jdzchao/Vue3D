@@ -73,7 +73,7 @@
             },
         },
         mounted() {
-            Bus.setConf({debug: false})
+            // Bus.setConf({debug: false})
             this.onResize();
             window.addEventListener("resize", this.onResize);
             setTimeout(() => {

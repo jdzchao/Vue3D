@@ -38,45 +38,11 @@
                 scenes: null, // scenes manager
                 orbit: null, // orbit control
                 /* status */
-                $_play: false,
-                $_status: 'awake',
                 slot: false,
-                /* setting */
-                background: null,
             }
         },
-        computed: {
-            play: {
-                get() {
-                    return this.$data.$_play;
-                },
-                set(val) {
-                    this.$data.$_play = val;
-                    // this.orbit.enabled = !val;
-                    if (val) {
-                        this.renderer.setActive(this.scenes.scene, this.scenes.cameras);
-                        this.renderer.setSize(this.width, this.height);
-                        this.renderer.render();
-                    } else {
-                        this.renderer.setActive(this.$data.$_scene, this.$data.$_camera);
-                        this.renderer.setSize(this.width, this.height);
-                        this.renderer.render();
-                    }
-                    this.emit("play", val);
-                }
-            },
-            status: {
-                get() {
-                    return this.$data.$_status;
-                },
-                set(val) {
-                    const status_enum = ['awake', 'start', 'render'];
-                    if (status_enum.indexOf(val) >= 0) {
-                        this.$data.$_status = val;
-                        this.emit("status", val);
-                    }
-                }
-            }
+        created() {
+            this.lifecycle('awake');
         },
         mounted() {
             // 初始化基础组件
@@ -95,7 +61,7 @@
             // 渲染第一帧
             this.renderer.setActive(this.scenes.base, this.camera).render(() => {
                 this.slot = true;
-                this.status = 'start';
+                this.lifecycle('start');
                 this.$emit('success');
             });
         },
@@ -115,9 +81,8 @@
              */
             render(callback) {
                 this.renderer.render(() => {
-                    this.status = 'render';
-                    if (typeof callback === "function") callback();
-                    this.emit("update"); // 向组件发送更新指令
+                    if (callback && typeof callback === "function") callback();
+                    this.lifecycle('update');
                 });
             },
             /**
@@ -144,12 +109,6 @@
             ratio(val, oldVal) {
                 if (val === oldVal) return;
                 this.resize();
-            },
-            background(val, oldVal) {
-                if (val === oldVal) return;
-                this.scenes.base.background = val;
-                this.scene.background = val;
-                this.render();
             }
         }
     }
