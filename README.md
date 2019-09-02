@@ -3,6 +3,8 @@
 > 将Three.js 封装成vue.js 2.x 组件   
 > Vue.js & Three.js   
 
+## 当前版本为极度不稳定状态，但是在自己的项目中已经有在使用，可以PR
+
 ## Install
 
 ### npm   
