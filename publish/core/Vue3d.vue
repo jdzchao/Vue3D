@@ -1,8 +1,6 @@
 <template>
     <canvas :id="id">
-        <template v-if="slot">
-            <slot></slot>
-        </template>
+        <slot v-if="slot.usable"></slot>
         Sorry, your web browser does not support WebGL
     </canvas>
 </template>
@@ -37,9 +35,19 @@
                 renderer: null, // renderer
                 scenes: null, // scenes manager
                 orbit: null, // orbit control
-                /* status */
-                slot: false,
+                /* Component Slot */
+                slot: {
+                    name: this.$options.name,
+                    usable: false,
+                    node: null,
+                },
             }
+        },
+        provide() {
+            return {
+                vue3d: this,
+                vSlot: this.slot
+            };
         },
         created() {
             this.lifecycle('awake');
@@ -60,34 +68,20 @@
             this.orbit.control.addEventListener('change', this.render, false);
             // 渲染第一帧
             this.renderer.setActive(this.scenes.base, this.camera).render(() => {
-                this.slot = true;
+                this.openSlot();
                 this.lifecycle('start');
                 this.$emit('success');
             });
         },
         methods: {
-            /**
-             * 用于挂载时，获取Vue3d基础成员
-             * */
-            vue3d() {
-                return {
-                    canvas: this.canvas,
-                    scene: this.scenes.base,
-                    camera: this.camera,
-                }
-            },
-            /**
-             * 渲染一帧
-             */
+            // 渲染一帧
             render(callback) {
                 this.renderer.render(() => {
                     if (callback && typeof callback === "function") callback();
                     this.lifecycle('update');
                 });
             },
-            /**
-             * 重置窗口大小
-             */
+            // 重置窗口大小
             resize() {
                 if (!this.renderer) return;
                 this.renderer.setSize(this.width, this.height);
@@ -95,7 +89,15 @@
                 this.camera.aspect = this.width / this.height;
                 this.camera.updateProjectionMatrix(); // 摄像机参数改变后必须执行生效
                 this.render();
-            }
+            },
+            openSlot() {
+                this.slot.node = this.scenes.base;
+                this.slot.usable = true;
+            },
+            closeSlot() {
+                this.slot.node = null;
+                this.slot.usable = false;
+            },
         },
         watch: {
             width(val, oldVal) {

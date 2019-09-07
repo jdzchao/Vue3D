@@ -1,6 +1,6 @@
 {
   "name": "vue3d",
-  "version": "0.10.2",
+  "version": "0.11.0",
   "description": "Vue components based on Three.js",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/jdzchao/Vue3D#readme",
   "dependencies": {
-    "three": "^0.107.0"
+    "three": "^0.107.0",
+    "vue": "^2.5.22"
   }
 }

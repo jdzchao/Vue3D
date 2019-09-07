@@ -26,25 +26,21 @@ const config = {
     },
 }
 
-
 export default {
     props: {
         config: {type: Object},  // Vue3d Configs Object
     },
     data() {
         return {
-            conf: config
+            conf: this.loadConf(this.config)
         }
-    },
-    created() {
-        this.conf = this.loadConf(this.config)
     },
     methods: {
         loadConf(conf) {
             if (typeof conf !== 'object') {
-                return this.conf
+                return config
             } else {
-                return Object.assign({}, this.conf, conf)
+                return Object.assign({}, config, conf)
             }
         }
     }

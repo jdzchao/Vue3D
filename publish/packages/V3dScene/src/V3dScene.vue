@@ -1,10 +1,9 @@
 <template>
     <object :name="$options.name" style="display:none;">
-        <slot v-if="slot"></slot>
+        <slot v-if="slot.usable"></slot>
     </object>
 </template>
 <script>
-    import * as THREE from 'three'
     export default {
         name: "V3dScene",
         props: {
@@ -12,27 +11,48 @@
         },
         data() {
             return {
-                $_canvas: null,
-                $_scene: null,
-                $_camera: null,
-                vue3d: null,
-                scene: null,
-                slot: false,
+                scene: this.vue3d.scenes.add(this.name),
+                /* Component Slot */
+                slot: {
+                    name: "V3dScene",
+                    usable: false,
+                    node: null,
+                },
             }
         },
-        created() {
-            let base = this.$parent.vue3d && this.$parent.vue3d();
-            if (base) {
-                this.$data.$_canvas = base.canvas;
-                this.$data.$_scene = base.scene;
-                this.$data.$_camera = base.camera;
-                this.vue3d = this.$parent;
-                this.scene = this.$parent.scenes.add(this.name);
-                this.slot = true;
-            } else {
-                console.error(this.$options.name + " should slot on Vue3D Component");
+        provide() {
+            return {
+                vScene: this,
+                vSlot: this.slot
+            };
+        },
+        inject: {
+            vue3d: {
+                default: () => {
+                    console.error(this.$options.name + " should slot on Vue3D Component");
+                    return {};
+                }
+            },
+            vSlot: {
+                default: () => {
+                    return {};
+                }
             }
+        },
+        beforeMount() {
+            this.openSlot();
+        },
+        methods: {
+            openSlot() {
+                this.slot.node = this.scene;
+                this.slot.usable = true;
+            },
+            closeSlot() {
+                this.slot.node = null;
+                this.slot.usable = false;
+            },
         }
+
     }
 </script>
 
