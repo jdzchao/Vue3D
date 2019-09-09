@@ -31,10 +31,13 @@
                 /* Vue3D Base Component */
                 canvas: null, // canvas dom
                 camera: null, // main camera
+                scene: null, //base scene
 
+                /* Vue3D Main Libraries */
                 renderer: null, // renderer
                 scenes: null, // scenes manager
                 orbit: null, // orbit control
+
                 /* Component Slot */
                 slot: {
                     name: this.$options.name,
@@ -59,15 +62,16 @@
             this.renderer = new Renderer(this.canvas, this.conf.renderer);
             // 初始化 Scenes Manager
             this.scenes = new ScenesManager();
+            this.scene = this.scenes.base;
             // 初始化主摄像机
             this.camera = new THREE.PerspectiveCamera(this.conf.camera.fov, this.width / this.height, this.conf.camera.near, this.conf.camera.far);
             this.camera.name = 'main';
-            this.scenes.base.cameras.push(this.camera);
+            this.scene.cameras.push(this.camera);
             // 初始化 Orbit Controller
             this.orbit = new Orbit(this.camera, this.canvas);
             this.orbit.control.addEventListener('change', this.render, false);
             // 渲染第一帧
-            this.renderer.setActive(this.scenes.base, this.camera).render(() => {
+            this.renderer.setActive(this.scene, this.camera).render(() => {
                 this.openSlot();
                 this.lifecycle('start');
                 this.$emit('success');
@@ -91,7 +95,7 @@
                 this.render();
             },
             openSlot() {
-                this.slot.node = this.scenes.base;
+                this.slot.node = this.scene;
                 this.slot.usable = true;
             },
             closeSlot() {
