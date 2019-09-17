@@ -46,7 +46,6 @@ class ScenesManager {
             this._subs.push(scene);
         } else if (typeof scene === "string") {
             scene = Bus.init_scene(name);
-            scene.name = name;
             this._subs.push(scene);
         } else {
             return false;
