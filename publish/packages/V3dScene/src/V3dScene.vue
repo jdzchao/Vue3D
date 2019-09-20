@@ -40,6 +40,7 @@
             }
         },
         beforeMount() {
+            this.scene.vComponent = this;
             this.openSlot();
         },
         methods: {

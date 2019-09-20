@@ -127,7 +127,7 @@ class Capture {
         if (targets.length > 0) {
             for (let i = 0; i < targets.length; i++) {
                 let target = targets[i];
-                if (target.object.type) {
+                if (target.object.hasOwnProperty('vComponent')) {
                     this.target = target.object;
                     break
                 }
