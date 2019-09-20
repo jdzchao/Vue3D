@@ -32,6 +32,7 @@ class Capture {
     }
 
     set target(obj) {
+        if (this.target === obj) return;
         this._captured = obj;
         this.callback(obj, this);
     }
