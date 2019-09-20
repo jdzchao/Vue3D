@@ -124,19 +124,20 @@ class Capture {
     // 分析结果
     _AnalysisTargets(targets) {
         this._all = targets;
+        this.target = null;
         if (targets.length > 0) {
             for (let i = 0; i < targets.length; i++) {
                 let target = targets[i];
                 if (target.object.hasOwnProperty('vComponent')) {
                     this.target = target.object;
                     break
+                } else if (target.object.parent.hasOwnProperty('vComponent')) {
+                    this.target = target.object.parent;
+                    break
                 }
             }
-        } else {
-            this.target = null;
         }
     }
-
 }
 
 export default Capture
