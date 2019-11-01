@@ -5,7 +5,7 @@
 </template>
 
 <script>
-    import Logo from "@c/Logo";
+    import Logo from "@/views/home/components/Logo";
 
     export default {
         name: "TopBar",

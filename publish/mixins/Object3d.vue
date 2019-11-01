@@ -9,6 +9,7 @@
      * 所有mixins需要在mounted之前创建Object3d对象
      */
     import * as THREE from 'three'
+    import {get_euler} from "../bus/utils";
 
     export default {
         name: "Object3d",
@@ -117,7 +118,10 @@
             },
             setRotation(val) {
                 if (val && val.hasOwnProperty('x') && val.hasOwnProperty('y') && val.hasOwnProperty('z')) {
-                    let euler = new THREE.Euler(val.x, val.y, val.z)
+                    const x = get_euler(val.x);
+                    const y = get_euler(val.y);
+                    const z = get_euler(val.z);
+                    let euler = new THREE.Euler(x, y, z);
                     this.object3d.setRotationFromEuler(euler);
                 }
                 this.$emit("update:rotation", this.object3d.rotation);

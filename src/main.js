@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-// import Vue3D from '../publish'
+import router from './router'
 // CSS
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
@@ -11,4 +11,5 @@ Vue.config.productionTip = false
 
 new Vue({
     render: h => h(App),
+    router
 }).$mount('#app')

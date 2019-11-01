@@ -14,6 +14,11 @@ export function get_object_size(object) {
     return box.getSize(object);
 }
 
+export function get_euler(angle) {
+    let euler = (angle % 360) / 180;
+    return euler * Math.PI
+}
+
 export default {
     methods: {
         init_scene,

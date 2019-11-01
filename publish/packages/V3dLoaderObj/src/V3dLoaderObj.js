@@ -17,7 +17,6 @@ export default {
         this.loader.load(this.path, object => {
             object.name = this.name;
             this.object3d = object;
-            console.log(object)
             this.init();
             this.setMaterial(this.material);
             this.loaded(object);

@@ -47,10 +47,12 @@
             openSlot() {
                 this.slot.node = this.scene;
                 this.slot.usable = true;
+                this.$emit("open")
             },
             closeSlot() {
                 this.slot.node = null;
                 this.slot.usable = false;
+                this.$emit("close")
             },
         }
 

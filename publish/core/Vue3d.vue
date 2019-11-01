@@ -72,6 +72,7 @@
             this.orbit.control.addEventListener('change', this.render, false);
             // 渲染第一帧
             this.renderer.setActive(this.scene, this.camera).render(() => {
+                this.resize();
                 this.openSlot();
                 this.lifecycle('start');
                 this.$emit('success');
