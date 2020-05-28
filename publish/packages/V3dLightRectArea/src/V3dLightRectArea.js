@@ -11,8 +11,9 @@ export default {
         height: {type: Number, default: 10},
         color: {type: String, default: 'rgb(255,255,255)'},
         intensity: {type: Number, default: 1.0},
+        ambient: {type: Number, default: 0},
         /* helper */
-        withHelper: {type: Boolean, default: true},
+        withHelper: {type: Boolean, default: false},
         visibleHelper: {type: Boolean, default: false},
     },
     data() {
