@@ -170,7 +170,6 @@
             },
             position(val) {
                 if (Object.is(this.object3d.position, val)) return;
-                console.log(val)
                 this.setPosition(val);
             },
             rotation(val) {
