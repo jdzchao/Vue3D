@@ -1,26 +1,27 @@
 {
-  "name": "app",
-  "version": "1.0.0",
-  "private": true,
+  "name": "vue3d",
+  "version": "0.11.7",
+  "description": "Vue components based on Three.js",
+  "main": "index.js",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdzchao/Vue3D.git"
+  },
+  "keywords": [
+    "vue",
+    "three"
+  ],
+  "author": "JdzChao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jdzchao/Vue3D/issues"
+  },
+  "homepage": "https://github.com/jdzchao/Vue3D#readme",
   "dependencies": {
-    "core-js": "^3.3.6",
-    "normalize.css": "^8.0.1",
-    "three": "0.117.0",
-    "vue": "^2.6.10",
-    "vue-router": "^3.1.3"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.0.5",
-    "@vue/cli-plugin-eslint": "^4.0.5",
-    "@vue/cli-service": "^4.0.5",
-    "babel-eslint": "^10.0.3",
-    "eslint": "^6.6.0",
-    "eslint-plugin-vue": "^5.2.3",
-    "vue-template-compiler": "^2.6.10"
+    "three": "^0.107.0",
+    "vue": "^2.5.22"
   }
 }
