@@ -1,5 +1,5 @@
 <template>
-    <canvas :id="id">
+    <canvas :id="id" style="display: block">
         <slot v-if="slot.usable"></slot>
         Sorry, your web browser does not support WebGL
     </canvas>

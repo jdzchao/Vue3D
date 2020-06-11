@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/jdzchao/Vue3D#readme",
   "dependencies": {
-    "three": "^0.107.0",
-    "vue": "^2.5.22"
+    "three": "^0.117.1",
+    "vue": "^2.6.11"
   }
 }
