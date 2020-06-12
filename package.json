@@ -1,6 +1,6 @@
 {
   "name": "vue3d",
-  "version": "0.11.7",
+  "version": "0.12.0",
   "description": "Vue components based on Three.js",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "vue",
     "three"
   ],
-  "author": "JdzChao",
+  "author": "yelup",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jdzchao/Vue3D/issues"
