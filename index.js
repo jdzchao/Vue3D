@@ -1,3 +1,4 @@
+import * as THREE from "three"
 // 全局总线
 import Bus from './bus'
 // 核心组件
@@ -49,6 +50,7 @@ export default {
 }
 
 export {
+    THREE,
     Bus,
     Vue3d,
     V3dScene,
